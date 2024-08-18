@@ -1,6 +1,8 @@
 package intern.customer.agitoo.Service.Concretes;
 
-import intern.customer.agitoo.Core.Results.*;
+import intern.customer.agitoo.DTO.DTOs.CustomerPolicyDTO;
+import intern.customer.agitoo.DTO.Mappers.CustomerPolicyMapper;
+import intern.customer.agitoo.Helper.Messages;
 import intern.customer.agitoo.Models.Concretes.CustomerPolicy;
 import intern.customer.agitoo.Repository.Abstracts.CustomerPolicyRepository;
 import intern.customer.agitoo.Service.Abstracts.ICustomerPolicyService;
@@ -10,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @NoArgsConstructor
@@ -19,53 +22,39 @@ public class CustomerPolicyServiceImpl implements ICustomerPolicyService {
     @Autowired
     private CustomerPolicyRepository customerPolicyRepository;
 
+    @Autowired
+    private CustomerPolicyMapper customerPolicyMapper;
+
 
     @Override
-    public DataResult<List<CustomerPolicy>> getAll () {
-        return new SuccessDataResult<List<CustomerPolicy>> (
-                customerPolicyRepository.findAll (),
-                "Customer policies listed!"
-        );
+    public List<CustomerPolicyDTO> getAll () {
+        List<CustomerPolicy> customerPolicies = customerPolicyRepository.findAll ();
+        List<CustomerPolicyDTO> customerPolicyDTOS = customerPolicies
+                .stream ()
+                .map (customerPolicy -> customerPolicyMapper
+                        .toDTO (customerPolicy, CustomerPolicyDTO.class)).collect(Collectors.toList());
+
+        return customerPolicyDTOS;
     }
 
     @Override
-    public Result Add (CustomerPolicy entity) {
-        customerPolicyRepository.save (entity);
-        return new SuccessResult (
-                true,
-                "Customer policy added!"
-        );
+    public CustomerPolicyDTO add (CustomerPolicyDTO dtoModel) {
+        CustomerPolicy customerPolicy = customerPolicyMapper.toEntity (dtoModel, CustomerPolicy.class);
+        CustomerPolicy savedCustomerPolicy = customerPolicyRepository.save (customerPolicy);
+        return customerPolicyMapper.toDTO (savedCustomerPolicy, CustomerPolicyDTO.class);
     }
 
     @Override
-    public Result Update (CustomerPolicy entity) {
-        if (customerPolicyRepository.existsById (entity.getCustomerPolicyId ())) {
-            customerPolicyRepository.save (entity);
-            return new SuccessResult (
-                    true,
-                    "Customer policy successfully updated!"
-            );
-        } else {
-            return new ErrorResult (
-                    false,
-                    "Customer policy not found"
-            );
-        }
+    public CustomerPolicyDTO update (CustomerPolicyDTO dtoModel) {
+        CustomerPolicy customerPolicy = customerPolicyMapper.toEntity (dtoModel, CustomerPolicy.class);
+        CustomerPolicy updatedCustomerPolicy = customerPolicyRepository.save (customerPolicy);
+
+        return customerPolicyMapper.toDTO (updatedCustomerPolicy, CustomerPolicyDTO.class);
     }
 
     @Override
-    public Result Delete (Long id) {
-        if (customerPolicyRepository.existsById (id)) {
-            customerPolicyRepository.deleteById (id);
-            return new SuccessResult (
-                    true,
-                    "Customer policy removed!"
-            );
-        } else {
-            return new ErrorResult (
-                    false,
-                    "Customer policy not found"
-            );
-        }
+    public void deleteById (Long id) {
+        customerPolicyRepository.deleteById (id);
+        System.out.print (id + " " + Messages.REMOVED);
     }
 }

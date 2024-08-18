@@ -1,6 +1,9 @@
 package intern.customer.agitoo.Service.Concretes;
 
-import intern.customer.agitoo.Core.Results.*;
+import intern.customer.agitoo.DTO.DTOs.CustomerPaymentDTO;
+import intern.customer.agitoo.DTO.Mappers.CustomerDebitCardMapper;
+import intern.customer.agitoo.DTO.Mappers.CustomerPaymentMapper;
+import intern.customer.agitoo.Helper.Messages;
 import intern.customer.agitoo.Models.Concretes.CustomerPayment;
 import intern.customer.agitoo.Repository.Abstracts.CustomerPaymentRepository;
 import intern.customer.agitoo.Service.Abstracts.ICustomerPaymentService;
@@ -10,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @NoArgsConstructor
@@ -19,52 +23,37 @@ public class CustomerPaymentServiceImpl implements ICustomerPaymentService {
     @Autowired
     private CustomerPaymentRepository customerPaymentRepository;
 
+    @Autowired
+    private CustomerPaymentMapper customerPaymentMapper;
+
     @Override
-    public DataResult<List<CustomerPayment>> getAll () {
-        return new SuccessDataResult<List<CustomerPayment>> (
-                customerPaymentRepository.findAll (),
-                "Customer payments listed!"
-        );
+    public List<CustomerPaymentDTO> getAll () {
+        List<CustomerPayment> customerPayments = customerPaymentRepository.findAll ();
+        List<CustomerPaymentDTO> customerPaymentDTOS = customerPayments
+                .stream ()
+                .map (customerPayment -> customerPaymentMapper
+                        .toDTO (customerPayment, CustomerPaymentDTO.class))
+                .collect(Collectors.toList());
+        return customerPaymentDTOS;
     }
 
     @Override
-    public Result Add (CustomerPayment entity) {
-        customerPaymentRepository.save (entity);
-        return new SuccessResult (
-                true,
-                "Customer payment added!"
-        );
+    public CustomerPaymentDTO add (CustomerPaymentDTO dtoModel) {
+        CustomerPayment customerPayment = customerPaymentMapper.toEntity (dtoModel, CustomerPayment.class );
+        CustomerPayment savedCustomerPayment = customerPaymentRepository.save (customerPayment);
+        return customerPaymentMapper.toDTO (savedCustomerPayment, CustomerPaymentDTO.class);
     }
 
     @Override
-    public Result Update (CustomerPayment entity) {
-        if (customerPaymentRepository.existsById (entity.getPaymentID ())) {
-            customerPaymentRepository.save (entity);
-            return new SuccessResult (
-                    true,
-                    "Customer payment successfully updated!"
-            );
-        } else {
-            return new ErrorResult (
-                    false,
-                    "Customer payment not found"
-            );
-        }
+    public CustomerPaymentDTO update (CustomerPaymentDTO dtoModel) {
+        CustomerPayment customerPayment = customerPaymentMapper.toEntity (dtoModel, CustomerPayment.class);
+        CustomerPayment updatedCustomerPayment = customerPaymentRepository.save (customerPayment);
+        return customerPaymentMapper.toDTO (updatedCustomerPayment, CustomerPaymentDTO.class);
     }
 
     @Override
-    public Result Delete (Long id) {
-        if (customerPaymentRepository.existsById (id)) {
-            customerPaymentRepository.deleteById (id);
-            return new SuccessResult (
-                    true,
-                    "Customer payment removed!"
-            );
-        } else {
-            return new ErrorResult (
-                    false,
-                    "Customer payment not found"
-            );
-        }
+    public void deleteById (Long id) {
+        customerPaymentRepository.deleteById (id);
+        System.out.print (id + " " + Messages.REMOVED);
     }
 }

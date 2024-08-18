@@ -1,6 +1,7 @@
 package intern.customer.agitoo.Service.Abstracts;
 
-import intern.customer.agitoo.Models.Concretes.CustomerPolicyRenewal;
+import intern.customer.agitoo.DTO.DTOs.CustomerPolicyRenewalDTO;
 
-public interface ICustomerPolicyRenewalService extends IGenericService<CustomerPolicyRenewal> {
+public interface ICustomerPolicyRenewalService
+        extends IGenericService<CustomerPolicyRenewalDTO> {
 }

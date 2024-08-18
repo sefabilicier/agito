@@ -1,6 +1,7 @@
 package intern.customer.agitoo.Service.Abstracts;
 
-import intern.customer.agitoo.Models.Concretes.CustomerAddressCountry;
+import intern.customer.agitoo.DTO.DTOs.CustomerAddressCountryDTO;
 
-public interface ICustomerAddressCountryService extends IGenericService<CustomerAddressCountry> {
+public interface ICustomerAddressCountryService
+        extends IGenericService<CustomerAddressCountryDTO> {
 }

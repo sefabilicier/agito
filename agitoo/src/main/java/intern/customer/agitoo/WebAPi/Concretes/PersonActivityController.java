@@ -2,40 +2,66 @@ package intern.customer.agitoo.WebAPi.Concretes;
 
 import intern.customer.agitoo.Core.Results.DataResult;
 import intern.customer.agitoo.Core.Results.Result;
+import intern.customer.agitoo.DTO.DTOs.PersonActivityDTO;
 import intern.customer.agitoo.Models.Concretes.PersonActivity;
 import intern.customer.agitoo.Service.Abstracts.IPersonActivityService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.xml.crypto.Data;
 import java.util.List;
 
+@Slf4j
 @Controller
 @RestController
-@RequestMapping("/api/personactivity")
+@RequestMapping("/api/person-activity")
 public class PersonActivityController {
 
     @Autowired
     private IPersonActivityService personActivityService;
 
-    @GetMapping(value = "/getall")
-    public DataResult<List<PersonActivity>> getAll () {
-        return this.personActivityService.getAll ();
+    @RequestMapping(value = "/getall", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
+    public ResponseEntity<DataResult<List<PersonActivityDTO>>> getAll () {
+        log.info("Received request to list customer activities!");
+        List<PersonActivityDTO> personActivityDTOList = personActivityService.getAll ();
+        DataResult<List<PersonActivityDTO>> response = new DataResult<> (
+                personActivityDTOList,
+                true,
+                "Person activities listed! "
+        );
+        return ResponseEntity.ok (response);
     }
 
-    @PostMapping(value = "/add")
-    public Result Add (PersonActivity personActivity) {
-        return this.personActivityService.Add (personActivity);
+    @RequestMapping(value = "/add",  method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_VALUE})
+    @ResponseStatus(HttpStatus.CREATED)
+    public ResponseEntity<DataResult<PersonActivityDTO>> Add (PersonActivityDTO personActivityDTO) {
+        log.info("Received request to add customer activity {}", personActivityDTO);
+        PersonActivityDTO savedPersonActivityDTO = personActivityService.add (personActivityDTO);
+        DataResult<PersonActivityDTO> response = new DataResult<>(
+                savedPersonActivityDTO, true, "Person activity added!"
+        );
+        return ResponseEntity.ok (response);
 
     }
 
-    @PutMapping(value = "/update")
-    public Result Update (PersonActivity personActivity) {
-        return this.personActivityService.Update (personActivity);
+    @RequestMapping (value = "/update", method = RequestMethod.PUT, produces = {MediaType.APPLICATION_JSON_VALUE})
+    public ResponseEntity<DataResult<PersonActivityDTO>> Update (PersonActivityDTO personActivityDTO) {
+        log.info("Received request to update customer activity {}", personActivityDTO);
+        PersonActivityDTO updatedPersonActivityDTO = personActivityService.update (personActivityDTO);
+        DataResult<PersonActivityDTO> response = new DataResult<> (
+                updatedPersonActivityDTO, true, "Person activity updated!"
+        );
+        return ResponseEntity.ok (response);
     }
 
-    @DeleteMapping(value = "/{id}")
-    public Result Delete (@PathVariable Long id) {
-        return this.personActivityService.Delete (id);
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    public void Delete (@PathVariable Long id) {
+        log.info("Received request to delete customer activity {}", id);
+        this.personActivityService.deleteById (id);
     }
 }

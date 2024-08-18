@@ -1,6 +1,8 @@
 package intern.customer.agitoo.Service.Concretes;
 
-import intern.customer.agitoo.Core.Results.*;
+import intern.customer.agitoo.DTO.DTOs.CustomerContactDTO;
+import intern.customer.agitoo.DTO.Mappers.CustomerContactMapper;
+import intern.customer.agitoo.Helper.Messages;
 import intern.customer.agitoo.Models.Concretes.CustomerContact;
 import intern.customer.agitoo.Repository.Abstracts.CustomerContactRepository;
 import intern.customer.agitoo.Service.Abstracts.ICustomerContactService;
@@ -10,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @NoArgsConstructor
@@ -19,52 +22,38 @@ public class CustomerContactServiceImpl implements ICustomerContactService {
     @Autowired
     private CustomerContactRepository customerContactRepository;
 
+    @Autowired
+    private CustomerContactMapper customerContactMapper;
+
     @Override
-    public DataResult<List<CustomerContact>> getAll () {
-        return new SuccessDataResult<List<CustomerContact>> (
-                customerContactRepository.findAll (),
-                "Customer contact listed!"
-        );
+    public List<CustomerContactDTO> getAll () {
+        List<CustomerContact> customerContacts = customerContactRepository.findAll ();
+        List<CustomerContactDTO> customerContactDTOS = customerContacts
+                .stream()
+                .map (customerContact -> customerContactMapper
+                        .toDTO (customerContact, CustomerContactDTO.class)).collect (Collectors.toList ());
+        return customerContactDTOS;
     }
 
     @Override
-    public Result Add (CustomerContact entity) {
-        customerContactRepository.save (entity);
-        return new SuccessResult (
-                true,
-                "Customer contact added!"
-        );
+    public CustomerContactDTO add (CustomerContactDTO dtoModel) {
+        CustomerContact customerContact = customerContactMapper.toEntity (dtoModel, CustomerContact.class);
+        CustomerContact savedCustomerContact = customerContactRepository.save(customerContact);
+        return customerContactMapper.toDTO (savedCustomerContact, CustomerContactDTO.class);
+
     }
 
     @Override
-    public Result Update (CustomerContact entity) {
-        if (customerContactRepository.existsById (entity.getContactID ())) {
-            customerContactRepository.save (entity);
-            return new SuccessResult (
-                    true,
-                    "Customer contact updated!"
-            );
-        } else {
-            return new ErrorResult (
-                    false,
-                    "Customer contact not found!"
-            );
-        }
+    public CustomerContactDTO update (CustomerContactDTO dtoModel) {
+        CustomerContact customerContact = customerContactMapper
+                .toEntity (dtoModel, CustomerContact.class);
+        CustomerContact updatedCustomerContact = customerContactRepository.save (customerContact);
+        return customerContactMapper.toDTO (updatedCustomerContact, CustomerContactDTO.class);
     }
 
     @Override
-    public Result Delete (Long id) {
-        if (customerContactRepository.existsById (id)) {
-            customerContactRepository.deleteById (id);
-            return new SuccessResult (
-                    true,
-                    "Customer contact removed"
-            );
-        } else {
-            return new ErrorResult (
-                    false,
-                    "Customer contact not found!"
-            );
-        }
+    public void deleteById (Long id) {
+        customerContactRepository.deleteById (id);
+        System.out.print (id + " " + Messages.REMOVED);
     }
 }

@@ -11,19 +11,15 @@ public class GenericMapper<S, D> {
 
     /* generic as allinOne
 
-    *  S -> Source ------------ Customer
-    *
-    *  D -> Destination ------- CustomerDTO
+     *  S -> Source ------------ Customer
+     *
+     *  D -> Destination ------- CustomerDTO
 
-    * */
-
-
-    private ModelMapper modelMapper;
+     * */
 
     @Autowired
-    public GenericMapper (ModelMapper modelMapper) {
-        this.modelMapper = modelMapper;
-    }
+    private ModelMapper modelMapper;
+
 
     public D toDTO (S source, Class<D> destinationClass) {
         return modelMapper.map (source, destinationClass);

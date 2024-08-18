@@ -1,6 +1,8 @@
 package intern.customer.agitoo.Service.Concretes;
 
-import intern.customer.agitoo.Core.Results.*;
+import intern.customer.agitoo.DTO.DTOs.CustomerDebitCardDTO;
+import intern.customer.agitoo.DTO.Mappers.CustomerDebitCardMapper;
+import intern.customer.agitoo.Helper.Messages;
 import intern.customer.agitoo.Models.Concretes.CustomerDebitCard;
 import intern.customer.agitoo.Repository.Abstracts.CustomerDebitCardRepository;
 import intern.customer.agitoo.Service.Abstracts.ICustomerDebitCardService;
@@ -10,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @NoArgsConstructor
@@ -19,52 +22,41 @@ public class CustomerDebitCardServiceImpl implements ICustomerDebitCardService {
     @Autowired
     private CustomerDebitCardRepository customerDebitCardRepository;
 
+    @Autowired
+    private CustomerDebitCardMapper customerDebitCardMapper;
+
     @Override
-    public DataResult<List<CustomerDebitCard>> getAll () {
-        return new SuccessDataResult<List<CustomerDebitCard>> (
-                customerDebitCardRepository.findAll (),
-                "Customer debit cards listed!"
-        );
+    public List<CustomerDebitCardDTO> getAll () {
+        List<CustomerDebitCard> customerDebitCards = customerDebitCardRepository.findAll ();
+        List<CustomerDebitCardDTO> customerDebitCardDTOS = customerDebitCards
+                .stream ()
+                .map (customerDebitCard ->
+                        customerDebitCardMapper.toDTO (customerDebitCard, CustomerDebitCardDTO.class))
+                .collect(Collectors.toList ());
+
+        return customerDebitCardDTOS;
+
     }
 
     @Override
-    public Result Add (CustomerDebitCard entity) {
-        customerDebitCardRepository.save (entity);
-        return new SuccessResult (
-                true,
-                "Customer debit card added!"
-        );
+    public CustomerDebitCardDTO add (CustomerDebitCardDTO dtoModel) {
+        CustomerDebitCard customerDebitCard = customerDebitCardMapper
+                .toEntity (dtoModel, CustomerDebitCard.class);
+        CustomerDebitCard savedCustomerDebitCard = customerDebitCardRepository.save(customerDebitCard);
+        return customerDebitCardMapper
+                .toDTO (savedCustomerDebitCard, CustomerDebitCardDTO.class);
     }
 
     @Override
-    public Result Update (CustomerDebitCard entity) {
-        if (customerDebitCardRepository.existsById (entity.getDebitCardID ())) {
-            customerDebitCardRepository.save (entity);
-            return new SuccessResult (
-                    true,
-                    "Customer debit card updated!"
-            );
-        } else {
-            return new ErrorResult (
-                    false,
-                    "Customer debit card updated"
-            );
-        }
+    public CustomerDebitCardDTO update (CustomerDebitCardDTO dtoModel) {
+        CustomerDebitCard customerDebitCard = customerDebitCardMapper.toEntity (dtoModel,CustomerDebitCard.class);
+        CustomerDebitCard updatedCustomerDebitCard = customerDebitCardRepository.save (customerDebitCard);
+        return customerDebitCardMapper.toDTO (updatedCustomerDebitCard, CustomerDebitCardDTO.class);
     }
 
     @Override
-    public Result Delete (Long id) {
-        if (customerDebitCardRepository.existsById (id)) {
-            customerDebitCardRepository.deleteById (id);
-            return new SuccessResult (
-                    true,
-                    "Customer debit card removed!"
-            );
-        } else {
-            return new ErrorResult (
-                    false,
-                    "Customer debit card not found!"
-            );
-        }
+    public void deleteById (Long id) {
+        customerDebitCardRepository.deleteById (id);
+        System.out.print (id + " " + Messages.REMOVED);
     }
 }

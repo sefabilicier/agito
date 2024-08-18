@@ -1,18 +1,19 @@
 package intern.customer.agitoo.Service.Concretes;
 
-import intern.customer.agitoo.Core.Results.*;
+import intern.customer.agitoo.DTO.DTOs.CustomerDTO;
+import intern.customer.agitoo.DTO.Mappers.CustomerMapper;
+import intern.customer.agitoo.Helper.Messages;
 import intern.customer.agitoo.Models.Concretes.Customer;
 import intern.customer.agitoo.Repository.Abstracts.CustomerRepository;
 import intern.customer.agitoo.Service.Abstracts.ICustomerService;
+import intern.customer.agitoo.Service.Rules.toDatabase;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @NoArgsConstructor
@@ -22,82 +23,46 @@ public class CustomerServiceImpl implements ICustomerService {
     @Autowired
     private CustomerRepository customerRepository;
 
+    @Autowired
+    private CustomerMapper customerMapper;
+
     @Override
-    public DataResult<List<Customer>> getAll () {
+    public List<CustomerDTO> getAll () {
+        toDatabase.isConnected ();
         List<Customer> customers = customerRepository.findAll ();
-        System.out.println ("Retrieved Customers: " + customers);
-        executionInfo ();
-        isConnected ();
-        return new SuccessDataResult<> (
-                customerRepository.findAll (),
-                "Customers listed!"
-        );
+        List<CustomerDTO> customerDTOS = customers
+                .stream ()
+                .map (customer -> customerMapper
+                        .toDTO (customer, CustomerDTO.class)).collect(Collectors.toList());
+        return customerDTOS;
     }
 
     @Override
-    public Result Add (Customer entity) {
-        customerRepository.save (entity);
-        return new SuccessResult (
-                true,
-                "Customer added!"
-        );
+    public CustomerDTO add (CustomerDTO dtoModel) {
+        Customer customer = customerMapper.toEntity (dtoModel, Customer.class);
+        Customer savedCustomer = customerRepository.save (customer);
+
+        return customerMapper.toDTO (savedCustomer, CustomerDTO.class);
     }
 
     @Override
-    public Result Update (Customer entity) {
-        if (customerRepository.existsById (entity.getCustomerId ())) {
-            customerRepository.save (entity);
-            return new SuccessResult (
-                    true,
-                    "Customer successfully updated!"
-            );
-        } else {
-            return new ErrorResult (
-                    false,
-                    "Customer not found"
-            );
-        }
+    public CustomerDTO update (CustomerDTO dtoModel) {
+        Customer customer = customerMapper
+                .toEntity (dtoModel, Customer.class);
+        Customer savedCustomer = customerRepository.save (customer);
+
+        return customerMapper.toDTO (savedCustomer, CustomerDTO.class);
     }
 
     @Override
-    public Result Delete (Long id) {
-        if (customerRepository.existsById (id)) {
-            customerRepository.deleteById (id);
-            return new SuccessResult (
-                    true,
-                    "Customer removed!"
-            );
-        } else {
-            return new ErrorResult (
-                    false,
-                    "Customer not found"
-            );
-        }
-
-
+    public void deleteById (Long id) {
+        customerRepository.deleteById (id);
+        System.out.print (id + " " + Messages.REMOVED);
     }
-
 
     public void executionInfo () {
         System.out.println ("it is being executed");
     }
 
-    public void isConnected () {
-        final String JDBC_URL = "jdbc:oracle:thin:@localhost:1521:XE";
-        final String JDBC_USER = "C##EGITIM";
-        final String JDBC_PASSWORD = "1";
 
-        Connection connection = null;
-
-        try {
-            Class.forName ("oracle.jdbc.driver.OracleDriver");
-
-            connection = DriverManager.getConnection (JDBC_URL, JDBC_USER, JDBC_PASSWORD);
-            System.out.println ("Successfully connected to the database!");
-
-        } catch (ClassNotFoundException | SQLException e) {
-            System.err.println ("JDBC Driver not found.");
-            e.printStackTrace ();
-        }
-    }
 }

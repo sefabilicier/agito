@@ -1,6 +1,7 @@
 package intern.customer.agitoo.Service.Abstracts;
 
-import intern.customer.agitoo.Models.Concretes.CustomerContact;
+import intern.customer.agitoo.DTO.DTOs.CustomerContactDTO;
 
-public interface ICustomerContactService extends IGenericService<CustomerContact> {
+public interface ICustomerContactService
+        extends IGenericService<CustomerContactDTO> {
 }

@@ -1,6 +1,9 @@
 package intern.customer.agitoo.Service.Concretes;
 
-import intern.customer.agitoo.Core.Results.*;
+import intern.customer.agitoo.DTO.DTOs.PersonActivityDTO;
+import intern.customer.agitoo.DTO.DTOs.PersonFeedbackDTO;
+import intern.customer.agitoo.DTO.Mappers.PersonFeedbackMapper;
+import intern.customer.agitoo.Helper.Messages;
 import intern.customer.agitoo.Models.Concretes.PersonFeedback;
 import intern.customer.agitoo.Repository.Abstracts.PersonFeedbackRepository;
 import intern.customer.agitoo.Service.Abstracts.IPersonFeedbackService;
@@ -10,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @NoArgsConstructor
@@ -19,52 +23,41 @@ public class PersonFeedbackServiceImpl implements IPersonFeedbackService {
     @Autowired
     private PersonFeedbackRepository personFeedbackRepository;
 
+    @Autowired
+    private PersonFeedbackMapper personFeedbackMapper;
+
+
     @Override
-    public DataResult<List<PersonFeedback>> getAll () {
-        return new SuccessDataResult<List<PersonFeedback>> (
-                personFeedbackRepository.findAll (),
-                "Customer feedbacks listed!"
-        );
+    public List<PersonFeedbackDTO> getAll () {
+        List<PersonFeedback> personFeedbacks = personFeedbackRepository.findAll ();
+        List<PersonFeedbackDTO> personFeedbackDTOS = personFeedbacks
+                .stream ()
+                .map (personFeedback -> personFeedbackMapper
+                        .toDTO (personFeedback, PersonFeedbackDTO.class))
+                .collect(Collectors.toList ());
+        return personFeedbackDTOS;
     }
 
     @Override
-    public Result Add (PersonFeedback entity) {
-        personFeedbackRepository.save (entity);
-        return new SuccessResult (
-                true,
-                "Customer feedback added!"
-        );
+    public PersonFeedbackDTO add (PersonFeedbackDTO dtoModel) {
+        PersonFeedback personFeedback = personFeedbackMapper.toEntity (dtoModel, PersonFeedback.class);
+        PersonFeedback savePersonFeedback = personFeedbackRepository.save (personFeedback);
+
+        return personFeedbackMapper.toDTO (savePersonFeedback, PersonFeedbackDTO.class);
     }
 
     @Override
-    public Result Update (PersonFeedback entity) {
-        if (personFeedbackRepository.existsById (entity.getFeedbackId ())) {
-            personFeedbackRepository.save (entity);
-            return new SuccessResult (
-                    true,
-                    "Customer feedback successfully updated!"
-            );
-        } else {
-            return new ErrorResult (
-                    false,
-                    "Customer feedback not found"
-            );
-        }
+    public PersonFeedbackDTO update (PersonFeedbackDTO dtoModel) {
+        PersonFeedback personFeedback = personFeedbackMapper
+                .toEntity (dtoModel, PersonFeedback.class);
+        PersonFeedback savedPersonFeedback = personFeedbackRepository.save (personFeedback);
+
+        return personFeedbackMapper.toDTO (savedPersonFeedback, PersonFeedbackDTO.class);
     }
 
     @Override
-    public Result Delete (Long id) {
-        if (personFeedbackRepository.existsById (id)) {
-            personFeedbackRepository.deleteById (id);
-            return new SuccessResult (
-                    true,
-                    "Customer feedback removed!"
-            );
-        } else {
-            return new ErrorResult (
-                    false,
-                    "Customer feedback not found"
-            );
-        }
+    public void deleteById (Long id) {
+        personFeedbackRepository.deleteById (id);
+        System.out.print (id + " " + Messages.REMOVED);
     }
 }

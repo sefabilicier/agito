@@ -2,14 +2,23 @@ package intern.customer.agitoo.WebAPi.Concretes;
 
 import intern.customer.agitoo.Core.Results.DataResult;
 import intern.customer.agitoo.Core.Results.Result;
+import intern.customer.agitoo.DTO.DTOs.CustomerDebitCardDTO;
 import intern.customer.agitoo.Models.Concretes.CustomerDebitCard;
 import intern.customer.agitoo.Service.Abstracts.ICustomerDebitCardService;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.xml.crypto.Data;
 import java.util.List;
+import java.util.ResourceBundle;
 
+@Slf4j
 @Controller
 @RestController
 @RequestMapping("/api/customerdebitcard")
@@ -19,24 +28,45 @@ public class CustomerDebitCardController {
     private ICustomerDebitCardService customerDebitCardsService;
 
 
-    @GetMapping(value = "/getall")
-    public DataResult<List<CustomerDebitCard>> getAll () {
-        return this.customerDebitCardsService.getAll ();
+    @RequestMapping(value = "/getall", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
+    public ResponseEntity<DataResult<List<CustomerDebitCardDTO>>> getAll () {
+        log.info("Received request to list customer debit cards!");
+        List<CustomerDebitCardDTO> customerDebitCardList = customerDebitCardsService.getAll ();
+        DataResult<List<CustomerDebitCardDTO>> response = new DataResult<> (
+                customerDebitCardList,
+                true,
+                "Customer debit cards listed!"
+        );
+        return ResponseEntity.ok (response);
     }
 
-    @PostMapping(value = "/add")
-    public Result Add (CustomerDebitCard customerDebitCard) {
-        return this.customerDebitCardsService.Add (customerDebitCard);
+    @RequestMapping(value = "/add",  method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_VALUE})
+    @ResponseStatus(HttpStatus.CREATED)
+    public ResponseEntity<DataResult<CustomerDebitCardDTO>> Add (CustomerDebitCardDTO customerDebitCardDTO) {
+        log.info("Received request to add customer debit card {}", customerDebitCardDTO);
+        CustomerDebitCardDTO savedCustomerDebitCardDTO = customerDebitCardsService.add (customerDebitCardDTO);
+        DataResult<CustomerDebitCardDTO> response = new DataResult<>(
+                savedCustomerDebitCardDTO,
+                true,
+                "Customer added!"
+                );
+        return ResponseEntity.ok (response);
 
     }
 
-    @PutMapping(value = "/update")
-    public Result Update (CustomerDebitCard customerDebitCard) {
-        return this.customerDebitCardsService.Update (customerDebitCard);
+    @RequestMapping (value = "/update", method = RequestMethod.PUT, produces = {MediaType.APPLICATION_JSON_VALUE})
+    public ResponseEntity<DataResult<CustomerDebitCardDTO>> Update (CustomerDebitCardDTO customerDebitCardDTO) {
+        log.info("Received request to update customer debit card {}", customerDebitCardDTO);
+        CustomerDebitCardDTO updateCustomerDebitCardDTO = customerDebitCardsService.update (customerDebitCardDTO);
+        DataResult<CustomerDebitCardDTO> response = new DataResult<> (
+                updateCustomerDebitCardDTO, true, "Customer debit card updated!"
+        );
+        return ResponseEntity.ok (response);
     }
 
-    @DeleteMapping(value = "/{id}")
-    public Result Delete (@PathVariable Long id) {
-        return this.customerDebitCardsService.Delete (id);
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    public void Delete (@PathVariable Long id) {
+        log.info("Received request to delete customer debit card {}", id);
+        this.customerDebitCardsService.deleteById (id);
     }
 }

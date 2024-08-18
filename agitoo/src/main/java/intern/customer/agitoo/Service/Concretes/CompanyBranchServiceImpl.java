@@ -1,6 +1,8 @@
 package intern.customer.agitoo.Service.Concretes;
 
-import intern.customer.agitoo.Core.Results.*;
+import intern.customer.agitoo.DTO.DTOs.CompanyBranchDTO;
+import intern.customer.agitoo.DTO.Mappers.CompanyBranchMapper;
+import intern.customer.agitoo.Helper.Messages;
 import intern.customer.agitoo.Models.Concretes.CompanyBranch;
 import intern.customer.agitoo.Repository.Abstracts.CompanyBranchRepository;
 import intern.customer.agitoo.Service.Abstracts.ICompanyBranchService;
@@ -10,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @NoArgsConstructor
@@ -19,37 +22,59 @@ public class CompanyBranchServiceImpl implements ICompanyBranchService {
     @Autowired
     private CompanyBranchRepository companyBranchRepository;
 
+    @Autowired
+    private CompanyBranchMapper companyBranchMapper;
 
     @Override
-    public DataResult<List<CompanyBranch>> getAll () {
-        return new SuccessDataResult<List<CompanyBranch>> (
-                this.companyBranchRepository.findAll (),
-                "Company branches listed!");
+    public List<CompanyBranchDTO> getAll () {
+
+        List<CompanyBranch> companyBranches = companyBranchRepository.findAll ();
+
+        List<CompanyBranchDTO> companyBranchDTOS = companyBranches
+                .stream ()
+                .map (companyBranch -> companyBranchMapper
+                                .toDTO (companyBranch, CompanyBranchDTO.class))
+                                        .collect(Collectors.toList ());
+        return companyBranchDTOS;
     }
 
     @Override
-    public Result Add (CompanyBranch entity) {
-        this.companyBranchRepository.save (entity);
-        return new SuccessResult (true, "Company Branch added!");
+    public CompanyBranchDTO add (CompanyBranchDTO dtoModel) {
+
+        existsByName (dtoModel.getBranchName ());
+
+        CompanyBranch companyBranch = companyBranchMapper
+                .toEntity (dtoModel, CompanyBranch.class);
+
+        CompanyBranch savedCompanyBranchDTO = companyBranchRepository.save (companyBranch);
+
+        return companyBranchMapper.toDTO (savedCompanyBranchDTO, CompanyBranchDTO.class);
     }
 
     @Override
-    public Result Update (CompanyBranch entity) {
-        if (companyBranchRepository.existsById (entity.getBranchID ())) {
-            this.companyBranchRepository.save (entity);
-            return new SuccessResult (true, "Company branch updated!");
-        } else {
-            return new ErrorResult (false, "Unfortunately company branch not found!");
-        }
+    public CompanyBranchDTO update (CompanyBranchDTO dtoModel) {
+
+        existsByName (dtoModel.getBranchName ());
+
+        CompanyBranch companyBranch = companyBranchMapper
+                .toEntity (dtoModel, CompanyBranch.class);
+
+        CompanyBranch updatedCompanyBranchDTO = companyBranchRepository.save (companyBranch);
+        return companyBranchMapper.toDTO (updatedCompanyBranchDTO, CompanyBranchDTO.class);
     }
 
     @Override
-    public Result Delete (Long id) {
-        if (companyBranchRepository.existsById (id)) {
-            this.companyBranchRepository.deleteById (id);
-            return new SuccessResult (true, "Company deleted successfully");
-        } else {
-            return new ErrorResult (false, "Company branch not found!");
-        }
+    public void deleteById (Long id) {
+        this.companyBranchRepository.deleteById (id);
+        System.out.print (id + " " + Messages.REMOVED);
+    }
+
+
+
+    //CHECKING METHODS;
+
+    @Override
+    public String existsByName (String name) {
+        return "";
     }
 }

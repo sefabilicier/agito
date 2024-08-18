@@ -1,6 +1,7 @@
 package intern.customer.agitoo.Service.Abstracts;
 
-import intern.customer.agitoo.Models.Concretes.CustomerPayment;
+import intern.customer.agitoo.DTO.DTOs.CustomerPaymentDTO;
 
-public interface ICustomerPaymentService extends IGenericService<CustomerPayment> {
+public interface ICustomerPaymentService
+        extends IGenericService<CustomerPaymentDTO> {
 }

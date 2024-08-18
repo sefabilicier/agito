@@ -1,6 +1,8 @@
 package intern.customer.agitoo.Service.Concretes;
 
-import intern.customer.agitoo.Core.Results.*;
+import intern.customer.agitoo.DTO.DTOs.CompanyFinancialDTO;
+import intern.customer.agitoo.DTO.Mappers.CompanyFinancialMapper;
+import intern.customer.agitoo.Helper.Messages;
 import intern.customer.agitoo.Models.Concretes.CompanyFinancial;
 import intern.customer.agitoo.Repository.Abstracts.CompanyFinancialRepository;
 import intern.customer.agitoo.Service.Abstracts.ICompanyFinancialService;
@@ -10,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @NoArgsConstructor
@@ -19,38 +22,44 @@ public class CompanyFinancialServiceImpl implements ICompanyFinancialService {
     @Autowired
     private CompanyFinancialRepository companyFinancialRepository;
 
+    @Autowired
+    private CompanyFinancialMapper companyFinancialMapper;
 
     @Override
-    public DataResult<List<CompanyFinancial>> getAll () {
-        return new SuccessDataResult<List<CompanyFinancial>> (
-                this.companyFinancialRepository.findAll (),
-                "Company financials listed!"
-        );
+    public List<CompanyFinancialDTO> getAll () {
+        List<CompanyFinancial> companyFinancials = companyFinancialRepository.findAll ();
+
+        List<CompanyFinancialDTO> companyFinancialDTOS = companyFinancials
+                .stream ()
+                .map (companyFinancial -> companyFinancialMapper
+                        .toDTO (companyFinancial, CompanyFinancialDTO.class))
+                                .collect(Collectors.toList ());
+
+        return companyFinancialDTOS;
     }
 
     @Override
-    public Result Add (CompanyFinancial entity) {
-        this.companyFinancialRepository.save (entity);
-        return new SuccessResult (true, "Company financial added!");
+    public CompanyFinancialDTO add (CompanyFinancialDTO dtoModel) {
+        CompanyFinancial companyFinancial = companyFinancialMapper
+                .toEntity (dtoModel, CompanyFinancial.class);
+
+        CompanyFinancial savedCompanyBranchDTO = companyFinancialRepository.save (companyFinancial);
+        return companyFinancialMapper.toDTO (savedCompanyBranchDTO, CompanyFinancialDTO.class);
+
     }
 
     @Override
-    public Result Update (CompanyFinancial entity) {
-        if (companyFinancialRepository.existsById (entity.getFinancialID ())) {
-            this.companyFinancialRepository.save (entity);
-            return new SuccessResult (true, "Company financial updated!");
-        } else {
-            return new ErrorResult (false, "Unfortunately company branch not found!");
-        }
+    public CompanyFinancialDTO update (CompanyFinancialDTO dtoModel) {
+        CompanyFinancial companyFinancial = companyFinancialMapper
+                .toEntity (dtoModel, CompanyFinancial.class);
+
+        CompanyFinancial updatedCompanyFinancial = companyFinancialRepository.save (companyFinancial);
+        return companyFinancialMapper.toDTO (updatedCompanyFinancial, CompanyFinancialDTO.class);
     }
 
     @Override
-    public Result Delete (Long id) {
-        if (companyFinancialRepository.existsById (id)) {
-            this.companyFinancialRepository.deleteById (id);
-            return new SuccessResult (true, "Company financial successfully");
-        } else {
-            return new ErrorResult (false, "Company branch not found!");
-        }
+    public void deleteById (Long id) {
+        companyFinancialRepository.deleteById (id);
+        System.out.println (id + " " + Messages.REMOVED);
     }
 }

@@ -1,6 +1,8 @@
 package intern.customer.agitoo.Service.Concretes;
 
-import intern.customer.agitoo.Core.Results.*;
+import intern.customer.agitoo.DTO.DTOs.PersonDTO;
+import intern.customer.agitoo.DTO.Mappers.PersonMapper;
+import intern.customer.agitoo.Helper.Messages;
 import intern.customer.agitoo.Models.Concretes.Person;
 import intern.customer.agitoo.Repository.Abstracts.PersonRepository;
 import intern.customer.agitoo.Service.Abstracts.IPersonService;
@@ -10,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @NoArgsConstructor
@@ -19,52 +22,40 @@ public class PersonServiceImpl implements IPersonService {
     @Autowired
     private PersonRepository personRepository;
 
+    @Autowired
+    private PersonMapper personMapper;
+
+
     @Override
-    public DataResult<List<Person>> getAll () {
-        return new SuccessDataResult<List<Person>> (
-                personRepository.findAll (),
-                "Person listed!"
-        );
+    public List<PersonDTO> getAll () {
+        List<Person> personList = personRepository.findAll ();
+        List<PersonDTO> personDTOS = personList
+                .stream ()
+                .map (person -> personMapper
+                        .toDTO (person, PersonDTO.class))
+                .collect(Collectors.toList ());
+        return personDTOS;
     }
 
     @Override
-    public Result Add (Person entity) {
-        personRepository.save (entity);
-        return new SuccessResult (
-                true,
-                "Person added!"
-        );
+    public PersonDTO add (PersonDTO dtoModel) {
+        Person personList = personMapper.toEntity (dtoModel, Person.class);
+        Person savedPerson = personRepository.save(personList);
+
+        return personMapper.toDTO (savedPerson, PersonDTO.class);
     }
 
     @Override
-    public Result Update (Person entity) {
-        if (personRepository.existsById (entity.getPersonId ())) {
-            personRepository.save (entity);
-            return new SuccessResult (
-                    true,
-                    "Person successfully updated!"
-            );
-        } else {
-            return new ErrorResult (
-                    false,
-                    "Person not found"
-            );
-        }
+    public PersonDTO update (PersonDTO dtoModel) {
+        Person personList = personMapper
+                .toEntity (dtoModel, Person.class);
+        Person updatedPerson = personRepository.save (personList);
+        return personMapper.toDTO (updatedPerson, PersonDTO.class);
     }
 
     @Override
-    public Result Delete (Long id) {
-        if (personRepository.existsById (id)) {
-            personRepository.deleteById (id);
-            return new SuccessResult (
-                    true,
-                    "Person removed!"
-            );
-        } else {
-            return new ErrorResult (
-                    false,
-                    "Person not found"
-            );
-        }
+    public void deleteById (Long id) {
+        personRepository.deleteById (id);
+        System.out.print (id + " " + Messages.REMOVED);
     }
 }

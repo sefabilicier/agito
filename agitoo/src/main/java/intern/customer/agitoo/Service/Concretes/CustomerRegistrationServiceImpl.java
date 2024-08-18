@@ -1,6 +1,8 @@
 package intern.customer.agitoo.Service.Concretes;
 
-import intern.customer.agitoo.Core.Results.*;
+import intern.customer.agitoo.DTO.DTOs.CustomerRegistrationDTO;
+import intern.customer.agitoo.DTO.Mappers.CustomerRegistrationMapper;
+import intern.customer.agitoo.Helper.Messages;
 import intern.customer.agitoo.Models.Concretes.CustomerRegistration;
 import intern.customer.agitoo.Repository.Abstracts.CustomerRegistrationRepository;
 import intern.customer.agitoo.Service.Abstracts.ICustomerRegistrationService;
@@ -10,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @NoArgsConstructor
@@ -20,53 +23,41 @@ public class CustomerRegistrationServiceImpl implements ICustomerRegistrationSer
     @Autowired
     private CustomerRegistrationRepository customerRegistrationRepository;
 
+    @Autowired
+    private CustomerRegistrationMapper customerRegistrationMapper;
+
 
     @Override
-    public DataResult<List<CustomerRegistration>> getAll () {
-        return new SuccessDataResult<> (
-                customerRegistrationRepository.findAll (),
-                "Customer registrations listed!"
-        );
+    public List<CustomerRegistrationDTO> getAll () {
+        List<CustomerRegistration> customerRegistrations = customerRegistrationRepository.findAll ();
+        List<CustomerRegistrationDTO> customerRegistrationDTOS = customerRegistrations
+                .stream ()
+                .map (customerRegistration -> customerRegistrationMapper
+                        .toDTO (customerRegistration, CustomerRegistrationDTO.class))
+                .collect(Collectors.toList());
+        return customerRegistrationDTOS;
     }
 
     @Override
-    public Result Add (CustomerRegistration entity) {
-        customerRegistrationRepository.save (entity);
-        return new SuccessResult (
-                true,
-                "Customer added!"
-        );
+    public CustomerRegistrationDTO add (CustomerRegistrationDTO dtoModel) {
+        CustomerRegistration customerRegistration = customerRegistrationMapper.toEntity (dtoModel, CustomerRegistration.class);
+        CustomerRegistration savedCustomerRegistration = customerRegistrationRepository.save (customerRegistration);
+
+        return customerRegistrationMapper.toDTO (savedCustomerRegistration, CustomerRegistrationDTO.class);
     }
 
     @Override
-    public Result Update (CustomerRegistration entity) {
-        if (customerRegistrationRepository.existsById (entity.getRegistrationID ())) {
-            customerRegistrationRepository.save (entity);
-            return new SuccessResult (
-                    true,
-                    "Customer successfully updated!"
-            );
-        } else {
-            return new ErrorResult (
-                    false,
-                    "Customer not found"
-            );
-        }
+    public CustomerRegistrationDTO update (CustomerRegistrationDTO dtoModel) {
+        CustomerRegistration customerRegistration = customerRegistrationMapper
+                .toEntity (dtoModel, CustomerRegistration.class);
+        CustomerRegistration updatedCustomerRegistration = customerRegistrationRepository.save (customerRegistration);
+
+        return customerRegistrationMapper.toDTO (updatedCustomerRegistration, CustomerRegistrationDTO.class);
     }
 
     @Override
-    public Result Delete (Long id) {
-        if (customerRegistrationRepository.existsById (id)) {
-            customerRegistrationRepository.deleteById (id);
-            return new SuccessResult (
-                    true,
-                    "Customer removed!"
-            );
-        } else {
-            return new ErrorResult (
-                    false,
-                    "Customer not found"
-            );
-        }
+    public void deleteById (Long id) {
+        customerRegistrationRepository.deleteById (id);
+        System.out.print (id + " " + Messages.REMOVED);
     }
 }

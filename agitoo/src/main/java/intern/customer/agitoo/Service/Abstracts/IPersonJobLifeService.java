@@ -1,6 +1,7 @@
 package intern.customer.agitoo.Service.Abstracts;
 
-import intern.customer.agitoo.Models.Concretes.PersonJobLife;
+import intern.customer.agitoo.DTO.DTOs.PersonJobLifeDTO;
 
-public interface IPersonJobLifeService extends IGenericService<PersonJobLife> {
+public interface IPersonJobLifeService
+        extends IGenericService<PersonJobLifeDTO> {
 }

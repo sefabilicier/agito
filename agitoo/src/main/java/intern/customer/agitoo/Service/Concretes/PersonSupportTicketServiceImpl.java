@@ -1,6 +1,8 @@
 package intern.customer.agitoo.Service.Concretes;
 
-import intern.customer.agitoo.Core.Results.*;
+import intern.customer.agitoo.DTO.DTOs.PersonSupportTicketDTO;
+import intern.customer.agitoo.DTO.Mappers.PersonSupportTicketMapper;
+import intern.customer.agitoo.Helper.Messages;
 import intern.customer.agitoo.Models.Concretes.PersonSupportTicket;
 import intern.customer.agitoo.Repository.Abstracts.PersonSupportTicketRepository;
 import intern.customer.agitoo.Service.Abstracts.IPersonSupportTicketService;
@@ -10,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @NoArgsConstructor
@@ -19,53 +22,39 @@ public class PersonSupportTicketServiceImpl implements IPersonSupportTicketServi
     @Autowired
     private PersonSupportTicketRepository personSupportTicketRepository;
 
+    @Autowired
+    private PersonSupportTicketMapper personSupportTicketMapper;
 
     @Override
-    public DataResult<List<PersonSupportTicket>> getAll () {
-        return new SuccessDataResult<List<PersonSupportTicket>> (
-                personSupportTicketRepository.findAll (),
-                "Person support tickets tickets listed!"
-        );
+    public List<PersonSupportTicketDTO> getAll () {
+        List<PersonSupportTicket> personSupportTickets = personSupportTicketRepository.findAll ();
+        List<PersonSupportTicketDTO> personSupportTicketDTOS = personSupportTickets
+                .stream ()
+                .map (personSupportTicket -> personSupportTicketMapper
+                        .toDTO (personSupportTicket, PersonSupportTicketDTO.class))
+                .collect(Collectors.toList());
+        return personSupportTicketDTOS;
     }
 
     @Override
-    public Result Add (PersonSupportTicket entity) {
-        personSupportTicketRepository.save (entity);
-        return new SuccessResult (
-                true,
-                "Person support ticket added!"
-        );
+    public PersonSupportTicketDTO add (PersonSupportTicketDTO dtoModel) {
+        PersonSupportTicket personSupportTicket = personSupportTicketMapper.toEntity (dtoModel, PersonSupportTicket.class);
+        PersonSupportTicket savedPersonSupportTicket = personSupportTicketRepository.save (personSupportTicket);
+
+        return personSupportTicketMapper.toDTO (savedPersonSupportTicket, PersonSupportTicketDTO.class);
     }
 
     @Override
-    public Result Update (PersonSupportTicket entity) {
-        if (personSupportTicketRepository.existsById (entity.getTicketID ())) {
-            personSupportTicketRepository.save (entity);
-            return new SuccessResult (
-                    true,
-                    "Person support ticket successfully updated!"
-            );
-        } else {
-            return new ErrorResult (
-                    false,
-                    "Person support ticket not found"
-            );
-        }
+    public PersonSupportTicketDTO update (PersonSupportTicketDTO dtoModel) {
+        PersonSupportTicket personSupportTicket = personSupportTicketMapper
+                .toEntity (dtoModel, PersonSupportTicket.class);
+        PersonSupportTicket updatedPersonSupportTicket = personSupportTicketRepository.save (personSupportTicket);
+        return personSupportTicketMapper.toDTO (updatedPersonSupportTicket, PersonSupportTicketDTO.class);
     }
 
     @Override
-    public Result Delete (Long id) {
-        if (personSupportTicketRepository.existsById (id)) {
-            personSupportTicketRepository.deleteById (id);
-            return new SuccessResult (
-                    true,
-                    "Person support ticket removed!"
-            );
-        } else {
-            return new ErrorResult (
-                    false,
-                    "Person support ticket not found"
-            );
-        }
+    public void deleteById (Long id) {
+        personSupportTicketRepository.deleteById (id);
+        System.out.print (id + " " + Messages.REMOVED);
     }
 }

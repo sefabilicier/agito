@@ -1,6 +1,7 @@
 package intern.customer.agitoo.Service.Abstracts;
 
-import intern.customer.agitoo.Models.Concretes.PersonFeedback;
+import intern.customer.agitoo.DTO.DTOs.PersonFeedbackDTO;
 
-public interface IPersonFeedbackService extends IGenericService<PersonFeedback> {
+public interface IPersonFeedbackService
+        extends IGenericService<PersonFeedbackDTO> {
 }
