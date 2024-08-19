@@ -30,7 +30,7 @@ public class PersonActivity {
     @Column(name = "DESCRIPTION")
     private String description;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "PERSONID")
     private Person person;
 }

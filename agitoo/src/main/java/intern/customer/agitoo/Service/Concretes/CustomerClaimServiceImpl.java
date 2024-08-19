@@ -3,7 +3,6 @@ package intern.customer.agitoo.Service.Concretes;
 import intern.customer.agitoo.DTO.DTOs.CustomerClaimDTO;
 import intern.customer.agitoo.DTO.Mappers.CustomerClaimMapper;
 import intern.customer.agitoo.Helper.Messages;
-import intern.customer.agitoo.Models.Concretes.Customer;
 import intern.customer.agitoo.Models.Concretes.CustomerClaim;
 import intern.customer.agitoo.Repository.Abstracts.CustomerClaimRepository;
 import intern.customer.agitoo.Service.Abstracts.ICustomerClaimService;

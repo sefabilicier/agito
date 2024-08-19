@@ -29,7 +29,7 @@ public class CustomerPolicyRenewal {
     @Column(name = "RENEWALCOVERAGEAMOUNT", length = 15)
     private BigDecimal renewalCoverageAmount;
 
-    @ManyToOne()
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "CUSTOMERPOLICYID")
     private CustomerPolicy customerPolicy;
 

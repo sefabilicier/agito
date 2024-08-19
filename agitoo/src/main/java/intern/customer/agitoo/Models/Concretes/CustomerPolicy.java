@@ -42,14 +42,14 @@ public class CustomerPolicy {
     @Column(name = "PREMIUM")
     private BigDecimal premium;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "CUSTOMERID")
     private Customer customer;
 
-    @OneToMany(mappedBy = "customerPolicy")
+    @OneToMany(mappedBy = "customerPolicy", fetch = FetchType.EAGER)
     List<CustomerClaim> customerClaims;
 
-    @OneToMany(mappedBy = "customerPolicy")
+    @OneToMany(mappedBy = "customerPolicy", fetch = FetchType.EAGER)
     List<CustomerPolicyRenewal> customerPolicyRenewals;
 
 }

@@ -1,10 +1,8 @@
 package intern.customer.agitoo.Service.Concretes;
 
-import intern.customer.agitoo.DTO.DTOs.CustomerAddressCityDTO;
 import intern.customer.agitoo.DTO.DTOs.CustomerAddressDTO;
 import intern.customer.agitoo.DTO.Mappers.CustomerAddressMapper;
 import intern.customer.agitoo.Helper.Messages;
-import intern.customer.agitoo.Models.Concretes.Customer;
 import intern.customer.agitoo.Models.Concretes.CustomerAddress;
 import intern.customer.agitoo.Repository.Abstracts.CustomerAddressRepository;
 import intern.customer.agitoo.Service.Abstracts.ICustomerAddressService;

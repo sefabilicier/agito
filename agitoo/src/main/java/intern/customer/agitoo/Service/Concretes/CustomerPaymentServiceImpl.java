@@ -1,7 +1,6 @@
 package intern.customer.agitoo.Service.Concretes;
 
 import intern.customer.agitoo.DTO.DTOs.CustomerPaymentDTO;
-import intern.customer.agitoo.DTO.Mappers.CustomerDebitCardMapper;
 import intern.customer.agitoo.DTO.Mappers.CustomerPaymentMapper;
 import intern.customer.agitoo.Helper.Messages;
 import intern.customer.agitoo.Models.Concretes.CustomerPayment;

@@ -44,7 +44,7 @@ public class PersonSupportTicket {
     @Column(name = "RESOLVEDDATE")
     private Date resolvedDate;
 
-    @ManyToOne(/*fetch = FetchType.LAZY*/)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "PERSONID")
     private Person person;
 

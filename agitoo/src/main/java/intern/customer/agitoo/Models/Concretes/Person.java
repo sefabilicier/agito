@@ -48,25 +48,25 @@ public class Person {
     @Column(name = "OCCUPATION")
     private String occupation;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "CUSTOMERID")
     private Customer customer;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "CUSTOMERID")
     private PersonActivity personActivity;
 
 
-    @OneToMany(mappedBy = "person")
+    @OneToMany(mappedBy = "person", fetch = FetchType.EAGER)
     List<PersonActivity> personActivities;
 
-    @OneToMany(mappedBy = "person")
+    @OneToMany(mappedBy = "person", fetch = FetchType.EAGER)
     List<PersonFeedback> personFeedbacks;
 
-    @OneToMany(mappedBy = "person")
+    @OneToMany(mappedBy = "person", fetch = FetchType.EAGER)
     List<PersonJobLife> personJobLifes;
 
-    @OneToMany(mappedBy = "person")
+    @OneToMany(mappedBy = "person", fetch = FetchType.EAGER)
     List<PersonSupportTicket> personSupportTickets;
 
 }

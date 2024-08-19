@@ -77,7 +77,7 @@ public class PersonJobLife {
     @Column(name = "NETINCOME", precision = 15, scale = 2)
     private BigDecimal netIncome;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "PERSONID")
     private Person person;
 

@@ -3,6 +3,7 @@ package intern.customer.agitoo.Service.Abstracts;
 import intern.customer.agitoo.DTO.DTOs.CompanyBranchDTO;
 import org.springframework.data.jpa.repository.Query;
 
+
 public interface ICompanyBranchService
         extends IGenericService<CompanyBranchDTO> {
 

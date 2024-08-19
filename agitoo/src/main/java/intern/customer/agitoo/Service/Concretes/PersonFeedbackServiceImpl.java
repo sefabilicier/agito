@@ -1,6 +1,5 @@
 package intern.customer.agitoo.Service.Concretes;
 
-import intern.customer.agitoo.DTO.DTOs.PersonActivityDTO;
 import intern.customer.agitoo.DTO.DTOs.PersonFeedbackDTO;
 import intern.customer.agitoo.DTO.Mappers.PersonFeedbackMapper;
 import intern.customer.agitoo.Helper.Messages;

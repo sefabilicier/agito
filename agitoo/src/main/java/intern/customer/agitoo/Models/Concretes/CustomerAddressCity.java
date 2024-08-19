@@ -20,7 +20,7 @@ public class CustomerAddressCity {
     @Column(name = "CITYNAME")
     private String cityName;
 
-    @ManyToOne()
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "ADDRESSCOUNTRYID")
     private CustomerAddressCountry customerAddressCountry;
 

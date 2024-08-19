@@ -1,5 +1,6 @@
 package intern.customer.agitoo.Core.Results;
 
+import intern.customer.agitoo.Helper.Messages;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
@@ -10,12 +11,12 @@ public class SuccessResult extends Result {
         super (true);
     }
 
-    public SuccessResult (boolean success, String message) {
+    public SuccessResult (boolean success, Messages message) {
         super (true, message);
     }
 
 
-    public SuccessResult (String message, boolean success) {
+    public SuccessResult (Messages message, boolean success) {
         super (true, message);
     }
 }

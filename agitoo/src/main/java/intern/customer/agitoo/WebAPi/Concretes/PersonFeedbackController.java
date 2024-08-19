@@ -1,11 +1,11 @@
 package intern.customer.agitoo.WebAPi.Concretes;
 
 import intern.customer.agitoo.Core.Results.DataResult;
-import intern.customer.agitoo.Core.Results.Result;
-import intern.customer.agitoo.DTO.DTOs.PersonDTO;
 import intern.customer.agitoo.DTO.DTOs.PersonFeedbackDTO;
-import intern.customer.agitoo.Models.Concretes.PersonFeedback;
+import intern.customer.agitoo.Helper.Messages;
 import intern.customer.agitoo.Service.Abstracts.IPersonFeedbackService;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.Min;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,7 +19,7 @@ import java.util.List;
 @Slf4j
 @Controller
 @RestController
-@RequestMapping("/api/personfeedback")
+@RequestMapping("/api/person-feedback")
 public class PersonFeedbackController {
 
     @Autowired
@@ -32,39 +32,39 @@ public class PersonFeedbackController {
         DataResult<List<PersonFeedbackDTO>> response = new DataResult<> (
                 personFeedbackDTOList,
                 true,
-                "Person feedbacks listed!"
+                Messages.LISTED
         );
         return ResponseEntity.ok (response);
     }
 
     @RequestMapping(value = "/add",  method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_VALUE})
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<DataResult<PersonFeedbackDTO>> Add (PersonFeedbackDTO personFeedbackDTO) {
+    public ResponseEntity<DataResult<PersonFeedbackDTO>> Add (@RequestBody @Valid PersonFeedbackDTO personFeedbackDTO) {
         log.info("Received request to add person feedback {}", personFeedbackDTO);
         PersonFeedbackDTO addedPersonFeedbackDTO = personFeedbackService.add (personFeedbackDTO);
         DataResult<PersonFeedbackDTO> response = new DataResult<> (
-                addedPersonFeedbackDTO, true, "Person feedback added!"
+                addedPersonFeedbackDTO, true, Messages.ADDED
         );
         return ResponseEntity.ok (response);
 
     }
 
     @RequestMapping (value = "/update", method = RequestMethod.PUT, produces = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<DataResult<PersonFeedbackDTO>> Update (PersonFeedbackDTO personFeedbackDTO) {
+    public ResponseEntity<DataResult<PersonFeedbackDTO>> Update (@RequestBody @Valid PersonFeedbackDTO personFeedbackDTO) {
         log.info("Received request to update person feedback {}", personFeedbackDTO);
         PersonFeedbackDTO updatedPersoFeedbackDTO = personFeedbackService.update (
                 personFeedbackDTO
         );
         DataResult<PersonFeedbackDTO> response = new DataResult<> (
                 updatedPersoFeedbackDTO,
-                true, "Customer feedback updated!"
+                true, Messages.UPDATED
         );
 
         return ResponseEntity.ok (response);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public void Delete (@PathVariable Long id) {
+    public void Delete (@PathVariable @Min(1) Long id) {
         log.info("Received request to delete person feedback {}", id);
         this.personFeedbackService.deleteById (id);
     }

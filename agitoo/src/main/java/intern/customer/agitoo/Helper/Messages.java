@@ -1,12 +1,21 @@
 package intern.customer.agitoo.Helper;
 
-public class Messages {
+import lombok.Getter;
 
-    public static final String ADDED = "successfully added";
-    public static final String REMOVED = "successfully removed";
-    public static final String UPDATED = "successfully updated";
-    public static final String NOT_FOUND = "not found";
-    public static final String ALREADY_EXISTS = "already exists";
-    public static final String ALREADY_DELETED = "already deleted";
-    public static final String ALREADY_UPDATED = "already updated";
+@Getter
+public enum Messages {
+    LISTED("data successfully listed!"),
+    ADDED("successfully added"),
+    REMOVED("successfully removed"),
+    UPDATED("successfully updated"),
+    NOT_FOUND("not found"),
+    ALREADY_EXISTS("already exists"),
+    ALREADY_DELETED("already deleted"),
+    ALREADY_UPDATED("already updated");
+
+    private final String text;
+
+    Messages(String text) {
+        this.text = text;
+    }
 }

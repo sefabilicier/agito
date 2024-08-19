@@ -3,7 +3,6 @@ package intern.customer.agitoo.Service.Concretes;
 import intern.customer.agitoo.DTO.DTOs.PersonJobLifeDTO;
 import intern.customer.agitoo.DTO.Mappers.PersonJobLifeMapper;
 import intern.customer.agitoo.Helper.Messages;
-import intern.customer.agitoo.Models.Concretes.Person;
 import intern.customer.agitoo.Models.Concretes.PersonJobLife;
 import intern.customer.agitoo.Repository.Abstracts.PersonJobLifeRepository;
 import intern.customer.agitoo.Service.Abstracts.IPersonJobLifeService;
@@ -13,7 +12,6 @@ import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.SQLOutput;
 import java.util.List;
 import java.util.stream.Collectors;
 

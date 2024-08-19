@@ -1,5 +1,6 @@
 package intern.customer.agitoo.Core.Results;
 
+import intern.customer.agitoo.Helper.Messages;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -9,7 +10,7 @@ public class DataResult<T> extends Result {
 
     private T data;
 
-    public DataResult (T data, boolean success, String message) {
+    public DataResult (T data, boolean success, Messages message) {
         super (success, message);
         this.data = data;
     }

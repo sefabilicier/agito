@@ -1,10 +1,11 @@
 package intern.customer.agitoo.WebAPi.Concretes;
 
 import intern.customer.agitoo.Core.Results.DataResult;
-import intern.customer.agitoo.Core.Results.Result;
 import intern.customer.agitoo.DTO.DTOs.CustomerAddressCityDTO;
-import intern.customer.agitoo.Models.Concretes.CustomerAddressCity;
+import intern.customer.agitoo.Helper.Messages;
 import intern.customer.agitoo.Service.Abstracts.ICustomerAddressCityService;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.Min;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -32,35 +33,35 @@ public class CustomerAddressCityController {
         DataResult<List<CustomerAddressCityDTO>> response = new DataResult<> (
                 customerAddressCityDTOList,
                 true,
-                "Customer Address cities listed!"
+                Messages.LISTED
         );
         return ResponseEntity.ok (response);
     }
 
     @RequestMapping(value = "/add",  method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_VALUE})
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<DataResult<CustomerAddressCityDTO>> Add (CustomerAddressCityDTO customerAddressCityDTO) {
+    public ResponseEntity<DataResult<CustomerAddressCityDTO>> Add (@RequestBody @Valid CustomerAddressCityDTO customerAddressCityDTO) {
         log.info("Received request to add customer address city {}", customerAddressCityDTO);
         CustomerAddressCityDTO savedCustomerAddressCity =  customerAddressCityService.add (customerAddressCityDTO);
         DataResult<CustomerAddressCityDTO> response = new DataResult<> (
-                savedCustomerAddressCity, true, "Customer address city added!");
+                savedCustomerAddressCity, true, Messages.ADDED);
         return ResponseEntity.ok (response);
 
     }
 
     @RequestMapping (value = "/update", method = RequestMethod.PUT, produces = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<DataResult<CustomerAddressCityDTO>> Update (CustomerAddressCityDTO customerAddressCityDTO) {
+    public ResponseEntity<DataResult<CustomerAddressCityDTO>> Update (@RequestBody @Valid CustomerAddressCityDTO customerAddressCityDTO) {
         log.info("Received request to update customer address city {}", customerAddressCityDTO);
         CustomerAddressCityDTO updaCustomerAddressCity =  customerAddressCityService.update (customerAddressCityDTO);
         DataResult<CustomerAddressCityDTO> response = new DataResult<> (
                 updaCustomerAddressCity,
-                true, "Company address city updated!"
+                true, Messages.UPDATED
         );
         return ResponseEntity.ok (response);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public void Delete (@PathVariable Long id) {
+    public void Delete (@PathVariable @Min(1) Long id) {
         log.info("Received request to delete customer address city {}", id);
         this.customerAddressCityService.deleteById (id);
     }

@@ -49,7 +49,7 @@ public class CustomerRegistration {
     @Column(name = "TOTALSPENT")
     private BigDecimal totalSpent;
 
-    @OneToOne()
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "CUSTOMERID")
     private Customer customer;
 }

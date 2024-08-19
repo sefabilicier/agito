@@ -37,7 +37,7 @@ public class CustomerClaim {
     @Column(name = "DESCRIPTION")
     private String claimDescription;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "CUSTOMERPOLICYID")
     private CustomerPolicy customerPolicy;
 

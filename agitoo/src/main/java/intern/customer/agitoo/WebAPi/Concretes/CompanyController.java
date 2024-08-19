@@ -1,10 +1,11 @@
 package intern.customer.agitoo.WebAPi.Concretes;
 
 import intern.customer.agitoo.Core.Results.DataResult;
-import intern.customer.agitoo.Core.Results.Result;
 import intern.customer.agitoo.DTO.DTOs.CompanyDTO;
-import intern.customer.agitoo.Models.Concretes.Company;
+import intern.customer.agitoo.Helper.Messages;
 import intern.customer.agitoo.Service.Abstracts.ICompanyService;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.Min;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -12,7 +13,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import javax.xml.crypto.Data;
 import java.util.List;
 
 @Slf4j
@@ -34,34 +34,34 @@ public class CompanyController {
         DataResult<List<CompanyDTO>> response = new DataResult<>
                 (companyDTOList,
                         true,
-                        "Companies listed!");
+                        Messages.LISTED);
         return ResponseEntity.ok (response);
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<DataResult<CompanyDTO>> Add (@RequestBody CompanyDTO companyDTO) {
+    public ResponseEntity<DataResult<CompanyDTO>> Add (@RequestBody @Valid CompanyDTO companyDTO) {
         log.info ("Received request to update company {}", companyDTO);
         CompanyDTO savedCompany = companyService.add (companyDTO);
 
         DataResult<CompanyDTO> response = new DataResult<>
-                (savedCompany, true, "Company added!");
+                (savedCompany, true, Messages.ADDED);
         return ResponseEntity.ok (response);
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.PUT, produces = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<DataResult<CompanyDTO>> Update (@RequestBody CompanyDTO companyDTO) {
+    public ResponseEntity<DataResult<CompanyDTO>> Update (@RequestBody @Valid CompanyDTO companyDTO) {
         log.info ("Request receive to update company {}", companyDTO);
         CompanyDTO updatedCompany = companyService.update (companyDTO);
         DataResult<CompanyDTO> response = new DataResult<> (
                 updatedCompany,
                 true,
-                "Received request to update company!"
+                Messages.UPDATED
         );
         return ResponseEntity.ok (response);
     }
 
     @RequestMapping(value = "/{id}",method = RequestMethod.DELETE, produces = {MediaType.APPLICATION_JSON_VALUE})
-    public void Delete (@PathVariable Long id) {
+    public void Delete (@PathVariable @Min(1) Long id) {
         log.info ("Received request to delete company branch  {}", id);
         this.companyService.deleteById (id);
     }

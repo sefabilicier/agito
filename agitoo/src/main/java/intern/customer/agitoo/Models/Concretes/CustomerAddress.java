@@ -35,15 +35,15 @@ public class CustomerAddress {
     private String isDefault;
 
 
-    @ManyToOne()
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "CUSTOMERID")
     private Customer customer;
 
-    @ManyToOne()
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "ADDRESSCOUNTRYID")
     private CustomerAddressCountry customerAddressCountry;
 
-    @ManyToOne()
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "ADDRESSCITYID")
     private CustomerAddressCity customerAddressCity;
 

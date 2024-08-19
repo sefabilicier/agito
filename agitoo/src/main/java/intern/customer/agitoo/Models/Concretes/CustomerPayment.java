@@ -31,11 +31,11 @@ public class CustomerPayment {
     @Column(name = "PAYMENTMETHOD")
     private PaymentMethod paymentMethod;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "CUSTOMERID")
     private Customer customer;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "CUSTOMERPOLICYID")
     private CustomerPolicy customerPolicy;
 }

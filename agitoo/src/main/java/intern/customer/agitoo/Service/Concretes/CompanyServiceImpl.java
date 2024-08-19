@@ -4,7 +4,6 @@ import intern.customer.agitoo.DTO.DTOs.CompanyDTO;
 import intern.customer.agitoo.DTO.Mappers.CompanyMapper;
 import intern.customer.agitoo.Helper.Messages;
 import intern.customer.agitoo.Models.Concretes.Company;
-import intern.customer.agitoo.Models.Concretes.CompanyBranch;
 import intern.customer.agitoo.Repository.Abstracts.CompanyRepository;
 import intern.customer.agitoo.Service.Abstracts.ICompanyService;
 import lombok.AllArgsConstructor;

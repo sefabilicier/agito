@@ -29,7 +29,7 @@ public class CompanyBranch {
     @Column(name = "BRANCHMANAGER")
     private String branchManager;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @Column(name = "COMPANYID")
     private Company company;
 }

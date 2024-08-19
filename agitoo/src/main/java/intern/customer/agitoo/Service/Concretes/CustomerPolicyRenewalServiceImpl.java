@@ -3,8 +3,6 @@ package intern.customer.agitoo.Service.Concretes;
 import intern.customer.agitoo.DTO.DTOs.CustomerPolicyRenewalDTO;
 import intern.customer.agitoo.DTO.Mappers.CustomerPolicyRenewalMapper;
 import intern.customer.agitoo.Helper.Messages;
-import intern.customer.agitoo.Models.Concretes.Customer;
-import intern.customer.agitoo.Models.Concretes.CustomerPolicy;
 import intern.customer.agitoo.Models.Concretes.CustomerPolicyRenewal;
 import intern.customer.agitoo.Repository.Abstracts.CustomerPolicyRenewalRepository;
 import intern.customer.agitoo.Service.Abstracts.ICustomerPolicyRenewalService;

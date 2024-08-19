@@ -33,7 +33,7 @@ public class PersonFeedback {
     @Column(name = "COMMENTS")
     private String comments;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "PERSONID")
     private Person person;
 

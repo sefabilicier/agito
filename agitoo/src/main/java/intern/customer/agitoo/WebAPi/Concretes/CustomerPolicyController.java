@@ -1,12 +1,11 @@
 package intern.customer.agitoo.WebAPi.Concretes;
 
 import intern.customer.agitoo.Core.Results.DataResult;
-import intern.customer.agitoo.Core.Results.Result;
 import intern.customer.agitoo.DTO.DTOs.CustomerPolicyDTO;
-import intern.customer.agitoo.Models.Concretes.CustomerPolicy;
+import intern.customer.agitoo.Helper.Messages;
 import intern.customer.agitoo.Service.Abstracts.ICustomerPolicyService;
+import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -14,13 +13,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import javax.xml.crypto.Data;
 import java.util.List;
 
 @Slf4j
 @Controller
 @RestController
-@RequestMapping("/api/customerpolicy")
+@RequestMapping("/api/customer-policy")
 public class CustomerPolicyController {
 
     @Autowired
@@ -33,29 +31,29 @@ public class CustomerPolicyController {
         DataResult<List<CustomerPolicyDTO>> response = new DataResult<> (
                 customerPolicyDTOList,
                 true,
-                "Customer policies listed"
+                Messages.LISTED
         );
         return ResponseEntity.ok (response);
     }
 
     @RequestMapping(value = "/add",  method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_VALUE})
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<DataResult<CustomerPolicyDTO>> Add (CustomerPolicyDTO customerPolicyDTO) {
+    public ResponseEntity<DataResult<CustomerPolicyDTO>> Add (@RequestBody @Valid CustomerPolicyDTO customerPolicyDTO) {
         log.info("Received request to add customer policy {}", customerPolicyDTO);
         CustomerPolicyDTO savedCustomerPolicyDTO = customerPolicyService.add (customerPolicyDTO);
         DataResult<CustomerPolicyDTO> response = new DataResult<> (
-                savedCustomerPolicyDTO, true, "Customer policy added!"
+                savedCustomerPolicyDTO, true, Messages.ADDED
         );
         return ResponseEntity.ok (response);
 
     }
 
     @RequestMapping (value = "/update", method = RequestMethod.PUT, produces = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<DataResult<CustomerPolicyDTO>> Update (CustomerPolicyDTO customerPolicyDTO) {
+    public ResponseEntity<DataResult<CustomerPolicyDTO>> Update (@RequestBody @Valid CustomerPolicyDTO customerPolicyDTO) {
         log.info("Received request to update customer policy {}", customerPolicyDTO);
         CustomerPolicyDTO updatedCustomerPolicyDTO = customerPolicyService.update (customerPolicyDTO);
         DataResult<CustomerPolicyDTO> response = new DataResult<> (updatedCustomerPolicyDTO, true,
-                "Customer policy updated!");
+                Messages.UPDATED);
         return ResponseEntity.ok (response);
     }
 

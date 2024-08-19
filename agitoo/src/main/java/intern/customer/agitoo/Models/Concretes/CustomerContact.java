@@ -31,7 +31,7 @@ public class CustomerContact {
     @Column(name = "PHONE")
     private String phone;
 
-    @ManyToOne()
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "CUSTOMERID")
     private Customer customer;
 

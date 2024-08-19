@@ -1,9 +1,11 @@
 package intern.customer.agitoo.Core.Results;
 
 
+import intern.customer.agitoo.Helper.Messages;
+
 public class SuccessDataResult<T> extends DataResult<T> {
 
-    public SuccessDataResult (T data, String message) {
+    public SuccessDataResult (T data, Messages message) {
         super (data, true, message);
     }
 
@@ -16,7 +18,7 @@ public class SuccessDataResult<T> extends DataResult<T> {
         super (null, true);
     }
 
-    public SuccessDataResult (String message) {
+    public SuccessDataResult (Messages message) {
         super (null, true, message);
     }
 }
