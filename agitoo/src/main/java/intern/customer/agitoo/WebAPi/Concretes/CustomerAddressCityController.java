@@ -26,7 +26,7 @@ public class CustomerAddressCityController {
     private ICustomerAddressCityService customerAddressCityService;
 
 
-    @RequestMapping(value = "/getall", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
+    @RequestMapping(value = "/get-all", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<DataResult<List<CustomerAddressCityDTO>>> getAll () {
         log.info("Received request to list customer address cities!");
         List<CustomerAddressCityDTO> customerAddressCityDTOList = customerAddressCityService.getAll ();

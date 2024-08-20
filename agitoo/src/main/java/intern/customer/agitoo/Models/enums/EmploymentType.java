@@ -7,10 +7,10 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum EmploymentType {
 
-    FullTime ("Full-Time"),
-    PartTime ("Part-Time"),
+    FullTime ("FullTime"),
+    PartTime ("PartTime"),
     Contract ("Contract"),
     Internship ("Internship");
 
-    private final String EmploymentType;
+    private final String employmentType;
 }

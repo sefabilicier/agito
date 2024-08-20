@@ -25,7 +25,7 @@ public class CustomerPaymentController {
     @Autowired
     private ICustomerPaymentService customerPaymentService;
 
-    @RequestMapping(value = "/getall", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
+    @RequestMapping(value = "/get-all", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<DataResult<List<CustomerPaymentDTO>>> getAll () {
         log.info("Received request to list customer payments!");
         List<CustomerPaymentDTO> customerPaymentDTOList = customerPaymentService.getAll ();

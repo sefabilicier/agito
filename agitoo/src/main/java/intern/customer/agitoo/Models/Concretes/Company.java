@@ -50,7 +50,7 @@ public class Company {
 
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "CUSTOMERID")
+    @JoinColumn(name = "CUSTOMERID", insertable = false, updatable = false)
     private Customer customer;
 
 

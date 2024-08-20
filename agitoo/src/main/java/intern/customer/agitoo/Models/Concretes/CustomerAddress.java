@@ -1,5 +1,6 @@
 package intern.customer.agitoo.Models.Concretes;
 
+import intern.customer.agitoo.Core.Utilities.BooleanToYesNoConverter;
 import intern.customer.agitoo.Models.enums.AddressType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -31,8 +32,9 @@ public class CustomerAddress {
     @Column(name = "POSTALCODE", length = 20)
     private String postalCode;
 
+    @Convert(converter = BooleanToYesNoConverter.class)
     @Column(name = "ISDEFAULT", length = 1)
-    private String isDefault;
+    private boolean isDefault;
 
 
     @ManyToOne(fetch = FetchType.EAGER)

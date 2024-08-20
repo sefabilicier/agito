@@ -100,12 +100,12 @@
 			<scope>runtime</scope>
 		</dependency>
 
-		<!--database no need it when working with the JPA
+		<!--database no need it when working with the JPA -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jdbc</artifactId>
         </dependency>
-        -->
+
 
 		<!--mapper-->
 		<dependency>
@@ -114,6 +114,11 @@
 			<version>3.2.1</version>
 		</dependency>
 
+		<!--hibernate-->
+		<dependency>
+			<groupId>org.hibernate.validator</groupId>
+			<artifactId>hibernate-validator</artifactId>
+		</dependency>
 
 
 	</dependencies>

@@ -9,8 +9,10 @@ public enum Currency {
 
     TR ("TR"),
     EUR ("EUR"),
-    USD ("USD"),
-    Other ("Other");
+    USD("USD"),
+    GBP ("GBP"),
+    JPY ("JPY"),
+    Other("Other");
 
     private final String Currency;
 

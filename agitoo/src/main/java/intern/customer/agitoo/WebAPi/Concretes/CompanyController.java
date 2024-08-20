@@ -25,7 +25,7 @@ public class CompanyController {
     @Autowired
     private ICompanyService companyService;
 
-    @RequestMapping (value = "/getall", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
+    @RequestMapping (value = "/get-all", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
     //@Operation(summary = "Get all company")
     public ResponseEntity<DataResult<List<CompanyDTO>>> getAll () {
         log.info ("Received request to list company branches!");

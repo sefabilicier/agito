@@ -26,7 +26,7 @@ public class CustomerController {
     private ICustomerService customerService;
 
 
-    @RequestMapping(value = "/getall", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
+    @RequestMapping(value = "/get-all", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<DataResult<List<CustomerDTO>>> getAll () {
         log.info("Received request to list customers!");
         List<CustomerDTO> customerDTOList = customerService.getAll ();

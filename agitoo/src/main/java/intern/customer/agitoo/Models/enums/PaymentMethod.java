@@ -6,13 +6,12 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public enum PaymentMethod {
-    //'Credit Card', 'Bank Transfer', 'Cash', 'Other'
 
-    CreditCard ("Credit Card"),
-    BankTransfer ("Bank Transfer"),
+    CreditCard ("CreditCard"),
+    BankTransfer ("BankTransfer"),
     Cash ("Cash"),
     Other ("Other");
 
 
-    private final String PaymentMethod;
+    private final String paymentMethod;
 }

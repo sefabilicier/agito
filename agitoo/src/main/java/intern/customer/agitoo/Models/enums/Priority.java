@@ -11,5 +11,5 @@ public enum Priority {
     Medium ("Medium"),
     High ("High");
 
-    private final String Priority;
+    private final String priority;
 }

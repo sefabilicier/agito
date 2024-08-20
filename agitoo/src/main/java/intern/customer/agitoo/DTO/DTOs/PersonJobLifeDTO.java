@@ -1,6 +1,7 @@
 package intern.customer.agitoo.DTO.DTOs;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,5 +21,6 @@ public class PersonJobLifeDTO {
     @NotBlank
     private String employmentType;
 
+    @JsonIgnore //should we ignore it?
     private PersonDTO person;
 }

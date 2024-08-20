@@ -12,5 +12,5 @@ public enum IncomeSource {
     Investment ("Investment"),
     Other ("Other");
 
-    private final String IncomeSource;
+    private final String incomeSource;
 }

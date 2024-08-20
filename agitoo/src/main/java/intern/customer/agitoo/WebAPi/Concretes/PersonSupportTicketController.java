@@ -25,7 +25,7 @@ public class PersonSupportTicketController {
     @Autowired
     private IPersonSupportTicketService personSupportTicketService;
 
-    @RequestMapping(value = "/getall", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
+    @RequestMapping(value = "/get-all", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<DataResult<List<PersonSupportTicketDTO>>> getAll () {
         log.info("Received request to list person support tickets!");
         List<PersonSupportTicketDTO> personSupportTicketDTOList = personSupportTicketService.getAll ();

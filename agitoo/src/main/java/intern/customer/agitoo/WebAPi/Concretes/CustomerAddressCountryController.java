@@ -25,7 +25,7 @@ public class CustomerAddressCountryController {
     @Autowired
     private ICustomerAddressCountryService customerAddressCountryService;
 
-    @RequestMapping(value = "/getall", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
+    @RequestMapping(value = "/get-all", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<DataResult<List<CustomerAddressCountryDTO>>> getAll () {
         log.info("Received request to list customer address countries!");
         List<CustomerAddressCountryDTO> customerAddressCityDTOList = customerAddressCountryService.getAll ();

@@ -38,7 +38,7 @@ public class CompanyFinancial {
     private BigDecimal liabilities;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @Column(name = "COMPANYID")
+    @JoinColumn(name = "COMPANYID")
     private Company company;
 
 }

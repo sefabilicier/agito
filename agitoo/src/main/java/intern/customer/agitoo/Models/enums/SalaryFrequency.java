@@ -8,10 +8,10 @@ import lombok.Getter;
 public enum SalaryFrequency {
 
     Monthly ("Monthly"),
-    BiWeekly ("Bi-Weekly"),
+    BiWeekly ("BiWeekly"),
     Weekly ("Weekly"),
-    Annualy ("Annually");
+    Annually ("Annually");
 
-    private final String SalaryFrequency;
+    private final String salaryFrequency;
 
 }

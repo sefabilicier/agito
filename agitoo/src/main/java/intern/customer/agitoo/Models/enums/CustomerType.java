@@ -7,8 +7,8 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum CustomerType {
 
-    COMPANY ("Company"),
-    PERSON ("Person");
+    Company ("Company"),
+    Person ("Person");
 
-    private final String type;
+    private final String customerType;
 }

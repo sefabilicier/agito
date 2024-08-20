@@ -26,7 +26,7 @@ public class CompanyFinancialController {
     private ICompanyFinancialService companyFinancialService;
 
 
-    @RequestMapping(value = "/getall", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
+    @RequestMapping(value = "/get-all", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<DataResult<List<CompanyFinancialDTO>>> getAll () {
         log.info("Received request to list company branches!");
         List<CompanyFinancialDTO> companyFinancialDTOList = companyFinancialService.getAll ();

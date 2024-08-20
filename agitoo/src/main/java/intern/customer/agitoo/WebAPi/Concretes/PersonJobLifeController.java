@@ -25,7 +25,7 @@ public class PersonJobLifeController {
     @Autowired
     private IPersonJobLifeService personJobLifeService;
 
-    @RequestMapping(value = "/getall", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
+    @RequestMapping(value = "/get-all", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<DataResult<List<PersonJobLifeDTO>>> getAll () {
         log.info("Received request to add person job lives!");
         List<PersonJobLifeDTO> personJobLifeDTOList = personJobLifeService.getAll ();

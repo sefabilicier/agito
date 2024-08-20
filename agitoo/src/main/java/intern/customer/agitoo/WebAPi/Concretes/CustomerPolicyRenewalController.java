@@ -26,7 +26,7 @@ public class CustomerPolicyRenewalController {
     private ICustomerPolicyRenewalService customerPolicyRenewalsService;
 
 
-    @RequestMapping(value = "/getall", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
+    @RequestMapping(value = "/get-all", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<DataResult<List<CustomerPolicyRenewalDTO>>> getAll () {
         log.info("Received request to list customer policy renewals!");
         List<CustomerPolicyRenewalDTO> customerPolicyRenewalDTOList = customerPolicyRenewalsService.getAll ();

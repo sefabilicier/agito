@@ -49,7 +49,7 @@ public class Person {
     private String occupation;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "CUSTOMERID")
+    @JoinColumn(name = "CUSTOMERID", insertable = false, updatable = false)
     private Customer customer;
 
     @ManyToOne(fetch = FetchType.EAGER)

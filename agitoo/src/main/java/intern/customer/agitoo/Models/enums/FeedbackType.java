@@ -11,5 +11,5 @@ public enum FeedbackType {
     Product ("Product"),
     General ("General");
 
-    private final String FeedbackType;
+    private final String feedbackType;
 }

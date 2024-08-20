@@ -24,7 +24,7 @@ public class CustomerPolicyController {
     @Autowired
     private ICustomerPolicyService customerPolicyService;
 
-    @RequestMapping(value = "/getall", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
+    @RequestMapping(value = "/get-all", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<DataResult<List<CustomerPolicyDTO>>> getAll () {
         log.info("Received request to list customer policies!");
         List<CustomerPolicyDTO> customerPolicyDTOList = customerPolicyService.getAll ();

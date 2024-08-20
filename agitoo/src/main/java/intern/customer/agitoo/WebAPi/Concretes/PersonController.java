@@ -26,7 +26,7 @@ public class PersonController {
     private IPersonService personService;
 
 
-    @RequestMapping(value = "/getall", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
+    @RequestMapping(value = "/get-all", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<DataResult<List<PersonDTO>>> getAll () {
         log.info("Received request to list all person!");
         List<PersonDTO> personDTOList = personService.getAll ();

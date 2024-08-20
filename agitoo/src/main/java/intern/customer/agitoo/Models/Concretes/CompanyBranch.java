@@ -30,6 +30,6 @@ public class CompanyBranch {
     private String branchManager;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @Column(name = "COMPANYID")
+    @JoinColumn(name = "COMPANYID")
     private Company company;
 }

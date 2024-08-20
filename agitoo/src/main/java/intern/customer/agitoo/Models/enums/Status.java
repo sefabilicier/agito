@@ -8,9 +8,9 @@ import lombok.Getter;
 public enum Status {
 
     Open ("Open"),
-    InProgress ("In Progress"),
+    Processing ("Processing"),
     Resolved ("Resolved"),
     Closed ("Closed");
 
-    private final String Status;
+    private final String status;
 }
