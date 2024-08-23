@@ -1,8 +1,8 @@
 package intern.customer.agitoo.DTO.DTOs;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.PastOrPresent;
-import jakarta.validation.constraints.PositiveOrZero;
+import intern.customer.agitoo.Models.Concretes.Customer;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,19 +18,35 @@ import java.util.Date;
 @Builder
 public class CustomerRegistrationDTO {
 
-    @NotBlank
-    private String isActive;
-    @PastOrPresent
+    @NotNull(message = "{isActive.notNull}")
+    @Pattern(regexp = "^[YN]$", message = "{isActive.pattern}")
+    private String isActive; // y or no --> boolean?
+
+    @PastOrPresent(message = "{registrationDate.pastOrPresent}")
     private Date regsitrationDate;
-    @NotBlank
+
+    @NotNull(message = "{lastLoginDate.notNull}")
     private LocalDateTime lastLoginDate;
+
+    @PositiveOrZero(message = "{loyaltyPoints.positiveOrZero}")
     private int loyaltyPoints;
-    @NotBlank
-    private String newsLetterSubscription;
-    @NotBlank
+
+    @NotNull(message = "{newsLetterSubscription.notNull}")
+    @Pattern(regexp = "^[YN]$", message = "{newsLetterSubscription.pattern}")
+    private String newsLetterSubscription; //--> boolean?
+
+    @NotNull(message = "{socialMediaHandle.notNull}")
+    @Pattern(regexp = "^[\\w]+$", message = "{socialMediaHandle.pattern}")
     private String socialMediaHandle;
-    @NotBlank
+
+    @NotNull(message = "{profilePictureURL.notNull}")
+    @Pattern(regexp = "^(https?|ftp)://[^\\s/$.?#].[^\\s]*$", message = "{profilePictureURL.pattern}")
     private String profilePictureURL;
-    @PositiveOrZero
+
+    @PositiveOrZero(message = "{totalSpent.positiveOrZero}")
+    @DecimalMin(value = "0.00", message = "{totalSpent.decimalMin}")
     private BigDecimal totalSpent;
+
+//    @Valid
+//    private CustomerDTO customer;
 }

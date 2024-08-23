@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
@@ -21,7 +23,7 @@ public class PersonFeedback {
     private Long feedbackId;
 
     @Column(name = "FEEDBACKDATE")
-    private Date feedbackDate;
+    private LocalDateTime feedbackDate;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "FEEDBACKTYPE")
@@ -33,7 +35,7 @@ public class PersonFeedback {
     @Column(name = "COMMENTS")
     private String comments;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "PERSONID")
     private Person person;
 

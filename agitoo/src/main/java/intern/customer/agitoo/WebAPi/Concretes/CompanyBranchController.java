@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Slf4j
-@Controller
 @RestController
 @RequestMapping("/api/company-branch")
 public class CompanyBranchController {
@@ -29,6 +28,7 @@ public class CompanyBranchController {
     public ResponseEntity<DataResult<List<CompanyBranchDTO>>> getAll () {
         log.info("Received request to list company branches!");
         List<CompanyBranchDTO> companyBranchDTOList = companyBranchService.getAll();
+
         DataResult<List<CompanyBranchDTO>> response = new DataResult<>
                 (companyBranchDTOList, true, Messages.LISTED);
         return ResponseEntity.ok(response);
@@ -41,7 +41,8 @@ public class CompanyBranchController {
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<DataResult<CompanyBranchDTO>> Add (@RequestBody @Valid CompanyBranchDTO companyBranchDTO) {
         log.info("Received request to add company branch {}", companyBranchDTO);
-        CompanyBranchDTO addedCompanyBranchDTO = companyBranchService.add (companyBranchDTO);
+        CompanyBranchDTO addedCompanyBranchDTO =
+                companyBranchService.add (companyBranchDTO);
 
         DataResult<CompanyBranchDTO> response = new DataResult<>
                 (addedCompanyBranchDTO, true, Messages.ADDED);
@@ -63,7 +64,7 @@ public class CompanyBranchController {
         //this.companyBranchService.update (companyBranch);
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/delete-by-id/{id}", method = RequestMethod.DELETE)
     public void Delete (@PathVariable @Min(1) Long id) {
         log.info("Received request to delete company branch {}", id);
         this.companyBranchService.deleteById (id);

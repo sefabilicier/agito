@@ -6,6 +6,7 @@ import intern.customer.agitoo.Helper.Messages;
 import intern.customer.agitoo.Models.Concretes.Company;
 import intern.customer.agitoo.Repository.Abstracts.CompanyRepository;
 import intern.customer.agitoo.Service.Abstracts.ICompanyService;
+import intern.customer.agitoo.Service.Rules.toDatabase;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,7 @@ public class CompanyServiceImpl implements ICompanyService {
 
     @Override
     public List<CompanyDTO> getAll () {
+        toDatabase.isConnected ();
         List<Company> companies = companyRepository.findAll ();
         List<CompanyDTO> companyDTOS = companies
                 .stream ()

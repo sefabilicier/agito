@@ -36,16 +36,15 @@ public class CustomerAddress {
     @Column(name = "ISDEFAULT", length = 1)
     private boolean isDefault;
 
-
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "CUSTOMERID")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CUSTOMERID", nullable = false) //Bir müşteri adresi, mutlaka bir müşteri ile ilişkili olmalı. Bu yüzden nullable = false eklenmeli.
     private Customer customer;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "ADDRESSCOUNTRYID")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ADDRESSCOUNTRYID", nullable = false)
     private CustomerAddressCountry customerAddressCountry;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ADDRESSCITYID")
     private CustomerAddressCity customerAddressCity;
 

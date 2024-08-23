@@ -2,6 +2,8 @@ package intern.customer.agitoo.Models.Concretes;
 
 import intern.customer.agitoo.Models.enums.CustomerContactType;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -25,14 +27,17 @@ public class CustomerContact {
     @Column(name = "CONTACTTYPE")
     private CustomerContactType contactType;
 
-    @Column(name = "EMAIL")
+    //@Email
+    @Column(name = "EMAIL", unique = true)
     private String email;
 
+    /*@Pattern(regexp = "^(\\+\\d{1,3}[- ]?)?\\d{10}$",
+            message = "Invalid phone number format")*/
     @Column(name = "PHONE")
     private String phone;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "CUSTOMERID")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CUSTOMERID", nullable = false)
     private Customer customer;
 
 }

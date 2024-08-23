@@ -11,6 +11,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class CustomerAddressCityDTO {
-    @NotBlank
+
+    @NotBlank(message = "{cityName.notBlank}")
     private String cityName;
+
 }

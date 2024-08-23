@@ -6,6 +6,7 @@ import intern.customer.agitoo.Helper.Messages;
 import intern.customer.agitoo.Models.Concretes.Person;
 import intern.customer.agitoo.Repository.Abstracts.PersonRepository;
 import intern.customer.agitoo.Service.Abstracts.IPersonService;
+import intern.customer.agitoo.Service.Rules.toDatabase;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,7 @@ public class PersonServiceImpl implements IPersonService {
 
     @Override
     public List<PersonDTO> getAll () {
+        toDatabase.isConnected ();
         List<Person> personList = personRepository.findAll ();
         List<PersonDTO> personDTOS = personList
                 .stream ()

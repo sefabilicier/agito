@@ -21,7 +21,7 @@ public class PersonSupportTicket {
     @Column(name = "TICKETID")
     private Long ticketID;
 
-    @Column(name = "TICKETNUMBER")
+    @Column(name = "TICKETNUMBER", unique = true)
     private String ticketNumber;
 
     @Column(name = "SUBJECT")
@@ -44,7 +44,7 @@ public class PersonSupportTicket {
     @Column(name = "RESOLVEDDATE")
     private Date resolvedDate;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "PERSONID")
     private Person person;
 

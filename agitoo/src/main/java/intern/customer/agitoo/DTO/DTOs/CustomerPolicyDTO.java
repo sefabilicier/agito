@@ -1,9 +1,9 @@
 package intern.customer.agitoo.DTO.DTOs;
 
 
-import jakarta.validation.constraints.FutureOrPresent;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.PastOrPresent;
+import intern.customer.agitoo.Models.enums.CustomerPolicyType;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -19,25 +19,38 @@ import java.util.List;
 @Builder
 public class CustomerPolicyDTO {
 
-    @NotBlank
+    @NotBlank(message = "{customerPolicyNumber.notBlank}")
     private String customerPolicyNumber;
-    @NotBlank
-    private String customerPolicyType;
-    @NotBlank
-    @PastOrPresent
+
+    @NotNull(message = "{customerPolicyType.notNull}")
+    private CustomerPolicyType customerPolicyType;
+
+    @NotNull(message = "{customerPolicyStartDate.notNull}")
+    @PastOrPresent(message = "{customerPolicyStartDate.pastOrPresent}")
     private Date customerPolicyStartDate;
-    @NotBlank
-    @FutureOrPresent
+
+    @NotNull(message = "{customerPolicyEndDate.notNull}")
+    @FutureOrPresent(message = "{customerPolicyEndDate.futureOrPresent}")
     private Date customerPolicyEndDate;
-    @NotBlank
+
+    @NotNull(message = "{coverageAmount.notNull}")
+    @Positive(message = "{coverageAmount.positive}")
+    @DecimalMin(value = "0.00", message = "{coverageAmount.decimalMin}")
     private BigDecimal coverageAmount;
-    @NotBlank
+
+    @NotNull(message = "{premium.notNull}")
+    @Positive(message = "{premium.positive}")
+    @DecimalMin(value = "0.00", message = "{premium.decimalMin}")
     private BigDecimal premium;
 
-    List<CustomerClaimDTO> customerClaims;
-    List<CustomerPolicyRenewalDTO> customerPolicyRenewals;
+    @Valid
+    private List<CustomerClaimDTO> customerClaims;
 
-    private CustomerDTO customer;
+    @Valid
+    private List<CustomerPolicyRenewalDTO> customerPolicyRenewals;
+
+//    @Valid
+//    private CustomerDTO customer;
 
 
 }

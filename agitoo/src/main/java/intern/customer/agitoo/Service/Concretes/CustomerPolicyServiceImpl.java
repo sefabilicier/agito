@@ -6,6 +6,7 @@ import intern.customer.agitoo.Helper.Messages;
 import intern.customer.agitoo.Models.Concretes.CustomerPolicy;
 import intern.customer.agitoo.Repository.Abstracts.CustomerPolicyRepository;
 import intern.customer.agitoo.Service.Abstracts.ICustomerPolicyService;
+import intern.customer.agitoo.Service.Rules.toDatabase;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,7 @@ public class CustomerPolicyServiceImpl implements ICustomerPolicyService {
 
     @Override
     public List<CustomerPolicyDTO> getAll () {
+        toDatabase.isConnected ();
         List<CustomerPolicy> customerPolicies = customerPolicyRepository.findAll ();
         List<CustomerPolicyDTO> customerPolicyDTOS = customerPolicies
                 .stream ()

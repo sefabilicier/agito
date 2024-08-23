@@ -6,6 +6,7 @@ import intern.customer.agitoo.Helper.Messages;
 import intern.customer.agitoo.Models.Concretes.CustomerPayment;
 import intern.customer.agitoo.Repository.Abstracts.CustomerPaymentRepository;
 import intern.customer.agitoo.Service.Abstracts.ICustomerPaymentService;
+import intern.customer.agitoo.Service.Rules.toDatabase;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,7 @@ public class CustomerPaymentServiceImpl implements ICustomerPaymentService {
 
     @Override
     public List<CustomerPaymentDTO> getAll () {
+        toDatabase.isConnected ();
         List<CustomerPayment> customerPayments = customerPaymentRepository.findAll ();
         List<CustomerPaymentDTO> customerPaymentDTOS = customerPayments
                 .stream ()

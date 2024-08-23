@@ -18,7 +18,6 @@ import java.util.List;
 
 
 @Slf4j
-@Controller
 @RestController
 @RequestMapping("/api/customer-address")
 public class CustomerAddressController {
@@ -60,7 +59,7 @@ public class CustomerAddressController {
 
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/delete-by-id/{id}", method = RequestMethod.DELETE)
     public void Delete (@PathVariable @Min(1) Long id) {
         log.info("Received request to delete customer addresses {}", id);
         this.customerAddressService.deleteById (id);

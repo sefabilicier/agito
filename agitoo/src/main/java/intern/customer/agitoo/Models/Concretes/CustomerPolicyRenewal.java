@@ -29,8 +29,8 @@ public class CustomerPolicyRenewal {
     @Column(name = "RENEWALCOVERAGEAMOUNT", length = 15)
     private BigDecimal renewalCoverageAmount;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "CUSTOMERPOLICYID")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CUSTOMERPOLICYID", nullable = false)
     private CustomerPolicy customerPolicy;
 
 

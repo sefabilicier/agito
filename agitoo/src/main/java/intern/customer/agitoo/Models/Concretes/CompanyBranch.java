@@ -21,7 +21,7 @@ public class CompanyBranch {
     private String branchName;
 
     @Column(name = "BRANCHADDRESS")
-    private String brachAddress;
+    private String branchAddress;
 
     @Column(name = "BRANCHPHONE")
     private String branchPhone;
@@ -29,7 +29,7 @@ public class CompanyBranch {
     @Column(name = "BRANCHMANAGER")
     private String branchManager;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "COMPANYID")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "COMPANYID", nullable = false)
     private Company company;
 }

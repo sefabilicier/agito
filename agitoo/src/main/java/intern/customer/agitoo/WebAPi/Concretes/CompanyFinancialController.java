@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Slf4j
-@Controller
 @RestController
 @RequestMapping("/api/company-financial")
 public class CompanyFinancialController {
@@ -60,7 +59,7 @@ public class CompanyFinancialController {
         return ResponseEntity.ok (response);
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/delete-by-id/{id}", method = RequestMethod.DELETE)
     public void Delete (@PathVariable @Min(1) Long id) {
         log.info("Received request to delete company branch {}", id);
         this.companyFinancialService.deleteById (id);

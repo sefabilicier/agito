@@ -1,5 +1,6 @@
 package intern.customer.agitoo.DTO.Mappers;
 
+import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @NoArgsConstructor
+@AllArgsConstructor
 public class GenericMapper<S, D> {
 
     /* generic as allinOne
@@ -19,7 +21,6 @@ public class GenericMapper<S, D> {
 
     @Autowired
     private ModelMapper modelMapper;
-
 
     public D toDTO (S source, Class<D> destinationClass) {
         return modelMapper.map (source, destinationClass);

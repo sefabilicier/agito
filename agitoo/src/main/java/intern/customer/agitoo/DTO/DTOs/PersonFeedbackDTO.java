@@ -1,12 +1,14 @@
 package intern.customer.agitoo.DTO.DTOs;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.PastOrPresent;
+import intern.customer.agitoo.Models.enums.FeedbackType;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Data
@@ -15,14 +17,21 @@ import java.util.Date;
 @Builder
 public class PersonFeedbackDTO {
 
-    @PastOrPresent
-    private Date feedbackDate;
+    @NotNull(message = "{feedbackDate.notNull}")
+    @PastOrPresent(message = "{feedbackDate.pastOrPresent}")
+    private LocalDateTime feedbackDate;
+
+    @NotNull(message = "{feedbackType.notBlank}")
+    private FeedbackType feedbackType;
+
     @NotBlank
-    private String feedbackType;
-    @NotBlank
+    @Min(value = 0, message = "{rating.min}")
+    @Max(value = 5, message = "{rating.max}")
     private int rating;
-    @NotBlank
+
+    @NotBlank(message = "{comments.notBlank}")
     private String comments;
 
-    private PersonDTO person;
+//    @Valid
+//    private PersonDTO person;
 }

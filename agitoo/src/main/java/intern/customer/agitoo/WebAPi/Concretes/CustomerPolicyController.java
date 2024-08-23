@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Slf4j
-@Controller
 @RestController
 @RequestMapping("/api/customer-policy")
 public class CustomerPolicyController {
@@ -57,7 +56,7 @@ public class CustomerPolicyController {
         return ResponseEntity.ok (response);
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
     public void Delete (@PathVariable Long id) {
         log.info("Received request to delete customer policy {}", id);
         this.customerPolicyService.deleteById (id);

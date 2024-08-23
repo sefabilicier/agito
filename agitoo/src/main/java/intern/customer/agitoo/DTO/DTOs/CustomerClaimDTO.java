@@ -1,6 +1,8 @@
 package intern.customer.agitoo.DTO.DTOs;
 
 
+import intern.customer.agitoo.Models.enums.ClaimStatus;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PastOrPresent;
@@ -18,14 +20,15 @@ import java.util.Date;
 @Builder
 public class CustomerClaimDTO {
 
-    @PastOrPresent
+    @PastOrPresent(message = "{claimDate.pastOrPresent}")
     private Date claimDate;
-    @NotNull
+    @NotNull(message = "{claimAmount.notNull}")
     private BigDecimal claimAmount;
-    @NotBlank
-    private String claimStatus;
-    @NotBlank
+    @NotNull(message = "{claimStatus.notBlank}")
+    private ClaimStatus claimStatus;
+    @NotBlank(message = "{claimDescription.notBlank}")
     private String claimDescription;
 
-    private CustomerPolicyDTO customerPolicy;
+//    @Valid
+//    private CustomerPolicyDTO customerPolicy;
 }

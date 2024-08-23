@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Slf4j
-@Controller
 @RestController
 @RequestMapping("/api/customer-registration")
 public class CustomerRegistrationController {
@@ -60,7 +59,7 @@ public class CustomerRegistrationController {
         return ResponseEntity.ok (response);
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/delete-by-id/{id}", method = RequestMethod.DELETE)
     public void Delete (@PathVariable @Min(1) Long id) {
         log.info("Received request to delete customer registration {}", id);
         this.customerRegistrationService.deleteById (id);

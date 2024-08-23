@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Slf4j
-@Controller
 @RestController
 @RequestMapping("/api/person-activity")
 public class PersonActivityController {
@@ -59,7 +58,7 @@ public class PersonActivityController {
         return ResponseEntity.ok (response);
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/delete-by-id/{id}", method = RequestMethod.DELETE)
     public void Delete (@PathVariable @Min(1) Long id) {
         log.info("Received request to delete customer activity {}", id);
         this.personActivityService.deleteById (id);

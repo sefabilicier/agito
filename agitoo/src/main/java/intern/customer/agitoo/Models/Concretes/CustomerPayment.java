@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.util.Date;
 
 @Entity
@@ -22,7 +23,7 @@ public class CustomerPayment {
     private Long paymentID;
 
     @Column(name = "PAYMENTDATE")
-    private Date paymentDate;
+    private Timestamp paymentDate;
 
     @Column(name = "PAYMENTAMOUNT")
     private BigDecimal paymentAmount;
@@ -31,11 +32,11 @@ public class CustomerPayment {
     @Column(name = "PAYMENTMETHOD")
     private PaymentMethod paymentMethod;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "CUSTOMERID")
     private Customer customer;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "CUSTOMERPOLICYID")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CUSTOMERPOLICYID", nullable = false)
     private CustomerPolicy customerPolicy;
 }

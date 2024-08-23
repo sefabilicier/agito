@@ -1,5 +1,7 @@
 package intern.customer.agitoo.DTO.DTOs;
 
+import intern.customer.agitoo.Models.enums.CustomerContactType;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
@@ -14,15 +16,20 @@ import lombok.NoArgsConstructor;
 @Builder
 public class CustomerContactDTO {
 
-    @NotBlank
+    @NotBlank(message = "{contactName.notBlank}")
     private String contactName;
-    @NotBlank
-    private String contactType;
-    @Email
+
+    @NotBlank(message = "{contactType.notBlank}")
+    private CustomerContactType contactType;
+
+    @NotBlank(message = "{email.notBlank}")
+    @Email(message = "{email.invalid}")
     private String email;
-    @NotBlank(message = "Phone number cannot be blank")
-    @Pattern(regexp = "^(\\+\\d{1,3}[- ]?)?\\d{10}$", message = "Invalid phone number format")
+
+    @NotBlank(message = "{phone.notBlank}")
+    @Pattern(regexp = "^(\\+\\d{1,3}[- ]?)?\\d{10}$", message = "{phone.pattern}")
     private String phone;
 
-    private CustomerDTO customer;
+//    @Valid
+//    private CustomerDTO customer;
 }

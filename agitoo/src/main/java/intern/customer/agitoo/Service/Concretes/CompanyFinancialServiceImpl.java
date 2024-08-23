@@ -6,6 +6,7 @@ import intern.customer.agitoo.Helper.Messages;
 import intern.customer.agitoo.Models.Concretes.CompanyFinancial;
 import intern.customer.agitoo.Repository.Abstracts.CompanyFinancialRepository;
 import intern.customer.agitoo.Service.Abstracts.ICompanyFinancialService;
+import intern.customer.agitoo.Service.Rules.toDatabase;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,7 @@ public class CompanyFinancialServiceImpl implements ICompanyFinancialService {
 
     @Override
     public List<CompanyFinancialDTO> getAll () {
+        toDatabase.isConnected ();
         List<CompanyFinancial> companyFinancials = companyFinancialRepository.findAll ();
 
         List<CompanyFinancialDTO> companyFinancialDTOS = companyFinancials

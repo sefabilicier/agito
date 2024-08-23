@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -36,7 +37,7 @@ public class Person {
     private PersonGender gender;
 
     @Column(name = "DATEOFBIRTH")
-    private LocalDateTime dateOfBirth;
+    private LocalDate dateOfBirth;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "MARITALSTATUS")
@@ -48,25 +49,20 @@ public class Person {
     @Column(name = "OCCUPATION")
     private String occupation;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "CUSTOMERID", insertable = false, updatable = false)
     private Customer customer;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "CUSTOMERID")
-    private PersonActivity personActivity;
+    @OneToMany(mappedBy = "person", fetch = FetchType.LAZY)
+    private List<PersonActivity> personActivities;
 
+    @OneToMany(mappedBy = "person", fetch = FetchType.LAZY)
+    private List<PersonFeedback> personFeedbacks;
 
-    @OneToMany(mappedBy = "person", fetch = FetchType.EAGER)
-    List<PersonActivity> personActivities;
+    @OneToMany(mappedBy = "person", fetch = FetchType.LAZY)
+    private List<PersonJobLife> personJobLives;
 
-    @OneToMany(mappedBy = "person", fetch = FetchType.EAGER)
-    List<PersonFeedback> personFeedbacks;
-
-    @OneToMany(mappedBy = "person", fetch = FetchType.EAGER)
-    List<PersonJobLife> personJobLifes;
-
-    @OneToMany(mappedBy = "person", fetch = FetchType.EAGER)
-    List<PersonSupportTicket> personSupportTickets;
+    @OneToMany(mappedBy = "person", fetch = FetchType.LAZY)
+    private List<PersonSupportTicket> personSupportTickets;
 
 }

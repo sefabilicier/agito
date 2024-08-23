@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -19,44 +20,46 @@ public class Company {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "COMPANYID")
-    private Long companyid;
+    private Long companyId;
 
     @Column(name = "COMPANYNAME")
-    private String companyname;
+    private String companyName;
 
     @Column(name = "INDUSTRY")
     private String industry;
 
-    @Column(name = "REGISTRATIONNUMBER")
-    private Integer registrationnumber;
+    @Column(name = "REGISTRATIONNUMBER", unique = true)
+    private String registrationNumber;
 
-    @Column(name = "TAXIDENTIFICATIONNUMBER")
-    private Integer taxidentificationnumber;
+    @Column(name = "TAXIDENTIFICATIONNUMBER", unique = true)
+    private String taxIdentificationNumber;
 
     @Column(name = "CONTACTCOMPANY")
-    private String contactcompany;
+    private String contactCompany;
 
     @Column(name = "ESTABLISHEDDATE")
-    private Date establisheddate;
+    private Date establishedDate;
 
     @Column(name = "NUMBEROFEMPLOYEES")
-    private Integer numberofemployees;
+    private Integer numberOfEmployees;
 
-    @Column(name = "REVENUE")
-    private float revenue;
+    @Column(name = "REVENUE", precision = 15, scale = 2)
+    private BigDecimal revenue;
 
     @Column(name = "WEBSITEURL")
-    private String websiteurl;
+    private String websiteURL;
 
-
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "CUSTOMERID", insertable = false, updatable = false)
+    //foreign key
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CUSTOMERID",
+            insertable = false,
+            updatable = false,
+            nullable = false)
     private Customer customer;
 
+    @OneToMany(mappedBy = "company", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<CompanyBranch> companyBranches;
 
-    @OneToMany(mappedBy = "company", fetch = FetchType.EAGER)
-    List<CompanyBranch> companyBranches;
-
-    @OneToMany(mappedBy = "company", fetch = FetchType.EAGER)
-    List<CompanyFinancial> companyFinancials;
+    @OneToMany(mappedBy = "company", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<CompanyFinancial> companyFinancials;
 }

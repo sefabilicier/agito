@@ -31,8 +31,8 @@ public class CustomerDebitCard {
     @Column(name = "ISSUER")
     private String issuer;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "CUSTOMERID")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CUSTOMERID", nullable = false)
     private Customer customer;
 
 }

@@ -1,7 +1,9 @@
 package intern.customer.agitoo.Core.Utilities;
 
 import jakarta.persistence.AttributeConverter;
+import jakarta.persistence.Converter;
 
+@Converter(autoApply = true)
 public class BooleanToYesNoConverter implements AttributeConverter<Boolean, String> {
     @Override
     public String convertToDatabaseColumn (Boolean attribute) {

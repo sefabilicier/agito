@@ -23,7 +23,7 @@ public class CustomerPolicy {
     @Column(name = "CUSTOMERPOLICYID")
     private Long customerPolicyId;
 
-    @Column(name = "CUSTOMERPOLICYNUMBER")
+    @Column(name = "CUSTOMERPOLICYNUMBER", unique = true)
     private String customerPolicyNumber;
 
     @Enumerated(EnumType.STRING)
@@ -42,15 +42,18 @@ public class CustomerPolicy {
     @Column(name = "PREMIUM")
     private BigDecimal premium;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "CUSTOMERID")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CUSTOMERID", nullable = false)
     private Customer customer;
 
-    @OneToMany(mappedBy = "customerPolicy", fetch = FetchType.EAGER)
-    List<CustomerClaim> customerClaims;
+    @OneToMany(mappedBy = "customerPolicy", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<CustomerClaim> customerClaims;
 
-    @OneToMany(mappedBy = "customerPolicy", fetch = FetchType.EAGER)
-    List<CustomerPolicyRenewal> customerPolicyRenewals;
+    @OneToMany(mappedBy = "customerPolicy", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<CustomerPayment> customerPayments;
+
+    @OneToMany(mappedBy = "customerPolicy", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<CustomerPolicyRenewal> customerPolicyRenewals;
 
 }
 

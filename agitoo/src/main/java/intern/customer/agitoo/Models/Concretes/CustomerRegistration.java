@@ -23,10 +23,10 @@ public class CustomerRegistration {
     private Long registrationID;
 
     @Column(name = "ISACTIVE")
-    private String isActive;
+    private String isActive; //Y * N
 
     @Column(name = "REGISTRATIONDATE")
-    private Date regsitrationDate;
+    private LocalDateTime regsitrationDate = LocalDateTime.now();;
 
     @Column(name = "LASTLOGINDATE")
     private LocalDateTime lastLoginDate;
@@ -35,7 +35,7 @@ public class CustomerRegistration {
     private int loyaltyPoints;
 
     @Column(name = "NEWSLETTERSUBSCRIPTION")
-    private String newsLetterSubscription;
+    private String newsLetterSubscription; //Y * N
 
     @Column(name = "SOCIALMEDIAHANDLE")
     private String socialMediaHandle;
@@ -49,7 +49,7 @@ public class CustomerRegistration {
     @Column(name = "TOTALSPENT")
     private BigDecimal totalSpent;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "CUSTOMERID")
     private Customer customer;
 }

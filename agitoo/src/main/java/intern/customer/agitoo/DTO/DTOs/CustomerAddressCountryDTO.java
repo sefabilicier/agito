@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class CustomerAddressCountryDTO {
-    @NotBlank
+
+    @NotBlank(message = "{countryName.notBlank}")
     private String countryName;
 }

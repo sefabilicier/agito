@@ -87,12 +87,11 @@
        -->
 
 
-		<!--hata konfigürasyonları-->
+		<!--Error Configurations-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
-
 
 		<dependency>
 			<groupId>com.oracle.database.jdbc</groupId>
@@ -100,12 +99,12 @@
 			<scope>runtime</scope>
 		</dependency>
 
-		<!--database no need it when working with the JPA -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-jdbc</artifactId>
-        </dependency>
-
+		<!--database no need it when working with the JPA
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jdbc</artifactId>
+		</dependency>
+		-->
 
 		<!--mapper-->
 		<dependency>
@@ -120,6 +119,28 @@
 			<artifactId>hibernate-validator</artifactId>
 		</dependency>
 
+		<!--Test Dependencies start-->
+		<!-- JUnit 5 -->
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter</artifactId>
+			<version>5.10.0</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-engine</artifactId>
+			<version>5.10.0</version>
+			<scope>test</scope>
+		</dependency>
+		<!-- AssertJ for fluent assertions -->
+		<dependency>
+			<groupId>org.assertj</groupId>
+			<artifactId>assertj-core</artifactId>
+			<version>3.22.0</version>
+			<scope>test</scope>
+		</dependency>
+		<!--Test Dependencies end-->
 
 	</dependencies>
 

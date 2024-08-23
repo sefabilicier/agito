@@ -26,28 +26,28 @@ public class Customer {
     private CustomerType customerType;
 
 
-    @OneToOne(mappedBy = "customer", fetch = FetchType.EAGER)
+    @OneToOne(mappedBy = "customer", fetch = FetchType.LAZY)
     private CustomerRegistration customerRegistration;
 
-    @OneToMany(mappedBy = "customer", fetch = FetchType.EAGER)
-    List<Company> companies;
+    @OneToMany(mappedBy = "customer", fetch = FetchType.LAZY)
+    private List<Company> companies;
 
-    @OneToMany(mappedBy = "customer", fetch = FetchType.EAGER)
-    List<Person> personLists;
+    @OneToMany(mappedBy = "customer", fetch = FetchType.LAZY)
+    private List<Person> personLists;
 
-    @OneToMany(mappedBy = "customer", fetch = FetchType.EAGER)
-    List<CustomerAddress> customerAddresses;
+    @OneToMany(mappedBy = "customer", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<CustomerAddress> customerAddresses;
 
-    @OneToMany(mappedBy = "customer", fetch = FetchType.EAGER)
-    List<CustomerContact> customerContacts;
+    @OneToMany(mappedBy = "customer", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<CustomerContact> customerContacts;
 
-    @OneToMany(mappedBy = "customer", fetch = FetchType.EAGER)
-    List<CustomerDebitCard> customerDebitCards;
+    @OneToMany(mappedBy = "customer", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<CustomerDebitCard> customerDebitCards;
 
-    @OneToMany(mappedBy = "customer", fetch = FetchType.EAGER)
-    List<CustomerPayment> customerPayments;
+    @OneToMany(mappedBy = "customer", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<CustomerPayment> customerPayments;
 
-    @OneToMany(mappedBy = "customer", fetch = FetchType.EAGER)
-    List<CustomerPolicy> customerPolicies;
+    @OneToMany(mappedBy = "customer", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<CustomerPolicy> customerPolicies;
 
 }

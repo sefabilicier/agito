@@ -1,7 +1,10 @@
 package intern.customer.agitoo.DTO.DTOs;
 
+import intern.customer.agitoo.Models.enums.ActivityType;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,12 +18,16 @@ import java.time.LocalDateTime;
 @Builder
 public class PersonActivityDTO {
 
-    @NotBlank
-    private String activityType;
-    @FutureOrPresent
+    @NotNull(message = "{activityType.notBlank}")
+    private ActivityType activityType;
+
+    @FutureOrPresent(message = "{activityDate.futureOrPresent}")
+    @NotNull(message = "{activityDate.notNull}")
     private LocalDateTime activityDate;
-    @NotBlank
+
+    @NotBlank(message = "{description.notBlank}")
     private String description;
 
-    private PersonDTO person;
+//    @Valid
+//    private PersonDTO person;
 }

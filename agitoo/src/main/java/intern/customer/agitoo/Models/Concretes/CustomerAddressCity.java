@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Entity
 @Data
 @AllArgsConstructor
@@ -20,9 +22,11 @@ public class CustomerAddressCity {
     @Column(name = "CITYNAME")
     private String cityName;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "ADDRESSCOUNTRYID")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ADDRESSCOUNTRYID", nullable = false)
     private CustomerAddressCountry customerAddressCountry;
 
+    @OneToMany(mappedBy = "customerAddressCity", cascade = CascadeType.ALL)
+    private List<CustomerAddress> customerAddresses;
 
 }

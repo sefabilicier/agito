@@ -6,6 +6,7 @@ import intern.customer.agitoo.Helper.Messages;
 import intern.customer.agitoo.Models.Concretes.CompanyBranch;
 import intern.customer.agitoo.Repository.Abstracts.CompanyBranchRepository;
 import intern.customer.agitoo.Service.Abstracts.ICompanyBranchService;
+import intern.customer.agitoo.Service.Rules.toDatabase;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,15 +28,15 @@ public class CompanyBranchServiceImpl implements ICompanyBranchService {
 
     @Override
     public List<CompanyBranchDTO> getAll () {
+        toDatabase.isConnected (); //veritabanına bağlandı mı?
+        List<CompanyBranch> companyBranches = companyBranchRepository.findAll (); //repodaki tüm verileri al
 
-        List<CompanyBranch> companyBranches = companyBranchRepository.findAll ();
-
-        List<CompanyBranchDTO> companyBranchDTOS = companyBranches
-                .stream ()
-                .map (companyBranch -> companyBranchMapper
+        List<CompanyBranchDTO> companyBranchDTOS = companyBranches //dto classına listele
+                .stream () //repodaki tüm verileri dolaş
+                .map (companyBranch -> companyBranchMapper //ve bu dolaştığın tüm verileri dto classına maple
                                 .toDTO (companyBranch, CompanyBranchDTO.class))
-                                        .collect(Collectors.toList ());
-        return companyBranchDTOS;
+                                        .collect(Collectors.toList ()); //ve hepsini liste olarak döndür
+        return companyBranchDTOS; //getAll çağrılınca bu listeye eklediğin dtodaki verilerini listele
     }
 
     @Override

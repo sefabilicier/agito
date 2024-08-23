@@ -6,6 +6,7 @@ import intern.customer.agitoo.Helper.Messages;
 import intern.customer.agitoo.Models.Concretes.CustomerAddressCountry;
 import intern.customer.agitoo.Repository.Abstracts.CustomerAddressCountryRepository;
 import intern.customer.agitoo.Service.Abstracts.ICustomerAddressCountryService;
+import intern.customer.agitoo.Service.Rules.toDatabase;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,7 @@ public class CustomerAddressCountryServiceImpl implements ICustomerAddressCountr
 
     @Override
     public List<CustomerAddressCountryDTO> getAll () {
+        toDatabase.isConnected ();
         List<CustomerAddressCountry> customerAddressCountries = customerAddressCountryRepository.findAll ();
         List<CustomerAddressCountryDTO> customerAddressCountryDTOS = customerAddressCountries
                 .stream ()

@@ -1,7 +1,7 @@
 package intern.customer.agitoo.DTO.DTOs;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.PastOrPresent;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,11 +16,17 @@ import java.math.BigDecimal;
 @Builder
 public class CompanyFinancialDTO {
 
-    @PastOrPresent
-    private String financialYear;
-    @NotBlank
+    @PastOrPresent(message = "{financialYear.pastOrPresent}")
+    @NotBlank(message = "{financialYear.notBlank}")
+    @NotNull(message = "{financialYear.notNull}")
+    private String financialYear; //date?
+
+    @NotNull(message = "{revenue.notNull}")
+    @PositiveOrZero(message = "{revenue.positiveOrZero}")
+    @DecimalMin(value = "0.00", message = "{revenue.decimalMin}")
     private BigDecimal revenue;
 
-    private CompanyDTO company;
+//    @Valid
+//    private CompanyDTO company;
 
 }

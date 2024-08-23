@@ -6,6 +6,7 @@ import intern.customer.agitoo.Helper.Messages;
 import intern.customer.agitoo.Models.Concretes.CustomerAddressCity;
 import intern.customer.agitoo.Repository.Abstracts.CustomerAddressCityRepository;
 import intern.customer.agitoo.Service.Abstracts.ICustomerAddressCityService;
+import intern.customer.agitoo.Service.Rules.toDatabase;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,7 @@ public class CustomerAddressCityServiceImpl implements ICustomerAddressCityServi
 
     @Override
     public List<CustomerAddressCityDTO> getAll () {
+        toDatabase.isConnected ();
         List<CustomerAddressCity> customerAddressCities = customerAddressCityRepository.findAll ();
         List<CustomerAddressCityDTO> customerAddressCityDTOS = customerAddressCities
                 .stream ()

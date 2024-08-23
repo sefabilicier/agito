@@ -21,7 +21,7 @@ public class CustomerClaim {
     @Column(name = "CUSTOMERCLAIMID")
     private Long claimId;
 
-    @Column(name = "CLAIMNUMBER")
+    @Column(name = "CLAIMNUMBER", unique = true)
     private String claimNumber;
 
     @Column(name = "CLAIMDATE")
@@ -37,8 +37,8 @@ public class CustomerClaim {
     @Column(name = "DESCRIPTION")
     private String claimDescription;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "CUSTOMERPOLICYID")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CUSTOMERPOLICYID", nullable = false)
     private CustomerPolicy customerPolicy;
 
 }
