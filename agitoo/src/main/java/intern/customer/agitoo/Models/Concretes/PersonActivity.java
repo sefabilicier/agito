@@ -3,6 +3,7 @@ package intern.customer.agitoo.Models.Concretes;
 import intern.customer.agitoo.Models.enums.ActivityType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -13,6 +14,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "PERSONACTIVITIES")
+@Builder
 public class PersonActivity {
 
     @Id

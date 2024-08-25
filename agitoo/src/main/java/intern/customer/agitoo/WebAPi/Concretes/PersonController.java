@@ -1,6 +1,6 @@
 package intern.customer.agitoo.WebAPi.Concretes;
 
-import intern.customer.agitoo.Core.Results.DataResult;
+import intern.customer.agitoo.Common.Results.DataResult;
 import intern.customer.agitoo.DTO.DTOs.PersonDTO;
 import intern.customer.agitoo.Helper.Messages;
 import intern.customer.agitoo.Service.Abstracts.IPersonService;
@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

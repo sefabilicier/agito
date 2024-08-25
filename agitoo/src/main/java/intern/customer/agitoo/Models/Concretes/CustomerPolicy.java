@@ -4,6 +4,7 @@ package intern.customer.agitoo.Models.Concretes;
 import intern.customer.agitoo.Models.enums.CustomerPolicyType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -16,6 +17,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "CUSTOMERPOLICIES")
+@Builder
 public class CustomerPolicy {
 
     @Id

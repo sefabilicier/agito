@@ -1,7 +1,5 @@
 package intern.customer.agitoo.DTO.DTOs;
 
-import intern.customer.agitoo.Models.Concretes.Customer;
-import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

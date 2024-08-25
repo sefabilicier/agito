@@ -4,6 +4,7 @@ import intern.customer.agitoo.Models.enums.Priority;
 import intern.customer.agitoo.Models.enums.Status;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -14,6 +15,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "PERSONSUPPORTTICKETS")
+@Builder
 public class PersonSupportTicket {
 
     @Id

@@ -4,6 +4,7 @@ package intern.customer.agitoo.Models.Concretes;
 import intern.customer.agitoo.Models.enums.CustomerType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -14,6 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "CUSTOMERS")
+@Builder
 public class Customer {
 
     @Id

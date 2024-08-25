@@ -1,4 +1,4 @@
-package intern.customer.agitoo.Core.Results;
+package intern.customer.agitoo.Common.Results;
 
 import intern.customer.agitoo.Helper.Messages;
 import lombok.Data;

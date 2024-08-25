@@ -3,18 +3,18 @@ package intern.customer.agitoo.Models.Concretes;
 import intern.customer.agitoo.Models.enums.FeedbackType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "PERSONFEEDBACKS")
+@Builder
 public class PersonFeedback {
 
     @Id

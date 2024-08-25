@@ -6,6 +6,7 @@ import intern.customer.agitoo.Helper.Messages;
 import intern.customer.agitoo.Models.Concretes.Person;
 import intern.customer.agitoo.Repository.Abstracts.PersonRepository;
 import intern.customer.agitoo.Service.Abstracts.IPersonService;
+import intern.customer.agitoo.Service.Rules.PersonBusinessRules;
 import intern.customer.agitoo.Service.Rules.toDatabase;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -26,6 +27,9 @@ public class PersonServiceImpl implements IPersonService {
     @Autowired
     private PersonMapper personMapper;
 
+    @Autowired
+    private PersonBusinessRules personBusinessRules;
+
 
     @Override
     public List<PersonDTO> getAll () {
@@ -41,6 +45,8 @@ public class PersonServiceImpl implements IPersonService {
 
     @Override
     public PersonDTO add (PersonDTO dtoModel) {
+
+        personBusinessRules.checkIfPersonFullNameExists (dtoModel.getFirstName ());
         Person personList = personMapper.toEntity (dtoModel, Person.class);
         Person savedPerson = personRepository.save(personList);
 

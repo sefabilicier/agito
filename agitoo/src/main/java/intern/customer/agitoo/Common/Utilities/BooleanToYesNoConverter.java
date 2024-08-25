@@ -1,4 +1,4 @@
-package intern.customer.agitoo.Core.Utilities;
+package intern.customer.agitoo.Common.Utilities;
 
 import jakarta.persistence.AttributeConverter;
 import jakarta.persistence.Converter;

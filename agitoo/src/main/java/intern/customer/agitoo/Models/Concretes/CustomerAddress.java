@@ -1,9 +1,10 @@
 package intern.customer.agitoo.Models.Concretes;
 
-import intern.customer.agitoo.Core.Utilities.BooleanToYesNoConverter;
+import intern.customer.agitoo.Common.Utilities.BooleanToYesNoConverter;
 import intern.customer.agitoo.Models.enums.AddressType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -12,6 +13,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "CUSTOMERADDRESSES")
+@Builder
 public class CustomerAddress {
 
     @Id

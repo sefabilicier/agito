@@ -1,4 +1,4 @@
-package intern.customer.agitoo;
+package intern.customer.agitoo.model;
 
 import intern.customer.agitoo.Models.Concretes.Customer;
 import intern.customer.agitoo.Models.Concretes.CustomerAddress;
@@ -7,11 +7,15 @@ import intern.customer.agitoo.Repository.Abstracts.CustomerAddressRepository;
 import intern.customer.agitoo.Repository.Abstracts.CustomerRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DataJpaTest
+@SpringJUnitConfig
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class CustomerAddressTest {
 
     @Autowired

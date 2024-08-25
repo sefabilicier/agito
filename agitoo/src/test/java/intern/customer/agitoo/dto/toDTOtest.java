@@ -1,6 +1,6 @@
-package intern.customer.agitoo;
+package intern.customer.agitoo.dto;
 
-import intern.customer.agitoo.Config.MapperConfiguration;
+import intern.customer.agitoo.Configuration.MapperConfiguration;
 import intern.customer.agitoo.DTO.DTOs.CustomerDTO;
 import intern.customer.agitoo.DTO.DTOs.PersonDTO;
 import intern.customer.agitoo.Models.Concretes.Customer;

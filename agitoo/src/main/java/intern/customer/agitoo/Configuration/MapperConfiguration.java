@@ -1,7 +1,5 @@
-package intern.customer.agitoo.Config;
+package intern.customer.agitoo.Configuration;
 
-import intern.customer.agitoo.DTO.DTOs.PersonDTO;
-import intern.customer.agitoo.Models.Concretes.Person;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.NamingConventions;
 import org.springframework.context.annotation.Bean;

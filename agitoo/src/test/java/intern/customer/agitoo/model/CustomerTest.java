@@ -1,24 +1,23 @@
-package intern.customer.agitoo;
+package intern.customer.agitoo.model;
 
 import intern.customer.agitoo.Models.Concretes.Customer;
 import intern.customer.agitoo.Models.Concretes.CustomerAddress;
 import intern.customer.agitoo.Models.enums.CustomerType;
 import intern.customer.agitoo.Repository.Abstracts.CustomerRepository;
-
-
-import jakarta.transaction.Transactional;
-import lombok.AllArgsConstructor;
-import lombok.Data;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
-@Data
-@AllArgsConstructor
+@DataJpaTest
+@SpringJUnitConfig
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class CustomerTest {
 
+    @Autowired
     private CustomerRepository customerRepository;
 
     @Test
@@ -47,6 +46,6 @@ public class CustomerTest {
 
         // Assert
         assertThat(savedCustomer.getCustomerAddresses()).isNotEmpty();
-        assertThat(savedCustomer.getCustomerAddresses().getFirst ().getCustomer()).isEqualTo(savedCustomer);
+        assertThat(savedCustomer.getCustomerAddresses()).isEqualTo(savedCustomer);
     }
 }

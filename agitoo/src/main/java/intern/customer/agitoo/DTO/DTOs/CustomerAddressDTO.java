@@ -1,10 +1,10 @@
 package intern.customer.agitoo.DTO.DTOs;
 
-import intern.customer.agitoo.Core.Utilities.BooleanToYesNoConverter;
 import intern.customer.agitoo.Models.enums.AddressType;
-import jakarta.persistence.Convert;
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.*;
+import jakarta.validation.constraints.AssertTrue;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

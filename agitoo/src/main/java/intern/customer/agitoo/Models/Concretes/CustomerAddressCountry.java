@@ -2,6 +2,7 @@ package intern.customer.agitoo.Models.Concretes;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -12,6 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "CUSTOMERADDRESSCOUNTRIES")
+@Builder
 public class CustomerAddressCountry {
 
     @Id

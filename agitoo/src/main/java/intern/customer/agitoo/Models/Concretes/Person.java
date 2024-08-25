@@ -4,11 +4,11 @@ import intern.customer.agitoo.Models.enums.MaritalStatus;
 import intern.customer.agitoo.Models.enums.PersonGender;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -16,6 +16,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "PERSON")
+@Builder
 public class Person {
 
     @Id

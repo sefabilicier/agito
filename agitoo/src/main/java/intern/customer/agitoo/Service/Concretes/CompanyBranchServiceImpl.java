@@ -44,6 +44,10 @@ public class CompanyBranchServiceImpl implements ICompanyBranchService {
 
         existsByName (dtoModel.getBranchName ());
 
+         return getCompanyBranchDTO (dtoModel);
+    }
+
+    private CompanyBranchDTO getCompanyBranchDTO (CompanyBranchDTO dtoModel) {
         CompanyBranch companyBranch = companyBranchMapper
                 .toEntity (dtoModel, CompanyBranch.class);
 

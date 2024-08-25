@@ -1,7 +1,6 @@
 package intern.customer.agitoo.DTO.DTOs;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import intern.customer.agitoo.Models.enums.MaritalStatus;
 import intern.customer.agitoo.Models.enums.PersonGender;
 import jakarta.annotation.Nullable;

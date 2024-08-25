@@ -1,7 +1,6 @@
 package intern.customer.agitoo.DTO.DTOs;
 
 import intern.customer.agitoo.Models.enums.ActivityType;
-import jakarta.validation.Valid;
 import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

@@ -1,9 +1,7 @@
 package intern.customer.agitoo.DTO.DTOs;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import intern.customer.agitoo.Models.enums.EmploymentType;
-import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;

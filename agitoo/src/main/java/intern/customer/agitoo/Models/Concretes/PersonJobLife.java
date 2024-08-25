@@ -8,18 +8,19 @@ import intern.customer.agitoo.Models.enums.SalaryFrequency;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.DecimalMin;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "PERSONJOBLIFES")
+@Builder
 public class PersonJobLife {
 
     @Id

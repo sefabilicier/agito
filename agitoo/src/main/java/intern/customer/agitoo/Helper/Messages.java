@@ -1,6 +1,5 @@
 package intern.customer.agitoo.Helper;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @Getter

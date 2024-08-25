@@ -3,6 +3,7 @@ package intern.customer.agitoo.Models.Concretes;
 import intern.customer.agitoo.Models.enums.ClaimStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -14,6 +15,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "CUSTOMERCLAIMS")
+@Builder
 public class CustomerClaim {
 
     @Id

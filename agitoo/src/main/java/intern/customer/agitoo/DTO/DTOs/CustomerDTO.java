@@ -2,7 +2,6 @@ package intern.customer.agitoo.DTO.DTOs;
 
 import intern.customer.agitoo.Models.enums.CustomerType;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
