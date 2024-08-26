@@ -6,6 +6,7 @@ import intern.customer.agitoo.Helper.Messages;
 import intern.customer.agitoo.Models.Concretes.CustomerPolicy;
 import intern.customer.agitoo.Repository.Abstracts.CustomerPolicyRepository;
 import intern.customer.agitoo.Service.Abstracts.ICustomerPolicyService;
+import intern.customer.agitoo.Service.Rules.CommonBusinessRules;
 import intern.customer.agitoo.Service.Rules.toDatabase;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -56,6 +57,7 @@ public class CustomerPolicyServiceImpl implements ICustomerPolicyService {
 
     @Override
     public void deleteById (Long id) {
+        CommonBusinessRules.checkIfIdExist (customerPolicyRepository, id);
         customerPolicyRepository.deleteById (id);
         System.out.print (id + " " + Messages.REMOVED);
     }

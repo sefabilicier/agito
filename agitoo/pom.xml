@@ -184,6 +184,24 @@
 		<!--Test Dependencies end-->
 
 
+		<!-- Logging for the run section-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-logging</artifactId>
+			<version>3.3.3</version>
+		</dependency>
+
+		<!-- Logging for documented result-->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>2.1.0-alpha1</version>
+		</dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-core</artifactId>
+			<version>1.5.6</version>
+		</dependency>
 
 	</dependencies>
 

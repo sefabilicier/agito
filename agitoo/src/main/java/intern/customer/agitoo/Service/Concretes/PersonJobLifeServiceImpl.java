@@ -6,6 +6,7 @@ import intern.customer.agitoo.Helper.Messages;
 import intern.customer.agitoo.Models.Concretes.PersonJobLife;
 import intern.customer.agitoo.Repository.Abstracts.PersonJobLifeRepository;
 import intern.customer.agitoo.Service.Abstracts.IPersonJobLifeService;
+import intern.customer.agitoo.Service.Rules.CommonBusinessRules;
 import intern.customer.agitoo.Service.Rules.toDatabase;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -56,6 +57,7 @@ public class PersonJobLifeServiceImpl implements IPersonJobLifeService {
 
     @Override
     public void deleteById (Long id) {
+        CommonBusinessRules.checkIfIdExist (personJobLifeRepository, id);
         personJobLifeRepository.deleteById (id);
         System.out.print (id + " " + Messages.REMOVED);
     }

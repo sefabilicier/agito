@@ -6,6 +6,7 @@ import intern.customer.agitoo.Helper.Messages;
 import intern.customer.agitoo.Models.Concretes.PersonActivity;
 import intern.customer.agitoo.Repository.Abstracts.PersonActivityRepository;
 import intern.customer.agitoo.Service.Abstracts.IPersonActivityService;
+import intern.customer.agitoo.Service.Rules.CommonBusinessRules;
 import intern.customer.agitoo.Service.Rules.toDatabase;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -55,6 +56,7 @@ public class PersonActivityServiceImpl implements IPersonActivityService {
 
     @Override
     public void deleteById (Long id) {
+        CommonBusinessRules.checkIfIdExist (personActivityRepository, id);
         personActivityRepository.deleteById (id);
         System.out.print (id + " " + Messages.REMOVED );
     }

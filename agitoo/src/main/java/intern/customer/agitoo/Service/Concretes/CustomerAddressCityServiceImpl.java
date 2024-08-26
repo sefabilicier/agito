@@ -6,6 +6,7 @@ import intern.customer.agitoo.Helper.Messages;
 import intern.customer.agitoo.Models.Concretes.CustomerAddressCity;
 import intern.customer.agitoo.Repository.Abstracts.CustomerAddressCityRepository;
 import intern.customer.agitoo.Service.Abstracts.ICustomerAddressCityService;
+import intern.customer.agitoo.Service.Rules.CommonBusinessRules;
 import intern.customer.agitoo.Service.Rules.toDatabase;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -55,6 +56,7 @@ public class CustomerAddressCityServiceImpl implements ICustomerAddressCityServi
 
     @Override
     public void deleteById (Long id) {
+        CommonBusinessRules.checkIfIdExist (customerAddressCityRepository, id);
         customerAddressCityRepository.deleteById (id);
         System.out.print (id + " " + Messages.REMOVED);
     }

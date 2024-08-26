@@ -6,6 +6,7 @@ import intern.customer.agitoo.Helper.Messages;
 import intern.customer.agitoo.Models.Concretes.CustomerClaim;
 import intern.customer.agitoo.Repository.Abstracts.CustomerClaimRepository;
 import intern.customer.agitoo.Service.Abstracts.ICustomerClaimService;
+import intern.customer.agitoo.Service.Rules.CommonBusinessRules;
 import intern.customer.agitoo.Service.Rules.toDatabase;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -56,6 +57,7 @@ public class CustomerClaimServiceImpl implements ICustomerClaimService {
 
     @Override
     public void deleteById (Long id) {
+        CommonBusinessRules.checkIfIdExist (customerClaimRepository, id);
         customerClaimRepository.deleteById (id);
         System.out.print (id + " " + Messages.REMOVED);
     }

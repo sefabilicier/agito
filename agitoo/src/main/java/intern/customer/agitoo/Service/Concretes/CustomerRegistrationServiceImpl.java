@@ -6,6 +6,7 @@ import intern.customer.agitoo.Helper.Messages;
 import intern.customer.agitoo.Models.Concretes.CustomerRegistration;
 import intern.customer.agitoo.Repository.Abstracts.CustomerRegistrationRepository;
 import intern.customer.agitoo.Service.Abstracts.ICustomerRegistrationService;
+import intern.customer.agitoo.Service.Rules.CommonBusinessRules;
 import intern.customer.agitoo.Service.Rules.toDatabase;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -59,6 +60,7 @@ public class CustomerRegistrationServiceImpl implements ICustomerRegistrationSer
 
     @Override
     public void deleteById (Long id) {
+        CommonBusinessRules.checkIfIdExist (customerRegistrationRepository, id);
         customerRegistrationRepository.deleteById (id);
         System.out.print (id + " " + Messages.REMOVED);
     }
