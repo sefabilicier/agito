@@ -6,6 +6,7 @@ import intern.customer.agitoo.Helper.Messages;
 import intern.customer.agitoo.Models.Concretes.CompanyBranch;
 import intern.customer.agitoo.Repository.Abstracts.CompanyBranchRepository;
 import intern.customer.agitoo.Service.Abstracts.ICompanyBranchService;
+import intern.customer.agitoo.Service.Rules.CommonBusinessRules;
 import intern.customer.agitoo.Service.Rules.toDatabase;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -70,6 +71,7 @@ public class CompanyBranchServiceImpl implements ICompanyBranchService {
 
     @Override
     public void deleteById (Long id) {
+        CommonBusinessRules.checkIfIdExist (companyBranchRepository, id);
         this.companyBranchRepository.deleteById (id);
         System.out.print (id + " " + Messages.REMOVED);
     }

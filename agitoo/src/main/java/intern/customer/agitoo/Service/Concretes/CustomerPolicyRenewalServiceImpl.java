@@ -6,6 +6,7 @@ import intern.customer.agitoo.Helper.Messages;
 import intern.customer.agitoo.Models.Concretes.CustomerPolicyRenewal;
 import intern.customer.agitoo.Repository.Abstracts.CustomerPolicyRenewalRepository;
 import intern.customer.agitoo.Service.Abstracts.ICustomerPolicyRenewalService;
+import intern.customer.agitoo.Service.Rules.CommonBusinessRules;
 import intern.customer.agitoo.Service.Rules.toDatabase;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -57,6 +58,7 @@ public class CustomerPolicyRenewalServiceImpl implements ICustomerPolicyRenewalS
 
     @Override
     public void deleteById (Long id) {
+        CommonBusinessRules.checkIfIdExist (customerPolicyRenewalRepository, id);
         customerPolicyRenewalRepository.deleteById (id);
         System.out.print (id + " " + Messages.REMOVED);
     }

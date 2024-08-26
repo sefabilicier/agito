@@ -6,6 +6,7 @@ import intern.customer.agitoo.Helper.Messages;
 import intern.customer.agitoo.Models.Concretes.CompanyFinancial;
 import intern.customer.agitoo.Repository.Abstracts.CompanyFinancialRepository;
 import intern.customer.agitoo.Service.Abstracts.ICompanyFinancialService;
+import intern.customer.agitoo.Service.Rules.CommonBusinessRules;
 import intern.customer.agitoo.Service.Rules.toDatabase;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -61,6 +62,7 @@ public class CompanyFinancialServiceImpl implements ICompanyFinancialService {
 
     @Override
     public void deleteById (Long id) {
+        CommonBusinessRules.checkIfIdExist (companyFinancialRepository, id);
         companyFinancialRepository.deleteById (id);
         System.out.println (id + " " + Messages.REMOVED);
     }

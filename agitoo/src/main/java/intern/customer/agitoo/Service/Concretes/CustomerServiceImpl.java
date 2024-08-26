@@ -6,6 +6,7 @@ import intern.customer.agitoo.Helper.Messages;
 import intern.customer.agitoo.Models.Concretes.Customer;
 import intern.customer.agitoo.Repository.Abstracts.CustomerRepository;
 import intern.customer.agitoo.Service.Abstracts.ICustomerService;
+import intern.customer.agitoo.Service.Rules.CommonBusinessRules;
 import intern.customer.agitoo.Service.Rules.toDatabase;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -56,9 +57,12 @@ public class CustomerServiceImpl implements ICustomerService {
 
     @Override
     public void deleteById (Long id) {
+        CommonBusinessRules.checkIfIdExist (customerRepository, id);
         customerRepository.deleteById (id);
         System.out.print (id + " " + Messages.REMOVED);
     }
+
+
 
     public void executionInfo () {
         System.out.println ("it is being executed");
