@@ -12,6 +12,9 @@ import intern.customer.agitoo.Service.Rules.toDatabase;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -33,6 +36,7 @@ public class PersonServiceImpl implements IPersonService {
 
 
     @Override
+    @Cacheable(value = "person")
     public List<PersonDTO> getAll () {
         toDatabase.isConnected ();
         List<Person> personList = personRepository.findAll ();
@@ -45,6 +49,7 @@ public class PersonServiceImpl implements IPersonService {
     }
 
     @Override
+    @CachePut(value = "person", key = "")
     public PersonDTO add (PersonDTO dtoModel) {
 
         personBusinessRules.checkIfPersonFullNameExists (dtoModel.getFirstName ());
@@ -55,6 +60,7 @@ public class PersonServiceImpl implements IPersonService {
     }
 
     @Override
+    @CachePut(value = "person", key = "")
     public PersonDTO update (PersonDTO dtoModel) {
         Person personList = personMapper
                 .toEntity (dtoModel, Person.class);
@@ -63,6 +69,7 @@ public class PersonServiceImpl implements IPersonService {
     }
 
     @Override
+    @CacheEvict(value = "person", key = "#id")
     public void deleteById (Long id) {
         CommonBusinessRules.checkIfIdExist (personRepository, id);
         personRepository.deleteById (id);

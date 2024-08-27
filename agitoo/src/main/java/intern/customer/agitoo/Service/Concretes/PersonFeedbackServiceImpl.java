@@ -11,6 +11,9 @@ import intern.customer.agitoo.Service.Rules.toDatabase;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -29,6 +32,7 @@ public class PersonFeedbackServiceImpl implements IPersonFeedbackService {
 
 
     @Override
+    @Cacheable(value = "person-feedback")
     public List<PersonFeedbackDTO> getAll () {
         toDatabase.isConnected ();
         List<PersonFeedback> personFeedbacks = personFeedbackRepository.findAll ();
@@ -41,6 +45,7 @@ public class PersonFeedbackServiceImpl implements IPersonFeedbackService {
     }
 
     @Override
+    @CachePut(value = "person-feedback", key = "")
     public PersonFeedbackDTO add (PersonFeedbackDTO dtoModel) {
         PersonFeedback personFeedback = personFeedbackMapper.toEntity (dtoModel, PersonFeedback.class);
         PersonFeedback savePersonFeedback = personFeedbackRepository.save (personFeedback);
@@ -49,6 +54,7 @@ public class PersonFeedbackServiceImpl implements IPersonFeedbackService {
     }
 
     @Override
+    @CachePut(value = "person-feedback", key = "")
     public PersonFeedbackDTO update (PersonFeedbackDTO dtoModel) {
         PersonFeedback personFeedback = personFeedbackMapper
                 .toEntity (dtoModel, PersonFeedback.class);
@@ -58,6 +64,7 @@ public class PersonFeedbackServiceImpl implements IPersonFeedbackService {
     }
 
     @Override
+    @CacheEvict(value = "person-feedback", key = "#id")
     public void deleteById (Long id) {
         CommonBusinessRules.checkIfIdExist (personFeedbackRepository, id);
         personFeedbackRepository.deleteById (id);

@@ -11,6 +11,9 @@ import intern.customer.agitoo.Service.Rules.toDatabase;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,6 +31,7 @@ public class PersonJobLifeServiceImpl implements IPersonJobLifeService {
     private PersonJobLifeMapper personJobLifeMapper;
 
     @Override
+    @Cacheable(value = "person-job-life")
     public List<PersonJobLifeDTO> getAll () {
         toDatabase.isConnected ();
         List<PersonJobLife> personJobLives = personJobLifeRepository.findAll ();
@@ -40,6 +44,7 @@ public class PersonJobLifeServiceImpl implements IPersonJobLifeService {
     }
 
     @Override
+    @CachePut(value = "person-job-life", key = "")
     public PersonJobLifeDTO add (PersonJobLifeDTO dtoModel) {
         PersonJobLife personJobLife = personJobLifeMapper.toEntity (dtoModel, PersonJobLife.class);
         PersonJobLife savedPersonJobLife = personJobLifeRepository.save (personJobLife);
@@ -48,6 +53,7 @@ public class PersonJobLifeServiceImpl implements IPersonJobLifeService {
     }
 
     @Override
+    @CachePut(value = "person-job-life", key = "")
     public PersonJobLifeDTO update (PersonJobLifeDTO dtoModel) {
         PersonJobLife personJobLife = personJobLifeMapper
                 .toEntity (dtoModel, PersonJobLife.class);
@@ -56,6 +62,7 @@ public class PersonJobLifeServiceImpl implements IPersonJobLifeService {
     }
 
     @Override
+    @CacheEvict(value = "person-job-life", key = "#id")
     public void deleteById (Long id) {
         CommonBusinessRules.checkIfIdExist (personJobLifeRepository, id);
         personJobLifeRepository.deleteById (id);

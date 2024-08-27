@@ -11,6 +11,9 @@ import intern.customer.agitoo.Service.Rules.toDatabase;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -29,6 +32,7 @@ public class CustomerAddressCountryServiceImpl implements ICustomerAddressCountr
 
 
     @Override
+    @Cacheable(value = "customer-address-country")
     public List<CustomerAddressCountryDTO> getAll () {
         toDatabase.isConnected ();
         List<CustomerAddressCountry> customerAddressCountries = customerAddressCountryRepository.findAll ();
@@ -40,6 +44,7 @@ public class CustomerAddressCountryServiceImpl implements ICustomerAddressCountr
     }
 
     @Override
+    @CachePut(value = "customer-address-country", key = "")
     public CustomerAddressCountryDTO add (CustomerAddressCountryDTO dtoModel) {
         CustomerAddressCountry customerAddressCountry = customerAddressCountryMapper.toEntity (dtoModel, CustomerAddressCountry.class);
         CustomerAddressCountry savedCustomerAddressCountry = customerAddressCountryRepository.save (customerAddressCountry);
@@ -47,6 +52,7 @@ public class CustomerAddressCountryServiceImpl implements ICustomerAddressCountr
     }
 
     @Override
+    @CachePut(value = "customer-address-country", key = "")
     public CustomerAddressCountryDTO update (CustomerAddressCountryDTO dtoModel) {
         CustomerAddressCountry customerAddressCountry = customerAddressCountryMapper
                 .toEntity (dtoModel, CustomerAddressCountry.class);
@@ -55,6 +61,7 @@ public class CustomerAddressCountryServiceImpl implements ICustomerAddressCountr
     }
 
     @Override
+    @CacheEvict(value = "customer-address-country", key = "#id")
     public void deleteById (Long id) {
         CommonBusinessRules.checkIfIdExist (customerAddressCountryRepository, id);
         customerAddressCountryRepository.deleteById (id);

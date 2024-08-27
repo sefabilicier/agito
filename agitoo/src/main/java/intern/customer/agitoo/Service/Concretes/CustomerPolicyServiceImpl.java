@@ -11,6 +11,9 @@ import intern.customer.agitoo.Service.Rules.toDatabase;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -29,6 +32,7 @@ public class CustomerPolicyServiceImpl implements ICustomerPolicyService {
 
 
     @Override
+    @Cacheable(value = "customer-policy")
     public List<CustomerPolicyDTO> getAll () {
         toDatabase.isConnected ();
         List<CustomerPolicy> customerPolicies = customerPolicyRepository.findAll ();
@@ -41,6 +45,7 @@ public class CustomerPolicyServiceImpl implements ICustomerPolicyService {
     }
 
     @Override
+    @CachePut(value = "customer-policy", key = "")
     public CustomerPolicyDTO add (CustomerPolicyDTO dtoModel) {
         CustomerPolicy customerPolicy = customerPolicyMapper.toEntity (dtoModel, CustomerPolicy.class);
         CustomerPolicy savedCustomerPolicy = customerPolicyRepository.save (customerPolicy);
@@ -48,6 +53,7 @@ public class CustomerPolicyServiceImpl implements ICustomerPolicyService {
     }
 
     @Override
+    @CachePut(value = "customer-policy", key = "")
     public CustomerPolicyDTO update (CustomerPolicyDTO dtoModel) {
         CustomerPolicy customerPolicy = customerPolicyMapper.toEntity (dtoModel, CustomerPolicy.class);
         CustomerPolicy updatedCustomerPolicy = customerPolicyRepository.save (customerPolicy);
@@ -56,6 +62,7 @@ public class CustomerPolicyServiceImpl implements ICustomerPolicyService {
     }
 
     @Override
+    @CacheEvict(value = "customer-policy", key = "#id")
     public void deleteById (Long id) {
         CommonBusinessRules.checkIfIdExist (customerPolicyRepository, id);
         customerPolicyRepository.deleteById (id);

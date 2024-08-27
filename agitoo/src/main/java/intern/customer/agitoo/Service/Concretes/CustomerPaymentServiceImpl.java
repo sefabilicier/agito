@@ -11,6 +11,9 @@ import intern.customer.agitoo.Service.Rules.toDatabase;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,6 +31,7 @@ public class CustomerPaymentServiceImpl implements ICustomerPaymentService {
     private CustomerPaymentMapper customerPaymentMapper;
 
     @Override
+    @Cacheable(value = "customer-payment")
     public List<CustomerPaymentDTO> getAll () {
         toDatabase.isConnected ();
         List<CustomerPayment> customerPayments = customerPaymentRepository.findAll ();
@@ -40,6 +44,7 @@ public class CustomerPaymentServiceImpl implements ICustomerPaymentService {
     }
 
     @Override
+    @CachePut(value = "customer-payment", key = "")
     public CustomerPaymentDTO add (CustomerPaymentDTO dtoModel) {
         CustomerPayment customerPayment = customerPaymentMapper.toEntity (dtoModel, CustomerPayment.class );
         CustomerPayment savedCustomerPayment = customerPaymentRepository.save (customerPayment);
@@ -47,6 +52,7 @@ public class CustomerPaymentServiceImpl implements ICustomerPaymentService {
     }
 
     @Override
+    @CachePut(value = "customer-payment", key = "")
     public CustomerPaymentDTO update (CustomerPaymentDTO dtoModel) {
         CustomerPayment customerPayment = customerPaymentMapper.toEntity (dtoModel, CustomerPayment.class);
         CustomerPayment updatedCustomerPayment = customerPaymentRepository.save (customerPayment);
@@ -54,6 +60,7 @@ public class CustomerPaymentServiceImpl implements ICustomerPaymentService {
     }
 
     @Override
+    @CacheEvict(value = "customer-payment", key = "#id")
     public void deleteById (Long id) {
         CommonBusinessRules.checkIfIdExist (customerPaymentRepository, id);
         customerPaymentRepository.deleteById (id);

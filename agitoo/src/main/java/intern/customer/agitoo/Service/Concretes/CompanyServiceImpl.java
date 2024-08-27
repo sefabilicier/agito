@@ -11,6 +11,9 @@ import intern.customer.agitoo.Service.Rules.toDatabase;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,6 +31,7 @@ public class CompanyServiceImpl implements ICompanyService {
     private CompanyMapper companyMapper;
 
     @Override
+    @Cacheable(value = "company")
     public List<CompanyDTO> getAll () {
         toDatabase.isConnected ();
         List<Company> companies = companyRepository.findAll ();
@@ -40,6 +44,7 @@ public class CompanyServiceImpl implements ICompanyService {
     }
 
     @Override
+    @CachePut(value = "company", key = "")
     public CompanyDTO add (CompanyDTO dtoModel) {
         Company company = companyMapper
                 .toEntity (dtoModel,  Company.class);
@@ -48,6 +53,7 @@ public class CompanyServiceImpl implements ICompanyService {
     }
 
     @Override
+    @CachePut(value = "company", key = "")
     public CompanyDTO update (CompanyDTO dtoModel) {
         Company company = companyMapper
                 .toEntity (dtoModel, Company.class);
@@ -56,6 +62,7 @@ public class CompanyServiceImpl implements ICompanyService {
     }
 
     @Override
+    @CacheEvict(value = "company", key = "#id")
     public void deleteById (Long id) {
         CommonBusinessRules.checkIfIdExist (companyRepository, id);
         companyRepository.deleteById (id);
