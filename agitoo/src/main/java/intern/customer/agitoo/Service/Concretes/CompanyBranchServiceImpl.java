@@ -11,6 +11,9 @@ import intern.customer.agitoo.Service.Rules.toDatabase;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,6 +31,7 @@ public class CompanyBranchServiceImpl implements ICompanyBranchService {
     private CompanyBranchMapper companyBranchMapper;
 
     @Override
+    @Cacheable(value = "customer-branch")
     public List<CompanyBranchDTO> getAll () {
         toDatabase.isConnected (); //veritabanına bağlandı mı?
         List<CompanyBranch> companyBranches = companyBranchRepository.findAll (); //repodaki tüm verileri al
@@ -41,6 +45,7 @@ public class CompanyBranchServiceImpl implements ICompanyBranchService {
     }
 
     @Override
+    @CachePut(value = "customer-branch", key = "")
     public CompanyBranchDTO add (CompanyBranchDTO dtoModel) {
 
         existsByName (dtoModel.getBranchName ());
@@ -58,6 +63,7 @@ public class CompanyBranchServiceImpl implements ICompanyBranchService {
     }
 
     @Override
+    @CachePut(value = "customer-branch", key = "")
     public CompanyBranchDTO update (CompanyBranchDTO dtoModel) {
 
         existsByName (dtoModel.getBranchName ());
@@ -70,6 +76,7 @@ public class CompanyBranchServiceImpl implements ICompanyBranchService {
     }
 
     @Override
+    @CacheEvict(value = "customer-branch", key = "#id")
     public void deleteById (Long id) {
         CommonBusinessRules.checkIfIdExist (companyBranchRepository, id);
         this.companyBranchRepository.deleteById (id);

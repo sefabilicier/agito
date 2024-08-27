@@ -11,6 +11,9 @@ import intern.customer.agitoo.Service.Rules.toDatabase;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,6 +31,7 @@ public class CustomerPolicyRenewalServiceImpl implements ICustomerPolicyRenewalS
     private CustomerPolicyRenewalMapper customerPolicyRenewalMapper;
 
     @Override
+    @Cacheable(value = "customer-policy-renewal")
     public List<CustomerPolicyRenewalDTO> getAll () {
         toDatabase.isConnected ();
         List<CustomerPolicyRenewal> customerPolicyRenewals = customerPolicyRenewalRepository.findAll ();
@@ -40,6 +44,7 @@ public class CustomerPolicyRenewalServiceImpl implements ICustomerPolicyRenewalS
     }
 
     @Override
+    @CachePut(value = "customer-policy-renewal", key = "")
     public CustomerPolicyRenewalDTO add (CustomerPolicyRenewalDTO dtoModel) {
         CustomerPolicyRenewal customerPolicyRenewal = customerPolicyRenewalMapper
                 .toEntity (dtoModel, CustomerPolicyRenewal.class);
@@ -49,6 +54,7 @@ public class CustomerPolicyRenewalServiceImpl implements ICustomerPolicyRenewalS
     }
 
     @Override
+    @CachePut(value = "customer-policy-renewal", key = "")
     public CustomerPolicyRenewalDTO update (CustomerPolicyRenewalDTO dtoModel) {
         CustomerPolicyRenewal customerPolicyRenewal = customerPolicyRenewalMapper.toEntity (dtoModel, CustomerPolicyRenewal.class);
         CustomerPolicyRenewal updatedCustomerPolicyRenewal = customerPolicyRenewalRepository.save (customerPolicyRenewal);
@@ -57,6 +63,7 @@ public class CustomerPolicyRenewalServiceImpl implements ICustomerPolicyRenewalS
     }
 
     @Override
+    @CacheEvict(value = "customer-policy-renewal", key = "#id")
     public void deleteById (Long id) {
         CommonBusinessRules.checkIfIdExist (customerPolicyRenewalRepository, id);
         customerPolicyRenewalRepository.deleteById (id);

@@ -11,6 +11,9 @@ import intern.customer.agitoo.Service.Rules.toDatabase;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,6 +31,7 @@ public class CompanyFinancialServiceImpl implements ICompanyFinancialService {
     private CompanyFinancialMapper companyFinancialMapper;
 
     @Override
+    @Cacheable(value = "customer-financial")
     public List<CompanyFinancialDTO> getAll () {
         toDatabase.isConnected ();
         List<CompanyFinancial> companyFinancials = companyFinancialRepository.findAll ();
@@ -42,6 +46,7 @@ public class CompanyFinancialServiceImpl implements ICompanyFinancialService {
     }
 
     @Override
+    @CachePut(value = "customer-financial", key = "")
     public CompanyFinancialDTO add (CompanyFinancialDTO dtoModel) {
         CompanyFinancial companyFinancial = companyFinancialMapper
                 .toEntity (dtoModel, CompanyFinancial.class);
@@ -52,6 +57,7 @@ public class CompanyFinancialServiceImpl implements ICompanyFinancialService {
     }
 
     @Override
+    @CachePut(value = "customer-financial", key = "")
     public CompanyFinancialDTO update (CompanyFinancialDTO dtoModel) {
         CompanyFinancial companyFinancial = companyFinancialMapper
                 .toEntity (dtoModel, CompanyFinancial.class);
@@ -61,6 +67,7 @@ public class CompanyFinancialServiceImpl implements ICompanyFinancialService {
     }
 
     @Override
+    @CacheEvict(value = "customer-financial", key = "#id")
     public void deleteById (Long id) {
         CommonBusinessRules.checkIfIdExist (companyFinancialRepository, id);
         companyFinancialRepository.deleteById (id);

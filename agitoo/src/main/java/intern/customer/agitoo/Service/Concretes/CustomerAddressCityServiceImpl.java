@@ -11,6 +11,9 @@ import intern.customer.agitoo.Service.Rules.toDatabase;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,6 +31,7 @@ public class CustomerAddressCityServiceImpl implements ICustomerAddressCityServi
     private CustomerAddressCityMapper customerAddressCityMapper;
 
     @Override
+    @Cacheable(value = "customer-address-city")
     public List<CustomerAddressCityDTO> getAll () {
         toDatabase.isConnected ();
         List<CustomerAddressCity> customerAddressCities = customerAddressCityRepository.findAll ();
@@ -40,6 +44,7 @@ public class CustomerAddressCityServiceImpl implements ICustomerAddressCityServi
     }
 
     @Override
+    @CachePut(value = "customer-address-city", key = "")
     public CustomerAddressCityDTO add (CustomerAddressCityDTO dtoModel) {
         CustomerAddressCity customerAddressCity = customerAddressCityMapper.toEntity (dtoModel, CustomerAddressCity.class);
         CustomerAddressCity savedCustomerAddressCity = customerAddressCityRepository.save (customerAddressCity);
@@ -47,6 +52,7 @@ public class CustomerAddressCityServiceImpl implements ICustomerAddressCityServi
     }
 
     @Override
+    @CachePut(value = "customer-address-city", key = "")
     public CustomerAddressCityDTO update (CustomerAddressCityDTO dtoModel) {
         CustomerAddressCity customerAddressCity = customerAddressCityMapper
                 .toEntity (dtoModel, CustomerAddressCity.class);
@@ -55,6 +61,7 @@ public class CustomerAddressCityServiceImpl implements ICustomerAddressCityServi
     }
 
     @Override
+    @CacheEvict(value = "customer-address-city", key = "#id")
     public void deleteById (Long id) {
         CommonBusinessRules.checkIfIdExist (customerAddressCityRepository, id);
         customerAddressCityRepository.deleteById (id);

@@ -11,6 +11,9 @@ import intern.customer.agitoo.Service.Rules.toDatabase;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -29,6 +32,7 @@ public class CustomerAddressServiceImpl implements ICustomerAddressService {
 
 
     @Override
+    @Cacheable(value = "customer-address")
     public List<CustomerAddressDTO> getAll () {
         toDatabase.isConnected ();
         List<CustomerAddress> customerAddresses = customerAddressRepository.findAll ();
@@ -41,6 +45,7 @@ public class CustomerAddressServiceImpl implements ICustomerAddressService {
     }
 
     @Override
+    @CachePut(value = "customer-address", key = "")
     public CustomerAddressDTO add (CustomerAddressDTO dtoModel) {
         CustomerAddress customerAddress = customerAddressMapper.toEntity (dtoModel, CustomerAddress.class);
         CustomerAddress savedCustomerAddress = customerAddressRepository.save (customerAddress);
@@ -48,6 +53,7 @@ public class CustomerAddressServiceImpl implements ICustomerAddressService {
     }
 
     @Override
+    @CachePut(value = "customer-address", key = "")
     public CustomerAddressDTO update (CustomerAddressDTO dtoModel) {
         CustomerAddress customerAddress = customerAddressMapper
                 .toEntity (dtoModel, CustomerAddress.class);
@@ -56,6 +62,7 @@ public class CustomerAddressServiceImpl implements ICustomerAddressService {
     }
 
     @Override
+    @CacheEvict(value = "customer-address", key = "#id")
     public void deleteById (Long id) {
         CommonBusinessRules.checkIfIdExist (customerAddressRepository, id);
         customerAddressRepository.deleteById (id);

@@ -11,6 +11,9 @@ import intern.customer.agitoo.Service.Rules.toDatabase;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -30,6 +33,7 @@ public class CustomerRegistrationServiceImpl implements ICustomerRegistrationSer
 
 
     @Override
+    @Cacheable(value = "customer-registration")
     public List<CustomerRegistrationDTO> getAll () {
         toDatabase.isConnected ();
         List<CustomerRegistration> customerRegistrations = customerRegistrationRepository.findAll ();
@@ -42,6 +46,7 @@ public class CustomerRegistrationServiceImpl implements ICustomerRegistrationSer
     }
 
     @Override
+    @CachePut(value = "customer-registration", key = "")
     public CustomerRegistrationDTO add (CustomerRegistrationDTO dtoModel) {
         CustomerRegistration customerRegistration = customerRegistrationMapper.toEntity (dtoModel, CustomerRegistration.class);
         CustomerRegistration savedCustomerRegistration = customerRegistrationRepository.save (customerRegistration);
@@ -50,6 +55,7 @@ public class CustomerRegistrationServiceImpl implements ICustomerRegistrationSer
     }
 
     @Override
+    @CachePut(value = "customer-registration", key = "")
     public CustomerRegistrationDTO update (CustomerRegistrationDTO dtoModel) {
         CustomerRegistration customerRegistration = customerRegistrationMapper
                 .toEntity (dtoModel, CustomerRegistration.class);
@@ -59,6 +65,7 @@ public class CustomerRegistrationServiceImpl implements ICustomerRegistrationSer
     }
 
     @Override
+    @CacheEvict(value = "customer-registration", key = "#id")
     public void deleteById (Long id) {
         CommonBusinessRules.checkIfIdExist (customerRegistrationRepository, id);
         customerRegistrationRepository.deleteById (id);

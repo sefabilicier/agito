@@ -11,6 +11,9 @@ import intern.customer.agitoo.Service.Rules.toDatabase;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -29,6 +32,7 @@ public class PersonActivityServiceImpl implements IPersonActivityService {
 
 
     @Override
+    @Cacheable(value = "person-activity")
     public List<PersonActivityDTO> getAll () {
         toDatabase.isConnected ();
         List<PersonActivity> personActivities = personActivityRepository.findAll ();
@@ -40,6 +44,7 @@ public class PersonActivityServiceImpl implements IPersonActivityService {
     }
 
     @Override
+    @CachePut(value = "person-activity", key = "")
     public PersonActivityDTO add (PersonActivityDTO dtoModel) {
         PersonActivity personActivity = personActivityMapper.toEntity (dtoModel, PersonActivity.class);
         PersonActivity savedPersonActivity = personActivityRepository.save (personActivity);
@@ -47,6 +52,7 @@ public class PersonActivityServiceImpl implements IPersonActivityService {
     }
 
     @Override
+    @CachePut(value = "person-activity", key = "")
     public PersonActivityDTO update (PersonActivityDTO dtoModel) {
         PersonActivity personActivity = personActivityMapper
                 .toEntity (dtoModel, PersonActivity.class);
@@ -55,6 +61,7 @@ public class PersonActivityServiceImpl implements IPersonActivityService {
     }
 
     @Override
+    @CacheEvict(value = "person-activity", key = "#id")
     public void deleteById (Long id) {
         CommonBusinessRules.checkIfIdExist (personActivityRepository, id);
         personActivityRepository.deleteById (id);

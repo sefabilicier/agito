@@ -11,6 +11,9 @@ import intern.customer.agitoo.Service.Rules.toDatabase;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,6 +31,7 @@ public class CustomerDebitCardServiceImpl implements ICustomerDebitCardService {
     private CustomerDebitCardMapper customerDebitCardMapper;
 
     @Override
+    @Cacheable(value = "customer-debit-card")
     public List<CustomerDebitCardDTO> getAll () {
         toDatabase.isConnected ();
         List<CustomerDebitCard> customerDebitCards = customerDebitCardRepository.findAll ();
@@ -42,6 +46,7 @@ public class CustomerDebitCardServiceImpl implements ICustomerDebitCardService {
     }
 
     @Override
+    @CachePut(value = "customer-debit-card", key = "")
     public CustomerDebitCardDTO add (CustomerDebitCardDTO dtoModel) {
         CustomerDebitCard customerDebitCard = customerDebitCardMapper
                 .toEntity (dtoModel, CustomerDebitCard.class);
@@ -51,6 +56,7 @@ public class CustomerDebitCardServiceImpl implements ICustomerDebitCardService {
     }
 
     @Override
+    @CachePut(value = "customer-debit-card", key = "")
     public CustomerDebitCardDTO update (CustomerDebitCardDTO dtoModel) {
         CustomerDebitCard customerDebitCard = customerDebitCardMapper.toEntity (dtoModel,CustomerDebitCard.class);
         CustomerDebitCard updatedCustomerDebitCard = customerDebitCardRepository.save (customerDebitCard);
@@ -58,6 +64,7 @@ public class CustomerDebitCardServiceImpl implements ICustomerDebitCardService {
     }
 
     @Override
+    @CacheEvict(value = "customer-debit-card", key = "#id")
     public void deleteById (Long id) {
         CommonBusinessRules.checkIfIdExist (customerDebitCardRepository, id);
         customerDebitCardRepository.deleteById (id);

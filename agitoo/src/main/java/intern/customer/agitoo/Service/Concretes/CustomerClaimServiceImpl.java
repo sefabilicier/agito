@@ -11,6 +11,9 @@ import intern.customer.agitoo.Service.Rules.toDatabase;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,6 +31,7 @@ public class CustomerClaimServiceImpl implements ICustomerClaimService {
     private CustomerClaimMapper customerClaimMapper;
 
     @Override
+    @Cacheable(value = "customer-claim")
     public List<CustomerClaimDTO> getAll () {
         toDatabase.isConnected ();
         List<CustomerClaim> customerClaims = customerClaimRepository.findAll ();
@@ -41,6 +45,7 @@ public class CustomerClaimServiceImpl implements ICustomerClaimService {
     }
 
     @Override
+    @CachePut(value = "customer-claim", key = "")
     public CustomerClaimDTO add (CustomerClaimDTO dtoModel) {
         CustomerClaim customerClaim = customerClaimMapper
                 .toEntity (dtoModel, CustomerClaim.class);
@@ -49,6 +54,7 @@ public class CustomerClaimServiceImpl implements ICustomerClaimService {
     }
 
     @Override
+    @CachePut(value = "customer-claim", key = "")
     public CustomerClaimDTO update (CustomerClaimDTO dtoModel) {
         CustomerClaim customerClaim = customerClaimMapper.toEntity (dtoModel, CustomerClaim.class);
         CustomerClaim updatedCustomerClaim = customerClaimRepository.save (customerClaim);
@@ -56,6 +62,7 @@ public class CustomerClaimServiceImpl implements ICustomerClaimService {
     }
 
     @Override
+    @CacheEvict(value = "customer-claim", key = "#id")
     public void deleteById (Long id) {
         CommonBusinessRules.checkIfIdExist (customerClaimRepository, id);
         customerClaimRepository.deleteById (id);
