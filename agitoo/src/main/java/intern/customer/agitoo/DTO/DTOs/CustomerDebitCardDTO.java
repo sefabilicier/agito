@@ -33,16 +33,18 @@ public class CustomerDebitCardDTO {
 //    private CustomerDTO customer;
 
 
-    public String getCardNumber(){
+    public String getCardNumber () {
         return maskedcardNumber ();
     }
 
     /*masking the rest of the card number except the first 4 numbers.*/
-    private String maskedcardNumber(){
-        if (cardNumber == null || cardNumber.length () < 4 ){
+    private String maskedcardNumber () {
+        if (cardNumber == null || cardNumber.length () < 4) {
             return "invalid card number";
         }
-        return cardNumber.substring (0,4) + "-****-****-****";
-    };
+        return cardNumber.substring (0, 4) + "-****-****-****";
+    }
+
+    ;
 
 }

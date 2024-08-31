@@ -43,7 +43,7 @@ public class PersonSupportTicketDTO {
     private PersonDTO person;
 
     @JsonProperty("maskedTicketNumber")
-    public String getTicketNumber(){
-        return ticketNumber.substring (0,3) + " -************";
+    public String getTicketNumber () {
+        return ticketNumber.substring (0, 3) + " -************";
     }
 }

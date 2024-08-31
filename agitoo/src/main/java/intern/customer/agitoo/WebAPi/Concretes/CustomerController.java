@@ -26,7 +26,7 @@ public class CustomerController {
 
     @RequestMapping(value = "/get-all", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<DataResult<List<CustomerDTO>>> getAll () {
-        log.info("Received request to list customers!");
+        log.info ("Received request to list customers!");
         List<CustomerDTO> customerDTOList = customerService.getAll ();
         DataResult<List<CustomerDTO>> response = new DataResult<> (
                 customerDTOList,
@@ -37,10 +37,10 @@ public class CustomerController {
         return ResponseEntity.ok (response);
     }
 
-    @RequestMapping(value = "/add",  method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_VALUE})
+    @RequestMapping(value = "/add", method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_VALUE})
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<DataResult<CustomerDTO>> Add (@RequestBody @Valid CustomerDTO customerDTO) {
-        log.info("Received request to add customer {}", customerDTO);
+        log.info ("Received request to add customer {}", customerDTO);
         CustomerDTO savedCustomer = customerService.add (customerDTO);
         DataResult<CustomerDTO> response = new DataResult<> (
                 savedCustomer,
@@ -51,19 +51,19 @@ public class CustomerController {
 
     }
 
-    @RequestMapping (value = "/update", method = RequestMethod.PUT, produces = {MediaType.APPLICATION_JSON_VALUE})
+    @RequestMapping(value = "/update", method = RequestMethod.PUT, produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<DataResult<CustomerDTO>> Update (@RequestBody @Valid CustomerDTO customerDTO) {
-        log.info("Received request to update customer {}", customerDTO);
+        log.info ("Received request to update customer {}", customerDTO);
 
         CustomerDTO udpatedCustomer = customerService.update (customerDTO);
-        DataResult<CustomerDTO> response = new DataResult<>(
+        DataResult<CustomerDTO> response = new DataResult<> (
                 udpatedCustomer, true, Messages.UPDATED);
         return ResponseEntity.ok (response);
     }
 
     @RequestMapping(value = "/delete-by-id/{id}", method = RequestMethod.DELETE)
     public void Delete (@PathVariable @Min(1) Long id) {
-        log.info("Received request to delete customer {}", id);
+        log.info ("Received request to delete customer {}", id);
         this.customerService.deleteById (id);
     }
 }

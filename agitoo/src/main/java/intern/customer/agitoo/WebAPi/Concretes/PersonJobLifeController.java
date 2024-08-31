@@ -25,7 +25,7 @@ public class PersonJobLifeController {
 
     @RequestMapping(value = "/get-all", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<DataResult<List<PersonJobLifeDTO>>> getAll () {
-        log.info("Received request to add person job lives!");
+        log.info ("Received request to add person job lives!");
         List<PersonJobLifeDTO> personJobLifeDTOList = personJobLifeService.getAll ();
         DataResult<List<PersonJobLifeDTO>> response = new DataResult<> (
                 personJobLifeDTOList,
@@ -35,10 +35,10 @@ public class PersonJobLifeController {
         return ResponseEntity.ok (response);
     }
 
-    @RequestMapping(value = "/add",  method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_VALUE})
+    @RequestMapping(value = "/add", method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_VALUE})
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<DataResult<PersonJobLifeDTO>> Add (@RequestBody @Valid PersonJobLifeDTO personJobLifeDTO) {
-        log.info("Received request to add person job life {}", personJobLifeDTO);
+        log.info ("Received request to add person job life {}", personJobLifeDTO);
         PersonJobLifeDTO addedPersonJobLife = personJobLifeService.add (personJobLifeDTO);
         DataResult<PersonJobLifeDTO> response = new DataResult<> (
                 addedPersonJobLife, true, Messages.ADDED
@@ -46,9 +46,9 @@ public class PersonJobLifeController {
         return ResponseEntity.ok (response);
     }
 
-    @RequestMapping (value = "/update", method = RequestMethod.PUT, produces = {MediaType.APPLICATION_JSON_VALUE})
+    @RequestMapping(value = "/update", method = RequestMethod.PUT, produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<DataResult<PersonJobLifeDTO>> Update (@RequestBody @Valid PersonJobLifeDTO personJobLifeDTO) {
-        log.info("Received request to update person job life {}", personJobLifeDTO);
+        log.info ("Received request to update person job life {}", personJobLifeDTO);
         PersonJobLifeDTO updatedPersonJobLifeDTO = personJobLifeService.update (
                 personJobLifeDTO
         );
@@ -61,7 +61,7 @@ public class PersonJobLifeController {
 
     @RequestMapping(value = "/delete-by-id/{id}", method = RequestMethod.DELETE)
     public void Delete (@PathVariable @Min(1) Long id) {
-        log.info("Received request to delete person job life {}", id);
+        log.info ("Received request to delete person job life {}", id);
         this.personJobLifeService.deleteById (id);
     }
 }

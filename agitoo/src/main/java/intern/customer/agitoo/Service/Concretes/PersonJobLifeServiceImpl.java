@@ -6,8 +6,6 @@ import intern.customer.agitoo.Helper.Messages;
 import intern.customer.agitoo.Models.Concretes.PersonJobLife;
 import intern.customer.agitoo.Repository.Abstracts.PersonJobLifeRepository;
 import intern.customer.agitoo.Service.Abstracts.IPersonJobLifeService;
-import intern.customer.agitoo.Service.Rules.CommonBusinessRules;
-import intern.customer.agitoo.Service.Rules.toDatabase;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +16,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static intern.customer.agitoo.Service.Rules.CommonBusinessRules.checkIfIdExist;
+import static intern.customer.agitoo.Service.Rules.toDatabase.isConnected;
 
 @Service
 @NoArgsConstructor
@@ -33,13 +34,13 @@ public class PersonJobLifeServiceImpl implements IPersonJobLifeService {
     @Override
     @Cacheable(value = "person-job-life")
     public List<PersonJobLifeDTO> getAll () {
-        toDatabase.isConnected ();
+        isConnected ();
         List<PersonJobLife> personJobLives = personJobLifeRepository.findAll ();
         List<PersonJobLifeDTO> personJobLifeDTOS = personJobLives
                 .stream ()
                 .map (personJobLife -> personJobLifeMapper
                         .toDTO (personJobLife, PersonJobLifeDTO.class))
-                .collect(Collectors.toList());
+                .collect (Collectors.toList ());
         return personJobLifeDTOS;
     }
 
@@ -64,7 +65,7 @@ public class PersonJobLifeServiceImpl implements IPersonJobLifeService {
     @Override
     @CacheEvict(value = "person-job-life", key = "#id")
     public void deleteById (Long id) {
-        CommonBusinessRules.checkIfIdExist (personJobLifeRepository, id);
+        checkIfIdExist (personJobLifeRepository, id);
         personJobLifeRepository.deleteById (id);
         System.out.print (id + " " + Messages.REMOVED);
     }

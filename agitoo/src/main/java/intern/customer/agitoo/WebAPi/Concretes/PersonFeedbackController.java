@@ -25,7 +25,7 @@ public class PersonFeedbackController {
 
     @RequestMapping(value = "/get-all", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<DataResult<List<PersonFeedbackDTO>>> getAll () {
-        log.info("Received request to list person feedbacks!");
+        log.info ("Received request to list person feedbacks!");
         List<PersonFeedbackDTO> personFeedbackDTOList = personFeedbackService.getAll ();
         DataResult<List<PersonFeedbackDTO>> response = new DataResult<> (
                 personFeedbackDTOList,
@@ -35,10 +35,10 @@ public class PersonFeedbackController {
         return ResponseEntity.ok (response);
     }
 
-    @RequestMapping(value = "/add",  method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_VALUE})
+    @RequestMapping(value = "/add", method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_VALUE})
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<DataResult<PersonFeedbackDTO>> Add (@RequestBody @Valid PersonFeedbackDTO personFeedbackDTO) {
-        log.info("Received request to add person feedback {}", personFeedbackDTO);
+        log.info ("Received request to add person feedback {}", personFeedbackDTO);
         PersonFeedbackDTO addedPersonFeedbackDTO = personFeedbackService.add (personFeedbackDTO);
         DataResult<PersonFeedbackDTO> response = new DataResult<> (
                 addedPersonFeedbackDTO, true, Messages.ADDED
@@ -47,9 +47,9 @@ public class PersonFeedbackController {
 
     }
 
-    @RequestMapping (value = "/update", method = RequestMethod.PUT, produces = {MediaType.APPLICATION_JSON_VALUE})
+    @RequestMapping(value = "/update", method = RequestMethod.PUT, produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<DataResult<PersonFeedbackDTO>> Update (@RequestBody @Valid PersonFeedbackDTO personFeedbackDTO) {
-        log.info("Received request to update person feedback {}", personFeedbackDTO);
+        log.info ("Received request to update person feedback {}", personFeedbackDTO);
         PersonFeedbackDTO updatedPersoFeedbackDTO = personFeedbackService.update (
                 personFeedbackDTO
         );
@@ -63,7 +63,7 @@ public class PersonFeedbackController {
 
     @RequestMapping(value = "/delete-by-id/{id}", method = RequestMethod.DELETE)
     public void Delete (@PathVariable @Min(1) Long id) {
-        log.info("Received request to delete person feedback {}", id);
+        log.info ("Received request to delete person feedback {}", id);
         this.personFeedbackService.deleteById (id);
     }
 }

@@ -1,6 +1,7 @@
 <configuration>
 
-    <property name="CONSOLE_LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %highlight(%-36logger{36}) - %msg%n"/>
+    <property name="CONSOLE_LOG_PATTERN"
+              value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %highlight(%-36logger{36}) - %msg%n"/>
     <property name="LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"/>
 
     <!-- Console Appender: Keep logs visible in the console -->
@@ -32,8 +33,8 @@
             <fileNamePattern>
                 C:/Users/sefa.biliciler/Desktop/Java/agitoo/agitoo/src/main/resources/Logging/LogZipped/logs/archive/application-%d{yyyy-MM-dd}-%i.log.zip
             </fileNamePattern>
-            <maxFileSize>10MB</maxFileSize>
-            <maxHistory>100</maxHistory>
+            <maxFileSize>50MB</maxFileSize>
+            <maxHistory>500</maxHistory>
         </rollingPolicy>
     </appender>
     <root>

@@ -25,21 +25,21 @@ public class CompanyBranchController {
 
     @RequestMapping(value = "/get-all", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<DataResult<List<CompanyBranchDTO>>> getAll () {
-        log.info("Received request to list company branches!");
-        List<CompanyBranchDTO> companyBranchDTOList = companyBranchService.getAll();
+        log.info ("Received request to list company branches!");
+        List<CompanyBranchDTO> companyBranchDTOList = companyBranchService.getAll ();
 
         DataResult<List<CompanyBranchDTO>> response = new DataResult<>
                 (companyBranchDTOList, true, Messages.LISTED);
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok (response);
 
         /*return new ResponseEntity<List<CompanyBranchDTO>>
                         (companyBranchService.getAll (), HttpStatus.OK);*/
     }
 
-    @RequestMapping(value = "/add",  method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_VALUE})
+    @RequestMapping(value = "/add", method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_VALUE})
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<DataResult<CompanyBranchDTO>> Add (@RequestBody @Valid CompanyBranchDTO companyBranchDTO) {
-        log.info("Received request to add company branch {}", companyBranchDTO);
+        log.info ("Received request to add company branch {}", companyBranchDTO);
         CompanyBranchDTO addedCompanyBranchDTO =
                 companyBranchService.add (companyBranchDTO);
 
@@ -51,9 +51,9 @@ public class CompanyBranchController {
 
     }
 
-    @RequestMapping (value = "/update", method = RequestMethod.PUT, produces = {MediaType.APPLICATION_JSON_VALUE})
+    @RequestMapping(value = "/update", method = RequestMethod.PUT, produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<DataResult<CompanyBranchDTO>> Update (@RequestBody @Valid CompanyBranchDTO companyBranchDTO) {
-        log.info("Received request to update company branch {}", companyBranchDTO);
+        log.info ("Received request to update company branch {}", companyBranchDTO);
         CompanyBranchDTO updatedCompanyBranchDTO = companyBranchService.update (companyBranchDTO);
         DataResult<CompanyBranchDTO> response = new DataResult<> (
                 updatedCompanyBranchDTO, true, Messages.UPDATED);
@@ -65,7 +65,7 @@ public class CompanyBranchController {
 
     @RequestMapping(value = "/delete-by-id/{id}", method = RequestMethod.DELETE)
     public void Delete (@PathVariable @Min(1) Long id) {
-        log.info("Received request to delete company branch {}", id);
+        log.info ("Received request to delete company branch {}", id);
         this.companyBranchService.deleteById (id);
     }
 }

@@ -28,7 +28,8 @@ public class CustomerRegistration {
     private String isActive; //Y * N
 
     @Column(name = "REGISTRATIONDATE")
-    private LocalDateTime registrationDate = LocalDateTime.now();;
+    private LocalDateTime registrationDate = LocalDateTime.now ();
+    ;
 
     @Column(name = "LASTLOGINDATE")
     private LocalDateTime lastLoginDate;

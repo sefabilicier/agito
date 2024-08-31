@@ -1,14 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import Customers from './components/Customer/Customers.js';
+import { ChakraProvider } from '@chakra-ui/react'
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import './index.css'
+
+const router = createBrowserRouter([
+  {
+    path: "/customers",
+    element: <Customers />
+  }
+])
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <ChakraProvider>
+        <RouterProvider router={router} />
+    </ChakraProvider>
   </React.StrictMode>
 );
-
-reportWebVitals();

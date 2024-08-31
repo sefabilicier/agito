@@ -24,7 +24,7 @@ public class CustomerPolicyController {
 
     @RequestMapping(value = "/get-all", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<DataResult<List<CustomerPolicyDTO>>> getAll () {
-        log.info("Received request to list customer policies!");
+        log.info ("Received request to list customer policies!");
         List<CustomerPolicyDTO> customerPolicyDTOList = customerPolicyService.getAll ();
         DataResult<List<CustomerPolicyDTO>> response = new DataResult<> (
                 customerPolicyDTOList,
@@ -34,10 +34,10 @@ public class CustomerPolicyController {
         return ResponseEntity.ok (response);
     }
 
-    @RequestMapping(value = "/add",  method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_VALUE})
+    @RequestMapping(value = "/add", method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_VALUE})
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<DataResult<CustomerPolicyDTO>> Add (@RequestBody @Valid CustomerPolicyDTO customerPolicyDTO) {
-        log.info("Received request to add customer policy {}", customerPolicyDTO);
+        log.info ("Received request to add customer policy {}", customerPolicyDTO);
         CustomerPolicyDTO savedCustomerPolicyDTO = customerPolicyService.add (customerPolicyDTO);
         DataResult<CustomerPolicyDTO> response = new DataResult<> (
                 savedCustomerPolicyDTO, true, Messages.ADDED
@@ -46,9 +46,9 @@ public class CustomerPolicyController {
 
     }
 
-    @RequestMapping (value = "/update", method = RequestMethod.PUT, produces = {MediaType.APPLICATION_JSON_VALUE})
+    @RequestMapping(value = "/update", method = RequestMethod.PUT, produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<DataResult<CustomerPolicyDTO>> Update (@RequestBody @Valid CustomerPolicyDTO customerPolicyDTO) {
-        log.info("Received request to update customer policy {}", customerPolicyDTO);
+        log.info ("Received request to update customer policy {}", customerPolicyDTO);
         CustomerPolicyDTO updatedCustomerPolicyDTO = customerPolicyService.update (customerPolicyDTO);
         DataResult<CustomerPolicyDTO> response = new DataResult<> (updatedCustomerPolicyDTO, true,
                 Messages.UPDATED);
@@ -57,7 +57,7 @@ public class CustomerPolicyController {
 
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
     public void Delete (@PathVariable Long id) {
-        log.info("Received request to delete customer policy {}", id);
+        log.info ("Received request to delete customer policy {}", id);
         this.customerPolicyService.deleteById (id);
     }
 }

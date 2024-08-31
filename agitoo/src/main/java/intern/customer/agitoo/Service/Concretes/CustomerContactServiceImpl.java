@@ -6,8 +6,6 @@ import intern.customer.agitoo.Helper.Messages;
 import intern.customer.agitoo.Models.Concretes.CustomerContact;
 import intern.customer.agitoo.Repository.Abstracts.CustomerContactRepository;
 import intern.customer.agitoo.Service.Abstracts.ICustomerContactService;
-import intern.customer.agitoo.Service.Rules.CommonBusinessRules;
-import intern.customer.agitoo.Service.Rules.toDatabase;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +16,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static intern.customer.agitoo.Service.Rules.CommonBusinessRules.checkIfIdExist;
+import static intern.customer.agitoo.Service.Rules.toDatabase.isConnected;
 
 @Service
 @NoArgsConstructor
@@ -33,10 +34,10 @@ public class CustomerContactServiceImpl implements ICustomerContactService {
     @Override
     @Cacheable(value = "customer-contact")
     public List<CustomerContactDTO> getAll () {
-        toDatabase.isConnected ();
+        isConnected ();
         List<CustomerContact> customerContacts = customerContactRepository.findAll ();
         List<CustomerContactDTO> customerContactDTOS = customerContacts
-                .stream()
+                .stream ()
                 .map (customerContact -> customerContactMapper
                         .toDTO (customerContact, CustomerContactDTO.class)).collect (Collectors.toList ());
         return customerContactDTOS;
@@ -46,7 +47,7 @@ public class CustomerContactServiceImpl implements ICustomerContactService {
     @CachePut(value = "customer-contact", key = "")
     public CustomerContactDTO add (CustomerContactDTO dtoModel) {
         CustomerContact customerContact = customerContactMapper.toEntity (dtoModel, CustomerContact.class);
-        CustomerContact savedCustomerContact = customerContactRepository.save(customerContact);
+        CustomerContact savedCustomerContact = customerContactRepository.save (customerContact);
         return customerContactMapper.toDTO (savedCustomerContact, CustomerContactDTO.class);
 
     }
@@ -63,7 +64,7 @@ public class CustomerContactServiceImpl implements ICustomerContactService {
     @Override
     @CacheEvict(value = "customer-contact", key = "#id")
     public void deleteById (Long id) {
-        CommonBusinessRules.checkIfIdExist (customerContactRepository, id);
+        checkIfIdExist (customerContactRepository, id);
         customerContactRepository.deleteById (id);
         System.out.print (id + " " + Messages.REMOVED);
     }

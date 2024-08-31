@@ -25,7 +25,7 @@ public class PersonActivityController {
 
     @RequestMapping(value = "/get-all", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<DataResult<List<PersonActivityDTO>>> getAll () {
-        log.info("Received request to list customer activities!");
+        log.info ("Received request to list customer activities!");
         List<PersonActivityDTO> personActivityDTOList = personActivityService.getAll ();
         DataResult<List<PersonActivityDTO>> response = new DataResult<> (
                 personActivityDTOList,
@@ -35,21 +35,21 @@ public class PersonActivityController {
         return ResponseEntity.ok (response);
     }
 
-    @RequestMapping(value = "/add",  method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_VALUE})
+    @RequestMapping(value = "/add", method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_VALUE})
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<DataResult<PersonActivityDTO>> Add (@RequestBody @Valid PersonActivityDTO personActivityDTO) {
-        log.info("Received request to add customer activity {}", personActivityDTO);
+        log.info ("Received request to add customer activity {}", personActivityDTO);
         PersonActivityDTO savedPersonActivityDTO = personActivityService.add (personActivityDTO);
-        DataResult<PersonActivityDTO> response = new DataResult<>(
+        DataResult<PersonActivityDTO> response = new DataResult<> (
                 savedPersonActivityDTO, true, Messages.ADDED
         );
         return ResponseEntity.ok (response);
 
     }
 
-    @RequestMapping (value = "/update", method = RequestMethod.PUT, produces = {MediaType.APPLICATION_JSON_VALUE})
+    @RequestMapping(value = "/update", method = RequestMethod.PUT, produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<DataResult<PersonActivityDTO>> Update (@RequestBody @Valid PersonActivityDTO personActivityDTO) {
-        log.info("Received request to update customer activity {}", personActivityDTO);
+        log.info ("Received request to update customer activity {}", personActivityDTO);
         PersonActivityDTO updatedPersonActivityDTO = personActivityService.update (personActivityDTO);
         DataResult<PersonActivityDTO> response = new DataResult<> (
                 updatedPersonActivityDTO, true, Messages.UPDATED
@@ -59,7 +59,7 @@ public class PersonActivityController {
 
     @RequestMapping(value = "/delete-by-id/{id}", method = RequestMethod.DELETE)
     public void Delete (@PathVariable @Min(1) Long id) {
-        log.info("Received request to delete customer activity {}", id);
+        log.info ("Received request to delete customer activity {}", id);
         this.personActivityService.deleteById (id);
     }
 }

@@ -39,23 +39,23 @@ public class PersonJobLife {
     private EmploymentType employmentType;
 
     @Column(name = "BASESALARY", precision = 15, scale = 2)
-    @DecimalMin (value = "0.00")
+    @DecimalMin(value = "0.00")
     private BigDecimal baseSalary;
 
     @Column(name = "BONUS", precision = 15, scale = 2)
-    @DecimalMin (value = "0.00")
+    @DecimalMin(value = "0.00")
     private BigDecimal bonus;
 
     @Column(name = "COMMISSION", precision = 15, scale = 2)
-    @DecimalMin (value = "0.00")
+    @DecimalMin(value = "0.00")
     private BigDecimal commission;
 
     @Column(name = "OVERTIME", precision = 15, scale = 2)
-    @DecimalMin (value = "0.00")
+    @DecimalMin(value = "0.00")
     private BigDecimal overTime;
 
     @Column(name = "TOTALANNUALINCOME", precision = 15, scale = 2)
-    @DecimalMin (value = "0.00")
+    @DecimalMin(value = "0.00")
     private BigDecimal totalAnnualIncome;
 
     @Column(name = "LASTSALARYREVIEWDATE")
@@ -74,19 +74,19 @@ public class PersonJobLife {
     private IncomeSource incomeSource;
 
     @Column(name = "TAXABLEINCOME", precision = 15, scale = 2)
-    @DecimalMin (value = "0.00")
+    @DecimalMin(value = "0.00")
     private BigDecimal taxableIncome;
 
     @Column(name = "NONTAXABLEINCOME", precision = 15, scale = 2)
-    @DecimalMin (value = "0.00")
+    @DecimalMin(value = "0.00")
     private BigDecimal nonTaxableIncome;
 
     @Column(name = "DEDUCTIONS", precision = 15, scale = 2)
-    @DecimalMin (value = "0.00")
+    @DecimalMin(value = "0.00")
     private BigDecimal deductions;
 
     @Column(name = "NETINCOME", precision = 15, scale = 2)
-    @DecimalMin (value = "0.00")
+    @DecimalMin(value = "0.00")
     private BigDecimal netIncome;
 
     @ManyToOne(fetch = FetchType.LAZY)

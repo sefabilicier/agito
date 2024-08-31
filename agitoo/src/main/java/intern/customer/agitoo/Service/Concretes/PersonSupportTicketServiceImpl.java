@@ -6,8 +6,6 @@ import intern.customer.agitoo.Helper.Messages;
 import intern.customer.agitoo.Models.Concretes.PersonSupportTicket;
 import intern.customer.agitoo.Repository.Abstracts.PersonSupportTicketRepository;
 import intern.customer.agitoo.Service.Abstracts.IPersonSupportTicketService;
-import intern.customer.agitoo.Service.Rules.CommonBusinessRules;
-import intern.customer.agitoo.Service.Rules.toDatabase;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +16,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static intern.customer.agitoo.Service.Rules.CommonBusinessRules.checkIfIdExist;
+import static intern.customer.agitoo.Service.Rules.toDatabase.isConnected;
 
 @Service
 @NoArgsConstructor
@@ -33,13 +34,13 @@ public class PersonSupportTicketServiceImpl implements IPersonSupportTicketServi
     @Override
     @Cacheable(value = "person-support-ticket")
     public List<PersonSupportTicketDTO> getAll () {
-        toDatabase.isConnected ();
+        isConnected ();
         List<PersonSupportTicket> personSupportTickets = personSupportTicketRepository.findAll ();
         List<PersonSupportTicketDTO> personSupportTicketDTOS = personSupportTickets
                 .stream ()
                 .map (personSupportTicket -> personSupportTicketMapper
                         .toDTO (personSupportTicket, PersonSupportTicketDTO.class))
-                .collect(Collectors.toList());
+                .collect (Collectors.toList ());
         return personSupportTicketDTOS;
     }
 
@@ -64,7 +65,7 @@ public class PersonSupportTicketServiceImpl implements IPersonSupportTicketServi
     @Override
     @CacheEvict(value = "person-support-ticket", key = "#id")
     public void deleteById (Long id) {
-        CommonBusinessRules.checkIfIdExist (personSupportTicketRepository, id);
+        checkIfIdExist (personSupportTicketRepository, id);
         personSupportTicketRepository.deleteById (id);
         System.out.print (id + " " + Messages.REMOVED);
     }

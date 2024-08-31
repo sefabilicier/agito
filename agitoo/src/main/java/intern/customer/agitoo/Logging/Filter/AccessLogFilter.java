@@ -24,31 +24,29 @@ public class AccessLogFilter extends OncePerRequestFilter {
             FilterChain filterChain
     ) throws ServletException, IOException {
 
-        if (request.getRequestURI().toLowerCase().contains("/api")) {
-            long time = System.currentTimeMillis();
+        if (request.getRequestURI ().toLowerCase ().contains ("/api")) {
+            long time = System.currentTimeMillis ();
             try {
-                filterChain.doFilter(request, response);
-            }
-            finally {
-                time = System.currentTimeMillis() - time;
+                filterChain.doFilter (request, response);
+            } finally {
+                time = System.currentTimeMillis () - time;
 
-                String remoteIpAddress = request.getHeader("X-FORWARDED-FOR");
+                String remoteIpAddress = request.getHeader ("X-FORWARDED-FOR");
 
-                if (remoteIpAddress == null || remoteIpAddress.isEmpty()) {
-                    remoteIpAddress = request.getRemoteAddr();
+                if (remoteIpAddress == null || remoteIpAddress.isEmpty ()) {
+                    remoteIpAddress = request.getRemoteAddr ();
                 }
 
-                log.info("{} {} {} {} {} {}ms",
+                log.info ("{} {} {} {} {} {}ms",
                         remoteIpAddress,
-                        request.getMethod(),
-                        request.getRequestURI(),
-                        response.getContentType(),
-                        response.getStatus(), time);
+                        request.getMethod (),
+                        request.getRequestURI (),
+                        response.getContentType (),
+                        response.getStatus (), time);
 
             }
-        }
-        else {
-            filterChain.doFilter(request, response);
+        } else {
+            filterChain.doFilter (request, response);
         }
 
 

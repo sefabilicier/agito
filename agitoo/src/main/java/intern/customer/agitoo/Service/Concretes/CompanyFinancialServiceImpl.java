@@ -6,8 +6,6 @@ import intern.customer.agitoo.Helper.Messages;
 import intern.customer.agitoo.Models.Concretes.CompanyFinancial;
 import intern.customer.agitoo.Repository.Abstracts.CompanyFinancialRepository;
 import intern.customer.agitoo.Service.Abstracts.ICompanyFinancialService;
-import intern.customer.agitoo.Service.Rules.CommonBusinessRules;
-import intern.customer.agitoo.Service.Rules.toDatabase;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +16,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static intern.customer.agitoo.Service.Rules.CommonBusinessRules.checkIfIdExist;
+import static intern.customer.agitoo.Service.Rules.toDatabase.isConnected;
 
 @Service
 @NoArgsConstructor
@@ -33,14 +34,14 @@ public class CompanyFinancialServiceImpl implements ICompanyFinancialService {
     @Override
     @Cacheable(value = "customer-financial")
     public List<CompanyFinancialDTO> getAll () {
-        toDatabase.isConnected ();
+        isConnected ();
         List<CompanyFinancial> companyFinancials = companyFinancialRepository.findAll ();
 
         List<CompanyFinancialDTO> companyFinancialDTOS = companyFinancials
                 .stream ()
                 .map (companyFinancial -> companyFinancialMapper
                         .toDTO (companyFinancial, CompanyFinancialDTO.class))
-                                .collect(Collectors.toList ());
+                .collect (Collectors.toList ());
 
         return companyFinancialDTOS;
     }
@@ -69,7 +70,7 @@ public class CompanyFinancialServiceImpl implements ICompanyFinancialService {
     @Override
     @CacheEvict(value = "customer-financial", key = "#id")
     public void deleteById (Long id) {
-        CommonBusinessRules.checkIfIdExist (companyFinancialRepository, id);
+        checkIfIdExist (companyFinancialRepository, id);
         companyFinancialRepository.deleteById (id);
         System.out.println (id + " " + Messages.REMOVED);
     }

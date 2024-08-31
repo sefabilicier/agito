@@ -6,8 +6,6 @@ import intern.customer.agitoo.Helper.Messages;
 import intern.customer.agitoo.Models.Concretes.CustomerPolicy;
 import intern.customer.agitoo.Repository.Abstracts.CustomerPolicyRepository;
 import intern.customer.agitoo.Service.Abstracts.ICustomerPolicyService;
-import intern.customer.agitoo.Service.Rules.CommonBusinessRules;
-import intern.customer.agitoo.Service.Rules.toDatabase;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +16,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static intern.customer.agitoo.Service.Rules.CommonBusinessRules.checkIfIdExist;
+import static intern.customer.agitoo.Service.Rules.toDatabase.isConnected;
 
 @Service
 @NoArgsConstructor
@@ -34,12 +35,12 @@ public class CustomerPolicyServiceImpl implements ICustomerPolicyService {
     @Override
     @Cacheable(value = "customer-policy")
     public List<CustomerPolicyDTO> getAll () {
-        toDatabase.isConnected ();
+        isConnected ();
         List<CustomerPolicy> customerPolicies = customerPolicyRepository.findAll ();
         List<CustomerPolicyDTO> customerPolicyDTOS = customerPolicies
                 .stream ()
                 .map (customerPolicy -> customerPolicyMapper
-                        .toDTO (customerPolicy, CustomerPolicyDTO.class)).collect(Collectors.toList());
+                        .toDTO (customerPolicy, CustomerPolicyDTO.class)).collect (Collectors.toList ());
 
         return customerPolicyDTOS;
     }
@@ -64,7 +65,7 @@ public class CustomerPolicyServiceImpl implements ICustomerPolicyService {
     @Override
     @CacheEvict(value = "customer-policy", key = "#id")
     public void deleteById (Long id) {
-        CommonBusinessRules.checkIfIdExist (customerPolicyRepository, id);
+        checkIfIdExist (customerPolicyRepository, id);
         customerPolicyRepository.deleteById (id);
         System.out.print (id + " " + Messages.REMOVED);
     }
