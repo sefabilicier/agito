@@ -25,7 +25,7 @@ public class PersonSupportTicketController {
 
     @RequestMapping(value = "/get-all", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<DataResult<List<PersonSupportTicketDTO>>> getAll () {
-        log.info("Received request to list person support tickets!");
+        log.info ("Received request to list person support tickets!");
         List<PersonSupportTicketDTO> personSupportTicketDTOList = personSupportTicketService.getAll ();
         DataResult<List<PersonSupportTicketDTO>> response = new DataResult<> (
                 personSupportTicketDTOList,
@@ -35,10 +35,10 @@ public class PersonSupportTicketController {
         return ResponseEntity.ok (response);
     }
 
-    @RequestMapping(value = "/add",  method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_VALUE})
+    @RequestMapping(value = "/add", method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_VALUE})
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<DataResult<PersonSupportTicketDTO>> Add (@RequestBody @Valid PersonSupportTicketDTO personSupportTicketDTO) {
-        log.info("Received request to add person support ticket {}", personSupportTicketDTO);
+        log.info ("Received request to add person support ticket {}", personSupportTicketDTO);
         PersonSupportTicketDTO addedPersonSupportTicketDTO = personSupportTicketService.add (personSupportTicketDTO);
         DataResult<PersonSupportTicketDTO> response = new DataResult<> (
                 addedPersonSupportTicketDTO, true, Messages.ADDED
@@ -47,23 +47,23 @@ public class PersonSupportTicketController {
 
     }
 
-    @RequestMapping (value = "/update", method = RequestMethod.PUT, produces = {MediaType.APPLICATION_JSON_VALUE})
+    @RequestMapping(value = "/update", method = RequestMethod.PUT, produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<DataResult<PersonSupportTicketDTO>> Update (@RequestBody @Valid PersonSupportTicketDTO personSupportTicketDTO) {
-        log.info("Received request to update person support ticket {}", personSupportTicketDTO);
+        log.info ("Received request to update person support ticket {}", personSupportTicketDTO);
         PersonSupportTicketDTO updatedPersonSupportTicketDTO = personSupportTicketService.update (
                 personSupportTicketDTO
         );
         DataResult<PersonSupportTicketDTO> response = new DataResult<> (
                 updatedPersonSupportTicketDTO,
 
-            true, Messages.UPDATED
+                true, Messages.UPDATED
         );
         return ResponseEntity.ok (response);
     }
 
     @RequestMapping(value = "/delete-by-id/{id}", method = RequestMethod.DELETE)
     public void Delete (@PathVariable @Min(1) Long id) {
-        log.info("Received request to delete person support ticket {}", id);
+        log.info ("Received request to delete person support ticket {}", id);
         this.personSupportTicketService.deleteById (id);
     }
 }

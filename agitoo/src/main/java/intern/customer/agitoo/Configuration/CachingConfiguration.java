@@ -12,7 +12,7 @@ import java.util.Arrays;
 @EnableCaching
 public class CachingConfiguration {
 
-    public CacheManager cacheManager(){
+    public CacheManager cacheManager () {
         SimpleCacheManager cashList = new SimpleCacheManager ();
         cashList.setCaches (Arrays.asList (
                 new ConcurrentMapCache ("customer"),

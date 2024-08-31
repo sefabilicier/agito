@@ -6,8 +6,6 @@ import intern.customer.agitoo.Helper.Messages;
 import intern.customer.agitoo.Models.Concretes.CustomerPayment;
 import intern.customer.agitoo.Repository.Abstracts.CustomerPaymentRepository;
 import intern.customer.agitoo.Service.Abstracts.ICustomerPaymentService;
-import intern.customer.agitoo.Service.Rules.CommonBusinessRules;
-import intern.customer.agitoo.Service.Rules.toDatabase;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +16,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static intern.customer.agitoo.Service.Rules.CommonBusinessRules.checkIfIdExist;
+import static intern.customer.agitoo.Service.Rules.toDatabase.isConnected;
 
 @Service
 @NoArgsConstructor
@@ -33,20 +34,20 @@ public class CustomerPaymentServiceImpl implements ICustomerPaymentService {
     @Override
     @Cacheable(value = "customer-payment")
     public List<CustomerPaymentDTO> getAll () {
-        toDatabase.isConnected ();
+        isConnected ();
         List<CustomerPayment> customerPayments = customerPaymentRepository.findAll ();
         List<CustomerPaymentDTO> customerPaymentDTOS = customerPayments
                 .stream ()
                 .map (customerPayment -> customerPaymentMapper
                         .toDTO (customerPayment, CustomerPaymentDTO.class))
-                .collect(Collectors.toList());
+                .collect (Collectors.toList ());
         return customerPaymentDTOS;
     }
 
     @Override
     @CachePut(value = "customer-payment", key = "")
     public CustomerPaymentDTO add (CustomerPaymentDTO dtoModel) {
-        CustomerPayment customerPayment = customerPaymentMapper.toEntity (dtoModel, CustomerPayment.class );
+        CustomerPayment customerPayment = customerPaymentMapper.toEntity (dtoModel, CustomerPayment.class);
         CustomerPayment savedCustomerPayment = customerPaymentRepository.save (customerPayment);
         return customerPaymentMapper.toDTO (savedCustomerPayment, CustomerPaymentDTO.class);
     }
@@ -62,7 +63,7 @@ public class CustomerPaymentServiceImpl implements ICustomerPaymentService {
     @Override
     @CacheEvict(value = "customer-payment", key = "#id")
     public void deleteById (Long id) {
-        CommonBusinessRules.checkIfIdExist (customerPaymentRepository, id);
+        checkIfIdExist (customerPaymentRepository, id);
         customerPaymentRepository.deleteById (id);
         System.out.print (id + " " + Messages.REMOVED);
     }

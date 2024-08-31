@@ -33,7 +33,7 @@ public class CustomerContactController {
         return ResponseEntity.ok (response);
     }
 
-    @RequestMapping(value = "/add",  method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_VALUE})
+    @RequestMapping(value = "/add", method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_VALUE})
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<DataResult<CustomerContactDTO>> Add (@RequestBody @Valid CustomerContactDTO customerContactDTO) {
         log.info ("Received request to create customer contact {}", customerContactDTO);
@@ -46,19 +46,19 @@ public class CustomerContactController {
         return ResponseEntity.ok (response);
     }
 
-    @RequestMapping (value = "/update", method = RequestMethod.PUT, produces = {MediaType.APPLICATION_JSON_VALUE})
+    @RequestMapping(value = "/update", method = RequestMethod.PUT, produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<DataResult<CustomerContactDTO>> Update (@RequestBody @Valid CustomerContactDTO customerContactDTO) {
-        log.info("Received request to update customer contact {}", customerContactDTO);
+        log.info ("Received request to update customer contact {}", customerContactDTO);
         CustomerContactDTO customerContact = customerContactService.add (customerContactDTO);
         DataResult<CustomerContactDTO> response = new DataResult<> (
-                customerContact, true,  Messages.UPDATED
+                customerContact, true, Messages.UPDATED
         );
         return ResponseEntity.ok (response);
     }
 
     @RequestMapping(value = "/delete-by-id/{id}", method = RequestMethod.DELETE)
     public void Delete (@PathVariable @Min(1) Long id) {
-        log.info("Received request to delete customer contact {}", id);
+        log.info ("Received request to delete customer contact {}", id);
         this.customerContactService.deleteById (id);
     }
 }

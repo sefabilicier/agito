@@ -26,7 +26,7 @@ public class CustomerDebitCardController {
 
     @RequestMapping(value = "/get-all", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<DataResult<List<CustomerDebitCardDTO>>> getAll () {
-        log.info("Received request to list customer debit cards!");
+        log.info ("Received request to list customer debit cards!");
         List<CustomerDebitCardDTO> customerDebitCardList = customerDebitCardsService.getAll ();
         DataResult<List<CustomerDebitCardDTO>> response = new DataResult<> (
                 customerDebitCardList,
@@ -36,23 +36,23 @@ public class CustomerDebitCardController {
         return ResponseEntity.ok (response);
     }
 
-    @RequestMapping(value = "/add",  method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_VALUE})
+    @RequestMapping(value = "/add", method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_VALUE})
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<DataResult<CustomerDebitCardDTO>> Add (@RequestBody @Valid CustomerDebitCardDTO customerDebitCardDTO) {
-        log.info("Received request to add customer debit card {}", customerDebitCardDTO);
+        log.info ("Received request to add customer debit card {}", customerDebitCardDTO);
         CustomerDebitCardDTO savedCustomerDebitCardDTO = customerDebitCardsService.add (customerDebitCardDTO);
-        DataResult<CustomerDebitCardDTO> response = new DataResult<>(
+        DataResult<CustomerDebitCardDTO> response = new DataResult<> (
                 savedCustomerDebitCardDTO,
                 true,
                 Messages.ADDED
-                );
+        );
         return ResponseEntity.ok (response);
 
     }
 
-    @RequestMapping (value = "/update", method = RequestMethod.PUT, produces = {MediaType.APPLICATION_JSON_VALUE})
+    @RequestMapping(value = "/update", method = RequestMethod.PUT, produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<DataResult<CustomerDebitCardDTO>> Update (@RequestBody @Valid CustomerDebitCardDTO customerDebitCardDTO) {
-        log.info("Received request to update customer debit card {}", customerDebitCardDTO);
+        log.info ("Received request to update customer debit card {}", customerDebitCardDTO);
         CustomerDebitCardDTO updateCustomerDebitCardDTO = customerDebitCardsService.update (customerDebitCardDTO);
         DataResult<CustomerDebitCardDTO> response = new DataResult<> (
                 updateCustomerDebitCardDTO, true, Messages.UPDATED
@@ -62,7 +62,7 @@ public class CustomerDebitCardController {
 
     @RequestMapping(value = "/delete-by-id/{id}", method = RequestMethod.DELETE)
     public void Delete (@PathVariable @Min(1) Long id) {
-        log.info("Received request to delete customer debit card {}", id);
+        log.info ("Received request to delete customer debit card {}", id);
         this.customerDebitCardsService.deleteById (id);
     }
 }

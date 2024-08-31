@@ -39,7 +39,8 @@ public class CustomerAddress {
     private boolean isDefault;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "CUSTOMERID", nullable = false) //Bir müşteri adresi, mutlaka bir müşteri ile ilişkili olmalı. Bu yüzden nullable = false eklenmeli.
+    @JoinColumn(name = "CUSTOMERID", nullable = false)
+    //Bir müşteri adresi, mutlaka bir müşteri ile ilişkili olmalı. Bu yüzden nullable = false eklenmeli.
     private Customer customer;
 
     @ManyToOne(fetch = FetchType.LAZY)

@@ -47,7 +47,7 @@ public class PersonDTO {
     @NotBlank(message = "{occupation.notBlank}")
     private String occupation;
 
-//    @Valid
+    //    @Valid
 //    private List<PersonActivityDTO> personActivities;
 //    @Valid
 //    private List<PersonFeedbackDTO> personFeedbacks;
@@ -58,7 +58,7 @@ public class PersonDTO {
 //    @Valid
 //    private CustomerDTO customer;
 
-    public String getFullName() {
+    public String getFullName () {
         return firstName + (middleName != null ? " " + middleName : "") + " " + lastName;
     }
 

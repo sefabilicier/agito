@@ -15,5 +15,5 @@ public interface ICompanyBranchService
                     "END " +
                     "FROM CompanyBranch c " +
                     "WHERE c.branchName = :name")
-    String existsByName(String name);
+    String existsByName (String name);
 }

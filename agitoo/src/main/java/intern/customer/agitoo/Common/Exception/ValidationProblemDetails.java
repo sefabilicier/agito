@@ -9,7 +9,7 @@ import java.util.Map;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ValidationProblemDetails extends ProblemDetails{
+public class ValidationProblemDetails extends ProblemDetails {
 
     private Map<String, String> validationErrors; //<hangi alanda, ne hatası var>
 

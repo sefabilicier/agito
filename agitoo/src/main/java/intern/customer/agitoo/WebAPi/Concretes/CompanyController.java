@@ -23,7 +23,7 @@ public class CompanyController {
     @Autowired
     private ICompanyService companyService;
 
-    @RequestMapping (value = "/get-all", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
+    @RequestMapping(value = "/get-all", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
     //@Operation(summary = "Get all company")
     public ResponseEntity<DataResult<List<CompanyDTO>>> getAll () {
         log.info ("Received request to list company branches!");
@@ -58,7 +58,7 @@ public class CompanyController {
         return ResponseEntity.ok (response);
     }
 
-    @RequestMapping(value = "/delete-by-id/{id}",method = RequestMethod.DELETE, produces = {MediaType.APPLICATION_JSON_VALUE})
+    @RequestMapping(value = "/delete-by-id/{id}", method = RequestMethod.DELETE, produces = {MediaType.APPLICATION_JSON_VALUE})
     public void Delete (@PathVariable @Min(1) Long id) {
         log.info ("Received request to delete company branch  {}", id);
         this.companyService.deleteById (id);

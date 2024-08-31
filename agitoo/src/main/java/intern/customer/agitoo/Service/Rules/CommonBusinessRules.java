@@ -9,11 +9,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class CommonBusinessRules {
 
-    public static <T, ID> void checkIfIdExist(JpaRepository<T, ID> repository, ID id) {
-        if (repository.existsById(id)) {
-            repository.deleteById(id);
+    public static <T, ID> void checkIfIdExist (JpaRepository<T, ID> repository, ID id) {
+        if (repository.existsById (id)) {
+            repository.deleteById (id);
         } else {
-            throw new BusinessException("Id not exist");
+            throw new BusinessException ("Id not exist");
         }
     }
 

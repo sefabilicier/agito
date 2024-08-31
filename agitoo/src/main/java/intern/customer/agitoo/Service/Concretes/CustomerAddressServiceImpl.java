@@ -6,8 +6,6 @@ import intern.customer.agitoo.Helper.Messages;
 import intern.customer.agitoo.Models.Concretes.CustomerAddress;
 import intern.customer.agitoo.Repository.Abstracts.CustomerAddressRepository;
 import intern.customer.agitoo.Service.Abstracts.ICustomerAddressService;
-import intern.customer.agitoo.Service.Rules.CommonBusinessRules;
-import intern.customer.agitoo.Service.Rules.toDatabase;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +16,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static intern.customer.agitoo.Service.Rules.CommonBusinessRules.checkIfIdExist;
+import static intern.customer.agitoo.Service.Rules.toDatabase.isConnected;
 
 @Service
 @NoArgsConstructor
@@ -34,7 +35,7 @@ public class CustomerAddressServiceImpl implements ICustomerAddressService {
     @Override
     @Cacheable(value = "customer-address")
     public List<CustomerAddressDTO> getAll () {
-        toDatabase.isConnected ();
+        isConnected ();
         List<CustomerAddress> customerAddresses = customerAddressRepository.findAll ();
         List<CustomerAddressDTO> customerAddressDTOS = customerAddresses
                 .stream ()
@@ -64,7 +65,7 @@ public class CustomerAddressServiceImpl implements ICustomerAddressService {
     @Override
     @CacheEvict(value = "customer-address", key = "#id")
     public void deleteById (Long id) {
-        CommonBusinessRules.checkIfIdExist (customerAddressRepository, id);
+        checkIfIdExist (customerAddressRepository, id);
         customerAddressRepository.deleteById (id);
         System.out.print (id + " " + Messages.REMOVED);
     }

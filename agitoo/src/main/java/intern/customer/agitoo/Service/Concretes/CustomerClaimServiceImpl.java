@@ -6,8 +6,6 @@ import intern.customer.agitoo.Helper.Messages;
 import intern.customer.agitoo.Models.Concretes.CustomerClaim;
 import intern.customer.agitoo.Repository.Abstracts.CustomerClaimRepository;
 import intern.customer.agitoo.Service.Abstracts.ICustomerClaimService;
-import intern.customer.agitoo.Service.Rules.CommonBusinessRules;
-import intern.customer.agitoo.Service.Rules.toDatabase;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +16,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static intern.customer.agitoo.Service.Rules.CommonBusinessRules.checkIfIdExist;
+import static intern.customer.agitoo.Service.Rules.toDatabase.isConnected;
 
 @Service
 @NoArgsConstructor
@@ -33,7 +34,7 @@ public class CustomerClaimServiceImpl implements ICustomerClaimService {
     @Override
     @Cacheable(value = "customer-claim")
     public List<CustomerClaimDTO> getAll () {
-        toDatabase.isConnected ();
+        isConnected ();
         List<CustomerClaim> customerClaims = customerClaimRepository.findAll ();
         List<CustomerClaimDTO> customerClaimDTOS = customerClaims
                 .stream ()
@@ -64,7 +65,7 @@ public class CustomerClaimServiceImpl implements ICustomerClaimService {
     @Override
     @CacheEvict(value = "customer-claim", key = "#id")
     public void deleteById (Long id) {
-        CommonBusinessRules.checkIfIdExist (customerClaimRepository, id);
+        checkIfIdExist (customerClaimRepository, id);
         customerClaimRepository.deleteById (id);
         System.out.print (id + " " + Messages.REMOVED);
     }

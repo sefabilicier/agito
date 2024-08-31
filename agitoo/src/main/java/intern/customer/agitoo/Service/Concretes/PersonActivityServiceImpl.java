@@ -6,8 +6,6 @@ import intern.customer.agitoo.Helper.Messages;
 import intern.customer.agitoo.Models.Concretes.PersonActivity;
 import intern.customer.agitoo.Repository.Abstracts.PersonActivityRepository;
 import intern.customer.agitoo.Service.Abstracts.IPersonActivityService;
-import intern.customer.agitoo.Service.Rules.CommonBusinessRules;
-import intern.customer.agitoo.Service.Rules.toDatabase;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +16,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static intern.customer.agitoo.Service.Rules.CommonBusinessRules.checkIfIdExist;
+import static intern.customer.agitoo.Service.Rules.toDatabase.isConnected;
 
 @Service
 @NoArgsConstructor
@@ -34,12 +35,12 @@ public class PersonActivityServiceImpl implements IPersonActivityService {
     @Override
     @Cacheable(value = "person-activity")
     public List<PersonActivityDTO> getAll () {
-        toDatabase.isConnected ();
+        isConnected ();
         List<PersonActivity> personActivities = personActivityRepository.findAll ();
         List<PersonActivityDTO> personActivityDTOS = personActivities
                 .stream ()
                 .map (personActivity -> personActivityMapper.toDTO (personActivity, PersonActivityDTO.class))
-                .collect(Collectors.toList());
+                .collect (Collectors.toList ());
         return personActivityDTOS;
     }
 
@@ -63,8 +64,8 @@ public class PersonActivityServiceImpl implements IPersonActivityService {
     @Override
     @CacheEvict(value = "person-activity", key = "#id")
     public void deleteById (Long id) {
-        CommonBusinessRules.checkIfIdExist (personActivityRepository, id);
+        checkIfIdExist (personActivityRepository, id);
         personActivityRepository.deleteById (id);
-        System.out.print (id + " " + Messages.REMOVED );
+        System.out.print (id + " " + Messages.REMOVED);
     }
 }

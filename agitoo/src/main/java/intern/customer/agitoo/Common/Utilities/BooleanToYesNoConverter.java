@@ -12,6 +12,6 @@ public class BooleanToYesNoConverter implements AttributeConverter<Boolean, Stri
 
     @Override
     public Boolean convertToEntityAttribute (String dbData) {
-        return "Y".equals(dbData);
+        return "Y".equals (dbData);
     }
 }

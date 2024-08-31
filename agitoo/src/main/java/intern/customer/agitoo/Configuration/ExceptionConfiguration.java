@@ -19,24 +19,24 @@ public class ExceptionConfiguration {
 
     @ExceptionHandler //exceptionda artık gerekli mesaj tek verilecek
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ProblemDetails handleBusinessException(BusinessException exception) { //businessexception aldığında çalış
-        ProblemDetails problemDetails = new ProblemDetails();
-        problemDetails.setMessage(exception.getMessage());
+    public ProblemDetails handleBusinessException (BusinessException exception) { //businessexception aldığında çalış
+        ProblemDetails problemDetails = new ProblemDetails ();
+        problemDetails.setMessage (exception.getMessage ());
 
         return problemDetails;
     }
 
     @ExceptionHandler
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ProblemDetails handleValidationException(MethodArgumentNotValidException exception) {//ekranda çıkan exception hatası için yazıldı
-        ValidationProblemDetails validationProblemDetails = new ValidationProblemDetails();
+    public ProblemDetails handleValidationException (MethodArgumentNotValidException exception) {//ekranda çıkan exception hatası için yazıldı
+        ValidationProblemDetails validationProblemDetails = new ValidationProblemDetails ();
 
-        validationProblemDetails.setMessage("Validation exception");
-        validationProblemDetails.setValidationErrors(new HashMap<String, String> ());
+        validationProblemDetails.setMessage ("Validation exception");
+        validationProblemDetails.setValidationErrors (new HashMap<String, String> ());
 
-        for(FieldError fieldError : exception.getBindingResult().getFieldErrors()) {
-            validationProblemDetails.getValidationErrors()
-                    .put(fieldError.getField(), fieldError.getDefaultMessage());
+        for (FieldError fieldError : exception.getBindingResult ().getFieldErrors ()) {
+            validationProblemDetails.getValidationErrors ()
+                    .put (fieldError.getField (), fieldError.getDefaultMessage ());
         }
 
         return validationProblemDetails;

@@ -6,8 +6,6 @@ import intern.customer.agitoo.Helper.Messages;
 import intern.customer.agitoo.Models.Concretes.Customer;
 import intern.customer.agitoo.Repository.Abstracts.CustomerRepository;
 import intern.customer.agitoo.Service.Abstracts.ICustomerService;
-import intern.customer.agitoo.Service.Rules.CommonBusinessRules;
-import intern.customer.agitoo.Service.Rules.toDatabase;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +16,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static intern.customer.agitoo.Service.Rules.CommonBusinessRules.checkIfIdExist;
+import static intern.customer.agitoo.Service.Rules.toDatabase.isConnected;
 
 @Service
 @NoArgsConstructor
@@ -33,12 +34,12 @@ public class CustomerServiceImpl implements ICustomerService {
     @Override
     @Cacheable(value = "customer") //no need to add key value bc nothing yields
     public List<CustomerDTO> getAll () {
-        toDatabase.isConnected ();
+        isConnected ();
         List<Customer> customers = customerRepository.findAll ();
         List<CustomerDTO> customerDTOS = customers
                 .stream ()
                 .map (customer -> customerMapper
-                        .toDTO (customer, CustomerDTO.class)).collect(Collectors.toList());
+                        .toDTO (customer, CustomerDTO.class)).collect (Collectors.toList ());
         return customerDTOS;
     }
 
@@ -64,11 +65,10 @@ public class CustomerServiceImpl implements ICustomerService {
     @Override
     @CacheEvict(value = "customer", key = "#id")
     public void deleteById (Long id) {
-        CommonBusinessRules.checkIfIdExist (customerRepository, id);
+        checkIfIdExist (customerRepository, id);
         customerRepository.deleteById (id);
         System.out.print (id + " " + Messages.REMOVED);
     }
-
 
 
     public void executionInfo () {

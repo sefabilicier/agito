@@ -6,8 +6,6 @@ import intern.customer.agitoo.Helper.Messages;
 import intern.customer.agitoo.Models.Concretes.CustomerDebitCard;
 import intern.customer.agitoo.Repository.Abstracts.CustomerDebitCardRepository;
 import intern.customer.agitoo.Service.Abstracts.ICustomerDebitCardService;
-import intern.customer.agitoo.Service.Rules.CommonBusinessRules;
-import intern.customer.agitoo.Service.Rules.toDatabase;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +16,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static intern.customer.agitoo.Service.Rules.CommonBusinessRules.checkIfIdExist;
+import static intern.customer.agitoo.Service.Rules.toDatabase.isConnected;
 
 @Service
 @NoArgsConstructor
@@ -33,13 +34,13 @@ public class CustomerDebitCardServiceImpl implements ICustomerDebitCardService {
     @Override
     @Cacheable(value = "customer-debit-card")
     public List<CustomerDebitCardDTO> getAll () {
-        toDatabase.isConnected ();
+        isConnected ();
         List<CustomerDebitCard> customerDebitCards = customerDebitCardRepository.findAll ();
         List<CustomerDebitCardDTO> customerDebitCardDTOS = customerDebitCards
                 .stream ()
                 .map (customerDebitCard ->
                         customerDebitCardMapper.toDTO (customerDebitCard, CustomerDebitCardDTO.class))
-                .collect(Collectors.toList ());
+                .collect (Collectors.toList ());
 
         return customerDebitCardDTOS;
 
@@ -50,7 +51,7 @@ public class CustomerDebitCardServiceImpl implements ICustomerDebitCardService {
     public CustomerDebitCardDTO add (CustomerDebitCardDTO dtoModel) {
         CustomerDebitCard customerDebitCard = customerDebitCardMapper
                 .toEntity (dtoModel, CustomerDebitCard.class);
-        CustomerDebitCard savedCustomerDebitCard = customerDebitCardRepository.save(customerDebitCard);
+        CustomerDebitCard savedCustomerDebitCard = customerDebitCardRepository.save (customerDebitCard);
         return customerDebitCardMapper
                 .toDTO (savedCustomerDebitCard, CustomerDebitCardDTO.class);
     }
@@ -58,7 +59,7 @@ public class CustomerDebitCardServiceImpl implements ICustomerDebitCardService {
     @Override
     @CachePut(value = "customer-debit-card", key = "")
     public CustomerDebitCardDTO update (CustomerDebitCardDTO dtoModel) {
-        CustomerDebitCard customerDebitCard = customerDebitCardMapper.toEntity (dtoModel,CustomerDebitCard.class);
+        CustomerDebitCard customerDebitCard = customerDebitCardMapper.toEntity (dtoModel, CustomerDebitCard.class);
         CustomerDebitCard updatedCustomerDebitCard = customerDebitCardRepository.save (customerDebitCard);
         return customerDebitCardMapper.toDTO (updatedCustomerDebitCard, CustomerDebitCardDTO.class);
     }
@@ -66,7 +67,7 @@ public class CustomerDebitCardServiceImpl implements ICustomerDebitCardService {
     @Override
     @CacheEvict(value = "customer-debit-card", key = "#id")
     public void deleteById (Long id) {
-        CommonBusinessRules.checkIfIdExist (customerDebitCardRepository, id);
+        checkIfIdExist (customerDebitCardRepository, id);
         customerDebitCardRepository.deleteById (id);
         System.out.print (id + " " + Messages.REMOVED);
     }

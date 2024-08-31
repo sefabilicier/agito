@@ -25,7 +25,7 @@ public class CustomerAddressCountryController {
 
     @RequestMapping(value = "/get-all", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<DataResult<List<CustomerAddressCountryDTO>>> getAll () {
-        log.info("Received request to list customer address countries!");
+        log.info ("Received request to list customer address countries!");
         List<CustomerAddressCountryDTO> customerAddressCityDTOList = customerAddressCountryService.getAll ();
         DataResult<List<CustomerAddressCountryDTO>> response = new DataResult<> (
                 customerAddressCityDTOList,
@@ -35,18 +35,18 @@ public class CustomerAddressCountryController {
         return ResponseEntity.ok (response);
     }
 
-    @RequestMapping(value = "/add",  method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_VALUE})
+    @RequestMapping(value = "/add", method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_VALUE})
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<DataResult<CustomerAddressCountryDTO>> Add (@RequestBody @Valid CustomerAddressCountryDTO customerAddressCountryDTO) {
-        log.info("Received request to add customer address country {}", customerAddressCountryDTO);
+        log.info ("Received request to add customer address country {}", customerAddressCountryDTO);
         CustomerAddressCountryDTO customerAddressCountry = customerAddressCountryService.add (customerAddressCountryDTO);
         DataResult<CustomerAddressCountryDTO> response = new DataResult<> (customerAddressCountry, true, Messages.ADDED);
         return ResponseEntity.ok (response);
     }
 
-    @RequestMapping (value = "/update", method = RequestMethod.PUT, produces = {MediaType.APPLICATION_JSON_VALUE})
+    @RequestMapping(value = "/update", method = RequestMethod.PUT, produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<DataResult<CustomerAddressCountryDTO>> Update (@RequestBody @Valid CustomerAddressCountryDTO customerAddressCountryDTO) {
-        log.info("Received request to update customer address country {}", customerAddressCountryDTO);
+        log.info ("Received request to update customer address country {}", customerAddressCountryDTO);
         CustomerAddressCountryDTO customerAddressCountry = customerAddressCountryService.update (customerAddressCountryDTO);
         DataResult<CustomerAddressCountryDTO> response = new DataResult<> (
                 customerAddressCountry, true, Messages.UPDATED
@@ -56,7 +56,7 @@ public class CustomerAddressCountryController {
 
     @RequestMapping(value = "/delete-by-id/{id}", method = RequestMethod.DELETE)
     public void Delete (@PathVariable @Min(1) Long id) {
-        log.info("Received request to delete customer address country {}", id);
+        log.info ("Received request to delete customer address country {}", id);
         this.customerAddressCountryService.deleteById (id);
     }
 }

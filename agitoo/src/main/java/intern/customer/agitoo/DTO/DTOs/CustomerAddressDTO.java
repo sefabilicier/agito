@@ -34,12 +34,12 @@ public class CustomerAddressDTO {
 
     //@Convert(converter = BooleanToYesNoConverter.class)
     /*
-    *
-    * Entity Sınıfı:
-    *   @Convert anotasyonu ile BooleanToYesNoConverter kullanarak boolean türünü 'Y' ve 'N' stringlerine dönüştürürsünüz.
-    *    DTO Sınıfı: boolean türünde alan kullanılır ve @Convert anotasyonuna ihtiyaç duymaz.
-    *
-    * */
+     *
+     * Entity Sınıfı:
+     *   @Convert anotasyonu ile BooleanToYesNoConverter kullanarak boolean türünü 'Y' ve 'N' stringlerine dönüştürürsünüz.
+     *    DTO Sınıfı: boolean türünde alan kullanılır ve @Convert anotasyonuna ihtiyaç duymaz.
+     *
+     * */
     @AssertTrue(message = "{isDefault.assertTrue}") //for boolean
     private boolean isDefault; //change for once at least to be true
 

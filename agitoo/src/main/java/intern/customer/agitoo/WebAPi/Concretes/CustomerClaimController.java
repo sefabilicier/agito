@@ -26,7 +26,7 @@ public class CustomerClaimController {
 
     @RequestMapping(value = "/get-all", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<DataResult<List<CustomerClaimDTO>>> getAll () {
-        log.info("Received request to list customer claims!");
+        log.info ("Received request to list customer claims!");
         List<CustomerClaimDTO> customerClaimList = customerClaimsService.getAll ();
         DataResult<List<CustomerClaimDTO>> response = new DataResult<> (
                 customerClaimList,
@@ -37,10 +37,10 @@ public class CustomerClaimController {
 
     }
 
-    @RequestMapping(value = "/add",  method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_VALUE})
+    @RequestMapping(value = "/add", method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_VALUE})
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<DataResult<CustomerClaimDTO>> Add (@RequestBody @Valid CustomerClaimDTO customerClaimDTO) {
-        log.info("Received request to add customer claim {}", customerClaimDTO);
+        log.info ("Received request to add customer claim {}", customerClaimDTO);
         CustomerClaimDTO customerClaim = customerClaimsService.add (customerClaimDTO);
         DataResult<CustomerClaimDTO> response = new DataResult<> (
                 customerClaim, true, Messages.ADDED
@@ -50,9 +50,9 @@ public class CustomerClaimController {
 
     }
 
-    @RequestMapping (value = "/update", method = RequestMethod.PUT, produces = {MediaType.APPLICATION_JSON_VALUE})
+    @RequestMapping(value = "/update", method = RequestMethod.PUT, produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<DataResult<CustomerClaimDTO>> Update (@RequestBody @Valid CustomerClaimDTO customerClaimDTO) {
-        log.info("Received request to update customer claim {}", customerClaimDTO);
+        log.info ("Received request to update customer claim {}", customerClaimDTO);
         CustomerClaimDTO customerClaim = customerClaimsService.update (customerClaimDTO);
         DataResult<CustomerClaimDTO> response = new DataResult<> (
                 customerClaim,
@@ -63,7 +63,7 @@ public class CustomerClaimController {
 
     @RequestMapping(value = "/delete-by-id/{id}", method = RequestMethod.DELETE)
     public void Delete (@PathVariable @Min(1) Long id) {
-        log.info("Received request to delete customer claim {}", id);
+        log.info ("Received request to delete customer claim {}", id);
         customerClaimsService.deleteById (id);
     }
 }

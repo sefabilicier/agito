@@ -26,7 +26,7 @@ public class PersonController {
 
     @RequestMapping(value = "/get-all", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<DataResult<List<PersonDTO>>> getAll () {
-        log.info("Received request to list all person!");
+        log.info ("Received request to list all person!");
         List<PersonDTO> personDTOList = personService.getAll ();
         DataResult<List<PersonDTO>> response = new DataResult<> (
                 personDTOList,
@@ -36,10 +36,10 @@ public class PersonController {
         return ResponseEntity.ok (response);
     }
 
-    @RequestMapping(value = "/add",  method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_VALUE})
+    @RequestMapping(value = "/add", method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_VALUE})
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<DataResult<PersonDTO>> Add (@RequestBody @Valid PersonDTO personDTO) {
-        log.info("Received request to add person {}", personDTO);
+        log.info ("Received request to add person {}", personDTO);
         PersonDTO addedPersonDTO = personService.add (personDTO);
         DataResult<PersonDTO> response = new DataResult<> (
                 addedPersonDTO, true, Messages.ADDED
@@ -47,9 +47,9 @@ public class PersonController {
         return ResponseEntity.ok (response);
     }
 
-    @RequestMapping (value = "/update", method = RequestMethod.PUT, produces = {MediaType.APPLICATION_JSON_VALUE})
+    @RequestMapping(value = "/update", method = RequestMethod.PUT, produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<DataResult<PersonDTO>> Update (@RequestBody @Valid PersonDTO personDTO) {
-        log.info("Received request to update person {}", personDTO);
+        log.info ("Received request to update person {}", personDTO);
         PersonDTO updatedPersonDTO = personService.update (personDTO);
         DataResult<PersonDTO> response = new DataResult<> (
                 updatedPersonDTO,
@@ -60,7 +60,7 @@ public class PersonController {
 
     @RequestMapping(value = "/delete-by-id/{id}", method = RequestMethod.DELETE)
     public void Delete (@PathVariable @Min(1) Long id) {
-        log.info("Received request to delete person {}", id);
+        log.info ("Received request to delete person {}", id);
         this.personService.deleteById (id);
     }
 }

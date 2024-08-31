@@ -6,8 +6,6 @@ import intern.customer.agitoo.Helper.Messages;
 import intern.customer.agitoo.Models.Concretes.CustomerRegistration;
 import intern.customer.agitoo.Repository.Abstracts.CustomerRegistrationRepository;
 import intern.customer.agitoo.Service.Abstracts.ICustomerRegistrationService;
-import intern.customer.agitoo.Service.Rules.CommonBusinessRules;
-import intern.customer.agitoo.Service.Rules.toDatabase;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +16,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static intern.customer.agitoo.Service.Rules.CommonBusinessRules.checkIfIdExist;
+import static intern.customer.agitoo.Service.Rules.toDatabase.isConnected;
 
 @Service
 @NoArgsConstructor
@@ -35,13 +36,13 @@ public class CustomerRegistrationServiceImpl implements ICustomerRegistrationSer
     @Override
     @Cacheable(value = "customer-registration")
     public List<CustomerRegistrationDTO> getAll () {
-        toDatabase.isConnected ();
+        isConnected ();
         List<CustomerRegistration> customerRegistrations = customerRegistrationRepository.findAll ();
         List<CustomerRegistrationDTO> customerRegistrationDTOS = customerRegistrations
                 .stream ()
                 .map (customerRegistration -> customerRegistrationMapper
                         .toDTO (customerRegistration, CustomerRegistrationDTO.class))
-                .collect(Collectors.toList());
+                .collect (Collectors.toList ());
         return customerRegistrationDTOS;
     }
 
@@ -67,7 +68,7 @@ public class CustomerRegistrationServiceImpl implements ICustomerRegistrationSer
     @Override
     @CacheEvict(value = "customer-registration", key = "#id")
     public void deleteById (Long id) {
-        CommonBusinessRules.checkIfIdExist (customerRegistrationRepository, id);
+        checkIfIdExist (customerRegistrationRepository, id);
         customerRegistrationRepository.deleteById (id);
         System.out.print (id + " " + Messages.REMOVED);
     }
