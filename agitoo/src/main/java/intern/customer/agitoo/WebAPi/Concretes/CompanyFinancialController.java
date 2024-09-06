@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import static intern.customer.agitoo.Helper.Messages.*;
+
 @Slf4j
 @RestController
 @RequestMapping("/api/company-financial")
@@ -31,7 +33,7 @@ public class CompanyFinancialController {
         DataResult<List<CompanyFinancialDTO>> response = new DataResult<> (
                 companyFinancialDTOList,
                 true,
-                Messages.LISTED
+                LISTED
         );
         return ResponseEntity.ok (response);
     }
@@ -41,7 +43,7 @@ public class CompanyFinancialController {
     public ResponseEntity<DataResult<CompanyFinancialDTO>> Add (@RequestBody @Valid CompanyFinancialDTO companyFinancialsDTO) {
         log.info ("Received request to add company branch {}", companyFinancialsDTO);
         CompanyFinancialDTO savedCompanyFinancial = companyFinancialService.add (companyFinancialsDTO);
-        DataResult<CompanyFinancialDTO> response = new DataResult<> (savedCompanyFinancial, true, Messages.ADDED);
+        DataResult<CompanyFinancialDTO> response = new DataResult<> (savedCompanyFinancial, true, ADDED);
         return ResponseEntity.ok (response);
 
     }
@@ -53,7 +55,7 @@ public class CompanyFinancialController {
         DataResult<CompanyFinancialDTO> response = new DataResult<> (
                 updatedCompanyFinancial,
                 true,
-                Messages.UPDATED
+                UPDATED
         );
         return ResponseEntity.ok (response);
     }

@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import static intern.customer.agitoo.Helper.Messages.*;
+
 @Slf4j
 @RestController
 @RequestMapping("/api/person")
@@ -31,7 +33,7 @@ public class PersonController {
         DataResult<List<PersonDTO>> response = new DataResult<> (
                 personDTOList,
                 true,
-                Messages.LISTED
+                LISTED
         );
         return ResponseEntity.ok (response);
     }
@@ -42,7 +44,7 @@ public class PersonController {
         log.info ("Received request to add person {}", personDTO);
         PersonDTO addedPersonDTO = personService.add (personDTO);
         DataResult<PersonDTO> response = new DataResult<> (
-                addedPersonDTO, true, Messages.ADDED
+                addedPersonDTO, true, ADDED
         );
         return ResponseEntity.ok (response);
     }
@@ -53,7 +55,7 @@ public class PersonController {
         PersonDTO updatedPersonDTO = personService.update (personDTO);
         DataResult<PersonDTO> response = new DataResult<> (
                 updatedPersonDTO,
-                true, Messages.UPDATED
+                true, UPDATED
         );
         return ResponseEntity.ok (response);
     }

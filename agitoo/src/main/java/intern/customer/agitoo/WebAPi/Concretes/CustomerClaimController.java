@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import static intern.customer.agitoo.Helper.Messages.*;
+
 @Slf4j
 @RestController
 @RequestMapping("/api/customer-claim")
@@ -31,7 +33,7 @@ public class CustomerClaimController {
         DataResult<List<CustomerClaimDTO>> response = new DataResult<> (
                 customerClaimList,
                 true,
-                Messages.LISTED
+                LISTED
         );
         return ResponseEntity.ok (response);
 
@@ -43,7 +45,7 @@ public class CustomerClaimController {
         log.info ("Received request to add customer claim {}", customerClaimDTO);
         CustomerClaimDTO customerClaim = customerClaimsService.add (customerClaimDTO);
         DataResult<CustomerClaimDTO> response = new DataResult<> (
-                customerClaim, true, Messages.ADDED
+                customerClaim, true, ADDED
         );
 
         return ResponseEntity.ok (response);
@@ -56,7 +58,7 @@ public class CustomerClaimController {
         CustomerClaimDTO customerClaim = customerClaimsService.update (customerClaimDTO);
         DataResult<CustomerClaimDTO> response = new DataResult<> (
                 customerClaim,
-                true, Messages.UPDATED
+                true, UPDATED
         );
         return ResponseEntity.ok (response);
     }

@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import static intern.customer.agitoo.Helper.Messages.*;
+
 @Slf4j
 @RestController
 @RequestMapping("/api/company")
@@ -32,7 +34,7 @@ public class CompanyController {
         DataResult<List<CompanyDTO>> response = new DataResult<>
                 (companyDTOList,
                         true,
-                        Messages.LISTED);
+                        LISTED);
         return ResponseEntity.ok (response);
     }
 
@@ -42,7 +44,7 @@ public class CompanyController {
         CompanyDTO savedCompany = companyService.add (companyDTO);
 
         DataResult<CompanyDTO> response = new DataResult<>
-                (savedCompany, true, Messages.ADDED);
+                (savedCompany, true, ADDED);
         return ResponseEntity.ok (response);
     }
 
@@ -53,7 +55,7 @@ public class CompanyController {
         DataResult<CompanyDTO> response = new DataResult<> (
                 updatedCompany,
                 true,
-                Messages.UPDATED
+                UPDATED
         );
         return ResponseEntity.ok (response);
     }

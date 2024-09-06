@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import static intern.customer.agitoo.Helper.Messages.*;
+
 @Slf4j
 @RestController
 @RequestMapping("/api/customer-policy-renewal")
@@ -31,7 +33,7 @@ public class CustomerPolicyRenewalController {
         DataResult<List<CustomerPolicyRenewalDTO>> response = new DataResult<> (
                 customerPolicyRenewalDTOList,
                 true,
-                Messages.LISTED
+                LISTED
         );
         return ResponseEntity.ok (response);
     }
@@ -43,7 +45,7 @@ public class CustomerPolicyRenewalController {
         CustomerPolicyRenewalDTO savedCustomerPolicyRenewalDTO = customerPolicyRenewalsService
                 .add (customerPolicyRenewalDTO);
         DataResult<CustomerPolicyRenewalDTO> response = new DataResult<> (
-                savedCustomerPolicyRenewalDTO, true, Messages.ADDED
+                savedCustomerPolicyRenewalDTO, true, ADDED
         );
         return ResponseEntity.ok (response);
     }
@@ -54,7 +56,7 @@ public class CustomerPolicyRenewalController {
         CustomerPolicyRenewalDTO updatedCustomerPolicyRenewalDTO = customerPolicyRenewalsService.update (customerPolicyRenewalDTO);
         DataResult<CustomerPolicyRenewalDTO> response = new DataResult<> (
                 updatedCustomerPolicyRenewalDTO,
-                true, Messages.UPDATED
+                true, UPDATED
         );
         return ResponseEntity.ok (response);
     }

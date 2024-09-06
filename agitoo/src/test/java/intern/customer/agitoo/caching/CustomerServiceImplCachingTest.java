@@ -1,9 +1,8 @@
-package intern.customer.agitoo.Caching;
+package intern.customer.agitoo.caching;
 
 import intern.customer.agitoo.DTO.DTOs.CompanyDTO;
 import intern.customer.agitoo.DTO.DTOs.CustomerDTO;
 import intern.customer.agitoo.DTO.DTOs.PersonDTO;
-import intern.customer.agitoo.Models.Concretes.Customer;
 import intern.customer.agitoo.Models.enums.CustomerType;
 import intern.customer.agitoo.Service.Concretes.CustomerServiceImpl;
 import lombok.AllArgsConstructor;
