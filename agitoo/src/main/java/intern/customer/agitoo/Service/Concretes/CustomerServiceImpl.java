@@ -2,7 +2,6 @@ package intern.customer.agitoo.Service.Concretes;
 
 import intern.customer.agitoo.DTO.DTOs.CustomerDTO;
 import intern.customer.agitoo.DTO.Mappers.CustomerMapper;
-import intern.customer.agitoo.Helper.Messages;
 import intern.customer.agitoo.Models.Concretes.Customer;
 import intern.customer.agitoo.Repository.Abstracts.CustomerRepository;
 import intern.customer.agitoo.Service.Abstracts.ICustomerService;
@@ -17,6 +16,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static intern.customer.agitoo.Helper.Messages.REMOVED;
 import static intern.customer.agitoo.Service.Rules.CommonBusinessRules.checkIfIdExist;
 import static intern.customer.agitoo.Service.Rules.toDatabase.isConnected;
 
@@ -67,7 +67,7 @@ public class CustomerServiceImpl implements ICustomerService {
     public void deleteById (Long id) {
         checkIfIdExist (customerRepository, id);
         customerRepository.deleteById (id);
-        System.out.print (id + " " + Messages.REMOVED);
+        System.out.print (id + " " + REMOVED);
     }
 
 

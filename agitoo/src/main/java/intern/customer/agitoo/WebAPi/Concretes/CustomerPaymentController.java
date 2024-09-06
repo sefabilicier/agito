@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import static intern.customer.agitoo.Helper.Messages.*;
+
 @Slf4j
 @RestController
 @RequestMapping("/api/customer-payment")
@@ -30,7 +32,7 @@ public class CustomerPaymentController {
         DataResult<List<CustomerPaymentDTO>> response = new DataResult<> (
                 customerPaymentDTOList,
                 true,
-                Messages.LISTED
+                LISTED
         );
 
         return ResponseEntity.ok (response);
@@ -42,7 +44,7 @@ public class CustomerPaymentController {
         log.info ("Received request to add customer payment {}", customerPaymentDTO);
         CustomerPaymentDTO savedCustomerPayment = customerPaymentService.add (customerPaymentDTO);
         DataResult<CustomerPaymentDTO> response = new DataResult<> (
-                savedCustomerPayment, true, Messages.ADDED
+                savedCustomerPayment, true, ADDED
         );
         return ResponseEntity.ok (response);
 
@@ -54,7 +56,7 @@ public class CustomerPaymentController {
         CustomerPaymentDTO updatedCustomerPayment = customerPaymentService.update (customerPaymentDTO);
         DataResult<CustomerPaymentDTO> response = new DataResult<> (
                 updatedCustomerPayment,
-                true, Messages.UPDATED
+                true, UPDATED
         );
         return ResponseEntity.ok (response);
     }

@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import static intern.customer.agitoo.Helper.Messages.*;
+
 
 @Slf4j
 @RestController
@@ -31,7 +33,7 @@ public class CustomerAddressController {
         DataResult<List<CustomerAddressDTO>> response = new DataResult<> (
                 customerAddressDTOList,
                 true,
-                Messages.LISTED
+                LISTED
         );
         return ResponseEntity.ok (response);
     }
@@ -43,7 +45,7 @@ public class CustomerAddressController {
         CustomerAddressDTO customerAddress = customerAddressService.add (customerAddressDTO);
         DataResult<CustomerAddressDTO> response = new DataResult<> (
                 customerAddress,
-                true, Messages.ADDED
+                true, ADDED
         );
         return ResponseEntity.ok (response);
 
@@ -53,7 +55,7 @@ public class CustomerAddressController {
     public ResponseEntity<DataResult<CustomerAddressDTO>> Update (@RequestBody @Valid CustomerAddressDTO customerAddressDTO) {
         log.info ("Received request to update customer addresses {}", customerAddressDTO);
         CustomerAddressDTO updatedCustomerAddress = customerAddressService.update (customerAddressDTO);
-        DataResult<CustomerAddressDTO> response = new DataResult<> (updatedCustomerAddress, true, Messages.UPDATED);
+        DataResult<CustomerAddressDTO> response = new DataResult<> (updatedCustomerAddress, true, UPDATED);
         return ResponseEntity.ok (response);
 
     }

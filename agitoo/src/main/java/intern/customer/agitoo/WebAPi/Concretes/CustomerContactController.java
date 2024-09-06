@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import static intern.customer.agitoo.Helper.Messages.*;
+
 @Slf4j
 @RestController
 @RequestMapping("/api/customer-contact")
@@ -29,7 +31,7 @@ public class CustomerContactController {
         log.info ("Received request to list customer contacts! ");
         List<CustomerContactDTO> customerContactDTOList = customerContactService.getAll ();
         DataResult<List<CustomerContactDTO>> response = new DataResult<> (
-                customerContactDTOList, true, Messages.LISTED);
+                customerContactDTOList, true, LISTED);
         return ResponseEntity.ok (response);
     }
 
@@ -41,7 +43,7 @@ public class CustomerContactController {
         DataResult<CustomerContactDTO> response = new DataResult<> (
                 customerContact,
                 true,
-                Messages.ADDED
+                ADDED
         );
         return ResponseEntity.ok (response);
     }
@@ -51,7 +53,7 @@ public class CustomerContactController {
         log.info ("Received request to update customer contact {}", customerContactDTO);
         CustomerContactDTO customerContact = customerContactService.add (customerContactDTO);
         DataResult<CustomerContactDTO> response = new DataResult<> (
-                customerContact, true, Messages.UPDATED
+                customerContact, true, UPDATED
         );
         return ResponseEntity.ok (response);
     }

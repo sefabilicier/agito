@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import static intern.customer.agitoo.Helper.Messages.*;
+
 @Slf4j
 @RestController
 @RequestMapping("/api/customer-debit-card")
@@ -31,7 +33,7 @@ public class CustomerDebitCardController {
         DataResult<List<CustomerDebitCardDTO>> response = new DataResult<> (
                 customerDebitCardList,
                 true,
-                Messages.LISTED
+                LISTED
         );
         return ResponseEntity.ok (response);
     }
@@ -44,7 +46,7 @@ public class CustomerDebitCardController {
         DataResult<CustomerDebitCardDTO> response = new DataResult<> (
                 savedCustomerDebitCardDTO,
                 true,
-                Messages.ADDED
+                ADDED
         );
         return ResponseEntity.ok (response);
 
@@ -55,7 +57,7 @@ public class CustomerDebitCardController {
         log.info ("Received request to update customer debit card {}", customerDebitCardDTO);
         CustomerDebitCardDTO updateCustomerDebitCardDTO = customerDebitCardsService.update (customerDebitCardDTO);
         DataResult<CustomerDebitCardDTO> response = new DataResult<> (
-                updateCustomerDebitCardDTO, true, Messages.UPDATED
+                updateCustomerDebitCardDTO, true, UPDATED
         );
         return ResponseEntity.ok (response);
     }

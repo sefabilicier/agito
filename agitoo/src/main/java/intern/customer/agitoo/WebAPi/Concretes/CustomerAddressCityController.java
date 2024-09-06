@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import static intern.customer.agitoo.Helper.Messages.*;
+
 @Slf4j
 @RestController
 @RequestMapping("/api/customer-address-city")
@@ -31,7 +33,7 @@ public class CustomerAddressCityController {
         DataResult<List<CustomerAddressCityDTO>> response = new DataResult<> (
                 customerAddressCityDTOList,
                 true,
-                Messages.LISTED
+                LISTED
         );
         return ResponseEntity.ok (response);
     }
@@ -42,7 +44,7 @@ public class CustomerAddressCityController {
         log.info ("Received request to add customer address city {}", customerAddressCityDTO);
         CustomerAddressCityDTO savedCustomerAddressCity = customerAddressCityService.add (customerAddressCityDTO);
         DataResult<CustomerAddressCityDTO> response = new DataResult<> (
-                savedCustomerAddressCity, true, Messages.ADDED);
+                savedCustomerAddressCity, true, ADDED);
         return ResponseEntity.ok (response);
 
     }
@@ -53,7 +55,7 @@ public class CustomerAddressCityController {
         CustomerAddressCityDTO updaCustomerAddressCity = customerAddressCityService.update (customerAddressCityDTO);
         DataResult<CustomerAddressCityDTO> response = new DataResult<> (
                 updaCustomerAddressCity,
-                true, Messages.UPDATED
+                true, UPDATED
         );
         return ResponseEntity.ok (response);
     }
