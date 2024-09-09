@@ -1,5 +1,6 @@
 package intern.customer.agitoo.Models.Concretes;
 
+import intern.customer.agitoo.Models.enums.Issuer;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -31,7 +32,7 @@ public class CustomerDebitCard {
     private Date expirationDate;
 
     @Column(name = "ISSUER")
-    private String issuer;
+    private Issuer issuer;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "CUSTOMERID", nullable = false)
