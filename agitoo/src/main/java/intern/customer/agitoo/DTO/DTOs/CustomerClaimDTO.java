@@ -21,10 +21,13 @@ public class CustomerClaimDTO {
 
     @PastOrPresent(message = "{claimDate.pastOrPresent}")
     private Date claimDate;
+
     @NotNull(message = "{claimAmount.notNull}")
     private BigDecimal claimAmount;
+
     @NotNull(message = "{claimStatus.notBlank}")
     private ClaimStatus claimStatus;
+
     @NotBlank(message = "{claimDescription.notBlank}")
     private String claimDescription;
 

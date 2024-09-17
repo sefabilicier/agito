@@ -20,7 +20,8 @@ import java.util.List;
 public class Company {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(generator = "company_sequence", strategy = GenerationType.SEQUENCE)
+    @SequenceGenerator(name = "company_sequence", sequenceName = "company_sequence", allocationSize = 1)
     @Column(name = "COMPANYID")
     private Long companyId;
 

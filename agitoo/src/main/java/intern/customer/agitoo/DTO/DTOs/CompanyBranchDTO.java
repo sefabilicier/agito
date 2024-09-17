@@ -34,13 +34,5 @@ public class CompanyBranchDTO {
 //    @Valid
 //    private CompanyDTO company;
 
-//    public String getCompanyName(){
-//        return companySecondName ();
-//    }
-//
-//
-//    public String companySecondName(){
-//        return company.getCompanyName ();
-//    };
 
 }

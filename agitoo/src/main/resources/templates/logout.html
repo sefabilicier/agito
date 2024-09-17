@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Login</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bulma.css}" />
+    <link href="/static/bulma.css" rel="stylesheet">
+    <style>
+        .login-container {
+            max-width: 400px;
+            margin: 100px auto;
+            padding: 20px;
+        }
+        .button {
+            background-color: #0C1B33;
+            color: white;
+            border-radius: 2px;
+        }
+        .button:hover{
+            background-color: #05299E;
+        }
+        .box {
+            box-shadow: none; /* Box gölgesini kaldır */
+        }
+    </style>
+</head>
+<body>
+<div class="login-container">
+    <div class="box">
+        <h1 class="title is-4 has-text-centered">Are you sure you want to log out?</h1>
+        <form method="post" action="/logout">
+            <button class="button is-primary is-fullwidth" type="submit">Logout</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>

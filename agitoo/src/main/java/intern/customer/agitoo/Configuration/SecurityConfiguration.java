@@ -6,9 +6,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.util.concurrent.TimeUnit;
 
@@ -16,49 +16,64 @@ import java.util.concurrent.TimeUnit;
 @AllArgsConstructor
 @Configuration
 @EnableWebSecurity
-public class SecurityConfiguration {
+public class SecurityConfiguration implements WebMvcConfigurer {
 
     //built for web security HTTP form submission
+    @Bean
     public SecurityFilterChain securityFilterChain (HttpSecurity http) throws Exception {
         http
-                .csrf(csrf -> csrf.disable()) // CSRF korumasını devre dışı bırakma (geliştirme ortamında uygundur)
+                .csrf(csrf -> csrf.disable()) // CSRF korumasını devre dışı bırakma (geliştirme ortamında uygundur);
                 .authorizeHttpRequests(
-                        authz -> authz
-                        .requestMatchers("/api/**","/", "/html/*", "index", "/css/*", "/js/*")
+                        authorization -> authorization
+                        .requestMatchers(
+                                "/api/**",
+                                "/ui/**",
+                                "/",
+                                "/html/**",
+                                "/index",
+                                "/css/**",
+                                "/js/**",
+                                "/login",
+                                "/logout"
+                        )
                         .permitAll()
                         .anyRequest()
                         .authenticated()
-                ).formLogin(
+                )
+                .formLogin(
                         formLogin -> formLogin
                                 .loginPage("/login")
-                                .permitAll()
-                                .defaultSuccessUrl("/customer/get-all", true) // Başarıyla girişten sonra /customer URL'sine yönlendirme
+                                .loginProcessingUrl("/login")
+                                .failureUrl("/login?error=true") //TODO: create a page
+                                .defaultSuccessUrl("/home", true) // Başarıyla girişten sonra /customer URL'sine yönlendirme
                                 .passwordParameter("password")
                                 .usernameParameter("username")
-                ).rememberMe(
+                                .permitAll()
+                )
+                .rememberMe(
                         rememberMe -> rememberMe
                                 .tokenValiditySeconds((int) TimeUnit.DAYS.toSeconds(7)) // Token geçerlilik süresi
                                 .key("somethingVerySecured") // Remember-me key
                                 .rememberMeParameter("remember-me")
-                ).logout(
+                )
+                .sessionManagement(
+                        sessionManagement -> sessionManagement
+                                .sessionFixation()
+                                .newSession()
+                                .maximumSessions(1)
+                                .expiredUrl("/login-expired") // Oturum süresi dolduğunda yönlendirme URL'si
+                )
+                .logout(
                         logOut -> logOut
                                 .logoutUrl("/logout")
-                                .logoutRequestMatcher(new AntPathRequestMatcher("/logout", "POST"))
+                                .logoutRequestMatcher(
+                                        new AntPathRequestMatcher("/logout", "POST"))
                                 .clearAuthentication(true)
                                 .invalidateHttpSession(true)
                                 .deleteCookies("AGITOOID", "remember-me")
                                 .logoutSuccessUrl("/login") // Logout sonrası yönlendirme
                 );
 
-                /*
-                .sessionManagement(
-                        sessionManagement -> sessionManagement
-                        .sessionFixation()
-                                .newSession()
-                        .maximumSessions(1)
-                        .expiredUrl("/login?expired") // Oturum süresi dolduğunda yönlendirme URL'si
-                )
-                ;*/
 
         return http.build ();
 

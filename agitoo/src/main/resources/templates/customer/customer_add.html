@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="eng" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bulma.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bulma.min.css}" />
+    <link href="/static/bulma.css" rel="stylesheet">
+    <title>Customer Management</title>
+    <style>
+
+        #select{
+            border: 2px solid;
+        }
+
+        .header {
+            margin: 20px;
+            text-align: center;
+        }
+
+        .field{
+            margin: 20px;
+            text-align: center;
+        }
+
+        .button{
+            border-radius: 2px;
+        }
+
+        .button.is-primary {
+            background-color: #4b0099; /* Button background color */
+            border-color: transparent;
+            color: white; /* Button text color */
+        }
+
+        .button.is-primary:hover {
+            background-color: #9400D3;
+            /*background-color: #1E00FF;  Button hover color */
+        }
+
+    </style>
+</head>
+<body>
+    <div class="is-widescreen ">
+        <header class="header">
+            <h1 class="title">Customer Type</h1>
+        </header>
+        <main class="container">
+                <div class="field">
+                    <label class="label">Please select what type customer you are</label>
+                    <form
+                            action="/api/customer/add-html"
+                            th:action="@{/api/customer/add-html}"
+                            th:object="${customerDTO}"
+                            method="post"
+                    >
+                        <div class="control has-icons-left">
+                            <div class="select">
+                                <div class="select is-normal">
+                                    <select id="select" th:field="*{customerType}">
+                                        <option th:each="customer : ${customer_add}"
+                                                th:value="${customer.customerType}"
+                                                th:text="${customer.customerType}">
+                                        </option>
+                                    </select>
+                                    <span class="icon is-small is-left">
+                                    <i class="fas fa-person"></i>
+                                </span>
+                                </div>
+                            </div>
+                            <div class="field is-grouped is-grouped-centered">
+                                <p class="control">
+                                    <button type="submit" class="button is-primary">
+                                        <!--"Add" butonunun formu göndermesi ve verilerin sunucuya iletilmesi için type="submit" olmalıdır. Ayrıca, <a> etiketi formu göndermez-->
+                                        Add
+                                    </button>
+                                </p>
+                                <p class="control">
+                                    <a class="button is-light">Cancel</a>
+                                </p>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+        </main>
+    </div>
+</body>
+</html>

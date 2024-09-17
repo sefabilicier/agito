@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="eng" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bulma.css}" />
+    <link href="/bulma.css" rel="stylesheet">
+    <title>Home</title>
+    <style>
+
+        .header {
+            margin: 0px;
+            padding: 10px;
+            justify-items: center;
+            text-align: center;
+        }
+
+        * {
+            background-color: #4b0099;
+        }
+
+        .title {
+            margin: 10px;
+        }
+
+        .is-bordered{
+            color: white;
+            border: 1px solid #ddd;
+        }
+
+
+    </style>
+</head>
+<body class="is-max-desktop is-centered">
+    <header class="header">
+        <div class="is-centered header">
+            <img class="is-left " src="https://media.licdn.com/dms/image/v2/D4D0BAQET4TsFgH-xaA/company-logo_200_200/company-logo_200_200/0/1682585744401/agito_software__consulting_logo?e=2147483647&v=beta&t=AkqRUeVGcArZFN23nJr3PIMpjaeY4SI02U7bXjFZzI8">
+            <h1 class="title" style="color:#ffffff">agito customer affairs </h1>
+        </div>
+        <nav class="level is-widescreen">
+            <div class="level-item has-text-centered">
+                <div>
+                    <p class="heading" style="color:#ffffff">Customers</p>
+                    <p class="title">
+                        <span th:text="${customerCount}" style="color:#ffffff"></span>
+                    </p>
+                </div>
+            </div>
+        </nav>
+        <!--<div class="fixed-grid has-4-cols is-centered">
+            <div class="grid">
+                <div class="cell" th:each="entry : ${apiLinks}">
+                    <a class="cell button is-normal" th:href="'http://localhost:8080' + ${entry.value}">
+                        <span th:text="${entry.key}"></span>
+                    </a>
+                </div>
+            </div>
+        </div>-->
+        <div class="grid">
+            <div class="cell " th:each="entry : ${apiLinks}">
+                <a class="cell is-bordered" th:href="'http://localhost:8080' + ${entry.value}">
+                    <span th:text="${entry.key}"></span>
+                </a>
+            </div>
+        </div>
+    </header>
+    <footer class="footer is-centered">
+        <div class="content has-text-centered ">
+            <p style="color:#ffffff">
+                <strong style="color:#ffffff">agito</strong> by <a href="https://tr.linkedin.com/in/sefabilicier" style="color:#ffffff">sefabilicier</a>
+            </p>
+        </div>
+    </footer>
+</body>
+</html>

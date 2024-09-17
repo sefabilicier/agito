@@ -21,7 +21,8 @@ import java.util.List;
 public class CustomerPolicy {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(generator = "customer_policies_sequence", strategy = GenerationType.SEQUENCE)
+    @SequenceGenerator(name = "customer_policies_sequence", sequenceName = "customer_policies_sequence", allocationSize = 1)
     @Column(name = "CUSTOMERPOLICYID")
     private Long customerPolicyId;
 

@@ -18,7 +18,8 @@ import java.time.LocalDateTime;
 public class PersonFeedback {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(generator = "person_feedbacks_sequence", strategy = GenerationType.SEQUENCE)
+    @SequenceGenerator(name = "person_feedbacks_sequence", sequenceName = "person_feedbacks_sequence", allocationSize = 1)
     @Column(name = "FEEDBACKID")
     private Long feedbackId;
 

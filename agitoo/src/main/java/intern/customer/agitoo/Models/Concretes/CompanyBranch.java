@@ -15,7 +15,8 @@ import lombok.NoArgsConstructor;
 public class CompanyBranch {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(generator = "company_branch_sequence", strategy = GenerationType.SEQUENCE)
+    @SequenceGenerator(name = "company_branch_sequence", sequenceName = "company_branch_sequence", allocationSize = 1)
     @Column(name = "BRANCHID")
     private Long branchID;
 

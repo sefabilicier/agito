@@ -24,7 +24,8 @@ import java.time.LocalDateTime;
 public class PersonJobLife {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(generator = "person_job_lifes_sequence", strategy = GenerationType.SEQUENCE)
+    @SequenceGenerator(name = "person_job_lifes_sequence", sequenceName = "person_job_lifes_sequence", allocationSize = 1)
     @Column(name = "JOBID")
     private Long jobID;
 

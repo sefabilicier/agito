@@ -38,7 +38,9 @@ public class CompanyController {
         return ResponseEntity.ok (response);
     }
 
-    @RequestMapping(value = "/add", method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_VALUE})
+    @RequestMapping(value = "/add",
+            method = RequestMethod.POST,
+            produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<DataResult<CompanyDTO>> Add (@RequestBody @Valid CompanyDTO companyDTO) {
         log.info ("Received request to update company {}", companyDTO);
         CompanyDTO savedCompany = companyService.add (companyDTO);

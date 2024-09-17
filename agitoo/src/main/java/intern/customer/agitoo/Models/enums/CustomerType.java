@@ -3,6 +3,7 @@ package intern.customer.agitoo.Models.enums;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+
 @Getter
 @AllArgsConstructor
 public enum CustomerType {
@@ -11,4 +12,5 @@ public enum CustomerType {
     Person ("Person");
 
     private final String customerType;
+
 }

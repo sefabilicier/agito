@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="eng" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bulma.css}" />
+    <link href="/bulma.css" rel="stylesheet">
+    <title>Customer Claim Management</title>
+    <style>
+
+        .table-container {
+            margin: 50px;
+            padding: 10px;
+        }
+
+        .header {
+            margin-top: 20px;
+            padding: 10px;
+            justify-items: center;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .table thead th {
+            color: white;
+            text-align: center;
+        }
+
+        .table thead{
+            background-color: #4b0099;
+        }
+
+        .table:hover td:hover{
+            background-color: rgba(5, 41, 158, 0.29);
+        }
+
+        .table tbody td {
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        .table tbody tr:nth-child(odd) {
+            background-color: #f5f5f5;
+        }
+
+        .table tbody {
+            background-color: #e8e8e8;
+        }
+
+        .header {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+    </style>
+</head>
+<body>
+<div class="is-widescreen is-centered">
+    <header class="header">
+        <h1 class="title">Customer Claim Management</h1>
+    </header>
+    <main class="table-container">
+        <table class="table is-bordered is-striped is-hoverable is-fullwidth">
+            <thead>
+            <tr>
+                <th>Claim Date</th>
+                <th>Claim Amount</th>
+                <th>Claim Status</th>
+                <th>Claim Description</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="claim : ${claims}">
+                <td th:text="${claim.getClaimDate()}"></td>
+                <td th:text="${claim.getClaimAmount()}"></td>
+                <td th:text="${claim.getClaimStatus()}"></td>
+                <td th:text="${claim.getClaimDescription()}"></td>
+            </tr>
+            </tbody>
+        </table>
+        <p>Data available: <span th:text="${#lists.size(claims)}"></span></p>
+    </main>
+</div>
+</body>
+
+</html>

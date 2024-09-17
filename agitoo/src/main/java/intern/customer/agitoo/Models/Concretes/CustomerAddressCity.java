@@ -17,7 +17,8 @@ import java.util.List;
 public class CustomerAddressCity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(generator = "customer_address_city_sequence", strategy = GenerationType.SEQUENCE)
+    @SequenceGenerator(name = "customer_address_city_sequence", sequenceName = "customer_address_city_sequence", allocationSize = 1)
     @Column(name = "ADDRESSCITYID")
     private Long cityID;
 

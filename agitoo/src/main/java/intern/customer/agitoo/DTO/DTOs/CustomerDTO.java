@@ -25,6 +25,10 @@ public class CustomerDTO {
     @Valid
     private List<PersonDTO> personLists;
 
+    public String getCustomerTypeAsString() {
+        return customerType != null ? customerType.toString() : "";
+    }
+
 
     /*@Valid
     private List<CustomerAddressDTO> customerAddresses;

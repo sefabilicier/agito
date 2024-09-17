@@ -17,7 +17,8 @@ import java.math.BigDecimal;
 public class CompanyFinancial {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(generator = "company_financial_sequence", strategy = GenerationType.SEQUENCE)
+    @SequenceGenerator(name = "company_financial_sequence", sequenceName = "company_financial_sequence", allocationSize = 1)
     @Column(name = "FINANCIALID")
     private Long financialID;
 

@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -57,9 +58,9 @@ public class CustomerController {
     public ResponseEntity<DataResult<CustomerDTO>> Update (@RequestBody @Valid CustomerDTO customerDTO) {
         log.info ("Received request to update customer {}", customerDTO);
 
-        CustomerDTO udpatedCustomer = customerService.update (customerDTO);
+        CustomerDTO updatedCustomer = customerService.update (customerDTO);
         DataResult<CustomerDTO> response = new DataResult<> (
-                udpatedCustomer, true, UPDATED);
+                updatedCustomer, true, UPDATED);
         return ResponseEntity.ok (response);
     }
 
@@ -69,4 +70,3 @@ public class CustomerController {
         this.customerService.deleteById (id);
     }
 }
-

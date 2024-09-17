@@ -20,7 +20,8 @@ import java.util.Date;
 public class CustomerRegistration {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(generator = "customer_registrations_sequence", strategy = GenerationType.SEQUENCE)
+    @SequenceGenerator(name = "customer_registrations_sequence", sequenceName = "customer_registrations_sequence", allocationSize = 1)
     @Column(name = "REGISTRATIONID")
     private Long registrationID;
 

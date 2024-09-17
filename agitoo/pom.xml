@@ -187,6 +187,11 @@
 			<artifactId>log4j-core</artifactId>
 			<version>2.24.0</version>
 		</dependency>
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-api</artifactId>
+			<version>2.24.0</version>
+		</dependency>
 		<!--Test Dependencies end-->
 
 		<!-- Logging for the run section-->
@@ -230,20 +235,55 @@
 			<artifactId>spring-security-config</artifactId>
 			<version>6.3.3</version>
 		</dependency>
+
+		<!--To be able to use data structures with Google source-->
 		<dependency>
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId>
 			<version>33.3.0-jre</version>
 		</dependency>
 
-
-		<!-- UI -->
+		<!-- UI starts -->
 		<dependency>
-			<groupId>org.thymeleaf</groupId>
-			<artifactId>thymeleaf</artifactId>
-			<version>3.1.2.RELEASE</version>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+		</dependency>
+		<!-- allows us to use layouts in UI -->
+		<dependency>
+			<groupId>nz.net.ultraq.thymeleaf</groupId>
+			<artifactId>thymeleaf-layout-dialect</artifactId>
+			<version>3.3.0</version>
+		</dependency>
+		<!-- UI ends-->
+
+		<!-- iyzicoPayment
+		<dependency>
+			<groupId>com.iyzipay</groupId>
+			<artifactId>iyzipay-java</artifactId>
+			<version>2.0.125</version>
 		</dependency>
 
+		<dependency>
+			<groupId>com.iyzipay</groupId>
+			<artifactId>iyzipay-java</artifactId>
+			<version>2.0.125</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/src/main/resources/libraries/iyzipay-java-2.0.125.jar</systemPath>
+		</dependency>
+
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>2.5</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.4</version>
+		</dependency>
+		iyzicoPayment ends
+		-->
 
 	</dependencies>
 

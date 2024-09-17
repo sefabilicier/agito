@@ -18,7 +18,8 @@ import java.util.Date;
 public class CustomerPolicyRenewal {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(generator = "customer_policy_renewals_sequence", strategy = GenerationType.SEQUENCE)
+    @SequenceGenerator(name = "customer_policy_renewals_sequence", sequenceName = "customer_policy_renewals_sequence", allocationSize = 1)
     @Column(name = "RENEWALID")
     private Long renewalId;
 

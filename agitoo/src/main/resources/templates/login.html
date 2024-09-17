@@ -1,39 +1,88 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <title>login</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
-    <link href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css" rel="stylesheet" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bulma.css}" />
+    <link href="/static/bulma.css" rel="stylesheet">
+    <title>Login</title>
     <style>
         body {
-            background-color: #acacac;
-            color: white;
+            color: black;
         }
+
+        .login-container {
+            max-width: 400px;
+            margin: 100px auto;
+            padding: 20px;
+            border-radius: 5px;
+        }
+
+        .title {
+            color: black; /* Title color */
+        }
+
+        .input {
+            border: 1px solid #ddd;
+        }
+
+        .input:focus {
+            box-shadow: none; /* Remove default shadow */
+        }
+
+        .button{
+            border: 1px solid #ddd;
+        }
+
+        .button.is-primary {
+            background-color: #0C1B33; /* Button background color */
+            #border-color: transparent;
+            color: white; /* Button text color */
+        }
+
+        .button.is-primary:hover {
+            background-color: #05299E; /* Button hover color */
+        }
+
+        .field {
+            margin-bottom: 20px;
+        }
+
+        .checkbox label {
+            color: black; /* Checkbox label color */
+        }
+
     </style>
 </head>
 <body>
-<div class="container">
-    <form class="form-signin" method="post" action="/login">
-        <h2 class="form-signin-heading">Login</h2>
-        <p>
-            <label for="username" class="sr-only">Username</label>
-            <input type="text" id="username" name="username" class="form-control" placeholder="Username" required=""
-                   autofocus="">
-        </p>
-        <p>
-            <label for="password" class="sr-only">Password</label>
-            <input type="password" id="password" name="password" class="form-control" placeholder="Password"
-                   required="">
-        </p>
-        <p>
-            Remember me?
-            <input type="checkbox" id="remember-me" name="remember-me" class="form-control">
-        </p>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
+<div class="login-container">
+    <h2 class="title is-4 has-text-centered">Spring Boot Security</h2>
+    <form method="post" action="/login">
+        <div class="field">
+            <label class="label" for="username">Username</label>
+            <div class="control">
+                <input type="text" id="username" name="username" class="input" placeholder="Username" required autofocus>
+            </div>
+        </div>
+        <div class="field">
+            <label class="label" for="password">Password</label>
+            <div class="control">
+                <input type="password" id="password" name="password" class="input" placeholder="Password" required>
+            </div>
+        </div>
+        <div class="field">
+            <div class="control">
+                <label class="checkbox">
+                    <input type="checkbox" id="remember-me" name="remember-me">
+                    Remember me?
+                </label>
+            </div>
+        </div>
+        <div class="field">
+            <div class="control">
+                <button class="button is-primary is-fullwidth" type="submit">Login</button>
+            </div>
+        </div>
     </form>
 </div>
 </body>

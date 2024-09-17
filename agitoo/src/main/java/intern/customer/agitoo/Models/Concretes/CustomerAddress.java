@@ -17,7 +17,8 @@ import lombok.NoArgsConstructor;
 public class CustomerAddress {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(generator = "customer_address_sequence", strategy = GenerationType.SEQUENCE)
+    @SequenceGenerator(name = "customer_address_sequence", sequenceName = "customer_address_sequence", allocationSize = 1)
     @Column(name = "ADDRESSID")
     private Long addressID;
 

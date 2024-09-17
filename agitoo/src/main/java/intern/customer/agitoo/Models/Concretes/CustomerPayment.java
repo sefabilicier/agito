@@ -19,7 +19,8 @@ import java.sql.Timestamp;
 public class CustomerPayment {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(generator = "customer_payments_sequence", strategy = GenerationType.SEQUENCE)
+    @SequenceGenerator(name = "customer_payments_sequence", sequenceName = "customer_payments_sequence", allocationSize = 1)
     @Column(name = "PAYMENTID")
     private Long paymentID;
 

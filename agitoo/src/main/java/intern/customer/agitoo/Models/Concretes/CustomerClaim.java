@@ -19,7 +19,8 @@ import java.util.Date;
 public class CustomerClaim {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(generator = "customer_claims_sequence", strategy = GenerationType.SEQUENCE)
+    @SequenceGenerator(name = "customer_claims_sequence", sequenceName = "customer_claims_sequence", allocationSize = 1)
     @Column(name = "CUSTOMERCLAIMID")
     private Long claimId;
 

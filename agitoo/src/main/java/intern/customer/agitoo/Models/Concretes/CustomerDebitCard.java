@@ -18,7 +18,8 @@ import java.util.Date;
 public class CustomerDebitCard {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(generator = "customer_debit_card_sequence", strategy = GenerationType.SEQUENCE)
+    @SequenceGenerator(name = "customer_debit_card_sequence", sequenceName = "customer_debit_card_sequence", allocationSize = 1)
     @Column(name = "DEBITCARDID")
     private Long debitCardID;
 

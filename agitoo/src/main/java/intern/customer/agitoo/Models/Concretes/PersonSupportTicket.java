@@ -19,7 +19,8 @@ import java.util.Date;
 public class PersonSupportTicket {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(generator = "person_support_ticket_sequence", strategy = GenerationType.SEQUENCE)
+    @SequenceGenerator(name = "person_support_ticket_sequence", sequenceName = "person_support_ticket_sequence", allocationSize = 1)
     @Column(name = "TICKETID")
     private Long ticketID;
 

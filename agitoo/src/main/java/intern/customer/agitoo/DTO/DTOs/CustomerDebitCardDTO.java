@@ -1,5 +1,6 @@
 package intern.customer.agitoo.DTO.DTOs;
 
+import intern.customer.agitoo.Models.enums.Issuer;
 import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -27,7 +28,7 @@ public class CustomerDebitCardDTO {
     private Date expirationDate;
 
     @NotBlank(message = "{issuer.notBlank}")
-    private String issuer;
+    private Issuer issuer;
 
 //    @Valid
 //    private CustomerDTO customer;

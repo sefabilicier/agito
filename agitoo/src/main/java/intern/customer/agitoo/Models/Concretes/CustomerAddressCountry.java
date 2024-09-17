@@ -17,7 +17,8 @@ import java.util.List;
 public class CustomerAddressCountry {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(generator = "customer_address_country_sequence", strategy = GenerationType.SEQUENCE)
+    @SequenceGenerator(name = "customer_address_country_sequence", sequenceName = "customer_address_country_sequence", allocationSize = 1)
     @Column(name = "ADDRESSCOUNTRYID")
     private Long addressCountryId;
 
