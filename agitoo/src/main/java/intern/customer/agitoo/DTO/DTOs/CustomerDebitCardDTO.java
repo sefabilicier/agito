@@ -19,7 +19,7 @@ public class CustomerDebitCardDTO {
 
     @NotBlank(message = "{cardNumber.notBlank}")
     @Size(min = 16, max = 16, message = "{cardNumber.size}")
-    private String cardNumber;
+    private String cardNumber; //TODO : MAKE VALIDATION ON FRONTEND
 
     @NotBlank(message = "{cardHolderName.notBlank}")
     private String cardHolderName;

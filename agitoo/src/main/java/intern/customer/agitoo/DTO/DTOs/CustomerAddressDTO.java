@@ -30,7 +30,7 @@ public class CustomerAddressDTO {
     private String postalCode;
 
     @NotBlank(message = "{country.notBlank}")
-    private String country;
+    private String country; //TODO: make it enum
 
     //@Convert(converter = BooleanToYesNoConverter.class)
     /*

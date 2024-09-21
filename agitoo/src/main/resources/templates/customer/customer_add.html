@@ -6,8 +6,17 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/bulma.css}" />
     <link rel="stylesheet" type="text/css" th:href="@{/css/bulma.min.css}" />
     <link href="/static/bulma.css" rel="stylesheet">
+
     <title>Customer Management</title>
     <style>
+        body {
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        body.loaded {
+            opacity: 1;
+        }
 
         #select{
             border: 2px solid;
@@ -38,6 +47,8 @@
             /*background-color: #1E00FF;  Button hover color */
         }
 
+
+
     </style>
 </head>
 <body>
@@ -49,8 +60,8 @@
                 <div class="field">
                     <label class="label">Please select what type customer you are</label>
                     <form
-                            action="/api/customer/add-html"
-                            th:action="@{/api/customer/add-html}"
+                            action="/ui/customer/add"
+                            th:action="@{/ui/customer/add}"
                             th:object="${customerDTO}"
                             method="post"
                     >
@@ -72,11 +83,11 @@
                                 <p class="control">
                                     <button type="submit" class="button is-primary">
                                         <!--"Add" butonunun formu göndermesi ve verilerin sunucuya iletilmesi için type="submit" olmalıdır. Ayrıca, <a> etiketi formu göndermez-->
-                                        Add
+                                        Next
                                     </button>
                                 </p>
                                 <p class="control">
-                                    <a class="button is-light">Cancel</a>
+                                    <a class="button is-light" th:href="'http://localhost:8080/home'">Cancel</a>
                                 </p>
                             </div>
                         </div>
@@ -85,5 +96,13 @@
 
         </main>
     </div>
+    <script>
+       // import loaded from "static/pageSmoothLoading.css";
+
+        document.addEventListener(
+            "DOMContentLoaded", function()
+            {document.body.classList.add('loaded');
+            });
+    </script>
 </body>
 </html>

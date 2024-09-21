@@ -13,6 +13,6 @@ import lombok.NoArgsConstructor;
 public class CustomerAddressCityDTO {
 
     @NotBlank(message = "{cityName.notBlank}")
-    private String cityName;
+    private String cityName; //TODO make it enum
 
 }

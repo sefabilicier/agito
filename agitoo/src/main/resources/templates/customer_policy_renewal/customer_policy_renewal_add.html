@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="eng" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bulma.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bulma.min.css}" />
+    <link href="/static/bulma.css" rel="stylesheet">
+    <title>Person Add</title>
+    <style>
+        body {
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        body.loaded {
+            opacity: 1;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+        .input {
+            border-radius: 2px;
+        }
+        .title {
+            color: #ffffff;
+        }
+        .header{
+            margin: 50px;
+            padding: 25px;
+            background-color: #4b0099;
+        }
+
+        .field-2{
+            margin: 20px;
+            text-align: center;
+        }
+
+        .button{
+            border-radius: 2px;
+        }
+
+        .button.is-primary {
+            background-color: #4b0099; /* Button background color */
+            border-color: transparent;
+            color: white; /* Button text color */
+        }
+
+        .button.is-primary:hover {
+            background-color: #9400D3;
+            /*background-color: #1E00FF;  Button hover color */
+        }
+    </style>
+</head>
+<body>
+<div class="is-widescreen">
+    <header class="header has-text-centered marginless">
+        <h1 class="title">Create a Customer Policy Renewal</h1>
+    </header>
+    <main class="container is-max-tablet">
+        <form
+                class="form-container is-centered"
+                action="/ui/customer-policy-renewal/add"
+                th:action="@{/ui/customer-policy-renewal/add}"
+                th:object="${customerPolicyRenewalDTO}"
+                method="post"
+        >
+            <div class="field">
+                <label class="label">Renewal Date</label>
+                <div class="control">
+                    <input class="input" type="date" placeholder="13.12.2023" th:field="${customerPolicyRenewalDTO.renewalDate}">
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Renewal Premium</label>
+                <div class="control">
+                    <input class="input" type="number" placeholder="15000" th:field="${customerPolicyRenewalDTO.renewalPremium}">
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Renewal Coverage Amount</label>
+                <div class="control">
+                    <input class="input" type="number" placeholder="7000" th:field="${customerPolicyRenewalDTO.renewalCoverageAmount}">
+                </div>
+            </div>
+            <div class="field-2 field is-grouped is-grouped-centered">
+                <p class="control">
+                    <button
+                            type="submit"
+                            class="button is-primary"
+                            th:href="'http://localhost:8080/ui/person-job-life/add'"
+                    >
+                        Next
+                    </button>
+                </p>
+                <p class="control">
+                    <a class="button is-light" th:href="'http://localhost:8080/home'">Cancel</a>
+                </p>
+            </div>
+        </form>
+    </main>
+</div>
+<script>
+    document.addEventListener(
+        "DOMContentLoaded", function()
+        {document.body.classList.add('loaded');
+        });
+</script>
+</body>
+</html>

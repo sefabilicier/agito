@@ -18,13 +18,13 @@ public class CustomerRegistrationDTO {
 
     @NotNull(message = "{isActive.notNull}")
     @Pattern(regexp = "^[YN]$", message = "{isActive.pattern}")
-    private String isActive; // y or no --> boolean?
+    private String isActive; // y or no --> boolean? TODO : make it enum
 
     @PastOrPresent(message = "{registrationDate.pastOrPresent}")
     private Date regsitrationDate;
 
     @NotNull(message = "{lastLoginDate.notNull}")
-    private LocalDateTime lastLoginDate;
+    private LocalDateTime lastLoginDate; //TODO generateable
 
     @PositiveOrZero(message = "{loyaltyPoints.positiveOrZero}")
     private int loyaltyPoints;

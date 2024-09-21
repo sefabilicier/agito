@@ -7,6 +7,14 @@
     <link href="/bulma.css" rel="stylesheet">
     <title>Customer Debit Card Management</title>
     <style>
+        body {
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        body.loaded {
+            opacity: 1;
+        }
 
         .table-container {
             margin: 50px;
@@ -84,6 +92,12 @@
         <p>Data available: <span th:text="${#lists.size(cards)}"></span></p>
     </main>
 </div>
+<script>
+    document.addEventListener(
+        "DOMContentLoaded", function()
+        {document.body.classList.add('loaded');
+        });
+</script>
 </body>
 
 </html>

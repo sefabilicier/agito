@@ -7,6 +7,14 @@
     <link href="/bulma.css" rel="stylesheet">
     <title>Home</title>
     <style>
+        body {
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        body.loaded {
+            opacity: 1;
+        }
 
         .header {
             margin: 0px;
@@ -15,7 +23,7 @@
             text-align: center;
         }
 
-        * {
+        *, footer {
             background-color: #4b0099;
         }
 
@@ -23,20 +31,53 @@
             margin: 10px;
         }
 
-        .is-bordered{
+        .is-bordered {
             color: white;
             border: 1px solid #ddd;
         }
 
+        .unBordered {
+            border: hidden;
+        }
+
+        #create{
+            border-radius: 2px;
+            color:#4b0099
+        }
+
+        #create-button{
+            margin: 15px;
+        }
+        .gridded{
+            margin: 10px;
+        }
+        /*.cell {
+            flex-grow: 1;  Hücrelerin genişlemesine izin verir
+        }*/
+        .cell {
+            justify-items:center;
+            flex: 1 1 auto; /* Esnek genişleme ve daralma */
+            min-width: 150px; /* Minimum genişlik */
+        }
+
+        .unBordered {
+            display: block; /* Tüm hücreyi kaplasın */
+            padding: 10px; /* İçerik için boşluk */
+            color: #ffffff; /* Yazı rengi */
+            text-align: center; /* Yazı ortalaması */
+        }
 
     </style>
 </head>
 <body class="is-max-desktop is-centered">
-    <header class="header">
-        <div class="is-centered header">
-            <img class="is-left " src="https://media.licdn.com/dms/image/v2/D4D0BAQET4TsFgH-xaA/company-logo_200_200/company-logo_200_200/0/1682585744401/agito_software__consulting_logo?e=2147483647&v=beta&t=AkqRUeVGcArZFN23nJr3PIMpjaeY4SI02U7bXjFZzI8">
-            <h1 class="title" style="color:#ffffff">agito customer affairs </h1>
+    <header class="header marginless">
+        <div class="header-content has-text-centered">
+            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQET4TsFgH-xaA/company-logo_200_200/company-logo_200_200/0/1682585744401/agito_software__consulting_logo?e=2147483647&v=beta&t=AkqRUeVGcArZFN23nJr3PIMpjaeY4SI02U7bXjFZzI8" alt="logo">
+            <!--<img class="is-left " th:src="@{/images/agitoo.PNG}" alt="Logo" style="max-width: 200px; max-height: 200px;">-->
+            <h1 class="title" style="color:#ffffff">customer affairs</h1>
         </div>
+    </header>
+    <main class="section">
         <nav class="level is-widescreen">
             <div class="level-item has-text-centered">
                 <div>
@@ -47,29 +88,34 @@
                 </div>
             </div>
         </nav>
-        <!--<div class="fixed-grid has-4-cols is-centered">
-            <div class="grid">
-                <div class="cell" th:each="entry : ${apiLinks}">
-                    <a class="cell button is-normal" th:href="'http://localhost:8080' + ${entry.value}">
-                        <span th:text="${entry.key}"></span>
-                    </a>
-                </div>
-            </div>
-        </div>-->
-        <div class="grid">
-            <div class="cell " th:each="entry : ${apiLinks}">
-                <a class="cell is-bordered" th:href="'http://localhost:8080' + ${entry.value}">
-                    <span th:text="${entry.key}"></span>
+        <div class="has-text-centered" id="create-button">
+            <a
+                    id="create"
+                    class="button is-normal is-light is-bordered"
+                    th:href="'http://localhost:8080/ui/customer/add'"
+            >
+                Create
+            </a>
+        </div>
+        <div class="grid is-centered gridded">
+            <div class="cell is-gap-2 is-bordered is-one-third" th:each="entry : ${apiLinks}">
+                <a class="unBordered" th:href="'http://localhost:8080' + ${entry.value}">
+                   <!--style="display: flex; justify-content: center; align-items: center; height: 100%; text-align: center;"-->
+                    <span style="color: #ffffff" th:text="${entry.key}"></span>
                 </a>
             </div>
         </div>
-    </header>
-    <footer class="footer is-centered">
-        <div class="content has-text-centered ">
-            <p style="color:#ffffff">
-                <strong style="color:#ffffff">agito</strong> by <a href="https://tr.linkedin.com/in/sefabilicier" style="color:#ffffff">sefabilicier</a>
-            </p>
+    </main>
+    <footer class="footer">
+        <div class="content has-text-centered " style="color:#ffffff">
+                <strong style="color:#ffffff">agito</strong> by <a href="https://tr.linkedin.com/in/sefabilicier" style="color:#ffffff">sefabilicier &copy; 2024</a>
         </div>
     </footer>
+    <script>
+        document.addEventListener(
+            "DOMContentLoaded", function()
+            {document.body.classList.add('loaded');
+            });
+    </script>
 </body>
 </html>

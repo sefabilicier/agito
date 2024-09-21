@@ -8,6 +8,15 @@
     <title>Company Financial Management</title>
     <style>
 
+        body {
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        body.loaded {
+            opacity: 1;
+        }
+
         .table-container {
             margin: 50px;
             padding: 10px;
@@ -80,5 +89,11 @@
         <p>Data available: <span th:text="${#lists.size(financials)}"></span></p>
     </main>
 </div>
+<script>
+    document.addEventListener(
+        "DOMContentLoaded", function()
+        {document.body.classList.add('loaded');
+        });
+</script>
 </body>
 </html>

@@ -5,8 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" th:href="@{/css/bulma.css}" />
     <link href="/bulma.css" rel="stylesheet">
-    <title>Customer Policy Renewal Management</title>
+    <title>Customer Registration Management</title>
     <style>
+        body {
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        body.loaded {
+            opacity: 1;
+        }
 
         .table-container {
             margin: 50px;
@@ -60,7 +68,7 @@
 <body>
 <div class="is-widescreen is-centered">
     <header class="header">
-        <h1 class="title">Customer Policy Renewal Management</h1>
+        <h1 class="title">Customer Registration Management</h1>
     </header>
     <main class="table-container">
         <table class="table is-bordered is-striped is-hoverable is-fullwidth">
@@ -92,6 +100,12 @@
         <p>Data available: <span th:text="${#lists.size(registrations)}"></span></p>
     </main>
 </div>
+<script>
+    document.addEventListener(
+        "DOMContentLoaded", function()
+        {document.body.classList.add('loaded');
+        });
+</script>
 </body>
 
 </html>

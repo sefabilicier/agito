@@ -9,13 +9,19 @@
     <style>
         body {
             color: black;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        body.loaded {
+            opacity: 1;
         }
 
         .login-container {
             max-width: 400px;
             margin: 100px auto;
             padding: 20px;
-            border-radius: 5px;
+            border-radius: 1px;
         }
 
         .title {
@@ -85,5 +91,11 @@
         </div>
     </form>
 </div>
+<script>
+    document.addEventListener(
+        "DOMContentLoaded", function()
+        {document.body.classList.add('loaded');
+        });
+</script>
 </body>
 </html>

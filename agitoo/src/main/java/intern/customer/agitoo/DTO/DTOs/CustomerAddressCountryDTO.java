@@ -13,5 +13,5 @@ import lombok.NoArgsConstructor;
 public class CustomerAddressCountryDTO {
 
     @NotBlank(message = "{countryName.notBlank}")
-    private String countryName;
+    private String countryName; //TODO make it enum
 }

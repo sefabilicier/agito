@@ -8,25 +8,16 @@
     <title>Login</title>
     <link rel="stylesheet" type="text/css" th:href="@{/css/bulma.css}" />
     <link href="/static/bulma.css" rel="stylesheet">
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            let countdownElement = document.getElementById('countdown');
-            let countdownValue = 5; // Set countdown time in seconds
-            let redirectUrl = '/login'; // URL to redirect to
-
-            function updateCountdown() {
-                countdownElement.textContent = countdownValue;
-                if (countdownValue <= 0) {
-                    window.location.href = redirectUrl;
-                } else {
-                    countdownValue--;
-                    setTimeout(updateCountdown, 1000); // Update every second
-                }
-            }
-            updateCountdown();
-        });
-    </script>
     <style>
+        body {
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        body.loaded {
+            opacity: 1;
+        }
+
         .login-container {
             max-width: 400px;
             margin: 100px auto;
@@ -46,5 +37,28 @@
         <p class="has-text-centered"> in <span id="countdown" class="countdown">5</span> seconds... </p>
     </div>
 </div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        let countdownElement = document.getElementById('countdown');
+        let countdownValue = 5; // Set countdown time in seconds
+        let redirectUrl = '/login'; // URL to redirect to
+
+        function updateCountdown() {
+            countdownElement.textContent = countdownValue;
+            if (countdownValue <= 0) {
+                window.location.href = redirectUrl;
+            } else {
+                countdownValue--;
+                setTimeout(updateCountdown, 1000); // Update every second
+            }
+        }
+        updateCountdown();
+    });
+
+    document.addEventListener(
+        "DOMContentLoaded", function()
+        {document.body.classList.add('loaded');
+        });
+</script>
 </body>
 </html>

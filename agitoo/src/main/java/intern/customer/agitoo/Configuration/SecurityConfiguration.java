@@ -26,6 +26,10 @@ public class SecurityConfiguration implements WebMvcConfigurer {
                 .authorizeHttpRequests(
                         authorization -> authorization
                         .requestMatchers(
+                                "/static/images/**",
+                                "/person_add",
+                                "/company_add",
+                                "/templates/**",
                                 "/api/**",
                                 "/ui/**",
                                 "/",
