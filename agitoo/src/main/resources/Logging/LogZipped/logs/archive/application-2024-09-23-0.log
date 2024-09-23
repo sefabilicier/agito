@@ -6989,3 +6989,59 @@ Unconditional classes:
 2024-09-23 10:19:50.845 [HikariPool-1 housekeeper] DEBUG [39mcom.zaxxer.hikari.pool.HikariPool   [0;39m - HikariPool-1 - Fill pool skipped, pool has sufficient level or currently being filled.
 2024-09-23 10:20:20.847 [HikariPool-1 housekeeper] DEBUG [39mcom.zaxxer.hikari.pool.HikariPool   [0;39m - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
 2024-09-23 10:20:20.847 [HikariPool-1 housekeeper] DEBUG [39mcom.zaxxer.hikari.pool.HikariPool   [0;39m - HikariPool-1 - Fill pool skipped, pool has sufficient level or currently being filled.
+2024-09-23 10:20:50.850 [HikariPool-1 housekeeper] DEBUG [39mcom.zaxxer.hikari.pool.HikariPool   [0;39m - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2024-09-23 10:20:50.851 [HikariPool-1 housekeeper] DEBUG [39mcom.zaxxer.hikari.pool.HikariPool   [0;39m - HikariPool-1 - Fill pool skipped, pool has sufficient level or currently being filled.
+2024-09-23 10:21:20.852 [HikariPool-1 housekeeper] DEBUG [39mcom.zaxxer.hikari.pool.HikariPool   [0;39m - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2024-09-23 10:21:20.852 [HikariPool-1 housekeeper] DEBUG [39mcom.zaxxer.hikari.pool.HikariPool   [0;39m - HikariPool-1 - Fill pool skipped, pool has sufficient level or currently being filled.
+2024-09-23 10:21:50.854 [HikariPool-1 housekeeper] DEBUG [39mcom.zaxxer.hikari.pool.HikariPool   [0;39m - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2024-09-23 10:21:50.854 [HikariPool-1 housekeeper] DEBUG [39mcom.zaxxer.hikari.pool.HikariPool   [0;39m - HikariPool-1 - Fill pool skipped, pool has sufficient level or currently being filled.
+2024-09-23 10:22:20.867 [HikariPool-1 housekeeper] DEBUG [39mcom.zaxxer.hikari.pool.HikariPool   [0;39m - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2024-09-23 10:22:20.868 [HikariPool-1 housekeeper] DEBUG [39mcom.zaxxer.hikari.pool.HikariPool   [0;39m - HikariPool-1 - Fill pool skipped, pool has sufficient level or currently being filled.
+2024-09-23 10:22:50.879 [HikariPool-1 housekeeper] DEBUG [39mcom.zaxxer.hikari.pool.HikariPool   [0;39m - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2024-09-23 10:22:50.879 [HikariPool-1 housekeeper] DEBUG [39mcom.zaxxer.hikari.pool.HikariPool   [0;39m - HikariPool-1 - Fill pool skipped, pool has sufficient level or currently being filled.
+2024-09-23 10:22:56.935 [SpringApplicationShutdownHook] DEBUG [39mo.s.b.a.ApplicationAvailabilityBean [0;39m - Application availability state ReadinessState changed from ACCEPTING_TRAFFIC to REFUSING_TRAFFIC
+2024-09-23 10:22:56.947 [SpringApplicationShutdownHook] DEBUG [39mo.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext[0;39m - Closing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@1cc43206, started on Mon Sep 23 10:12:15 TRT 2024
+2024-09-23 10:22:56.986 [SpringApplicationShutdownHook] DEBUG [39mo.s.c.s.DefaultLifecycleProcessor   [0;39m - Stopping beans in phase 2147483647
+2024-09-23 10:22:56.993 [SpringApplicationShutdownHook] DEBUG [39mo.s.c.s.DefaultLifecycleProcessor   [0;39m - Bean 'applicationTaskExecutor' completed its stop procedure
+2024-09-23 10:22:56.993 [SpringApplicationShutdownHook] DEBUG [39mo.s.c.s.DefaultLifecycleProcessor   [0;39m - Stopping beans in phase 2147482623
+2024-09-23 10:22:57.005 [SpringApplicationShutdownHook] DEBUG [39mo.s.c.s.DefaultLifecycleProcessor   [0;39m - Bean 'webServerGracefulShutdown' completed its stop procedure
+2024-09-23 10:22:57.005 [SpringApplicationShutdownHook] DEBUG [39mo.s.c.s.DefaultLifecycleProcessor   [0;39m - Stopping beans in phase 2147481599
+2024-09-23 10:22:57.030 [SpringApplicationShutdownHook] DEBUG [39mo.s.c.s.DefaultLifecycleProcessor   [0;39m - Bean 'webServerStartStop' completed its stop procedure
+2024-09-23 10:22:57.030 [SpringApplicationShutdownHook] DEBUG [39mo.s.c.s.DefaultLifecycleProcessor   [0;39m - Stopping beans in phase -2147483647
+2024-09-23 10:22:57.032 [SpringApplicationShutdownHook] DEBUG [39mo.s.c.s.DefaultLifecycleProcessor   [0;39m - Bean 'springBootLoggingLifecycle' completed its stop procedure
+2024-09-23 10:22:57.115 [SpringApplicationShutdownHook] DEBUG [39mo.s.b.a.e.jmx.JmxEndpointExporter   [0;39m - Unregister endpoint with ObjectName 'org.springframework.boot:type=Endpoint,name=Beans' from the JMX domain
+2024-09-23 10:22:57.116 [SpringApplicationShutdownHook] DEBUG [39mo.s.b.a.e.jmx.JmxEndpointExporter   [0;39m - Unregister endpoint with ObjectName 'org.springframework.boot:type=Endpoint,name=Caches' from the JMX domain
+2024-09-23 10:22:57.116 [SpringApplicationShutdownHook] DEBUG [39mo.s.b.a.e.jmx.JmxEndpointExporter   [0;39m - Unregister endpoint with ObjectName 'org.springframework.boot:type=Endpoint,name=Health' from the JMX domain
+2024-09-23 10:22:57.116 [SpringApplicationShutdownHook] DEBUG [39mo.s.b.a.e.jmx.JmxEndpointExporter   [0;39m - Unregister endpoint with ObjectName 'org.springframework.boot:type=Endpoint,name=Info' from the JMX domain
+2024-09-23 10:22:57.116 [SpringApplicationShutdownHook] DEBUG [39mo.s.b.a.e.jmx.JmxEndpointExporter   [0;39m - Unregister endpoint with ObjectName 'org.springframework.boot:type=Endpoint,name=Conditions' from the JMX domain
+2024-09-23 10:22:57.116 [SpringApplicationShutdownHook] DEBUG [39mo.s.b.a.e.jmx.JmxEndpointExporter   [0;39m - Unregister endpoint with ObjectName 'org.springframework.boot:type=Endpoint,name=Configprops' from the JMX domain
+2024-09-23 10:22:57.117 [SpringApplicationShutdownHook] DEBUG [39mo.s.b.a.e.jmx.JmxEndpointExporter   [0;39m - Unregister endpoint with ObjectName 'org.springframework.boot:type=Endpoint,name=Env' from the JMX domain
+2024-09-23 10:22:57.117 [SpringApplicationShutdownHook] DEBUG [39mo.s.b.a.e.jmx.JmxEndpointExporter   [0;39m - Unregister endpoint with ObjectName 'org.springframework.boot:type=Endpoint,name=Loggers' from the JMX domain
+2024-09-23 10:22:57.117 [SpringApplicationShutdownHook] DEBUG [39mo.s.b.a.e.jmx.JmxEndpointExporter   [0;39m - Unregister endpoint with ObjectName 'org.springframework.boot:type=Endpoint,name=Threaddump' from the JMX domain
+2024-09-23 10:22:57.117 [SpringApplicationShutdownHook] DEBUG [39mo.s.b.a.e.jmx.JmxEndpointExporter   [0;39m - Unregister endpoint with ObjectName 'org.springframework.boot:type=Endpoint,name=Metrics' from the JMX domain
+2024-09-23 10:22:57.117 [SpringApplicationShutdownHook] DEBUG [39mo.s.b.a.e.jmx.JmxEndpointExporter   [0;39m - Unregister endpoint with ObjectName 'org.springframework.boot:type=Endpoint,name=Sbom' from the JMX domain
+2024-09-23 10:22:57.117 [SpringApplicationShutdownHook] DEBUG [39mo.s.b.a.e.jmx.JmxEndpointExporter   [0;39m - Unregister endpoint with ObjectName 'org.springframework.boot:type=Endpoint,name=Scheduledtasks' from the JMX domain
+2024-09-23 10:22:57.117 [SpringApplicationShutdownHook] DEBUG [39mo.s.b.a.e.jmx.JmxEndpointExporter   [0;39m - Unregister endpoint with ObjectName 'org.springframework.boot:type=Endpoint,name=Mappings' from the JMX domain
+2024-09-23 10:22:57.118 [SpringApplicationShutdownHook] DEBUG [39mo.s.j.e.a.AnnotationMBeanExporter   [0;39m - Unregistering JMX-exposed beans on shutdown
+2024-09-23 10:22:57.120 [SpringApplicationShutdownHook] DEBUG [39mo.s.j.e.a.AnnotationMBeanExporter   [0;39m - Unregistering JMX-exposed beans
+2024-09-23 10:22:57.120 [SpringApplicationShutdownHook] DEBUG [39mo.s.s.c.ThreadPoolTaskExecutor      [0;39m - Shutting down ExecutorService 'applicationTaskExecutor'
+2024-09-23 10:22:57.137 [SpringApplicationShutdownHook] INFO  [34mo.s.o.j.LocalContainerEntityManagerFactoryBean[0;39m - Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-09-23 10:22:57.144 [SpringApplicationShutdownHook] DEBUG [39mo.h.internal.SessionFactoryImpl     [0;39m - HHH000031: Closing
+2024-09-23 10:22:57.151 [SpringApplicationShutdownHook] DEBUG [39mo.h.type.spi.TypeConfiguration$Scope[0;39m - Un-scoping TypeConfiguration [org.hibernate.type.spi.TypeConfiguration$Scope@2e1c2a3c] from SessionFactory [org.hibernate.internal.SessionFactoryImpl@51994ae8]
+2024-09-23 10:22:57.152 [SpringApplicationShutdownHook] DEBUG [39mo.h.s.i.AbstractServiceRegistryImpl [0;39m - Implicitly destroying ServiceRegistry on de-registration of all child ServiceRegistries
+2024-09-23 10:22:57.156 [SpringApplicationShutdownHook] DEBUG [39mo.h.b.r.i.BootstrapServiceRegistryImpl[0;39m - Implicitly destroying Boot-strap registry on de-registration of all child ServiceRegistries
+2024-09-23 10:22:57.164 [SpringApplicationShutdownHook] INFO  [34mcom.zaxxer.hikari.HikariDataSource  [0;39m - HikariPool-1 - Shutdown initiated...
+2024-09-23 10:22:57.165 [SpringApplicationShutdownHook] DEBUG [39mcom.zaxxer.hikari.pool.HikariPool   [0;39m - HikariPool-1 - Before shutdown stats (total=10, active=0, idle=10, waiting=0)
+2024-09-23 10:22:57.169 [HikariPool-1 connection closer] DEBUG [39mcom.zaxxer.hikari.pool.PoolBase     [0;39m - HikariPool-1 - Closing connection oracle.jdbc.driver.T4CConnection@1e39854b: (connection evicted)
+2024-09-23 10:22:57.179 [HikariPool-1 connection closer] DEBUG [39mcom.zaxxer.hikari.pool.PoolBase     [0;39m - HikariPool-1 - Closing connection oracle.jdbc.driver.T4CConnection@36c52254: (connection evicted)
+2024-09-23 10:22:57.182 [HikariPool-1 connection closer] DEBUG [39mcom.zaxxer.hikari.pool.PoolBase     [0;39m - HikariPool-1 - Closing connection oracle.jdbc.driver.T4CConnection@590d164f: (connection evicted)
+2024-09-23 10:22:57.185 [HikariPool-1 connection closer] DEBUG [39mcom.zaxxer.hikari.pool.PoolBase     [0;39m - HikariPool-1 - Closing connection oracle.jdbc.driver.T4CConnection@215a3834: (connection evicted)
+2024-09-23 10:22:57.189 [HikariPool-1 connection closer] DEBUG [39mcom.zaxxer.hikari.pool.PoolBase     [0;39m - HikariPool-1 - Closing connection oracle.jdbc.driver.T4CConnection@26d904fb: (connection evicted)
+2024-09-23 10:22:57.198 [HikariPool-1 connection closer] DEBUG [39mcom.zaxxer.hikari.pool.PoolBase     [0;39m - HikariPool-1 - Closing connection oracle.jdbc.driver.T4CConnection@3a5e12ea: (connection evicted)
+2024-09-23 10:22:57.204 [HikariPool-1 connection closer] DEBUG [39mcom.zaxxer.hikari.pool.PoolBase     [0;39m - HikariPool-1 - Closing connection oracle.jdbc.driver.T4CConnection@7d099c02: (connection evicted)
+2024-09-23 10:22:57.208 [HikariPool-1 connection closer] DEBUG [39mcom.zaxxer.hikari.pool.PoolBase     [0;39m - HikariPool-1 - Closing connection oracle.jdbc.driver.T4CConnection@bb88b09: (connection evicted)
+2024-09-23 10:22:57.215 [HikariPool-1 connection closer] DEBUG [39mcom.zaxxer.hikari.pool.PoolBase     [0;39m - HikariPool-1 - Closing connection oracle.jdbc.driver.T4CConnection@5263b5a1: (connection evicted)
+2024-09-23 10:22:57.218 [HikariPool-1 connection closer] DEBUG [39mcom.zaxxer.hikari.pool.PoolBase     [0;39m - HikariPool-1 - Closing connection oracle.jdbc.driver.T4CConnection@23d8cd3f: (connection evicted)
+2024-09-23 10:22:57.223 [SpringApplicationShutdownHook] DEBUG [39mcom.zaxxer.hikari.pool.HikariPool   [0;39m - HikariPool-1 - After shutdown stats (total=0, active=0, idle=0, waiting=0)
+2024-09-23 10:22:57.239 [SpringApplicationShutdownHook] INFO  [34mcom.zaxxer.hikari.HikariDataSource  [0;39m - HikariPool-1 - Shutdown completed.
+2024-09-23 10:22:57.257 [SpringApplicationShutdownHook] DEBUG [39mo.s.b.f.s.DisposableBeanAdapter     [0;39m - Custom destroy method 'close' on bean with name 'simpleMeterRegistry' completed
