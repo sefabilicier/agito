@@ -5,15 +5,19 @@ import intern.customer.agitoo.DTO.Mappers.CustomerMapper;
 import intern.customer.agitoo.Models.Concretes.Customer;
 import intern.customer.agitoo.Repository.Abstracts.CustomerRepository;
 import intern.customer.agitoo.Service.Abstracts.ICustomerService;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 
 import static intern.customer.agitoo.Helper.Messages.REMOVED;
@@ -32,42 +36,63 @@ public class CustomerServiceImpl implements ICustomerService {
     private CustomerMapper customerMapper;
 
     @Override
+    @Async
+    @Transactional(readOnly = true)
     @Cacheable(value = "customer") //no need to add key value bc nothing yields
-    public List<CustomerDTO> getAll () {
+    public CompletableFuture<List<CustomerDTO>> getAll () {
         isConnected ();
         List<Customer> customers = customerRepository.findAll ();
-        List<CustomerDTO> customerDTOS = customers
+        List<CustomerDTO> customerDTOList = customers
                 .stream ()
                 .map (customer -> customerMapper
                         .toDTO (customer, CustomerDTO.class)).collect (Collectors.toList ());
-        return customerDTOS;
+        return CompletableFuture.completedFuture (customerDTOList);
     }
 
     @Override
-    @CachePut(value = "customer", key = "")
-    public CustomerDTO add (CustomerDTO dtoModel) {
+    @Async
+    @Transactional
+    @CachePut(value = "customer", key = "#result.customerId")
+    public CompletableFuture<CustomerDTO> add (CustomerDTO dtoModel) {
         Customer customer = customerMapper.toEntity (dtoModel, Customer.class);
         Customer savedCustomer = customerRepository.save (customer);
 
-        return customerMapper.toDTO (savedCustomer, CustomerDTO.class);
+        return CompletableFuture.completedFuture (customerMapper.toDTO (savedCustomer, CustomerDTO.class));
     }
 
     @Override
-    @CachePut(value = "customer", key = "")
-    public CustomerDTO update (CustomerDTO dtoModel) {
+    @Async
+    @Transactional
+    @CachePut(value = "customer", key = "#result.customerId")
+    public CompletableFuture<CustomerDTO> update (CustomerDTO dtoModel) {
         Customer customer = customerMapper
                 .toEntity (dtoModel, Customer.class);
         Customer savedCustomer = customerRepository.save (customer);
 
-        return customerMapper.toDTO (savedCustomer, CustomerDTO.class);
+        return CompletableFuture.completedFuture (customerMapper.toDTO (savedCustomer, CustomerDTO.class));
     }
 
     @Override
+    @Async
+    @Transactional
     @CacheEvict(value = "customer", key = "#id")
-    public void deleteById (Long id) {
+    public CompletableFuture<Void> deleteById (Long id) {
         checkIfIdExist (customerRepository, id);
         customerRepository.deleteById (id);
         System.out.print (id + " " + REMOVED);
+        return CompletableFuture.completedFuture (null);
+    }
+
+    @Override
+    @Async
+    @Transactional
+    @CachePut(value = "customer", key = "#id")
+    public CompletableFuture<CustomerDTO> findById (Long id) {
+        checkIfIdExist (customerRepository, id);
+        Customer customer = customerRepository.findById (id)
+                .orElseThrow (
+                        () -> new EntityNotFoundException ("Customer not found with id: " + id));
+        return CompletableFuture.completedFuture (customerMapper.toDTO (customer, CustomerDTO.class));
     }
 
 

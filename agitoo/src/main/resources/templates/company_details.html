@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bulma.css}"/>
+    <link href="/bulma.css" rel="stylesheet">
+    <title>Customer Details</title>
+    <style>
+        body {
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        body.loaded {
+            opacity: 1;
+        }
+
+        .header {
+            margin: 0px;
+            padding: 10px;
+            justify-items: center;
+            text-align: center;
+        }
+
+        *, footer {
+            background-color: #4b0099;
+        }
+
+        .title {
+            margin: 10px;
+            color: #ffffff;
+        }
+
+        .unBordered {
+            border: hidden;
+        }
+
+        .delete-button {
+            background-color: white;
+            color: #4b0099;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        .delete-button:hover {
+            background-color: #9400D3;
+        }
+    </style>
+</head>
+<body class="is-max-desktop is-centered">
+<header class="header marginless">
+    <div class="header-content has-text-centered">
+        <h1 class="is-size-4" style="color:white">Company Details</h1>
+    </div>
+</header>
+<main class="section">
+    <div class="container">
+
+        <!-- Company -->
+        <div>
+            <h2>Company Information</h2>
+            <p th:text="'Company ID: ' + ${company.companyId}"></p>
+            <p th:text="'Company Name: ' + ${company.companyName}"></p>
+            <p th:text="'Industry: ' + ${company.industry}"></p>
+            <p th:text="'Registration Number: ' + ${company.registrationNumber}"></p>
+            <p th:text="'Tax Identification Number: ' + ${company.taxIdentificationNumber}"></p>
+            <p th:text="'Contact Company: ' + ${company.contactCompany}"></p>
+            <p th:text="'Established Date: ' + ${#dates.format(company.establishedDate, 'yyyy-MM-dd')}"></p>
+            <p th:text="'Number of Employees: ' + ${company.numberOfEmployees}"></p>
+            <p th:text="'Website URL: ' + ${company.websiteURL}"></p>
+        </div>
+
+        <!-- Company Branch -->
+        <div>
+            <h2>Branch Information</h2>
+            <p th:text="'Branch ID: ' + ${branch.branchID}"></p>
+            <p th:text="'Branch Name: ' + ${branch.branchName}"></p>
+            <p th:text="'Branch Address: ' + ${branch.branchAddress}"></p>
+            <p th:text="'Branch Phone: ' + ${branch.branchPhone}"></p>
+            <p th:text="'Branch Manager: ' + ${branch.branchManager}"></p>
+        </div>
+
+        <!-- Company Financial -->
+        <div>
+            <h2>Financial Information</h2>
+            <p th:text="'Financial ID: ' + ${financial.financialID}"></p>
+            <p th:text="'Financial Year: ' + ${financial.financialYear}"></p>
+            <p th:text="'Revenue: ' + ${financial.revenue} + ' USD'"></p>
+            <p th:text="'Profit: ' + ${financial.profit} + ' USD'"></p>
+            <p th:text="'Expenses: ' + ${financial.expenses} + ' USD'"></p>
+            <p th:text="'Assets: ' + ${financial.assets} + ' USD'"></p>
+            <p th:text="'Liabilities: ' + ${financial.liabilities} + ' USD'"></p>
+        </div>
+
+        <!-- Customer Claim -->
+        <div>
+            <h2>Claim Information</h2>
+            <ul>
+                <li th:each="claim : ${claims}">
+                    <p th:text="'Claim ID: ' + ${claim.claimId}"></p>
+                    <p th:text="'Claim Number: ' + ${claim.claimNumber}"></p>
+                    <p th:text="'Claim Date: ' + ${claim.claimDate}"></p>
+                    <p th:text="'Claim Amount: ' + ${claim.claimAmount}"></p>
+                    <p th:text="'Claim Status: ' + ${claim.claimStatus}"></p>
+                    <p th:text="'Claim Description: ' + ${claim.claimDescription}"></p>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Customer Contact -->
+        <div>
+            <h2>Contact Information</h2>
+            <ul>
+                <li th:each="contact : ${contacts}">
+                    <p th:text="'Contact ID: ' + ${contact.contactID}"></p>
+                    <p th:text="'Contact Name: ' + ${contact.contactName}"></p>
+                    <p th:text="'Contact Type: ' + ${contact.contactType}"></p>
+                    <p th:text="'Email: ' + ${contact.email}"></p>
+                    <p th:text="'Phone: ' + ${contact.phone}"></p>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Customer Debit Card -->
+        <div>
+            <h2>Debit Card Information</h2>
+            <ul>
+                <li th:each="card : ${debitCards}">
+                    <p th:text="'Debit Card ID: ' + ${card.debitCardID}"></p>
+                    <p th:text="'Card Number: ' + ${card.cardNumber}"></p>
+                    <p th:text="'Card Holder Name: ' + ${card.cardHolderName}"></p>
+                    <p th:text="'Expiration Date: ' + ${#dates.format(card.expirationDate, 'yyyy-MM-dd')}"></p>
+                    <p th:text="'Issuer: ' + ${card.issuer}"></p>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Customer Payment -->
+        <div>
+            <h2>Payment Information</h2>
+            <ul>
+                <li th:each="payment : ${payments}">
+                    <p th:text="'Payment ID: ' + ${payment.paymentID}"></p>
+                    <p th:text="'Payment Amount: ' + ${payment.paymentAmount} + ' USD'"></p>
+                    <p th:text="'Payment Date: ' + ${#dates.format(payment.paymentDate, 'yyyy-MM-dd HH:mm')}"></p>
+                    <p th:text="'Payment Method: ' + ${payment.paymentMethod}"></p>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Customer Policy -->
+        <div>
+            <h2>Policy Information</h2>
+            <ul>
+                <li th:each="policy : ${policies}">
+                    <p th:text="'Policy ID: ' + ${policy.customerPolicyId}"></p>
+                    <p th:text="'Policy Number: ' + ${policy.customerPolicyNumber}"></p>
+                    <p th:text="'Policy Type: ' + ${policy.customerPolicyType}"></p>
+                    <p th:text="'Start Date: ' + ${#dates.format(policy.customerPolicyStartDate, 'yyyy-MM-dd')}"></p>
+                    <p th:text="'End Date: ' + ${#dates.format(policy.customerPolicyEndDate, 'yyyy-MM-dd')}"></p>
+                    <p th:text="'Coverage Amount: ' + ${policy.coverageAmount} + ' USD'"></p>
+                    <p th:text="'Premium: ' + ${policy.premium} + ' USD'"></p>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Customer Policy Renewal -->
+        <div>
+            <h2>Policy Renewal Information</h2>
+            <ul>
+                <li th:each="renewal : ${renewals}">
+                    <p th:text="'Renewal ID: ' + ${renewal.renewalId}"></p>
+                    <p th:text="'Renewal Date: ' + ${#dates.format(renewal.renewalDate, 'yyyy-MM-dd')}"></p>
+                    <p th:text="'Renewal Premium: ' + ${renewal.renewalPremium} + ' USD'"></p>
+                    <p th:text="'Renewal Coverage Amount: ' + ${renewal.renewalCoverageAmount} + ' USD'"></p>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Customer Registration Detail -->
+        <div>
+            <h2>Registration Information</h2>
+            <p th:text="'Registration ID: ' + ${registration.registrationID}"></p>
+            <p th:text="'Active: ' + (${registration.isActive} == 'Y' ? 'Yes' : 'No')"></p>
+            <p th:text="'Registration Date: ' + ${#dates.format(registration.registrationDate, 'yyyy-MM-dd HH:mm')}"></p>
+            <p th:text="'Last Login Date: ' + ${#dates.format(registration.lastLoginDate, 'yyyy-MM-dd HH:mm')}"></p>
+            <p th:text="'Loyalty Points: ' + ${registration.loyaltyPoints}"></p>
+            <p th:text="'Newsletter Subscription: ' + (${registration.newsLetterSubscription} == 'Y' ? 'Subscribed' : 'Not Subscribed')"></p>
+            <p th:text="'Social Media Handle: ' + ${registration.socialMediaHandle}"></p>
+            <p th:text="'Profile Picture URL: ' + ${registration.profilePictureURL}"></p>
+            <p th:text="'Date of Last Purchase: ' + (${registration.dateOfLastPurchase} != null ? #dates.format(registration.dateOfLastPurchase, 'yyyy-MM-dd') : 'N/A')"></p>
+            <p th:text="'Total Spent: ' + ${registration.totalSpent} + ' USD'"></p>
+        </div>
+
+        <!-- Delete Button -->
+        <form method="post" th:action="@{/ui/person/delete/{companyId}/delete(companyId=${companyId})}">
+            <button type="submit" class="delete-button">Delete</button>
+        </form>
+    </div>
+</main>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        document.body.classList.add('loaded');
+    });
+</script>
+</body>
+</html>

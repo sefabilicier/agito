@@ -5,7 +5,6 @@ import intern.customer.agitoo.Service.Concretes.CustomerServiceImpl;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -16,11 +15,11 @@ public class countCustomer {
     @Autowired
     private CustomerServiceImpl customerService;
 
-    public Long countCompanyType(){
+    public Long countCompanyType () {
 
-        List<CustomerDTO> customerDTOList = customerService.getAll();
+        List<CustomerDTO> customerDTOList = customerService.getAll ().join ();
 
-        Long countingCustomer = customerDTOList.stream().count ();
+        Long countingCustomer = customerDTOList.stream ().count ();
 
         return countingCustomer;
     }

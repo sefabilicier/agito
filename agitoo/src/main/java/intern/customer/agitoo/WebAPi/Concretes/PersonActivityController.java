@@ -2,7 +2,6 @@ package intern.customer.agitoo.WebAPi.Concretes;
 
 import intern.customer.agitoo.Common.Results.DataResult;
 import intern.customer.agitoo.DTO.DTOs.PersonActivityDTO;
-import intern.customer.agitoo.Helper.Messages;
 import intern.customer.agitoo.Service.Abstracts.IPersonActivityService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
@@ -14,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 import static intern.customer.agitoo.Helper.Messages.*;
 
@@ -26,42 +26,62 @@ public class PersonActivityController {
     private IPersonActivityService personActivityService;
 
     @RequestMapping(value = "/get-all", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<DataResult<List<PersonActivityDTO>>> getAll () {
+    public CompletableFuture<ResponseEntity<DataResult<List<PersonActivityDTO>>>> getAll () {
         log.info ("Received request to list customer activities!");
-        List<PersonActivityDTO> personActivityDTOList = personActivityService.getAll ();
-        DataResult<List<PersonActivityDTO>> response = new DataResult<> (
-                personActivityDTOList,
-                true,
-                LISTED
+        return personActivityService.getAll ().thenApply (
+                personActivityDTOList -> {
+                    DataResult<List<PersonActivityDTO>> response = new DataResult<> (
+                            personActivityDTOList,
+                            true,
+                            LISTED
+                    );
+                    return ResponseEntity.ok (response);
+                }
         );
-        return ResponseEntity.ok (response);
+
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_VALUE})
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<DataResult<PersonActivityDTO>> Add (@RequestBody @Valid PersonActivityDTO personActivityDTO) {
+    public CompletableFuture<ResponseEntity<DataResult<PersonActivityDTO>>> Add (@RequestBody @Valid PersonActivityDTO personActivityDTO) {
         log.info ("Received request to add customer activity {}", personActivityDTO);
-        PersonActivityDTO savedPersonActivityDTO = personActivityService.add (personActivityDTO);
-        DataResult<PersonActivityDTO> response = new DataResult<> (
-                savedPersonActivityDTO, true, ADDED
+        return personActivityService.add (personActivityDTO).thenApply (
+                savedPersonActivityDTO -> {
+                    DataResult<PersonActivityDTO> response = new DataResult<> (
+                            savedPersonActivityDTO, true, ADDED
+                    );
+                    return ResponseEntity.ok (response);
+                }
         );
-        return ResponseEntity.ok (response);
+
 
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.PUT, produces = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<DataResult<PersonActivityDTO>> Update (@RequestBody @Valid PersonActivityDTO personActivityDTO) {
+    public CompletableFuture<ResponseEntity<DataResult<PersonActivityDTO>>> Update (@RequestBody @Valid PersonActivityDTO personActivityDTO) {
         log.info ("Received request to update customer activity {}", personActivityDTO);
-        PersonActivityDTO updatedPersonActivityDTO = personActivityService.update (personActivityDTO);
-        DataResult<PersonActivityDTO> response = new DataResult<> (
-                updatedPersonActivityDTO, true, UPDATED
+        return personActivityService.update (personActivityDTO).thenApply (
+                updatedPersonActivityDTO -> {
+                    DataResult<PersonActivityDTO> response = new DataResult<> (
+                            updatedPersonActivityDTO, true, UPDATED
+                    );
+                    return ResponseEntity.ok (response);
+                }
         );
-        return ResponseEntity.ok (response);
+
     }
 
     @RequestMapping(value = "/delete-by-id/{id}", method = RequestMethod.DELETE)
-    public void Delete (@PathVariable @Min(1) Long id) {
+    public CompletableFuture<ResponseEntity<DataResult<Void>>> Delete (@PathVariable @Min(1) Long id) {
         log.info ("Received request to delete customer activity {}", id);
-        this.personActivityService.deleteById (id);
+        return personActivityService.deleteById (id)
+                .thenApply (result -> {
+                    DataResult<Void> response = new DataResult<> (
+                            result,
+                            true,
+                            REMOVED
+                    );
+                    return ResponseEntity.ok (response);
+                });
     }
 }

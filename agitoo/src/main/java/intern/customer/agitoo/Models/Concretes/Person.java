@@ -20,7 +20,8 @@ import java.util.List;
 public class Person {
 
     @Id
-    @GeneratedValue(generator = "person_sequence", strategy = GenerationType.SEQUENCE) //We manage sequence not SQL as IDENTITY
+    @GeneratedValue(generator = "person_sequence", strategy = GenerationType.SEQUENCE)
+    //We manage sequence not SQL as IDENTITY
     @SequenceGenerator(name = "person_sequence", sequenceName = "person_sequence", allocationSize = 1)
     @Column(name = "PERSONID")
     private Long personId;
@@ -52,7 +53,7 @@ public class Person {
     private String occupation;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "CUSTOMERID", insertable = false, updatable = false)
+    @JoinColumn(name = "CUSTOMERID", nullable = false)
     private Customer customer;
 
     @OneToMany(mappedBy = "person", fetch = FetchType.LAZY)

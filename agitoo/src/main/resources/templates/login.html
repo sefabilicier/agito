@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/bulma.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bulma.css}"/>
     <link href="/static/bulma.css" rel="stylesheet">
     <title>Login</title>
     <style>
@@ -36,18 +36,18 @@
             box-shadow: none; /* Remove default shadow */
         }
 
-        .button{
+        .button {
             border: 1px solid #ddd;
         }
 
         .button.is-primary {
-            background-color: #0C1B33; /* Button background color */
+            background-color: #4b0099; /* Button background color */
             #border-color: transparent;
             color: white; /* Button text color */
         }
 
         .button.is-primary:hover {
-            background-color: #05299E; /* Button hover color */
+            background-color: #9400D3; /* Button hover color */
         }
 
         .field {
@@ -58,22 +58,42 @@
             color: black; /* Checkbox label color */
         }
 
+        .control {
+            border-radius: 1px;
+        }
+
     </style>
 </head>
 <body>
 <div class="login-container">
-    <h2 class="title is-4 has-text-centered">Spring Boot Security</h2>
+    <h2 class="is-size-4 is-centered" style="color:white">agito security via spring</h2>
     <form method="post" action="/login">
         <div class="field">
             <label class="label" for="username">Username</label>
             <div class="control">
-                <input type="text" id="username" name="username" class="input" placeholder="Username" required autofocus>
+                <input
+                        type="text"
+                        id="username"
+                        name="username"
+                        class="input"
+                        placeholder="Username"
+                        required autofocus
+                        style="border-radius:1px"
+
+                >
             </div>
         </div>
         <div class="field">
             <label class="label" for="password">Password</label>
             <div class="control">
-                <input type="password" id="password" name="password" class="input" placeholder="Password" required>
+                <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        class="input"
+                        placeholder="Password"
+                        required
+                        style="border-radius:1px">
             </div>
         </div>
         <div class="field">
@@ -86,15 +106,21 @@
         </div>
         <div class="field">
             <div class="control">
-                <button class="button is-primary is-fullwidth" type="submit">Login</button>
+                <button
+                        class="button is-primary is-fullwidth"
+                        type="submit"
+                        style="border-radius:1px"
+                >
+                    Login
+                </button>
             </div>
         </div>
     </form>
 </div>
 <script>
     document.addEventListener(
-        "DOMContentLoaded", function()
-        {document.body.classList.add('loaded');
+        "DOMContentLoaded", function () {
+            document.body.classList.add('loaded');
         });
 </script>
 </body>

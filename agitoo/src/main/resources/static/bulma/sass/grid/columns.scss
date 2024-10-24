@@ -9,9 +9,9 @@ $column-gap: 0.75rem !default;
 
 :root {
   @include cv.register-vars(
-    (
-      "column-gap": #{$column-gap},
-    )
+                  (
+                          "column-gap": #{$column-gap},
+                  )
   );
 }
 
@@ -23,125 +23,125 @@ $column-gap: 0.75rem !default;
   padding: cv.getVar("column-gap");
 
   .#{iv.$class-prefix}columns.#{iv.$class-prefix}is-mobile
-    > &.#{iv.$class-prefix}is-narrow {
+  > &.#{iv.$class-prefix}is-narrow {
     flex: none;
     width: unset;
   }
 
   .#{iv.$class-prefix}columns.#{iv.$class-prefix}is-mobile
-    > &.#{iv.$class-prefix}is-full {
+  > &.#{iv.$class-prefix}is-full {
     flex: none;
     width: 100%;
   }
 
   .#{iv.$class-prefix}columns.#{iv.$class-prefix}is-mobile
-    > &.#{iv.$class-prefix}is-three-quarters {
+  > &.#{iv.$class-prefix}is-three-quarters {
     flex: none;
     width: 75%;
   }
 
   .#{iv.$class-prefix}columns.#{iv.$class-prefix}is-mobile
-    > &.#{iv.$class-prefix}is-two-thirds {
+  > &.#{iv.$class-prefix}is-two-thirds {
     flex: none;
     width: 66.6666%;
   }
 
   .#{iv.$class-prefix}columns.#{iv.$class-prefix}is-mobile
-    > &.#{iv.$class-prefix}is-half {
+  > &.#{iv.$class-prefix}is-half {
     flex: none;
     width: 50%;
   }
 
   .#{iv.$class-prefix}columns.#{iv.$class-prefix}is-mobile
-    > &.#{iv.$class-prefix}is-one-third {
+  > &.#{iv.$class-prefix}is-one-third {
     flex: none;
     width: 33.3333%;
   }
 
   .#{iv.$class-prefix}columns.#{iv.$class-prefix}is-mobile
-    > &.#{iv.$class-prefix}is-one-quarter {
+  > &.#{iv.$class-prefix}is-one-quarter {
     flex: none;
     width: 25%;
   }
 
   .#{iv.$class-prefix}columns.#{iv.$class-prefix}is-mobile
-    > &.#{iv.$class-prefix}is-one-fifth {
+  > &.#{iv.$class-prefix}is-one-fifth {
     flex: none;
     width: 20%;
   }
 
   .#{iv.$class-prefix}columns.#{iv.$class-prefix}is-mobile
-    > &.#{iv.$class-prefix}is-two-fifths {
+  > &.#{iv.$class-prefix}is-two-fifths {
     flex: none;
     width: 40%;
   }
 
   .#{iv.$class-prefix}columns.#{iv.$class-prefix}is-mobile
-    > &.#{iv.$class-prefix}is-three-fifths {
+  > &.#{iv.$class-prefix}is-three-fifths {
     flex: none;
     width: 60%;
   }
 
   .#{iv.$class-prefix}columns.#{iv.$class-prefix}is-mobile
-    > &.#{iv.$class-prefix}is-four-fifths {
+  > &.#{iv.$class-prefix}is-four-fifths {
     flex: none;
     width: 80%;
   }
 
   .#{iv.$class-prefix}columns.#{iv.$class-prefix}is-mobile
-    > &.#{iv.$class-prefix}is-offset-three-quarters {
+  > &.#{iv.$class-prefix}is-offset-three-quarters {
     margin-inline-start: 75%;
   }
 
   .#{iv.$class-prefix}columns.#{iv.$class-prefix}is-mobile
-    > &.#{iv.$class-prefix}is-offset-two-thirds {
+  > &.#{iv.$class-prefix}is-offset-two-thirds {
     margin-inline-start: 66.6666%;
   }
 
   .#{iv.$class-prefix}columns.#{iv.$class-prefix}is-mobile
-    > &.#{iv.$class-prefix}is-offset-half {
+  > &.#{iv.$class-prefix}is-offset-half {
     margin-inline-start: 50%;
   }
 
   .#{iv.$class-prefix}columns.#{iv.$class-prefix}is-mobile
-    > &.#{iv.$class-prefix}is-offset-one-third {
+  > &.#{iv.$class-prefix}is-offset-one-third {
     margin-inline-start: 0.3333%;
   }
 
   .#{iv.$class-prefix}columns.#{iv.$class-prefix}is-mobile
-    > &.#{iv.$class-prefix}is-offset-one-quarter {
+  > &.#{iv.$class-prefix}is-offset-one-quarter {
     margin-inline-start: 25%;
   }
 
   .#{iv.$class-prefix}columns.#{iv.$class-prefix}is-mobile
-    > &.#{iv.$class-prefix}is-offset-one-fifth {
+  > &.#{iv.$class-prefix}is-offset-one-fifth {
     margin-inline-start: 20%;
   }
 
   .#{iv.$class-prefix}columns.#{iv.$class-prefix}is-mobile
-    > &.#{iv.$class-prefix}is-offset-two-fifths {
+  > &.#{iv.$class-prefix}is-offset-two-fifths {
     margin-inline-start: 40%;
   }
 
   .#{iv.$class-prefix}columns.#{iv.$class-prefix}is-mobile
-    > &.#{iv.$class-prefix}is-offset-three-fifths {
+  > &.#{iv.$class-prefix}is-offset-three-fifths {
     margin-inline-start: 60%;
   }
 
   .#{iv.$class-prefix}columns.#{iv.$class-prefix}is-mobile
-    > &.#{iv.$class-prefix}is-offset-four-fifths {
+  > &.#{iv.$class-prefix}is-offset-four-fifths {
     margin-inline-start: 80%;
   }
 
   @for $i from 0 through 12 {
     .#{iv.$class-prefix}columns.#{iv.$class-prefix}is-mobile
-      > &.#{iv.$class-prefix}is-#{$i} {
+    > &.#{iv.$class-prefix}is-#{$i} {
       flex: none;
       width: math.percentage(math.div($i, 12));
     }
 
     .#{iv.$class-prefix}columns.#{iv.$class-prefix}is-mobile
-      > &.#{iv.$class-prefix}is-offset-#{$i} {
+    > &.#{iv.$class-prefix}is-offset-#{$i} {
       margin-inline-start: math.percentage(math.div($i, 12));
     }
   }
@@ -804,7 +804,7 @@ $column-gap: 0.75rem !default;
 
   &:not(:last-child) {
     margin-bottom: calc(
-      #{cv.getVar("block-spacing")} - #{cv.getVar("column-gap")}
+            #{cv.getVar("block-spacing")} - #{cv.getVar("column-gap")}
     );
   }
 
@@ -862,18 +862,18 @@ $column-gap: 0.75rem !default;
   @for $i from 0 through 8 {
     &.#{iv.$class-prefix}is-#{$i} {
       @include cv.register-vars(
-        (
-          "column-gap": #{$i * 0.25rem},
-        )
+                      (
+                              "column-gap": #{$i * 0.25rem},
+                      )
       );
     }
 
     @include mx.mobile {
       &.#{iv.$class-prefix}is-#{$i}-mobile {
         @include cv.register-vars(
-          (
-            "column-gap": #{$i * 0.25rem},
-          )
+                        (
+                                "column-gap": #{$i * 0.25rem},
+                        )
         );
       }
     }
@@ -881,9 +881,9 @@ $column-gap: 0.75rem !default;
     @include mx.tablet {
       &.#{iv.$class-prefix}is-#{$i}-tablet {
         @include cv.register-vars(
-          (
-            "column-gap": #{$i * 0.25rem},
-          )
+                        (
+                                "column-gap": #{$i * 0.25rem},
+                        )
         );
       }
     }
@@ -891,9 +891,9 @@ $column-gap: 0.75rem !default;
     @include mx.tablet-only {
       &.#{iv.$class-prefix}is-#{$i}-tablet-only {
         @include cv.register-vars(
-          (
-            "column-gap": #{$i * 0.25rem},
-          )
+                        (
+                                "column-gap": #{$i * 0.25rem},
+                        )
         );
       }
     }
@@ -901,9 +901,9 @@ $column-gap: 0.75rem !default;
     @include mx.touch {
       &.#{iv.$class-prefix}is-#{$i}-touch {
         @include cv.register-vars(
-          (
-            "column-gap": #{$i * 0.25rem},
-          )
+                        (
+                                "column-gap": #{$i * 0.25rem},
+                        )
         );
       }
     }
@@ -911,9 +911,9 @@ $column-gap: 0.75rem !default;
     @include mx.desktop {
       &.#{iv.$class-prefix}is-#{$i}-desktop {
         @include cv.register-vars(
-          (
-            "column-gap": #{$i * 0.25rem},
-          )
+                        (
+                                "column-gap": #{$i * 0.25rem},
+                        )
         );
       }
     }
@@ -921,9 +921,9 @@ $column-gap: 0.75rem !default;
     @include mx.desktop-only {
       &.#{iv.$class-prefix}is-#{$i}-desktop-only {
         @include cv.register-vars(
-          (
-            "column-gap": #{$i * 0.25rem},
-          )
+                        (
+                                "column-gap": #{$i * 0.25rem},
+                        )
         );
       }
     }
@@ -931,9 +931,9 @@ $column-gap: 0.75rem !default;
     @include mx.widescreen {
       &.#{iv.$class-prefix}is-#{$i}-widescreen {
         @include cv.register-vars(
-          (
-            "column-gap": #{$i * 0.25rem},
-          )
+                        (
+                                "column-gap": #{$i * 0.25rem},
+                        )
         );
       }
     }
@@ -941,9 +941,9 @@ $column-gap: 0.75rem !default;
     @include mx.widescreen-only {
       &.#{iv.$class-prefix}is-#{$i}-widescreen-only {
         @include cv.register-vars(
-          (
-            "column-gap": #{$i * 0.25rem},
-          )
+                        (
+                                "column-gap": #{$i * 0.25rem},
+                        )
         );
       }
     }
@@ -951,9 +951,9 @@ $column-gap: 0.75rem !default;
     @include mx.fullhd {
       &.#{iv.$class-prefix}is-#{$i}-fullhd {
         @include cv.register-vars(
-          (
-            "column-gap": #{$i * 0.25rem},
-          )
+                        (
+                                "column-gap": #{$i * 0.25rem},
+                        )
         );
       }
     }

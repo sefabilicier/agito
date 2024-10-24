@@ -3,12 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/bulma.css}" />
-    <link rel="stylesheet" type="text/css" th:href="@{/css/bulma.min.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bulma.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bulma.min.css}"/>
     <link href="/static/bulma.css" rel="stylesheet">
     <title>Person Add</title>
     <style>
-
         body {
             opacity: 0;
             transition: opacity 0.5s ease-in-out;
@@ -23,43 +22,46 @@
             margin: 50px auto;
             padding: 20px;
         }
+
         .input {
             border-radius: 2px;
         }
-        .title {
-            color: #ffffff;
-        }
-        .header{
+
+        .header {
             margin: 50px;
             padding: 25px;
             background-color: #4b0099;
         }
 
-        .field-2{
+        .field-2 {
             margin: 20px;
             text-align: center;
         }
 
-        .button{
+        .button {
             border-radius: 2px;
         }
 
         .button.is-primary {
-            background-color: #4b0099; /* Button background color */
+            background-color: #4b0099;
             border-color: transparent;
-            color: white; /* Button text color */
+            color: white;
         }
 
         .button.is-primary:hover {
             background-color: #9400D3;
-            /*background-color: #1E00FF;  Button hover color */
+        }
+
+        .error {
+            color: red;
+            font-size: 0.8em;
         }
     </style>
 </head>
 <body>
 <div class="is-widescreen">
     <header class="header has-text-centered marginless">
-        <h1 class="title">Create a Person</h1>
+        <h1 class="is-size-3 label" style="color:white">Create a Person</h1>
     </header>
     <main class="container is-max-tablet">
         <form
@@ -68,78 +70,91 @@
                 th:action="@{/ui/person/add}"
                 th:object="${personDTO}"
                 method="post"
+                th:novalidate
         >
+            <input type="hidden" th:field="*{personId}">
+            <input type="hidden" th:name="customerId" th:value="${customerId}"/>
+
             <div class="field">
                 <label class="label">First Name</label>
-                <div class="control" th:object="">
-                    <input class="input" type="text" placeholder="Alex" th:field="${personDTO.firstName}">
+                <div class="control">
+                    <input class="input" type="text" placeholder="Alex" th:field="*{firstName}" required>
+                </div>
+                <div th:if="${#fields.hasErrors('firstName')}" class="error">
+                    <span th:errors="*{firstName}">First name is required.</span>
                 </div>
             </div>
+
             <div class="field">
                 <label class="label">Middle Name</label>
                 <div class="control">
-                    <input class="input" type="text" placeholder="James" th:field="${personDTO.middleName}">
+                    <input class="input" type="text" placeholder="James" th:field="*{middleName}">
                 </div>
             </div>
+
             <div class="field">
                 <label class="label">Last Name</label>
                 <div class="control">
-                    <input class="input" type="text" placeholder="Mark" th:field="${personDTO.lastName}">
+                    <input class="input" type="text" placeholder="Mark" th:field="*{lastName}" required>
+                </div>
+                <div th:if="${#fields.hasErrors('lastName')}" class="error">
+                    <span th:errors="*{lastName}">Last name is required.</span>
                 </div>
             </div>
+
             <div class="field">
                 <label class="label">Gender</label>
                 <div class="control">
                     <div class="select">
-                        <select th:field="*{gender}">
-                            <option th:each="gender : ${gender}"
-                                    th:value="${gender.genderType}"
-                                    th:text="${gender.genderType}">
-                            </option>
+                        <select th:field="*{gender}" required>
+                            <option value="" disabled selected>Select gender</option>
+                            <option th:each="gender : ${genders}" th:value="${gender}" th:text="${gender}"></option>
                         </select>
                     </div>
                 </div>
+                <div th:if="${#fields.hasErrors('gender')}" class="error">
+                    <span th:errors="*{gender}">Gender is required.</span>
+                </div>
             </div>
+
             <div class="field">
                 <label class="label">Marital Status</label>
                 <div class="control">
                     <div class="select is-normal">
-                        <select th:field="*{maritalStatus}">
-                            <option th:each="maritalStatus : ${status}"
-                                    th:value="${maritalStatus.maritalStatusType}"
-                                    th:text="${maritalStatus.maritalStatusType}">
-                            </option>
+                        <select th:field="*{maritalStatus}" required>
+                            <option value="" disabled selected>Select marital status</option>
+                            <option th:each="status : ${statuses}" th:value="${status}" th:text="${status}"></option>
                         </select>
                     </div>
                 </div>
-            </div>
-            <!--<div class="field">
-                <label class="label" for="date">Birthday</label>
-                <div class="control">
-                    <input type="text" id="date" class="input" placeholder="12.13.2000"  />
+                <div th:if="${#fields.hasErrors('maritalStatus')}" class="error">
+                    <span th:errors="*{maritalStatus}"></span>
                 </div>
-            </div>-->
+            </div>
+
             <div class="field">
                 <label class="label">Nationality</label>
                 <div class="control">
-                    <input class="input" type="text" placeholder="American" th:field="${personDTO.nationality}">
+                    <input class="input" type="text" placeholder="American" th:field="*{nationality}" required>
+                </div>
+                <div th:if="${#fields.hasErrors('nationality')}" class="error">
+                    <span th:errors="*{nationality}"></span>
                 </div>
             </div>
+
             <div class="field">
                 <label class="label">Occupation</label>
                 <div class="control">
-                    <input class="input" type="text" placeholder="Software Engineer" th:field="${personDTO.occupation}">
+                    <input class="input" type="text" placeholder="Software Engineer" th:field="*{occupation}" required>
+                </div>
+                <div th:if="${#fields.hasErrors('occupation')}" class="error">
+                    <span th:errors="*{occupation}"></span>
                 </div>
             </div>
+
             <div class="field-2 field is-grouped is-grouped-centered">
                 <p class="control">
-                    <button
-                            type="submit"
-                            class="button is-primary"
-                            th:href="'http://localhost:8080/ui/person-job-life/add'"
-                    >
-                        Next
-                    </button>
+                    <button type="submit" class="button is-primary">Next</button>
                 </p>
                 <p class="control">
                     <a class="button is-light" th:href="'http://localhost:8080/home'">Cancel</a>
@@ -149,10 +164,9 @@
     </main>
 </div>
 <script>
-    document.addEventListener(
-        "DOMContentLoaded", function()
-        {document.body.classList.add('loaded');
-        });
+    document.addEventListener("DOMContentLoaded", function () {
+        document.body.classList.add('loaded');
+    });
 </script>
 </body>
 </html>

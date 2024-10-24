@@ -25,21 +25,21 @@ public class toDTOtest {
     private final ModelMapper modelMapper = new MapperConfiguration ().modelMapper ();
 
     @Test
-    public void testCustomerToDTO(){
+    public void testCustomerToDTO () {
         Customer customer = new Customer ();
         customer.setCustomerType (CustomerType.Person);
 
         CustomerDTO customerDTO = modelMapper.map (customer, CustomerDTO.class);
 
-        assertNotNull(customerDTO);
-        assertEquals(CustomerType.Person, customerDTO.getCustomerType ());
+        assertNotNull (customerDTO);
+        assertEquals (CustomerType.Person, customerDTO.getCustomerType ());
     }
 
     @Test
-    public void testPersonToDTO(){
+    public void testPersonToDTO () {
         Person person = new Person ();
         person.setPersonId (1L);
-        person.setDateOfBirth (LocalDate.of (2024,8,22));
+        person.setDateOfBirth (LocalDate.of (2024, 8, 22));
         person.setGender (PersonGender.Male);
         person.setFirstName ("Martijn");
         person.setMiddleName ("");
@@ -51,7 +51,7 @@ public class toDTOtest {
 
         PersonDTO personDTO = modelMapper.map (person, PersonDTO.class);
 
-        assertNotNull(personDTO);
-        assertEquals(person, personDTO);
+        assertNotNull (personDTO);
+        assertEquals (person, personDTO);
     }
 }

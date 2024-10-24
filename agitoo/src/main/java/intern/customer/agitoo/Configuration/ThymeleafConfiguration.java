@@ -4,22 +4,17 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import org.thymeleaf.spring6.SpringTemplateEngine;
-import org.thymeleaf.spring6.templateresolver.SpringResourceTemplateResolver;
-import org.thymeleaf.spring6.view.ThymeleafViewResolver;
-import org.thymeleaf.templatemode.TemplateMode;
 
 
 //@EnableWebMvc
 @AllArgsConstructor
 @Configuration
 @ComponentScan
-public class ThymeleafConfiguration implements WebMvcConfigurer{
+public class ThymeleafConfiguration implements WebMvcConfigurer {
 
     //this config created to be able to see the view as under template for thymeleaf
 
@@ -28,7 +23,7 @@ public class ThymeleafConfiguration implements WebMvcConfigurer{
 
 
     public void setApplicationContext (final ApplicationContext applicationContext)
-        throws BeansException {
+            throws BeansException {
         this.applicationContext = applicationContext;
     }
 
@@ -69,14 +64,14 @@ public class ThymeleafConfiguration implements WebMvcConfigurer{
 //    }
 
     @Override
-    public void addResourceHandlers(final ResourceHandlerRegistry registry) {
+    public void addResourceHandlers (final ResourceHandlerRegistry registry) {
         registry
-                .addResourceHandler("/css/**")
-                .addResourceLocations("classpath:/static/")
-                .resourceChain(true);
+                .addResourceHandler ("/css/**")
+                .addResourceLocations ("classpath:/static/")
+                .resourceChain (true);
         registry
-                .addResourceHandler("/js/**")
-                .addResourceLocations("classpath:/static/")
-                .resourceChain(true);
+                .addResourceHandler ("/js/**")
+                .addResourceLocations ("classpath:/static/")
+                .resourceChain (true);
     }
 }

@@ -4,10 +4,10 @@
 @use "../utilities/mixins" as mx;
 
 $media-border-color: hsla(
-  #{cv.getVar("scheme-h")},
-  #{cv.getVar("scheme-s")},
-  #{cv.getVar("border-l")},
-  0.5
+                #{cv.getVar("scheme-h")},
+                #{cv.getVar("scheme-s")},
+                #{cv.getVar("border-l")},
+                0.5
 ) !default;
 $media-border-size: 1px !default;
 $media-spacing: 1rem !default;
@@ -20,16 +20,16 @@ $media-level-2-spacing: 0.5rem !default;
 .#{iv.$class-prefix}media {
   @extend %block;
   @include cv.register-vars(
-    (
-      "media-border-color": #{$media-border-color},
-      "media-border-size": #{$media-border-size},
-      "media-spacing": #{$media-spacing},
-      "media-spacing-large": #{$media-spacing-large},
-      "media-content-spacing": #{$media-content-spacing},
-      "media-level-1-spacing": #{$media-level-1-spacing},
-      "media-level-1-content-spacing": #{$media-level-1-content-spacing},
-      "media-level-2-spacing": #{$media-level-2-spacing},
-    )
+                  (
+                          "media-border-color": #{$media-border-color},
+                          "media-border-size": #{$media-border-size},
+                          "media-spacing": #{$media-spacing},
+                          "media-spacing-large": #{$media-spacing-large},
+                          "media-content-spacing": #{$media-content-spacing},
+                          "media-level-1-spacing": #{$media-level-1-spacing},
+                          "media-level-1-content-spacing": #{$media-level-1-content-spacing},
+                          "media-level-2-spacing": #{$media-level-2-spacing},
+                  )
   );
   align-items: flex-start;
   display: flex;

@@ -7,17 +7,31 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum Issuer {
 
-    VisaInc ("VisaInc"),
-    MasterCardInc ("MasterCardInc"),
-    Troy ("Cash"),
-    AmericanExpressCompany ("AmericanExpressCompany"),
-    DiscoverFinancialServices ("DiscoverFinancialServices"),
-    JCBCo ("JCBCo"),
-    DinersClubInternational ("DinersClubInternational"),
-    UnionPayInternational ("UnionPayInternational"),
+    //Issuer IN (
+    // 'Visa Inc',
+    // 'Mastercard Inc',
+    // 'Troy',
+    // 'American Express Company',
+    // 'Discover Financial Services',
+    // 'JCB Co',
+    // 'Diners Club International',
+    // 'UnionPay International',
+    // 'Maestro',
+    // 'Elo',
+    // 'RuPay')
+
+    VisaInc ("Visa Inc"),
+    MastercardInc ("Mastercard Inc"),
+    Troy ("Troy"),
+    AmericanExpressCompany ("American Express Company"),
+    DiscoverFinancialServices ("Discover Financial Services"),
+    JCBCo ("JCB Co"),
+    DinersClubInternational ("Diners Club International"),
+    UnionPayInternational ("UnionPay International"),
     Maestro ("Maestro"),
     Elo ("Elo"),
     RuPay ("RuPay");
 
     private final String issuer;
+
 }

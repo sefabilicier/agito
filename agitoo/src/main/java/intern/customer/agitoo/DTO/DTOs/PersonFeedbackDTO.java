@@ -1,6 +1,10 @@
 package intern.customer.agitoo.DTO.DTOs;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import intern.customer.agitoo.Models.Concretes.Person;
 import intern.customer.agitoo.Models.enums.FeedbackType;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -15,10 +19,15 @@ import java.time.LocalDateTime;
 @Builder
 public class PersonFeedbackDTO {
 
+    @NotNull(message = "{feedbackId.notNull}")
+    @Positive(message = "{feedbackId.positive}")
+    private Long feedbackId;
+
     @NotNull(message = "{feedbackDate.notNull}")
     @PastOrPresent(message = "{feedbackDate.pastOrPresent}")
     private LocalDateTime feedbackDate;
 
+    @Enumerated(EnumType.STRING)
     @NotNull(message = "{feedbackType.notBlank}")
     private FeedbackType feedbackType;
 
@@ -30,6 +39,7 @@ public class PersonFeedbackDTO {
     @NotBlank(message = "{comments.notBlank}")
     private String comments;
 
-//    @Valid
-//    private PersonDTO person;
+    @JsonIgnore
+    private Person person;
+    private Long personId;
 }

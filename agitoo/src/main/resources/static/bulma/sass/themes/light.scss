@@ -14,84 +14,76 @@ $scheme-main: hsl(iv.$scheme-h, iv.$scheme-s, $scheme-main-l);
 
 @mixin light-theme {
   @include cv.register-vars(
-    (
-      "scheme-h": iv.$scheme-h,
-      "scheme-s": iv.$scheme-s,
-      "light-l": iv.$light-l,
-      "light-invert-l": iv.$dark-l,
-      "dark-l": iv.$dark-l,
-      "dark-invert-l": iv.$light-l,
-      "soft-l": iv.$light-l,
-      "bold-l": iv.$dark-l,
-      "soft-invert-l": iv.$dark-l,
-      "bold-invert-l": iv.$light-l,
-
-      // Deltas
-      "hover-background-l-delta": -5%,
-      "active-background-l-delta": -10%,
-
-      "hover-border-l-delta": -10%,
-      "active-border-l-delta": -20%,
-
-      "hover-color-l-delta": -5%,
-      "active-color-l-delta": -10%,
-
-      "hover-shadow-a-delta": -0.05,
-      "active-shadow-a-delta": -0.1,
-
-      // Light only
-      "scheme-brightness": "light",
-      "scheme-main-l": $scheme-main-l,
-      "scheme-main-bis-l": 98%,
-      "scheme-main-ter-l": 96%,
-      "background-l": 96%,
-      "border-weak-l": 93%,
-      "border-l": 86%,
-      "text-weak-l": 48%,
-      "text-l": 29%,
-      "text-strong-l": 21%,
-      "text-title-l": 14%,
-      "scheme-invert-ter-l": 14%,
-      "scheme-invert-bis-l": 7%,
-      "scheme-invert-l": 4%,
-
-      // Typography
-      "family-primary": dv.$family-primary,
-      "family-secondary": dv.$family-secondary,
-      "family-code": dv.$family-code,
-      "size-small": dv.$size-small,
-      "size-normal": dv.$size-normal,
-      "size-medium": dv.$size-medium,
-      "size-large": dv.$size-large,
-      "weight-light": iv.$weight-light,
-      "weight-normal": iv.$weight-normal,
-      "weight-medium": iv.$weight-medium,
-      "weight-semibold": iv.$weight-semibold,
-      "weight-bold": iv.$weight-bold,
-      "weight-extrabold": iv.$weight-extrabold,
-
-      // Other
-      "block-spacing": iv.$block-spacing,
-      "duration": 294ms,
-      "easing": ease-out,
-      "radius-small": iv.$radius-small,
-      "radius": iv.$radius,
-      "radius-medium": iv.$radius-medium,
-      "radius-large": iv.$radius-large,
-      "radius-rounded": 9999px,
-      "speed": 86ms,
-
-      "arrow-color": #{cv.getVar("link")},
-      "loading-color": #{cv.getVar("border")},
-      "burger-h": #{cv.getVar("link-h")},
-      "burger-s": #{cv.getVar("link-s")},
-      "burger-l": #{cv.getVar("link-l")},
-      "burger-border-radius": 0.5em,
-      // Using px values to prevent half pixel issues
-      "burger-gap": 5px,
-      "burger-item-height": 2px,
-      "burger-item-width": 20px,
-    )
+                  (
+                          "scheme-h": iv.$scheme-h,
+                          "scheme-s": iv.$scheme-s,
+                          "light-l": iv.$light-l,
+                          "light-invert-l": iv.$dark-l,
+                          "dark-l": iv.$dark-l,
+                          "dark-invert-l": iv.$light-l,
+                          "soft-l": iv.$light-l,
+                          "bold-l": iv.$dark-l,
+                          "soft-invert-l": iv.$dark-l,
+                          "bold-invert-l": iv.$light-l,
+                    // Deltas
+                          "hover-background-l-delta": -5%,
+                          "active-background-l-delta": -10%,
+                          "hover-border-l-delta": -10%,
+                          "active-border-l-delta": -20%,
+                          "hover-color-l-delta": -5%,
+                          "active-color-l-delta": -10%,
+                          "hover-shadow-a-delta": -0.05,
+                          "active-shadow-a-delta": -0.1,
+                    // Light only
+                          "scheme-brightness": "light",
+                          "scheme-main-l": $scheme-main-l,
+                          "scheme-main-bis-l": 98%,
+                          "scheme-main-ter-l": 96%,
+                          "background-l": 96%,
+                          "border-weak-l": 93%,
+                          "border-l": 86%,
+                          "text-weak-l": 48%,
+                          "text-l": 29%,
+                          "text-strong-l": 21%,
+                          "text-title-l": 14%,
+                          "scheme-invert-ter-l": 14%,
+                          "scheme-invert-bis-l": 7%,
+                          "scheme-invert-l": 4%,
+                    // Typography
+                          "family-primary": dv.$family-primary,
+                          "family-secondary": dv.$family-secondary,
+                          "family-code": dv.$family-code,
+                          "size-small": dv.$size-small,
+                          "size-normal": dv.$size-normal,
+                          "size-medium": dv.$size-medium,
+                          "size-large": dv.$size-large,
+                          "weight-light": iv.$weight-light,
+                          "weight-normal": iv.$weight-normal,
+                          "weight-medium": iv.$weight-medium,
+                          "weight-semibold": iv.$weight-semibold,
+                          "weight-bold": iv.$weight-bold,
+                          "weight-extrabold": iv.$weight-extrabold,
+                    // Other
+                          "block-spacing": iv.$block-spacing,
+                          "duration": 294ms,
+                          "easing": ease-out,
+                          "radius-small": iv.$radius-small,
+                          "radius": iv.$radius,
+                          "radius-medium": iv.$radius-medium,
+                          "radius-large": iv.$radius-large,
+                          "radius-rounded": 9999px,
+                          "speed": 86ms,
+                          "arrow-color": #{cv.getVar("link")},
+                          "loading-color": #{cv.getVar("border")},
+                          "burger-h": #{cv.getVar("link-h")},
+                          "burger-s": #{cv.getVar("link-s")},
+                          "burger-l": #{cv.getVar("link-l")},
+                          "burger-border-radius": 0.5em,
+                    // Using px values to prevent half pixel issues
+                          "burger-gap": 5px,
+                          "burger-item-height": 2px,
+                          "burger-item-width": 20px,
+                  )
   );
 
   // Colors
@@ -119,12 +111,12 @@ $scheme-main: hsl(iv.$scheme-h, iv.$scheme-s, $scheme-main-l);
       @include cv.generate-basic-palette($name, $base, $invert);
     } @else {
       @include cv.generate-color-palette(
-        $name,
-        $base,
-        $scheme-main-l,
-        $invert,
-        $light,
-        $dark
+                      $name,
+                      $base,
+                      $scheme-main-l,
+                      $invert,
+                      $light,
+                      $dark
       );
     }
 

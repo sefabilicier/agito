@@ -1,0 +1,8 @@
+global:
+  scrape_interval: 15s
+
+scrape_configs:
+  - job_name: 'agitoo'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['localhost:8080'] #http://localhost:8080/actuator/prometheus --- Bu URL, Prometheus'un veri çekmesi için yapılandırdığınız endpoint olmalı. Eğer bu sayfa "no data" veya bir hata veriyorsa, uygulamanızda bir sorun olabilir.

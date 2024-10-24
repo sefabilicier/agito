@@ -47,10 +47,10 @@
 
 @mixin register-rgb($name, $value) {
   @include register-var(
-    $name,
-    (red($value), green($value), blue($value)),
-    "",
-    "-rgb"
+                  $name,
+                          (red($value), green($value), blue($value)),
+                  "",
+                  "-rgb"
   );
 }
 
@@ -97,8 +97,8 @@
   @include register-var($name, $on-scheme-lightness, "", "-on-scheme-l");
   $on-scheme-l: getVar($name, "", "-on-scheme-l");
   @include register-var(
-    "#{$name}-on-scheme",
-    buildHslaString($name, $on-scheme-l)
+                  "#{$name}-on-scheme",
+                  buildHslaString($name, $on-scheme-l)
   );
 }
 
@@ -263,8 +263,8 @@
 
       @if $ratio > 7 {
         $candidates: list.append(
-          $candidates,
-          fn.bulmaStringToNumber($digits-fg)
+                        $candidates,
+                        fn.bulmaStringToNumber($digits-fg)
         );
 
         @if ($is-light-fg) {
@@ -307,17 +307,17 @@
 
     // Register the lightness
     @include register-var(
-      $name,
-      getVar($name, "", "-#{$fg}-l"),
-      "",
-      "-#{$bg}-invert-l"
+                    $name,
+                    getVar($name, "", "-#{$fg}-l"),
+                    "",
+                    "-#{$bg}-invert-l"
     );
 
     // Resiter the color using that lightness
     $bg-invert-l: getVar($name, "", "-#{$bg}-invert-l");
     @include register-var(
-      "#{$name}-#{$bg}-invert",
-      buildHslaString($name, $bg-invert-l)
+                    "#{$name}-#{$bg}-invert",
+                    buildHslaString($name, $bg-invert-l)
     );
   }
 
@@ -328,16 +328,16 @@
   } @else {
     $base-invert-l-digits: map.get($combos, $base-digits);
     @include register-var(
-      $name,
-      getVar($name, "", "-#{$base-invert-l-digits}-l"),
-      "",
-      "-invert-l"
+                    $name,
+                    getVar($name, "", "-#{$base-invert-l-digits}-l"),
+                    "",
+                    "-invert-l"
     );
 
     $base-invert-l: getVar($name, "", "-invert-l");
     @include register-var(
-      "#{$name}-invert",
-      buildHslaString($name, $base-invert-l)
+                    "#{$name}-invert",
+                    buildHslaString($name, $base-invert-l)
     );
   }
 
@@ -360,16 +360,16 @@
 
     $light-invert-l-digits: map.get($combos, "90");
     @include register-var(
-      $name,
-      getVar($name, "", "-#{$light-invert-l-digits}-l"),
-      "",
-      "-light-invert-l"
+                    $name,
+                    getVar($name, "", "-#{$light-invert-l-digits}-l"),
+                    "",
+                    "-light-invert-l"
     );
 
     $light-invert-l: getVar($name, "", "-light-invert-l");
     @include register-var(
-      "#{$name}-light-invert",
-      buildHslaString($name, $light-invert-l)
+                    "#{$name}-light-invert",
+                    buildHslaString($name, $light-invert-l)
     );
 
     // Good color on dark background (10% lightness)
@@ -380,16 +380,16 @@
 
     $dark-invert-l-digits: map.get($combos, "10");
     @include register-var(
-      $name,
-      getVar($name, "", "-#{$dark-invert-l-digits}-l"),
-      "",
-      "-dark-invert-l"
+                    $name,
+                    getVar($name, "", "-#{$dark-invert-l-digits}-l"),
+                    "",
+                    "-dark-invert-l"
     );
 
     $dark-invert-l: getVar($name, "", "-dark-invert-l");
     @include register-var(
-      "#{$name}-dark-invert",
-      buildHslaString($name, $dark-invert-l)
+                    "#{$name}-dark-invert",
+                    buildHslaString($name, $dark-invert-l)
     );
 
     // Soft and Bold colors
@@ -400,12 +400,12 @@
     @include register-var("#{$name}-soft", buildHslaString($name, $soft-l));
     @include register-var("#{$name}-bold", buildHslaString($name, $bold-l));
     @include register-var(
-      "#{$name}-soft-invert",
-      buildHslaString($name, $soft-invert-l)
+                    "#{$name}-soft-invert",
+                    buildHslaString($name, $soft-invert-l)
     );
     @include register-var(
-      "#{$name}-bold-invert",
-      buildHslaString($name, $bold-invert-l)
+                    "#{$name}-bold-invert",
+                    buildHslaString($name, $bold-invert-l)
     );
   }
 }

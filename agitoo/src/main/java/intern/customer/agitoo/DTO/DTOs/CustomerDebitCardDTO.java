@@ -1,9 +1,11 @@
 package intern.customer.agitoo.DTO.DTOs;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import intern.customer.agitoo.Models.Concretes.Customer;
 import intern.customer.agitoo.Models.enums.Issuer;
-import jakarta.validation.constraints.FutureOrPresent;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,15 +13,21 @@ import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
+import static intern.customer.agitoo.Common.Utilities.LuhnDebitCardValidation.isValidLuhn;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 public class CustomerDebitCardDTO {
 
+    @NotNull(message = "{debitCardID.notNull}")
+    @Positive(message = "{debitCardID.positive}")
+    private Long debitCardID;
+
     @NotBlank(message = "{cardNumber.notBlank}")
     @Size(min = 16, max = 16, message = "{cardNumber.size}")
-    private String cardNumber; //TODO : MAKE VALIDATION ON FRONTEND
+    private String cardNumber; //TODO : MAKE VALIDATION ON FRONTEND - done
 
     @NotBlank(message = "{cardHolderName.notBlank}")
     private String cardHolderName;
@@ -27,50 +35,31 @@ public class CustomerDebitCardDTO {
     @FutureOrPresent(message = "{expirationDate.futureOrPresent}")
     private Date expirationDate;
 
+    @Enumerated(EnumType.STRING)
     @NotBlank(message = "{issuer.notBlank}")
     private Issuer issuer;
 
-//    @Valid
-//    private CustomerDTO customer;
+    @JsonIgnore
+    private Customer customer;
+    private Long customerId;
 
-    public String getCardNumber () { return maskedCardNumber ();}
-    public boolean isCardNumberValid() { return isValidLuhn (cardNumber);}
+    public String getCardNumber () {
+
+        if (cardNumber == null || cardNumber.isBlank ()) {
+            return null; // Thymeleaf boş bırakır, @NotBlank geçerliliği için hata mesajı döner
+        }
+        return isCardNumberValid () ? maskedCardNumber () : "invalid card number"; // Geçersizse mesaj döner.
+
+    }
+
+    public boolean isCardNumberValid () {
+        return isValidLuhn (cardNumber) && cardNumber != null;
+    }
 
     /*masking the rest of the card number except the first 4 numbers.*/
     private String maskedCardNumber () {
-        if (cardNumber == null || cardNumber.length () < 4) {
-            return "invalid card number";
-        }
-        return cardNumber.substring (0, 4) + "-****-****-****";
+        return cardNumber.length () < 16
+                ? "Invalid card number"
+                : cardNumber.substring (0, 4) + "-****-****-****";
     }
-
-    private boolean isValidLuhn (String cardNumber) {
-        if (cardNumber == null || cardNumber.length () < 16)
-        {
-            return false;
-        }
-
-        int sum = 0;
-        boolean alternate = false;
-
-        for (int i = cardNumber.length () - 1; i >= 0; i--)
-        {
-            char c = cardNumber.charAt (i);
-            if (!Character.isDigit (c)) {
-                return false;
-            }
-            int n = Character.getNumericValue (c);
-
-            if (alternate){
-                n *= 2;
-                if (n > 9){
-                    n -= 9;
-                }
-            }
-            sum += n;
-            alternate = !alternate;
-        }
-        return (sum % 10 == 0);
-    }
-
 }

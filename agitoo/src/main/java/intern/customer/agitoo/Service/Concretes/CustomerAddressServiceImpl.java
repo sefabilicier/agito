@@ -6,15 +6,19 @@ import intern.customer.agitoo.Helper.Messages;
 import intern.customer.agitoo.Models.Concretes.CustomerAddress;
 import intern.customer.agitoo.Repository.Abstracts.CustomerAddressRepository;
 import intern.customer.agitoo.Service.Abstracts.ICustomerAddressService;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 
 import static intern.customer.agitoo.Service.Rules.CommonBusinessRules.checkIfIdExist;
@@ -33,8 +37,10 @@ public class CustomerAddressServiceImpl implements ICustomerAddressService {
 
 
     @Override
+    @Async
+    @Transactional(readOnly = true)
     @Cacheable(value = "customer-address")
-    public List<CustomerAddressDTO> getAll () {
+    public CompletableFuture<List<CustomerAddressDTO>> getAll () {
         isConnected ();
         List<CustomerAddress> customerAddresses = customerAddressRepository.findAll ();
         List<CustomerAddressDTO> customerAddressDTOS = customerAddresses
@@ -42,31 +48,50 @@ public class CustomerAddressServiceImpl implements ICustomerAddressService {
                 .map (customerAddress -> customerAddressMapper
                         .toDTO (customerAddress, CustomerAddressDTO.class)).collect (Collectors.toList ());
 
-        return customerAddressDTOS;
+        return CompletableFuture.completedFuture (customerAddressDTOS);
     }
 
     @Override
-    @CachePut(value = "customer-address", key = "")
-    public CustomerAddressDTO add (CustomerAddressDTO dtoModel) {
+    @Async
+    @Transactional
+    @CachePut(value = "customer-address", key = "#result.addressID")
+    public CompletableFuture<CustomerAddressDTO> add (CustomerAddressDTO dtoModel) {
         CustomerAddress customerAddress = customerAddressMapper.toEntity (dtoModel, CustomerAddress.class);
         CustomerAddress savedCustomerAddress = customerAddressRepository.save (customerAddress);
-        return customerAddressMapper.toDTO (savedCustomerAddress, CustomerAddressDTO.class);
+        return CompletableFuture.completedFuture (customerAddressMapper.toDTO (savedCustomerAddress, CustomerAddressDTO.class));
     }
 
     @Override
-    @CachePut(value = "customer-address", key = "")
-    public CustomerAddressDTO update (CustomerAddressDTO dtoModel) {
+    @Async
+    @Transactional
+    @CachePut(value = "customer-address", key = "#result.addressID")
+    public CompletableFuture<CustomerAddressDTO> update (CustomerAddressDTO dtoModel) {
         CustomerAddress customerAddress = customerAddressMapper
                 .toEntity (dtoModel, CustomerAddress.class);
         CustomerAddress updatedCustomerAddress = customerAddressRepository.save (customerAddress);
-        return customerAddressMapper.toDTO (updatedCustomerAddress, CustomerAddressDTO.class);
+        return CompletableFuture.completedFuture (customerAddressMapper.toDTO (updatedCustomerAddress, CustomerAddressDTO.class));
     }
 
     @Override
+    @Async
+    @Transactional
     @CacheEvict(value = "customer-address", key = "#id")
-    public void deleteById (Long id) {
+    public CompletableFuture<Void> deleteById (Long id) {
         checkIfIdExist (customerAddressRepository, id);
         customerAddressRepository.deleteById (id);
         System.out.print (id + " " + Messages.REMOVED);
+        return CompletableFuture.completedFuture (null);
+    }
+
+    @Override
+    @Async
+    @Transactional
+    @CachePut(value = "customer-address-country", key = "#id")
+    public CompletableFuture<CustomerAddressDTO> findById (Long id) {
+        checkIfIdExist (customerAddressRepository, id);
+        CustomerAddress customerAddress = customerAddressRepository.findById (id)
+                .orElseThrow (
+                        () -> new EntityNotFoundException ("Customer Address not found with id: " + id));
+        return CompletableFuture.completedFuture (customerAddressMapper.toDTO (customerAddress, CustomerAddressDTO.class));
     }
 }

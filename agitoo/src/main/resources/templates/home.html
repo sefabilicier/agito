@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/bulma.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bulma.css}"/>
     <link href="/bulma.css" rel="stylesheet">
     <title>Home</title>
     <style>
         body {
+            font-family: 'SF Pro', sans-serif;
             opacity: 0;
             transition: opacity 0.5s ease-in-out;
         }
@@ -40,22 +41,42 @@
             border: hidden;
         }
 
-        #create{
+        #create {
             border-radius: 2px;
-            color:#4b0099
+            color: #4b0099
         }
 
-        #create-button{
+        #update {
+            border-radius: 2px;
+            color: #4b0099
+        }
+
+        #delete {
+            border-radius: 2px;
+            color: #4b0099
+        }
+
+        #create-button {
             margin: 15px;
         }
-        .gridded{
+
+        #update-button {
+            margin: 15px;
+        }
+
+        #delete-button {
+            margin: 15px;
+        }
+
+        .gridded {
             margin: 10px;
         }
+
         /*.cell {
             flex-grow: 1;  Hücrelerin genişlemesine izin verir
         }*/
         .cell {
-            justify-items:center;
+            justify-items: center;
             flex: 1 1 auto; /* Esnek genişleme ve daralma */
             min-width: 150px; /* Minimum genişlik */
         }
@@ -70,25 +91,27 @@
     </style>
 </head>
 <body class="is-max-desktop is-centered">
-    <header class="header marginless">
-        <div class="header-content has-text-centered">
-            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQET4TsFgH-xaA/company-logo_200_200/company-logo_200_200/0/1682585744401/agito_software__consulting_logo?e=2147483647&v=beta&t=AkqRUeVGcArZFN23nJr3PIMpjaeY4SI02U7bXjFZzI8" alt="logo">
-            <!--<img class="is-left " th:src="@{/images/agitoo.PNG}" alt="Logo" style="max-width: 200px; max-height: 200px;">-->
-            <h1 class="title" style="color:#ffffff">customer affairs</h1>
-        </div>
-    </header>
-    <main class="section">
-        <nav class="level is-widescreen">
-            <div class="level-item has-text-centered">
-                <div>
-                    <p class="heading" style="color:#ffffff">Customers</p>
-                    <p class="title">
-                        <span th:text="${customerCount}" style="color:#ffffff"></span>
-                    </p>
-                </div>
+<header class="header marginless">
+    <div class="header-content has-text-centered">
+        <img src="https://media.licdn.com/dms/image/v2/D4D0BAQET4TsFgH-xaA/company-logo_200_200/company-logo_200_200/0/1682585744401/agito_software__consulting_logo?e=2147483647&v=beta&t=AkqRUeVGcArZFN23nJr3PIMpjaeY4SI02U7bXjFZzI8"
+             alt="logo">
+        <!--<img class="is-left " th:src="@{/images/agitoo.PNG}" alt="Logo" style="max-width: 200px; max-height: 200px;">-->
+        <h1 class="is-size-4" style="color:white">customer affairs</h1>
+    </div>
+</header>
+<main class="section">
+    <nav class="level is-widescreen">
+        <div class="level-item has-text-centered">
+            <div>
+                <p class="heading" style="color:#ffffff">Customers</p>
+                <p class="title">
+                    <span th:text="${customerCount}" style="color:#ffffff"></span>
+                </p>
             </div>
-        </nav>
-        <div class="has-text-centered" id="create-button">
+        </div>
+    </nav>
+    <div class="fixed-grid is-centered">
+        <div class="cell is-gap-2 has-text-centered" id="create-button">
             <a
                     id="create"
                     class="button is-normal is-light is-bordered"
@@ -97,25 +120,45 @@
                 Create
             </a>
         </div>
-        <div class="grid is-centered gridded">
-            <div class="cell is-gap-2 is-bordered is-one-third" th:each="entry : ${apiLinks}">
-                <a class="unBordered" th:href="'http://localhost:8080' + ${entry.value}">
-                   <!--style="display: flex; justify-content: center; align-items: center; height: 100%; text-align: center;"-->
-                    <span style="color: #ffffff" th:text="${entry.key}"></span>
-                </a>
-            </div>
+        <!--<div class="cell is-gap-2 has-text-centered" id="update-button">
+            <a
+                    id="update"
+                    class="button is-normal is-light is-bordered"
+                    th:href="'http://localhost:8080/ui/update-by-id'"
+            >
+                Update
+            </a>
         </div>
-    </main>
-    <footer class="footer">
-        <div class="content has-text-centered " style="color:#ffffff">
-                <strong style="color:#ffffff">agito</strong> by <a href="https://tr.linkedin.com/in/sefabilicier" style="color:#ffffff">sefabilicier &copy; 2024</a>
+        <div class="cell is-gap-2 has-text-centered" id="delete-button">
+            <a
+                    id="delete"
+                    class="button is-normal is-light is-bordered"
+                    th:href="'http://localhost:8080/ui/delete-by-id'"
+            >
+                Delete
+            </a>
+        </div>-->
+    </div>
+    <div class="grid is-centered gridded">
+        <div class="cell is-gap-2 is-bordered is-one-third" th:each="entry : ${apiLinks}">
+            <a class="unBordered" th:href="'http://localhost:8080' + ${entry.value}">
+                <!--style="display: flex; justify-content: center; align-items: center; height: 100%; text-align: center;"-->
+                <span style="color: #ffffff" th:text="${entry.key}"></span>
+            </a>
         </div>
-    </footer>
-    <script>
-        document.addEventListener(
-            "DOMContentLoaded", function()
-            {document.body.classList.add('loaded');
-            });
-    </script>
+    </div>
+</main>
+<footer class="footer">
+    <div class="content has-text-centered " style="color:#ffffff">
+        <strong style="color:#ffffff">agito</strong> by <a href="https://tr.linkedin.com/in/sefabilicier"
+                                                           style="color:#ffffff">sefabilicier &copy; 2024</a>
+    </div>
+</footer>
+<script>
+    document.addEventListener(
+        "DOMContentLoaded", function () {
+            document.body.classList.add('loaded');
+        });
+</script>
 </body>
 </html>

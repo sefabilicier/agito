@@ -1,7 +1,13 @@
 package intern.customer.agitoo.DTO.DTOs;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import intern.customer.agitoo.Models.Concretes.Customer;
+import intern.customer.agitoo.Models.Concretes.CustomerAddressCity;
+import intern.customer.agitoo.Models.Concretes.CustomerAddressCountry;
 import intern.customer.agitoo.Models.enums.AddressType;
-import jakarta.validation.constraints.AssertTrue;
+import intern.customer.agitoo.Models.enums.IsDefault;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
@@ -16,7 +22,9 @@ import lombok.NoArgsConstructor;
 @Builder
 public class CustomerAddressDTO {
 
+    private Long addressID;
 
+    @Enumerated(EnumType.STRING)
     @NotNull(message = "{addressType.notNull}") //notnull for enum
     private AddressType addressType;
 
@@ -29,8 +37,10 @@ public class CustomerAddressDTO {
     @Pattern(regexp = "\\d+", message = "{postalCode.pattern}")
     private String postalCode;
 
-    @NotBlank(message = "{country.notBlank}")
-    private String country; //TODO: make it enum
+    @Enumerated(EnumType.STRING)
+    @NotNull(message = "{isDefault.notNull}")
+    private IsDefault isDefault;
+
 
     //@Convert(converter = BooleanToYesNoConverter.class)
     /*
@@ -40,9 +50,19 @@ public class CustomerAddressDTO {
      *    DTO Sınıfı: boolean türünde alan kullanılır ve @Convert anotasyonuna ihtiyaç duymaz.
      *
      * */
-    @AssertTrue(message = "{isDefault.assertTrue}") //for boolean
-    private boolean isDefault; //change for once at least to be true
+//    @AssertTrue(message = "{isDefault.assertTrue}") //for boolean
+//    private boolean isDefault; //change for once at least to be true
 
-//    @Valid
-//    private CustomerDTO customer;
+    @JsonIgnore
+    private Customer customer;
+    private Long customerId;
+
+    @JsonIgnore
+    private CustomerAddressCountry customerAddressCountry;
+    private Long customerAddressCountryId;
+
+    @JsonIgnore
+    private CustomerAddressCity customerAddressCity;
+    private Long customerAddressCityId;
+
 }

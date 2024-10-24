@@ -2,6 +2,8 @@ package intern.customer.agitoo.controller;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import intern.customer.agitoo.DTO.DTOs.CustomerDTO;
+import intern.customer.agitoo.Models.Concretes.Customer;
 import intern.customer.agitoo.Service.Concretes.CustomerServiceImpl;
 import intern.customer.agitoo.WebAPi.Concretes.CustomerController;
 import org.hamcrest.CoreMatchers;
@@ -18,13 +20,12 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-
-import intern.customer.agitoo.Models.Concretes.Customer;
-import intern.customer.agitoo.DTO.DTOs.CustomerDTO;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 import static intern.customer.agitoo.Models.enums.CustomerType.Company;
 import static intern.customer.agitoo.Models.enums.CustomerType.Person;
@@ -55,11 +56,11 @@ public class CustomerControllerTest {
     @InjectMocks
     private CustomerDTO customerDTO;
 
-    private Long customerId = 3L;
+    private final Long customerId = 3L;
 
     @BeforeEach
-    public void init(){
-        customer = Customer.builder()
+    public void init () {
+        customer = Customer.builder ()
                 .customerId (customerId)
                 .customerType (Person)
                 .customerAddresses (null)
@@ -71,62 +72,68 @@ public class CustomerControllerTest {
                 .build ();
         customerDTO = CustomerDTO.builder ()
                 .customerType (Company)
-                .personLists (null)
+                .list (null)
                 .companies (null)
                 .build ();
     }
 
     @Test
     public void CustomerController_CustomerDetail_ReturnCustomerDto () throws Exception {
-        when(customerService.getAll ()).thenReturn((List<CustomerDTO>) customerDTO);
+        List<CustomerDTO> customerDTOList = Arrays.asList(new CustomerDTO());
 
-        ResultActions response = mockMvc.perform(get ("/api/customer/get-all")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(customerDTO)));
+        when(customerService.getAll()).thenReturn(CompletableFuture.completedFuture(customerDTOList));
 
-        response.andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect (MockMvcResultMatchers.jsonPath ("$.customerType", CoreMatchers.is(customerDTO.getCustomerType ())))
+        ResultActions response = mockMvc.perform (get ("/api/customer/get-all")
+                .contentType (MediaType.APPLICATION_JSON)
+                .content (objectMapper.writeValueAsString (customerDTO)));
+
+        response.andExpect (MockMvcResultMatchers.status ().isOk ())
+                .andExpect (MockMvcResultMatchers.jsonPath ("$.customerType", CoreMatchers.is (customerDTO.getCustomerType ())))
                 .andExpect (MockMvcResultMatchers.jsonPath ("$.companies", CoreMatchers.is (null)))
                 .andExpect (MockMvcResultMatchers.jsonPath ("$.personList", CoreMatchers.is (null)));
     }
 
     @Test
-    public void CustomerController_AddCustomer_ReturnCreated() throws Exception {
-        given(customerService.add (ArgumentMatchers.any())).willAnswer ((invocation -> invocation.getArgument (0)));
+    public void CustomerController_AddCustomer_ReturnCreated () throws Exception {
+        given (customerService.add (ArgumentMatchers.any ())).willAnswer ((invocation -> invocation.getArgument (0)));
 
-        ResultActions response = mockMvc.perform (post("/api/customer/add")
+        ResultActions response = mockMvc.perform (post ("/api/customer/add")
                 .contentType (MediaType.APPLICATION_JSON)
-                .content (objectMapper.writeValueAsString(customerDTO)));
+                .content (objectMapper.writeValueAsString (customerDTO)));
 
         response
                 .andExpect (MockMvcResultMatchers.status ().isCreated ())
-                .andExpect (MockMvcResultMatchers.jsonPath ("$.customerType", CoreMatchers.is(customerDTO.getCustomerType ())))
+                .andExpect (MockMvcResultMatchers.jsonPath ("$.customerType", CoreMatchers.is (customerDTO.getCustomerType ())))
                 .andExpect (MockMvcResultMatchers.jsonPath ("$.companies", CoreMatchers.is (null)))
                 .andExpect (MockMvcResultMatchers.jsonPath ("$.personList", CoreMatchers.is (null)));
     }
 
     @Test
-    public void CustomerController_UpdateCustomer_ReturnCustomerDto() throws Exception {
-        when(customerService.update (customerDTO)).thenReturn(customerDTO);
+    public void CustomerController_UpdateCustomer_ReturnCustomerDto () throws Exception {
+        //when (customerService.update (customerDTO)).thenReturn (customerDTO);
 
-        ResultActions response = mockMvc.perform(put("/api/customer/update/1")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(customerDTO)));
+        CustomerDTO customerDTO = new CustomerDTO();
 
-        response.andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect (MockMvcResultMatchers.jsonPath ("$.customerType", CoreMatchers.is(customerDTO.getCustomerType ())))
+        when(customerService.update (customerDTO)).thenReturn(CompletableFuture.completedFuture(customerDTO));
+
+        ResultActions response = mockMvc.perform (put ("/api/customer/update/1")
+                .contentType (MediaType.APPLICATION_JSON)
+                .content (objectMapper.writeValueAsString (customerDTO)));
+
+        response.andExpect (MockMvcResultMatchers.status ().isOk ())
+                .andExpect (MockMvcResultMatchers.jsonPath ("$.customerType", CoreMatchers.is (customerDTO.getCustomerType ())))
                 .andExpect (MockMvcResultMatchers.jsonPath ("$.companies", CoreMatchers.is (null)))
                 .andExpect (MockMvcResultMatchers.jsonPath ("$.personList", CoreMatchers.is (null)));
     }
 
     @Test
-    public void CustomerController_DeleteCustomerById_ReturnString() throws Exception {
-        doNothing().when(customerService).deleteById (customerId);
+    public void CustomerController_DeleteCustomerById_ReturnString () throws Exception {
+        doNothing ().when (customerService).deleteById (customerId);
 
-        ResultActions response = mockMvc.perform(delete("/api/customer/delete/1")
-                .contentType(MediaType.APPLICATION_JSON));
+        ResultActions response = mockMvc.perform (delete ("/api/customer/delete/1")
+                .contentType (MediaType.APPLICATION_JSON));
 
-        response.andExpect(MockMvcResultMatchers.status().isOk());
+        response.andExpect (MockMvcResultMatchers.status ().isOk ());
     }
 
 }

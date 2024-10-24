@@ -32,28 +32,28 @@ $message-colors: dv.$colors !default;
 
 .#{iv.$class-prefix}message {
   @include cv.register-vars(
-    (
-      "message-border-l-delta": #{$message-border-l-delta},
-      "message-radius": #{$message-radius},
-      "message-header-weight": #{$message-header-weight},
-      "message-header-padding": #{$message-header-padding},
-      "message-header-radius": #{$message-header-radius},
-      "message-body-border-width": #{$message-body-border-width},
-      "message-body-color": #{$message-body-color},
-      "message-body-padding": #{$message-body-padding},
-      "message-body-radius": #{$message-body-radius},
-      "message-body-pre-code-background-color": #{$message-body-pre-code-background-color},
-      "message-header-body-border-width": #{$message-header-body-border-width},
-      "message-h": #{$message-h},
-      "message-s": #{$message-s},
-      "message-background-l": #{$message-background-l},
-      "message-border-l": #{$message-border-l},
-      "message-border-style": #{$message-border-style},
-      "message-border-width": #{$message-border-width},
-      "message-color-l": #{$message-color-l},
-      "message-header-background-l": #{$message-header-background-l},
-      "message-header-color-l": #{$message-header-color-l},
-    )
+                  (
+                          "message-border-l-delta": #{$message-border-l-delta},
+                          "message-radius": #{$message-radius},
+                          "message-header-weight": #{$message-header-weight},
+                          "message-header-padding": #{$message-header-padding},
+                          "message-header-radius": #{$message-header-radius},
+                          "message-body-border-width": #{$message-body-border-width},
+                          "message-body-color": #{$message-body-color},
+                          "message-body-padding": #{$message-body-padding},
+                          "message-body-radius": #{$message-body-radius},
+                          "message-body-pre-code-background-color": #{$message-body-pre-code-background-color},
+                          "message-header-body-border-width": #{$message-header-body-border-width},
+                          "message-h": #{$message-h},
+                          "message-s": #{$message-s},
+                          "message-background-l": #{$message-background-l},
+                          "message-border-l": #{$message-border-l},
+                          "message-border-style": #{$message-border-style},
+                          "message-border-width": #{$message-border-width},
+                          "message-color-l": #{$message-color-l},
+                          "message-header-background-l": #{$message-header-background-l},
+                          "message-header-color-l": #{$message-header-color-l},
+                  )
   );
 }
 
@@ -61,9 +61,9 @@ $message-colors: dv.$colors !default;
   @extend %block;
   border-radius: cv.getVar("message-radius");
   color: hsl(
-    #{cv.getVar("message-h")},
-    #{cv.getVar("message-s")},
-    #{cv.getVar("message-color-l")}
+                  #{cv.getVar("message-h")},
+                  #{cv.getVar("message-s")},
+                  #{cv.getVar("message-color-l")}
   );
   font-size: cv.getVar("size-normal");
 
@@ -95,19 +95,19 @@ $message-colors: dv.$colors !default;
   @each $name, $components in $message-colors {
     &.#{iv.$class-prefix}is-#{$name} {
       @include cv.register-vars(
-        (
-          "message-h": #{cv.getVar($name, "", "-h")},
-          "message-s": #{cv.getVar($name, "", "-s")},
-          "message-border-l":
-            calc(
-              #{cv.getVar($name, "", "-l")} + #{cv.getVar(
+                      (
+                              "message-h": #{cv.getVar($name, "", "-h")},
+                              "message-s": #{cv.getVar($name, "", "-s")},
+                              "message-border-l":
+                              calc(
+                                      #{cv.getVar($name, "", "-l")} + #{cv.getVar(
                   "message-border-l-delta"
                 )}
-            ),
-          "message-color-l": #{cv.getVar($name, "", "-on-scheme-l")},
-          "message-header-background-l": #{cv.getVar($name, "", "-l")},
-          "message-header-color-l": #{cv.getVar($name, "", "-invert-l")},
-        )
+                              ),
+                              "message-color-l": #{cv.getVar($name, "", "-on-scheme-l")},
+                              "message-header-background-l": #{cv.getVar($name, "", "-l")},
+                              "message-header-color-l": #{cv.getVar($name, "", "-invert-l")},
+                      )
       );
     }
   }
@@ -116,16 +116,16 @@ $message-colors: dv.$colors !default;
 .#{iv.$class-prefix}message-header {
   align-items: center;
   background-color: hsl(
-    #{cv.getVar("message-h")},
-    #{cv.getVar("message-s")},
-    #{cv.getVar("message-header-background-l")}
+                  #{cv.getVar("message-h")},
+                  #{cv.getVar("message-s")},
+                  #{cv.getVar("message-header-background-l")}
   );
   border-start-start-radius: cv.getVar("message-header-radius");
   border-start-end-radius: cv.getVar("message-header-radius");
   color: hsl(
-    #{cv.getVar("message-h")},
-    #{cv.getVar("message-s")},
-    #{cv.getVar("message-header-color-l")}
+                  #{cv.getVar("message-h")},
+                  #{cv.getVar("message-s")},
+                  #{cv.getVar("message-header-color-l")}
   );
   display: flex;
   font-weight: cv.getVar("message-header-weight");
@@ -149,14 +149,14 @@ $message-colors: dv.$colors !default;
 
 .#{iv.$class-prefix}message-body {
   background-color: hsl(
-    #{cv.getVar("message-h")},
-    #{cv.getVar("message-s")},
-    #{cv.getVar("message-background-l")}
+                  #{cv.getVar("message-h")},
+                  #{cv.getVar("message-s")},
+                  #{cv.getVar("message-background-l")}
   );
   border-inline-start-color: hsl(
-    #{cv.getVar("message-h")},
-    #{cv.getVar("message-s")},
-    #{cv.getVar("message-border-l")}
+                  #{cv.getVar("message-h")},
+                  #{cv.getVar("message-s")},
+                  #{cv.getVar("message-border-l")}
   );
   border-inline-start-style: #{cv.getVar("message-border-style")};
   border-inline-start-width: #{cv.getVar("message-border-width")};
@@ -166,14 +166,14 @@ $message-colors: dv.$colors !default;
   code,
   pre {
     background-color: hsl(
-      #{cv.getVar("message-h")},
-      #{cv.getVar("message-s")},
-      #{cv.getVar("message-header-color-l")}
+                    #{cv.getVar("message-h")},
+                    #{cv.getVar("message-s")},
+                    #{cv.getVar("message-header-color-l")}
     );
     color: hsl(
-      #{cv.getVar("message-h")},
-      #{cv.getVar("message-s")},
-      #{cv.getVar("message-header-background-l")}
+                    #{cv.getVar("message-h")},
+                    #{cv.getVar("message-s")},
+                    #{cv.getVar("message-header-background-l")}
     );
   }
 

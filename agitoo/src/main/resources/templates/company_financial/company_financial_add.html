@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/bulma.css}" />
-    <link rel="stylesheet" type="text/css" th:href="@{/css/bulma.min.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bulma.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bulma.min.css}"/>
     <link href="/static/bulma.css" rel="stylesheet">
-    <title>Person Add</title>
+    <title>Company Financial Add</title>
     <style>
         body {
             opacity: 0;
@@ -16,48 +16,51 @@
         body.loaded {
             opacity: 1;
         }
+
         .container {
             max-width: 500px;
             margin: 50px auto;
             padding: 20px;
         }
+
         .input {
             border-radius: 2px;
         }
-        .title {
-            color: #ffffff;
-        }
-        .header{
+
+        .header {
             margin: 50px;
             padding: 25px;
             background-color: #4b0099;
         }
 
-        .field-2{
+        .field-2 {
             margin: 20px;
             text-align: center;
         }
 
-        .button{
+        .button {
             border-radius: 2px;
         }
 
         .button.is-primary {
-            background-color: #4b0099; /* Button background color */
+            background-color: #4b0099;
             border-color: transparent;
-            color: white; /* Button text color */
+            color: white;
         }
 
         .button.is-primary:hover {
             background-color: #9400D3;
-            /*background-color: #1E00FF;  Button hover color */
+        }
+
+        .help {
+            color: red;
         }
     </style>
 </head>
 <body>
 <div class="is-widescreen">
     <header class="header has-text-centered marginless">
-        <h1 class="title">Create a Company Financial</h1>
+        <h1 class="is-size-3 label" style="color:white">Create a Company Financial</h1>
     </header>
     <main class="container is-max-tablet">
         <form
@@ -67,25 +70,75 @@
                 th:object="${companyFinancialDTO}"
                 method="post"
         >
+            <input type="hidden" th:field="${companyFinancialDTO.financialID}">
+            <input type="hidden" th:name="companyId" th:field="${companyId}">
+
             <div class="field">
                 <label class="label">Financial Year</label>
                 <div class="control">
                     <input class="input" type="text" placeholder="2010" th:field="${companyFinancialDTO.financialYear}">
                 </div>
+                <div th:if="${#fields.hasErrors('financialYear')}" class="help is-danger">
+                    <span th:errors="*{financialYear}"></span>
+                </div>
             </div>
+
             <div class="field">
                 <label class="label">Revenue</label>
                 <div class="control">
                     <input class="input" type="number" placeholder="5000000" th:field="${companyFinancialDTO.revenue}">
                 </div>
+                <div th:if="${#fields.hasErrors('revenue')}" class="help is-danger">
+                    <span th:errors="*{revenue}"></span>
+                </div>
             </div>
+
+            <div class="field">
+                <label class="label">Profit</label>
+                <div class="control">
+                    <input class="input" type="number" placeholder="1000000" th:field="${companyFinancialDTO.profit}">
+                </div>
+                <div th:if="${#fields.hasErrors('profit')}" class="help is-danger">
+                    <span th:errors="*{profit}"></span>
+                </div>
+            </div>
+
+            <div class="field">
+                <label class="label">Expenses</label>
+                <div class="control">
+                    <input class="input" type="number" placeholder="500000" th:field="${companyFinancialDTO.expenses}">
+                </div>
+                <div th:if="${#fields.hasErrors('expenses')}" class="help is-danger">
+                    <span th:errors="*{expenses}"></span>
+                </div>
+            </div>
+
+            <div class="field">
+                <label class="label">Assets</label>
+                <div class="control">
+                    <input class="input" type="number" placeholder="2000000" th:field="${companyFinancialDTO.assets}">
+                </div>
+                <div th:if="${#fields.hasErrors('assets')}" class="help is-danger">
+                    <span th:errors="*{assets}"></span>
+                </div>
+            </div>
+
+            <div class="field">
+                <label class="label">Liabilities</label>
+                <div class="control">
+                    <input class="input" type="number" placeholder="1000000"
+                           th:field="${companyFinancialDTO.liabilities}">
+                </div>
+                <div th:if="${#fields.hasErrors('liabilities')}" class="help is-danger">
+                    <span th:errors="*{liabilities}"></span>
+                </div>
+            </div>
+
             <div class="field-2 field is-grouped is-grouped-centered">
                 <p class="control">
                     <button
                             type="submit"
-                            class="button is-primary"
-                            th:href="'http://localhost:8080/ui/person-job-life/add'"
-                    >
+                            class="button is-primary">
                         Next
                     </button>
                 </p>
@@ -97,10 +150,9 @@
     </main>
 </div>
 <script>
-    document.addEventListener(
-        "DOMContentLoaded", function()
-        {document.body.classList.add('loaded');
-        });
+    document.addEventListener("DOMContentLoaded", function () {
+        document.body.classList.add('loaded');
+    });
 </script>
 </body>
 </html>

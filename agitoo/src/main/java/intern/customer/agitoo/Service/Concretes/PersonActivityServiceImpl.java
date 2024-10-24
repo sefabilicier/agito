@@ -6,15 +6,19 @@ import intern.customer.agitoo.Helper.Messages;
 import intern.customer.agitoo.Models.Concretes.PersonActivity;
 import intern.customer.agitoo.Repository.Abstracts.PersonActivityRepository;
 import intern.customer.agitoo.Service.Abstracts.IPersonActivityService;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 
 import static intern.customer.agitoo.Service.Rules.CommonBusinessRules.checkIfIdExist;
@@ -33,39 +37,60 @@ public class PersonActivityServiceImpl implements IPersonActivityService {
 
 
     @Override
+    @Async
+    @Transactional(readOnly = true)
     @Cacheable(value = "person-activity")
-    public List<PersonActivityDTO> getAll () {
+    public CompletableFuture<List<PersonActivityDTO>> getAll () {
         isConnected ();
         List<PersonActivity> personActivities = personActivityRepository.findAll ();
         List<PersonActivityDTO> personActivityDTOS = personActivities
                 .stream ()
                 .map (personActivity -> personActivityMapper.toDTO (personActivity, PersonActivityDTO.class))
                 .collect (Collectors.toList ());
-        return personActivityDTOS;
+        return CompletableFuture.completedFuture (personActivityDTOS);
     }
 
     @Override
-    @CachePut(value = "person-activity", key = "")
-    public PersonActivityDTO add (PersonActivityDTO dtoModel) {
+    @Async
+    @Transactional
+    @CachePut(value = "person-activity", key = "#result.activityId")
+    public CompletableFuture<PersonActivityDTO> add (PersonActivityDTO dtoModel) {
         PersonActivity personActivity = personActivityMapper.toEntity (dtoModel, PersonActivity.class);
         PersonActivity savedPersonActivity = personActivityRepository.save (personActivity);
-        return personActivityMapper.toDTO (savedPersonActivity, PersonActivityDTO.class);
+        return CompletableFuture.completedFuture (personActivityMapper.toDTO (savedPersonActivity, PersonActivityDTO.class));
     }
 
     @Override
-    @CachePut(value = "person-activity", key = "")
-    public PersonActivityDTO update (PersonActivityDTO dtoModel) {
+    @Async
+    @Transactional
+    @CachePut(value = "person-activity", key = "#result.activityId")
+    public CompletableFuture<PersonActivityDTO> update (PersonActivityDTO dtoModel) {
         PersonActivity personActivity = personActivityMapper
                 .toEntity (dtoModel, PersonActivity.class);
         PersonActivity updatedPersonActivity = personActivityRepository.save (personActivity);
-        return personActivityMapper.toDTO (updatedPersonActivity, PersonActivityDTO.class);
+        return CompletableFuture.completedFuture (personActivityMapper.toDTO (updatedPersonActivity, PersonActivityDTO.class));
     }
 
     @Override
+    @Async
+    @Transactional
     @CacheEvict(value = "person-activity", key = "#id")
-    public void deleteById (Long id) {
+    public CompletableFuture<Void> deleteById (Long id) {
         checkIfIdExist (personActivityRepository, id);
         personActivityRepository.deleteById (id);
         System.out.print (id + " " + Messages.REMOVED);
+        return CompletableFuture.completedFuture (null);
+    }
+
+    @Override
+    @Async
+    @Transactional
+    @CachePut(value = "person-activity", key = "#id")
+    public CompletableFuture<PersonActivityDTO> findById (Long id) {
+        checkIfIdExist (personActivityRepository, id);
+        PersonActivity personActivity = personActivityRepository.findById (id)
+                .orElseThrow (
+                        () -> new EntityNotFoundException ("Person activity not found with id: " + id));
+        return CompletableFuture.completedFuture (personActivityMapper.toDTO (personActivity, PersonActivityDTO.class));
     }
 }

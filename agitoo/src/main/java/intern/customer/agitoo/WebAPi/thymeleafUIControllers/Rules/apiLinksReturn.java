@@ -1,17 +1,14 @@
 package intern.customer.agitoo.WebAPi.thymeleafUIControllers.Rules;
 
 import org.springframework.stereotype.Component;
-import org.springframework.ui.Model;
 
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @Component
 public class apiLinksReturn {
 
-    public Map<String, String> uiApiLinks(){
+    public Map<String, String> uiApiLinks () {
         Map<String, String> apiLinks = new HashMap<> ();
         apiLinks.put ("Customer", "/ui/customer/get-all");
         apiLinks.put ("Person", "/ui/person/get-all");

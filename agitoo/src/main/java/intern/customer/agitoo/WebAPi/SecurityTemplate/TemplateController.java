@@ -9,17 +9,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class TemplateController {
 
     @GetMapping(value = "login")
-    public String getLogin() {
+    public String getLogin () {
         return "login";
     }
 
     @GetMapping(value = "logout")
-    public String logOut() {
+    public String logOut () {
         return "logout";
     }
 
     @GetMapping(value = "login-expired")
-    public String loginExpired(){
+    public String loginExpired () {
         return "login_expired";
     }
+
 }

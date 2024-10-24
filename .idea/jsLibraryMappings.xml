@@ -3,5 +3,6 @@
   <component name="JavaScriptLibraryMappings">
     <file url="file://$PROJECT_DIR$" libraries="{bootstrap, bulma, font-awesome, signin}" />
     <file url="file://$PROJECT_DIR$/agitoo" libraries="{bootstrap, bulma, font-awesome, signin}" />
+    <excludedPredefinedLibrary name="agitoo/agitoo/frontend/agitoofront/node_modules" />
   </component>
 </project>

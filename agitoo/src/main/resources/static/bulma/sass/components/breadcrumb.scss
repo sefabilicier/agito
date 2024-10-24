@@ -14,14 +14,14 @@ $breadcrumb-item-separator-color: cv.getVar("border") !default;
 
 .#{iv.$class-prefix}breadcrumb {
   @include cv.register-vars(
-    (
-      "breadcrumb-item-color": #{$breadcrumb-item-color},
-      "breadcrumb-item-hover-color": #{$breadcrumb-item-hover-color},
-      "breadcrumb-item-active-color": #{$breadcrumb-item-active-color},
-      "breadcrumb-item-padding-vertical": #{$breadcrumb-item-padding-vertical},
-      "breadcrumb-item-padding-horizontal": #{$breadcrumb-item-padding-horizontal},
-      "breadcrumb-item-separator-color": #{$breadcrumb-item-separator-color},
-    )
+                  (
+                          "breadcrumb-item-color": #{$breadcrumb-item-color},
+                          "breadcrumb-item-hover-color": #{$breadcrumb-item-hover-color},
+                          "breadcrumb-item-active-color": #{$breadcrumb-item-active-color},
+                          "breadcrumb-item-padding-vertical": #{$breadcrumb-item-padding-vertical},
+                          "breadcrumb-item-padding-horizontal": #{$breadcrumb-item-padding-horizontal},
+                          "breadcrumb-item-separator-color": #{$breadcrumb-item-separator-color},
+                  )
   );
 }
 
@@ -36,8 +36,7 @@ $breadcrumb-item-separator-color: cv.getVar("border") !default;
     color: cv.getVar("breadcrumb-item-color");
     display: flex;
     justify-content: center;
-    padding: cv.getVar("breadcrumb-item-padding-vertical")
-      cv.getVar("breadcrumb-item-padding-horizontal");
+    padding: cv.getVar("breadcrumb-item-padding-vertical") cv.getVar("breadcrumb-item-padding-horizontal");
 
     &:hover {
       color: cv.getVar("breadcrumb-item-hover-color");

@@ -17,13 +17,13 @@ $field-block-spacing: 0.75rem !default;
 
 :root {
   @include cv.register-vars(
-    (
-      "label-color": #{$label-color},
-      "label-spacing": #{$label-spacing},
-      "label-weight": #{$label-weight},
-      "help-size": #{$help-size},
-      "field-block-spacing": #{$field-block-spacing},
-    )
+                  (
+                          "label-color": #{$label-color},
+                          "label-spacing": #{$label-spacing},
+                          "label-weight": #{$label-weight},
+                          "help-size": #{$help-size},
+                          "field-block-spacing": #{$field-block-spacing},
+                  )
   );
 }
 
@@ -59,9 +59,9 @@ $field-block-spacing: 0.75rem !default;
   @each $name, $pair in $label-colors {
     &.#{iv.$class-prefix}is-#{$name} {
       color: hsl(
-        #{cv.getVar($name, "", "-h")},
-        #{cv.getVar($name, "", "-s")},
-        #{cv.getVar($name, "", "-on-scheme-l")}
+                      #{cv.getVar($name, "", "-h")},
+                      #{cv.getVar($name, "", "-s")},
+                      #{cv.getVar($name, "", "-on-scheme-l")}
       );
     }
   }
@@ -71,9 +71,9 @@ $field-block-spacing: 0.75rem !default;
 
 .#{iv.$class-prefix}field {
   @include cv.register-vars(
-    (
-      "block-spacing": #{cv.getVar("field-block-spacing")},
-    )
+                  (
+                          "block-spacing": #{cv.getVar("field-block-spacing")},
+                  )
   );
 
   @extend %block;

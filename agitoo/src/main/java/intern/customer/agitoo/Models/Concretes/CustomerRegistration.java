@@ -1,6 +1,7 @@
 package intern.customer.agitoo.Models.Concretes;
 
 
+import intern.customer.agitoo.Models.enums.IsActive;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -25,12 +26,12 @@ public class CustomerRegistration {
     @Column(name = "REGISTRATIONID")
     private Long registrationID;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "ISACTIVE")
-    private String isActive; //Y * N
+    private IsActive isActive;
 
     @Column(name = "REGISTRATIONDATE")
-    private LocalDateTime registrationDate = LocalDateTime.now ();
-    ;
+    private LocalDateTime registrationDate; //= LocalDateTime.now ()
 
     @Column(name = "LASTLOGINDATE")
     private LocalDateTime lastLoginDate;

@@ -1,6 +1,7 @@
 # [Bulma](https://bulma.io)
 
-Bulma is a **modern CSS framework** based on [Flexbox](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Flexible_Box_Layout/Using_CSS_flexible_boxes).
+Bulma is a **modern CSS framework** based
+on [Flexbox](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Flexible_Box_Layout/Using_CSS_flexible_boxes).
 
 ![Github](https://img.shields.io/github/v/release/jgthms/bulma?logo=Bulma)
 [![npm](https://img.shields.io/npm/v/bulma.svg)][npm-link]
@@ -52,15 +53,20 @@ Feel free to raise an issue or submit a pull request.
 
 ## CSS only
 
-Bulma is a **CSS** framework. As such, the sole output is a single CSS file: [bulma.css](https://github.com/jgthms/bulma/blob/master/css/bulma.css)
+Bulma is a **CSS** framework. As such, the sole output is a single CSS
+file: [bulma.css](https://github.com/jgthms/bulma/blob/master/css/bulma.css)
 
-You can either use that file, "out of the box", or download the Sass source files to customize the [variables](https://bulma.io/documentation/customize/#docsNav).
+You can either use that file, "out of the box", or download the Sass source files to customize
+the [variables](https://bulma.io/documentation/customize/#docsNav).
 
-There is **no** JavaScript included. People generally want to use their own JS implementation (and usually already have one). Bulma can be considered "environment agnostic": it's just the style layer on top of the logic.
+There is **no** JavaScript included. People generally want to use their own JS implementation (and usually already have
+one). Bulma can be considered "environment agnostic": it's just the style layer on top of the logic.
 
 ## Browser Support
 
-Bulma uses [autoprefixer](https://github.com/postcss/autoprefixer) to make (most) Flexbox features compatible with earlier browser versions. According to [Can I use](https://caniuse.com/#feat=flexbox), Bulma is compatible with **recent** versions of:
+Bulma uses [autoprefixer](https://github.com/postcss/autoprefixer) to make (most) Flexbox features compatible with
+earlier browser versions. According to [Can I use](https://caniuse.com/#feat=flexbox), Bulma is compatible with **recent
+** versions of:
 
 - Chrome
 - Edge
@@ -72,14 +78,15 @@ Internet Explorer (10+) is only partially supported.
 
 ## Documentation
 
-The documentation resides in the [docs](docs) directory, and is built with the Ruby-based [Jekyll](https://jekyllrb.com/) tool.
+The documentation resides in the [docs](docs) directory, and is built with the
+Ruby-based [Jekyll](https://jekyllrb.com/) tool.
 
 Browse the [online documentation here.](https://bulma.io/documentation/start/overview/)
 
 ## Related projects
 
 | Project                                                                              | Description                                                                                                      |
-| ------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------- |
+|--------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------|
 | [Bulma with Attribute Modules](https://github.com/j5bot/bulma-attribute-selectors)   | Adds support for attribute-based selectors                                                                       |
 | [Bulma with Rails](https://github.com/joshuajansen/bulma-rails)                      | Integrates Bulma with the rails asset pipeline                                                                   |
 | [BulmaRazor](https://github.com/loogn/bulmarazor)                                    | A lightweight component library based on Bulma and Blazor.                                                       |
@@ -115,7 +122,7 @@ Browse the [online documentation here.](https://bulma.io/documentation/start/ove
 | [Django Simple Bulma](https://github.com/python-discord/django-simple-bulma)         | Lightweight integration of Bulma and Bulma-Extensions for your Django app                                        |
 | [rbx](https://dfee.github.io/rbx)                                                    | Comprehensive React UI Framework written in TypeScript                                                           |
 | [Awesome Bulma Templates](https://github.com/aldi/awesome-bulma-templates)           | Free real-world Templates built with Bulma                                                                       |
-| [Trunx](https://github.com/fibo/trunx)                                               | Super Saiyan React components, son of awesome Bulma |
+| [Trunx](https://github.com/fibo/trunx)                                               | Super Saiyan React components, son of awesome Bulma                                                              |
 | [@aybolit/bulma](https://github.com/web-padawan/aybolit/tree/master/packages/bulma)  | Web Components library inspired by Bulma and Bulma-extensions                                                    |
 | [Drulma](https://www.drupal.org/project/drulma)                                      | Drupal theme for Bulma.                                                                                          |
 | [Bulrush](https://github.com/textbook/bulrush)                                       | A Bulma-based Python Pelican blog theme                                                                          |
@@ -131,15 +138,18 @@ Browse the [online documentation here.](https://bulma.io/documentation/start/ove
 | [@angular-bulma](https://quinnjr.github.io/angular-bulma)                            | [Angular](https://angular.io/) directives and components to use in your Bulma projects                           |
 | [Bulma CSS Class Completion](https://github.com/eliutdev/bulma-css-class-completion) | CSS class name completion for the HTML class attribute based on Bulma CSS classes.                               |
 | [Crispy-Bulma](https://github.com/ckrybus/crispy-bulma)                              | Bulma template pack for django-crispy-forms                                                                      |
-| [CASE](https://case.app)                                                             | CASE is Lightweight Backend-as-a-Service with essential features: DB, Admin panel, API, JS SDK         |
-| [Reactive Bulma](https://github.com/NicolasOmar/reactive-bulma)                                                             | A component library based on React, Bulma, Typescript and Rollup         |
+| [CASE](https://case.app)                                                             | CASE is Lightweight Backend-as-a-Service with essential features: DB, Admin panel, API, JS SDK                   |
+| [Reactive Bulma](https://github.com/NicolasOmar/reactive-bulma)                      | A component library based on React, Bulma, Typescript and Rollup                                                 |
 
 <p>Browser testing via <a href="https://www.lambdatest.com/" target="_blank"><img src="https://www.lambdatest.com/resources/images/logo-white.svg" style="vertical-align: middle;margin-left:5px" width="147" height="26" /></a></p>
 
 ## Copyright and license ![Github](https://img.shields.io/github/license/jgthms/bulma?logo=Github)
 
-Code copyright 2023 Jeremy Thomas. Code released under [the MIT license](https://github.com/jgthms/bulma/blob/master/LICENSE).
+Code copyright 2023 Jeremy Thomas. Code released
+under [the MIT license](https://github.com/jgthms/bulma/blob/master/LICENSE).
 
 [npm-link]: https://www.npmjs.com/package/bulma
+
 [awesome-link]: https://github.com/awesome-css-group/awesome-css
+
 [awesome-badge]: https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg

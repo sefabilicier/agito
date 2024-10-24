@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/bulma.css}" />
-    <link rel="stylesheet" type="text/css" th:href="@{/css/bulma.min.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bulma.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bulma.min.css}"/>
     <link href="/static/bulma.css" rel="stylesheet">
-    <title>Person Add</title>
+    <title>Person Job Life Add</title>
     <style>
         body {
             opacity: 0;
@@ -22,43 +22,46 @@
             margin: 50px auto;
             padding: 20px;
         }
+
         .input {
             border-radius: 2px;
         }
-        .title {
-            color: #ffffff;
-        }
-        .header{
+
+        .header {
             margin: 50px;
             padding: 25px;
             background-color: #4b0099;
         }
 
-        .field-2{
+        .field-2 {
             margin: 20px;
             text-align: center;
         }
 
-        .button{
+        .button {
             border-radius: 2px;
         }
 
         .button.is-primary {
-            background-color: #4b0099; /* Button background color */
+            background-color: #4b0099;
             border-color: transparent;
-            color: white; /* Button text color */
+            color: white;
         }
 
         .button.is-primary:hover {
             background-color: #9400D3;
-            /*background-color: #1E00FF;  Button hover color */
+        }
+
+        .error {
+            color: red;
+            font-size: 0.8em;
         }
     </style>
 </head>
 <body>
 <div class="is-widescreen">
     <header class="header has-text-centered marginless">
-        <h1 class="title">Create a Person Job Life</h1>
+        <h1 class="is-size-3 label" style="color:white">Create a Person Job Life</h1>
     </header>
     <main class="container is-max-tablet">
         <form
@@ -67,42 +70,52 @@
                 th:action="@{/ui/person-job-life/add}"
                 th:object="${personJobLifeDTO}"
                 method="post"
+                th:novalidate
         >
+            <input type="hidden" th:field="*{jobID}">
+            <input type="hidden" th:name="personId" th:value="*{personId}"/>
+
             <div class="field">
                 <label class="label">Job Title</label>
                 <div class="control">
-                    <input class="input" type="text" placeholder="Software Engineer" th:field="${personJobLifeDTO.jobTitle}">
+                    <input class="input" type="text" placeholder="Software Engineer" th:field="*{jobTitle}" required>
+                </div>
+                <div th:if="${#fields.hasErrors('jobTitle')}" class="error">
+                    <span th:errors="*{jobTitle}"></span>
                 </div>
             </div>
+
             <div class="field">
                 <label class="label">Department</label>
                 <div class="control">
-                    <input class="input" type="text" placeholder="Information Techonology" th:field="${personJobLifeDTO.department}">
+                    <input class="input" type="text" placeholder="Information Technology" th:field="*{department}"
+                           required>
+                </div>
+                <div th:if="${#fields.hasErrors('department')}" class="error">
+                    <span th:errors="*{department}"></span>
                 </div>
             </div>
+
             <div class="field">
                 <label class="label">Employment Type</label>
                 <div class="control">
-                    <div class="select">
+                    <div class="select" required>
                         <select th:field="*{employmentType}">
-                            <option th:each="employmentType : ${employmentType}"
-                                    th:value="${employmentType.employmentType}"
-                                    th:text="${employmentType.employmentType}">
-                            </option>
+                            <option value="" disabled selected>Select employment type</option>
+                            <option th:each="employmentType : ${employmentTypes}"
+                                    th:value="${employmentType}"
+                                    th:text="${employmentType}"></option>
                         </select>
                     </div>
+                </div>
+                <div th:if="${#fields.hasErrors('employmentType')}" class="error">
+                    <span th:errors="*{employmentType}"></span>
                 </div>
             </div>
 
             <div class="field-2 field is-grouped is-grouped-centered">
                 <p class="control">
-                    <button
-                            type="submit"
-                            class="button is-primary"
-                            th:href="'http://localhost:8080/ui/person-job-life/add'"
-                    >
-                        Next
-                    </button>
+                    <button type="submit" class="button is-primary">Next</button>
                 </p>
                 <p class="control">
                     <a class="button is-light" th:href="'http://localhost:8080/home'">Cancel</a>
@@ -110,13 +123,11 @@
             </div>
         </form>
     </main>
-
 </div>
 <script>
-    document.addEventListener(
-        "DOMContentLoaded", function()
-        {document.body.classList.add('loaded');
-        });
+    document.addEventListener("DOMContentLoaded", function () {
+        document.body.classList.add('loaded');
+    });
 </script>
 </body>
 </html>

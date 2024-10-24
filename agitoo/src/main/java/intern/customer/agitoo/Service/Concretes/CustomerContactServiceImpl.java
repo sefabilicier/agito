@@ -6,15 +6,19 @@ import intern.customer.agitoo.Helper.Messages;
 import intern.customer.agitoo.Models.Concretes.CustomerContact;
 import intern.customer.agitoo.Repository.Abstracts.CustomerContactRepository;
 import intern.customer.agitoo.Service.Abstracts.ICustomerContactService;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 
 import static intern.customer.agitoo.Service.Rules.CommonBusinessRules.checkIfIdExist;
@@ -32,40 +36,61 @@ public class CustomerContactServiceImpl implements ICustomerContactService {
     private CustomerContactMapper customerContactMapper;
 
     @Override
+    @Async
+    @Transactional(readOnly = true)
     @Cacheable(value = "customer-contact")
-    public List<CustomerContactDTO> getAll () {
+    public CompletableFuture<List<CustomerContactDTO>> getAll () {
         isConnected ();
         List<CustomerContact> customerContacts = customerContactRepository.findAll ();
         List<CustomerContactDTO> customerContactDTOS = customerContacts
                 .stream ()
                 .map (customerContact -> customerContactMapper
                         .toDTO (customerContact, CustomerContactDTO.class)).collect (Collectors.toList ());
-        return customerContactDTOS;
+        return CompletableFuture.completedFuture (customerContactDTOS);
     }
 
     @Override
-    @CachePut(value = "customer-contact", key = "")
-    public CustomerContactDTO add (CustomerContactDTO dtoModel) {
+    @Async
+    @Transactional
+    @CachePut(value = "customer-contact", key = "#result.contactID")
+    public CompletableFuture<CustomerContactDTO> add (CustomerContactDTO dtoModel) {
         CustomerContact customerContact = customerContactMapper.toEntity (dtoModel, CustomerContact.class);
         CustomerContact savedCustomerContact = customerContactRepository.save (customerContact);
-        return customerContactMapper.toDTO (savedCustomerContact, CustomerContactDTO.class);
+        return CompletableFuture.completedFuture (customerContactMapper.toDTO (savedCustomerContact, CustomerContactDTO.class));
 
     }
 
     @Override
-    @CachePut(value = "customer-contact", key = "")
-    public CustomerContactDTO update (CustomerContactDTO dtoModel) {
+    @Async
+    @Transactional
+    @CachePut(value = "customer-contact", key = "#result.contactID")
+    public CompletableFuture<CustomerContactDTO> update (CustomerContactDTO dtoModel) {
         CustomerContact customerContact = customerContactMapper
                 .toEntity (dtoModel, CustomerContact.class);
         CustomerContact updatedCustomerContact = customerContactRepository.save (customerContact);
-        return customerContactMapper.toDTO (updatedCustomerContact, CustomerContactDTO.class);
+        return CompletableFuture.completedFuture (customerContactMapper.toDTO (updatedCustomerContact, CustomerContactDTO.class));
     }
 
     @Override
+    @Async
+    @Transactional
     @CacheEvict(value = "customer-contact", key = "#id")
-    public void deleteById (Long id) {
+    public CompletableFuture<Void> deleteById (Long id) {
         checkIfIdExist (customerContactRepository, id);
         customerContactRepository.deleteById (id);
         System.out.print (id + " " + Messages.REMOVED);
+        return CompletableFuture.completedFuture (null);
+    }
+
+    @Override
+    @Async
+    @Transactional
+    @CachePut(value = "customer-contact", key = "#id")
+    public CompletableFuture<CustomerContactDTO> findById (Long id) {
+        checkIfIdExist (customerContactRepository, id);
+        CustomerContact customerContact = customerContactRepository.findById (id)
+                .orElseThrow (
+                        () -> new EntityNotFoundException ("Customer Claim not found with id: " + id));
+        return CompletableFuture.completedFuture (customerContactMapper.toDTO (customerContact, CustomerContactDTO.class));
     }
 }

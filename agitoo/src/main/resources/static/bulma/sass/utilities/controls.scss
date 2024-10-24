@@ -18,17 +18,17 @@ $control-focus-shadow-l: 50% !default;
 
 :root {
   @include cv.register-vars(
-    (
-      "control-radius": #{$control-radius},
-      "control-radius-small": #{$control-radius-small},
-      "control-border-width": #{$control-border-width},
-      "control-height": #{$control-height},
-      "control-line-height": #{$control-line-height},
-      "control-padding-vertical": #{$control-padding-vertical},
-      "control-padding-horizontal": #{$control-padding-horizontal},
-      "control-size": #{$control-size},
-      "control-focus-shadow-l": #{$control-focus-shadow-l},
-    )
+                  (
+                          "control-radius": #{$control-radius},
+                          "control-radius-small": #{$control-radius-small},
+                          "control-border-width": #{$control-border-width},
+                          "control-height": #{$control-height},
+                          "control-line-height": #{$control-line-height},
+                          "control-padding-vertical": #{$control-padding-vertical},
+                          "control-padding-horizontal": #{$control-padding-horizontal},
+                          "control-size": #{$control-size},
+                          "control-focus-shadow-l": #{$control-focus-shadow-l},
+                  )
   );
 }
 

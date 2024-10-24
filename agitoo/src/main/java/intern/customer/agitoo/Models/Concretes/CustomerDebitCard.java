@@ -32,6 +32,7 @@ public class CustomerDebitCard {
     @Column(name = "EXPIRATIONDATE")
     private Date expirationDate;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "ISSUER")
     private Issuer issuer;
 

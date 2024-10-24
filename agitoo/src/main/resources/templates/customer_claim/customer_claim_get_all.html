@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/bulma.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bulma.css}"/>
     <link href="/bulma.css" rel="stylesheet">
     <title>Customer Claim Management</title>
     <style>
@@ -37,11 +37,11 @@
             text-align: center;
         }
 
-        .table thead{
+        .table thead {
             background-color: #4b0099;
         }
 
-        .table:hover td:hover{
+        .table:hover td:hover {
             background-color: rgba(5, 41, 158, 0.29);
         }
 
@@ -68,16 +68,17 @@
 <body>
 <div class="is-widescreen is-centered">
     <header class="header">
-        <h1 class="title">Customer Claim Management</h1>
+        <h1 class="is-size-3 label" style="color:white">Customer Claim Management</h1>
     </header>
     <main class="table-container">
         <table class="table is-bordered is-striped is-hoverable is-fullwidth">
             <thead>
             <tr>
-                <th>Claim Date</th>
-                <th>Claim Amount</th>
-                <th>Claim Status</th>
-                <th>Claim Description</th>
+                <th class="has-text-centered">Claim Date</th>
+                <th class="has-text-centered">Claim Amount</th>
+                <th class="has-text-centered">Claim Status</th>
+                <th class="has-text-centered">Claim Description</th>
+                <th class="has-text-centered">Update</th>
             </tr>
             </thead>
             <tbody>
@@ -86,6 +87,12 @@
                 <td th:text="${claim.getClaimAmount()}"></td>
                 <td th:text="${claim.getClaimStatus()}"></td>
                 <td th:text="${claim.getClaimDescription()}"></td>
+                <td>
+                    <a class="is-link user-edit"
+                       th:href="@{/ui/customer-claim/update/{claimId}/edit(claimId=${claim.claimId})}">
+                        <span>Update</span>
+                    </a>
+                </td>
             </tr>
             </tbody>
         </table>
@@ -94,8 +101,8 @@
 </div>
 <script>
     document.addEventListener(
-        "DOMContentLoaded", function()
-        {document.body.classList.add('loaded');
+        "DOMContentLoaded", function () {
+            document.body.classList.add('loaded');
         });
 </script>
 </body>

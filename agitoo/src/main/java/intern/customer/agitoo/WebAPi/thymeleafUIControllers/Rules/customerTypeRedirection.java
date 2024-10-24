@@ -2,24 +2,25 @@ package intern.customer.agitoo.WebAPi.thymeleafUIControllers.Rules;
 
 import intern.customer.agitoo.DTO.DTOs.CustomerDTO;
 import intern.customer.agitoo.Models.enums.CustomerType;
-import lombok.AllArgsConstructor;
-import lombok.Data;
 import org.springframework.stereotype.Component;
 
 @Component
 public class customerTypeRedirection {
 
-    public static String selectedCustomerType(
+    public static String selectedCustomerType (
             CustomerDTO customerDTO,
             String personRedirect,
             String companyRedirect,
-            String mainRedirect){
-        if (CustomerType.Person.equals(customerDTO.getCustomerType())) {
+            String mainRedirect) {
+        if (
+                CustomerType.Person
+                        .equals (customerDTO.getCustomerType ())) {
             return personRedirect;
-        } else if (CustomerType.Company.equals (customerDTO.getCustomerType ())) {
+        } else if (
+                CustomerType.Company
+                        .equals (customerDTO.getCustomerType ())) {
             return companyRedirect;
-        }
-        else {
+        } else {
             return mainRedirect;
         }
     }

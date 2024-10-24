@@ -1,7 +1,10 @@
 package intern.customer.agitoo.DTO.DTOs;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import intern.customer.agitoo.Models.Concretes.*;
 import intern.customer.agitoo.Models.enums.CustomerType;
-import jakarta.validation.Valid;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -16,32 +19,35 @@ import java.util.List;
 @Builder
 public class CustomerDTO {
 
+    private Long customerId;
+
+    @Enumerated(EnumType.STRING)
     @NotNull(message = "{customerType.notNull}")
     private CustomerType customerType;
 
-    @Valid
-    private List<CompanyDTO> companies;
+    @JsonIgnore
+    private CustomerRegistration customerRegistration;
+    private Long customerRegistrationId;
 
-    @Valid
-    private List<PersonDTO> personLists;
+    @JsonIgnore
+    private List<Company> companies;
 
-    public String getCustomerTypeAsString() {
-        return customerType != null ? customerType.toString() : "";
-    }
+    @JsonIgnore
+    private List<Person> list;
 
+    @JsonIgnore
+    private List<CustomerAddress> customerAddresses;
 
-    /*@Valid
-    private List<CustomerAddressDTO> customerAddresses;
+    @JsonIgnore
+    private List<CustomerContact> customerContacts;
 
-    @Valid
-    private List<CustomerContactDTO> customerContacts;
+    @JsonIgnore
+    private List<CustomerDebitCard> customerDebitCards;
 
-    @Valid
-    private List<CustomerDebitCardDTO> customerDebitCards;
+    @JsonIgnore
+    private List<CustomerPayment> customerPayments;
 
-    @Valid
-    private List<CustomerPaymentDTO> customerPayments;
+    @JsonIgnore
+    private List<CustomerPolicy> customerPolicies;
 
-    @Valid
-    private List<CustomerPolicyDTO> customerPolicies;*/
 }

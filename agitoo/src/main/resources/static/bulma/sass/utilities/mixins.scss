@@ -46,20 +46,20 @@
 
 @mixin delete {
   @include cv.register-vars(
-    (
-      "delete-dimensions": 1.25rem,
-      "delete-background-l": 0%,
-      "delete-background-alpha": 0.5,
-      "delete-color": #{cv.getVar("white")},
-    )
+                  (
+                          "delete-dimensions": 1.25rem,
+                          "delete-background-l": 0%,
+                          "delete-background-alpha": 0.5,
+                          "delete-color": #{cv.getVar("white")},
+                  )
   );
 
   appearance: none;
   background-color: hsla(
-    #{cv.getVar("scheme-h")},
-    #{cv.getVar("scheme-s")},
-    #{cv.getVar("delete-background-l")},
-    #{cv.getVar("delete-background-alpha")}
+                  #{cv.getVar("scheme-h")},
+                  #{cv.getVar("scheme-s")},
+                  #{cv.getVar("delete-background-l")},
+                  #{cv.getVar("delete-background-alpha")}
   );
   border: none;
   border-radius: cv.getVar("radius-rounded");
@@ -141,9 +141,9 @@
   border: none;
   border-radius: cv.getVar("burger-border-radius");
   color: hsl(
-    cv.getVar("burger-h"),
-    cv.getVar("burger-s"),
-    cv.getVar("burger-l")
+                  cv.getVar("burger-h"),
+                  cv.getVar("burger-s"),
+                  cv.getVar("burger-l")
   );
   cursor: pointer;
   display: inline-flex;
@@ -183,19 +183,19 @@
 
   &:hover {
     background-color: hsla(
-      cv.getVar("burger-h"),
-      cv.getVar("burger-s"),
-      cv.getVar("burger-l"),
-      0.1
+                    cv.getVar("burger-h"),
+                    cv.getVar("burger-s"),
+                    cv.getVar("burger-l"),
+                    0.1
     );
   }
 
   &:active {
     background-color: hsla(
-      cv.getVar("burger-h"),
-      cv.getVar("burger-s"),
-      cv.getVar("burger-l"),
-      0.2
+                    cv.getVar("burger-h"),
+                    cv.getVar("burger-s"),
+                    cv.getVar("burger-l"),
+                    0.2
     );
   }
 

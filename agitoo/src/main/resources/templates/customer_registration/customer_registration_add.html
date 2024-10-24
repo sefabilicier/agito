@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/bulma.css}" />
-    <link rel="stylesheet" type="text/css" th:href="@{/css/bulma.min.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bulma.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bulma.min.css}"/>
     <link href="/static/bulma.css" rel="stylesheet">
-    <title>Person Add</title>
+    <title>Customer Registration Add</title>
     <style>
         body {
             opacity: 0;
@@ -22,43 +22,46 @@
             margin: 50px auto;
             padding: 20px;
         }
+
         .input {
             border-radius: 2px;
         }
-        .title {
-            color: #ffffff;
-        }
-        .header{
+
+        .header {
             margin: 50px;
             padding: 25px;
             background-color: #4b0099;
         }
 
-        .field-2{
+        .field-2 {
             margin: 20px;
             text-align: center;
         }
 
-        .button{
+        .button {
             border-radius: 2px;
         }
 
         .button.is-primary {
-            background-color: #4b0099; /* Button background color */
+            background-color: #4b0099;
             border-color: transparent;
-            color: white; /* Button text color */
+            color: white;
         }
 
         .button.is-primary:hover {
             background-color: #9400D3;
-            /*background-color: #1E00FF;  Button hover color */
+        }
+
+        .error {
+            color: red;
+            font-size: 0.8em;
         }
     </style>
 </head>
 <body>
 <div class="is-widescreen">
     <header class="header has-text-centered marginless">
-        <h1 class="title">Create a Customer Registration</h1>
+        <h1 class="is-size-3 label" style="color:white">Create a Customer Registration</h1>
     </header>
     <main class="container is-max-tablet">
         <form
@@ -67,64 +70,103 @@
                 th:action="@{/ui/customer-registration/add}"
                 th:object="${customerRegistrationDTO}"
                 method="post"
+                th:novalidate
         >
+            <input type="hidden" th:field="${customerRegistrationDTO.registrationID}">
+            <input type="hidden" th:name="customerId" th:field="${customerId}">
+
             <div class="field">
                 <label class="label">Active</label>
                 <div class="control">
-                    <input class="input" type="text" placeholder="Y or N" th:field="${customerRegistrationDTO.isActive}">
+                    <div class="select">
+                        <select th:field="${customerRegistrationDTO.isActive}" required>
+                            <option value="" disabled selected>Select status</option>
+                            <option th:each="activity : ${activities}" th:value="${activity}"
+                                    th:text="${activity}"></option>
+                        </select>
+                    </div>
+                </div>
+                <div th:if="${#fields.hasErrors('isActive')}" class="error">
+                    <span th:errors="*{isActive}"></span>
                 </div>
             </div>
+
             <div class="field">
                 <label class="label">Registration Date</label>
                 <div class="control">
-                    <input class="input" type="date" placeholder="13.12.2024" th:field="${customerRegistrationDTO.regsitrationDate}">
+                    <input class="input" type="date" th:field="${customerRegistrationDTO.registrationDate}" required>
+                </div>
+                <div th:if="${#fields.hasErrors('registrationDate')}" class="error">
+                    <span th:errors="*{registrationDate}"></span>
                 </div>
             </div>
+
             <div class="field">
                 <label class="label">Last Login Date</label>
                 <div class="control">
-                    <input class="input" type="datetime-local" placeholder="13.12.2023" th:field="${customerRegistrationDTO.regsitrationDate}">
+                    <input class="input" type="datetime-local" th:field="${customerRegistrationDTO.lastLoginDate}"
+                           required>
+                </div>
+                <div th:if="${#fields.hasErrors('lastLoginDate')}" class="error">
+                    <span th:errors="*{lastLoginDate}"></span>
                 </div>
             </div>
+
             <div class="field">
-                <label class="label">Loyal Points</label>
+                <label class="label">Loyalty Points</label>
                 <div class="control">
-                    <input class="input" type="number" placeholder="5" th:field="${customerRegistrationDTO.loyaltyPoints}">
+                    <input class="input" type="number" th:field="${customerRegistrationDTO.loyaltyPoints}" required>
+                </div>
+                <div th:if="${#fields.hasErrors('loyaltyPoints')}" class="error">
+                    <span th:errors="*{loyaltyPoints}"></span>
                 </div>
             </div>
+
             <div class="field">
-                <label class="label">News Letter Subscription</label>
+                <label class="label">Newsletter Subscription</label>
                 <div class="control">
-                    <input class="input" type="text" placeholder="Y or N" th:field="${customerRegistrationDTO.newsLetterSubscription}">
+                    <input class="input" type="text" th:field="${customerRegistrationDTO.newsLetterSubscription}"
+                           required placeholder="Y or N">
+                </div>
+                <div th:if="${#fields.hasErrors('newsLetterSubscription')}" class="error">
+                    <span th:errors="*{newsLetterSubscription}"></span>
                 </div>
             </div>
+
             <div class="field">
                 <label class="label">Social Media Handle</label>
                 <div class="control">
-                    <input class="input" type="number" placeholder="" th:field="${customerRegistrationDTO.socialMediaHandle}">
+                    <input class="input" type="text" th:field="${customerRegistrationDTO.socialMediaHandle}" required>
+                </div>
+                <div th:if="${#fields.hasErrors('socialMediaHandle')}" class="error">
+                    <span th:errors="*{socialMediaHandle}"></span>
                 </div>
             </div>
+
             <div class="field">
                 <label class="label">Profile Picture URL</label>
                 <div class="control">
-                    <input class="input" type="url" placeholder="www.picture.com" th:field="${customerRegistrationDTO.profilePictureURL}">
+                    <input class="input" type="url" th:field="${customerRegistrationDTO.profilePictureURL}" required
+                           placeholder="https://example.com/picture.jpg">
+                </div>
+                <div th:if="${#fields.hasErrors('profilePictureURL')}" class="error">
+                    <span th:errors="*{profilePictureURL}"></span>
                 </div>
             </div>
+
             <div class="field">
-                <label class="label">Total Spent Time</label>
+                <label class="label">Total Spent</label>
                 <div class="control">
-                    <input class="input" type="number" placeholder="5" th:field="${customerRegistrationDTO.totalSpent}">
+                    <input class="input" type="number" th:field="${customerRegistrationDTO.totalSpent}" required>
+                </div>
+                <div th:if="${#fields.hasErrors('totalSpent')}" class="error">
+                    <span th:errors="*{totalSpent}"></span>
                 </div>
             </div>
+
             <div class="field-2 field is-grouped is-grouped-centered">
                 <p class="control">
-                    <button
-                            type="submit"
-                            class="button is-primary"
-                            th:href="'http://localhost:8080/ui/person-job-life/add'"
-                    >
-                        Next
-                    </button>
+                    <button type="submit" class="button is-primary">Next</button>
                 </p>
                 <p class="control">
                     <a class="button is-light" th:href="'http://localhost:8080/home'">Cancel</a>
@@ -134,10 +176,9 @@
     </main>
 </div>
 <script>
-    document.addEventListener(
-        "DOMContentLoaded", function()
-        {document.body.classList.add('loaded');
-        });
+    document.addEventListener("DOMContentLoaded", function () {
+        document.body.classList.add('loaded');
+    });
 </script>
 </body>
 </html>

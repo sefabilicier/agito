@@ -11,13 +11,12 @@ $card-radius: 0.75rem !default;
 $card-header-background-color: transparent !default;
 $card-header-color: cv.getVar("text-strong") !default;
 $card-header-padding: 0.75rem 1rem !default;
-$card-header-shadow: 0 0.125em 0.25em
-  hsla(
-    #{cv.getVar("scheme-h")},
-    #{cv.getVar("scheme-s")},
-    #{cv.getVar("scheme-invert-l")},
-    0.1
-  ) !default;
+$card-header-shadow: 0 0.125em 0.25em hsla(
+                #{cv.getVar("scheme-h")},
+                #{cv.getVar("scheme-s")},
+                #{cv.getVar("scheme-invert-l")},
+                0.1
+) !default;
 $card-header-weight: cv.getVar("weight-bold") !default;
 
 $card-content-background-color: transparent !default;
@@ -31,23 +30,23 @@ $card-media-margin: cv.getVar("block-spacing") !default;
 
 .#{iv.$class-prefix}card {
   @include cv.register-vars(
-    (
-      "card-color": #{$card-color},
-      "card-background-color": #{$card-background-color},
-      "card-shadow": #{$card-shadow},
-      "card-radius": #{$card-radius},
-      "card-header-background-color": #{$card-header-background-color},
-      "card-header-color": #{$card-header-color},
-      "card-header-padding": #{$card-header-padding},
-      "card-header-shadow": #{$card-header-shadow},
-      "card-header-weight": #{$card-header-weight},
-      "card-content-background-color": #{$card-content-background-color},
-      "card-content-padding": #{$card-content-padding},
-      "card-footer-background-color": #{$card-footer-background-color},
-      "card-footer-border-top": #{$card-footer-border-top},
-      "card-footer-padding": #{$card-footer-padding},
-      "card-media-margin": #{$card-media-margin},
-    )
+                  (
+                          "card-color": #{$card-color},
+                          "card-background-color": #{$card-background-color},
+                          "card-shadow": #{$card-shadow},
+                          "card-radius": #{$card-radius},
+                          "card-header-background-color": #{$card-header-background-color},
+                          "card-header-color": #{$card-header-color},
+                          "card-header-padding": #{$card-header-padding},
+                          "card-header-shadow": #{$card-header-shadow},
+                          "card-header-weight": #{$card-header-weight},
+                          "card-content-background-color": #{$card-content-background-color},
+                          "card-content-padding": #{$card-content-padding},
+                          "card-footer-background-color": #{$card-footer-background-color},
+                          "card-footer-border-top": #{$card-footer-border-top},
+                          "card-footer-padding": #{$card-footer-padding},
+                          "card-media-margin": #{$card-media-margin},
+                  )
   );
 }
 

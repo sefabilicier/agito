@@ -3,27 +3,27 @@
 @use "../utilities/initial-variables" as iv;
 
 $digits: (
-  "00",
-  "05",
-  "10",
-  "15",
-  "20",
-  "25",
-  "30",
-  "35",
-  "40",
-  "45",
-  "50",
-  "55",
-  "60",
-  "65",
-  "70",
-  "75",
-  "80",
-  "85",
-  "90",
-  "95",
-  "100"
+        "00",
+        "05",
+        "10",
+        "15",
+        "20",
+        "25",
+        "30",
+        "35",
+        "40",
+        "45",
+        "50",
+        "55",
+        "60",
+        "65",
+        "70",
+        "75",
+        "80",
+        "85",
+        "90",
+        "95",
+        "100"
 );
 
 .#{iv.$helpers-has-prefix}background {
@@ -32,15 +32,15 @@ $digits: (
 
 @each $name, $color in dv.$colors {
   $background: hsl(
-    #{cv.getVar($name, "", "-h")},
-    #{cv.getVar($name, "", "-s")},
-    #{cv.getVar($name, "", "-l")}
+                  #{cv.getVar($name, "", "-h")},
+                  #{cv.getVar($name, "", "-s")},
+                  #{cv.getVar($name, "", "-l")}
   );
 
   $color: hsl(
-    #{cv.getVar($name, "", "-h")},
-    #{cv.getVar($name, "", "-s")},
-    #{cv.getVar($name, "", "-l")}
+                  #{cv.getVar($name, "", "-h")},
+                  #{cv.getVar($name, "", "-s")},
+                  #{cv.getVar($name, "", "-l")}
   );
 
   .#{iv.$helpers-has-prefix}text-#{$name} {
@@ -54,198 +54,198 @@ $digits: (
   // Invert
   .#{iv.$helpers-has-prefix}text-#{$name}-invert {
     color: hsl(
-      #{cv.getVar($name, "", "-h")},
-      #{cv.getVar($name, "", "-s")},
-      #{cv.getVar($name, "", "-invert-l")}
+                    #{cv.getVar($name, "", "-h")},
+                    #{cv.getVar($name, "", "-s")},
+                    #{cv.getVar($name, "", "-invert-l")}
     ) !important;
   }
 
   .#{iv.$helpers-has-prefix}background-#{$name}-invert {
     background-color: hsl(
-      #{cv.getVar($name, "", "-h")},
-      #{cv.getVar($name, "", "-s")},
-      #{cv.getVar($name, "", "-invert-l")}
+                    #{cv.getVar($name, "", "-h")},
+                    #{cv.getVar($name, "", "-s")},
+                    #{cv.getVar($name, "", "-invert-l")}
     ) !important;
   }
 
   // On Scheme
   .#{iv.$helpers-has-prefix}text-#{$name}-on-scheme {
     color: hsl(
-      #{cv.getVar($name, "", "-h")},
-      #{cv.getVar($name, "", "-s")},
-      #{cv.getVar($name, "", "-on-scheme-l")}
+                    #{cv.getVar($name, "", "-h")},
+                    #{cv.getVar($name, "", "-s")},
+                    #{cv.getVar($name, "", "-on-scheme-l")}
     ) !important;
   }
 
   .#{iv.$helpers-has-prefix}background-#{$name}-on-scheme {
     background-color: hsl(
-      #{cv.getVar($name, "", "-h")},
-      #{cv.getVar($name, "", "-s")},
-      #{cv.getVar($name, "", "-on-scheme-l")}
+                    #{cv.getVar($name, "", "-h")},
+                    #{cv.getVar($name, "", "-s")},
+                    #{cv.getVar($name, "", "-on-scheme-l")}
     ) !important;
   }
 
   // Light
   .#{iv.$helpers-has-prefix}text-#{$name}-light {
     color: hsl(
-      #{cv.getVar($name, "", "-h")},
-      #{cv.getVar($name, "", "-s")},
-      #{cv.getVar($name, "", "-light-l")}
+                    #{cv.getVar($name, "", "-h")},
+                    #{cv.getVar($name, "", "-s")},
+                    #{cv.getVar($name, "", "-light-l")}
     ) !important;
   }
 
   .#{iv.$helpers-has-prefix}background-#{$name}-light {
     background-color: hsl(
-      #{cv.getVar($name, "", "-h")},
-      #{cv.getVar($name, "", "-s")},
-      #{cv.getVar($name, "", "-light-l")}
+                    #{cv.getVar($name, "", "-h")},
+                    #{cv.getVar($name, "", "-s")},
+                    #{cv.getVar($name, "", "-light-l")}
     ) !important;
   }
 
   .#{iv.$helpers-has-prefix}text-#{$name}-light-invert {
     color: hsl(
-      #{cv.getVar($name, "", "-h")},
-      #{cv.getVar($name, "", "-s")},
-      #{cv.getVar($name, "", "-light-invert-l")}
+                    #{cv.getVar($name, "", "-h")},
+                    #{cv.getVar($name, "", "-s")},
+                    #{cv.getVar($name, "", "-light-invert-l")}
     ) !important;
   }
 
   .#{iv.$helpers-has-prefix}background-#{$name}-light-invert {
     background-color: hsl(
-      #{cv.getVar($name, "", "-h")},
-      #{cv.getVar($name, "", "-s")},
-      #{cv.getVar($name, "", "-light-invert-l")}
+                    #{cv.getVar($name, "", "-h")},
+                    #{cv.getVar($name, "", "-s")},
+                    #{cv.getVar($name, "", "-light-invert-l")}
     ) !important;
   }
 
   // Dark
   .#{iv.$helpers-has-prefix}text-#{$name}-dark {
     color: hsl(
-      #{cv.getVar($name, "", "-h")},
-      #{cv.getVar($name, "", "-s")},
-      #{cv.getVar($name, "", "-dark-l")}
+                    #{cv.getVar($name, "", "-h")},
+                    #{cv.getVar($name, "", "-s")},
+                    #{cv.getVar($name, "", "-dark-l")}
     ) !important;
   }
 
   .#{iv.$helpers-has-prefix}background-#{$name}-dark {
     background-color: hsl(
-      #{cv.getVar($name, "", "-h")},
-      #{cv.getVar($name, "", "-s")},
-      #{cv.getVar($name, "", "-dark-l")}
+                    #{cv.getVar($name, "", "-h")},
+                    #{cv.getVar($name, "", "-s")},
+                    #{cv.getVar($name, "", "-dark-l")}
     ) !important;
   }
 
   .#{iv.$helpers-has-prefix}text-#{$name}-dark-invert {
     color: hsl(
-      #{cv.getVar($name, "", "-h")},
-      #{cv.getVar($name, "", "-s")},
-      #{cv.getVar($name, "", "-dark-invert-l")}
+                    #{cv.getVar($name, "", "-h")},
+                    #{cv.getVar($name, "", "-s")},
+                    #{cv.getVar($name, "", "-dark-invert-l")}
     ) !important;
   }
 
   .#{iv.$helpers-has-prefix}background-#{$name}-dark-invert {
     background-color: hsl(
-      #{cv.getVar($name, "", "-h")},
-      #{cv.getVar($name, "", "-s")},
-      #{cv.getVar($name, "", "-dark-invert-l")}
+                    #{cv.getVar($name, "", "-h")},
+                    #{cv.getVar($name, "", "-s")},
+                    #{cv.getVar($name, "", "-dark-invert-l")}
     ) !important;
   }
 
   // Soft/Bold
   .#{iv.$helpers-has-prefix}text-#{$name}-soft {
     color: hsl(
-      #{cv.getVar($name, "", "-h")},
-      #{cv.getVar($name, "", "-s")},
-      #{cv.getVar("soft-l")}
+                    #{cv.getVar($name, "", "-h")},
+                    #{cv.getVar($name, "", "-s")},
+                    #{cv.getVar("soft-l")}
     ) !important;
   }
 
   .#{iv.$helpers-has-prefix}background-#{$name}-soft {
     background-color: hsl(
-      #{cv.getVar($name, "", "-h")},
-      #{cv.getVar($name, "", "-s")},
-      #{cv.getVar("soft-l")}
+                    #{cv.getVar($name, "", "-h")},
+                    #{cv.getVar($name, "", "-s")},
+                    #{cv.getVar("soft-l")}
     ) !important;
   }
 
   .#{iv.$helpers-has-prefix}text-#{$name}-bold {
     color: hsl(
-      #{cv.getVar($name, "", "-h")},
-      #{cv.getVar($name, "", "-s")},
-      #{cv.getVar("bold-l")}
+                    #{cv.getVar($name, "", "-h")},
+                    #{cv.getVar($name, "", "-s")},
+                    #{cv.getVar("bold-l")}
     ) !important;
   }
 
   .#{iv.$helpers-has-prefix}background-#{$name}-bold {
     background-color: hsl(
-      #{cv.getVar($name, "", "-h")},
-      #{cv.getVar($name, "", "-s")},
-      #{cv.getVar("bold-l")}
+                    #{cv.getVar($name, "", "-h")},
+                    #{cv.getVar($name, "", "-s")},
+                    #{cv.getVar("bold-l")}
     ) !important;
   }
 
   .#{iv.$helpers-has-prefix}text-#{$name}-soft-invert {
     color: hsl(
-      #{cv.getVar($name, "", "-h")},
-      #{cv.getVar($name, "", "-s")},
-      #{cv.getVar("soft-invert-l")}
+                    #{cv.getVar($name, "", "-h")},
+                    #{cv.getVar($name, "", "-s")},
+                    #{cv.getVar("soft-invert-l")}
     ) !important;
   }
 
   .#{iv.$helpers-has-prefix}background-#{$name}-soft-invert {
     background-color: hsl(
-      #{cv.getVar($name, "", "-h")},
-      #{cv.getVar($name, "", "-s")},
-      #{cv.getVar("soft-invert-l")}
+                    #{cv.getVar($name, "", "-h")},
+                    #{cv.getVar($name, "", "-s")},
+                    #{cv.getVar("soft-invert-l")}
     ) !important;
   }
 
   .#{iv.$helpers-has-prefix}text-#{$name}-bold-invert {
     color: hsl(
-      #{cv.getVar($name, "", "-h")},
-      #{cv.getVar($name, "", "-s")},
-      #{cv.getVar("bold-invert-l")}
+                    #{cv.getVar($name, "", "-h")},
+                    #{cv.getVar($name, "", "-s")},
+                    #{cv.getVar("bold-invert-l")}
     ) !important;
   }
 
   .#{iv.$helpers-has-prefix}background-#{$name}-bold-invert {
     background-color: hsl(
-      #{cv.getVar($name, "", "-h")},
-      #{cv.getVar($name, "", "-s")},
-      #{cv.getVar("bold-invert-l")}
+                    #{cv.getVar($name, "", "-h")},
+                    #{cv.getVar($name, "", "-s")},
+                    #{cv.getVar("bold-invert-l")}
     ) !important;
   }
 
   @each $digit in $digits {
     .#{iv.$helpers-has-prefix}text-#{$name}-#{$digit} {
       color: hsl(
-        #{cv.getVar($name, "", "-h")},
-        #{cv.getVar($name, "", "-s")},
-        #{cv.getVar($name, "", "-#{$digit}-l")}
+                      #{cv.getVar($name, "", "-h")},
+                      #{cv.getVar($name, "", "-s")},
+                      #{cv.getVar($name, "", "-#{$digit}-l")}
       ) !important;
     }
 
     .#{iv.$helpers-has-prefix}background-#{$name}-#{$digit} {
       background-color: hsl(
-        #{cv.getVar($name, "", "-h")},
-        #{cv.getVar($name, "", "-s")},
-        #{cv.getVar($name, "", "-#{$digit}-l")}
+                      #{cv.getVar($name, "", "-h")},
+                      #{cv.getVar($name, "", "-s")},
+                      #{cv.getVar($name, "", "-#{$digit}-l")}
       ) !important;
     }
 
     .#{iv.$helpers-has-prefix}text-#{$name}-#{$digit}-invert {
       color: hsl(
-        #{cv.getVar($name, "", "-h")},
-        #{cv.getVar($name, "", "-s")},
-        #{cv.getVar($name, "", "-#{$digit}-invert-l")}
+                      #{cv.getVar($name, "", "-h")},
+                      #{cv.getVar($name, "", "-s")},
+                      #{cv.getVar($name, "", "-#{$digit}-invert-l")}
       ) !important;
     }
 
     .#{iv.$helpers-has-prefix}background-#{$name}-#{$digit}-invert {
       background-color: hsl(
-        #{cv.getVar($name, "", "-h")},
-        #{cv.getVar($name, "", "-s")},
-        #{cv.getVar($name, "", "-#{$digit}-invert-l")}
+                      #{cv.getVar($name, "", "-h")},
+                      #{cv.getVar($name, "", "-s")},
+                      #{cv.getVar($name, "", "-#{$digit}-invert-l")}
       ) !important;
     }
   }
@@ -257,21 +257,21 @@ $digits: (
     &:hover,
     &:focus-visible {
       color: hsl(
-        #{cv.getVar($name, "", "-h")},
-        #{cv.getVar($name, "", "-s")},
-        calc(
-          #{cv.getVar($name, "", "-l")} + #{cv.getVar("hover-color-l-delta")}
-        )
+                      #{cv.getVar($name, "", "-h")},
+                      #{cv.getVar($name, "", "-s")},
+                      calc(
+                              #{cv.getVar($name, "", "-l")} + #{cv.getVar("hover-color-l-delta")}
+                      )
       ) !important;
     }
 
     &:active {
       color: hsl(
-        #{cv.getVar($name, "", "-h")},
-        #{cv.getVar($name, "", "-s")},
-        calc(
-          #{cv.getVar($name, "", "-l")} + #{cv.getVar("active-color-l-delta")}
-        )
+                      #{cv.getVar($name, "", "-h")},
+                      #{cv.getVar($name, "", "-s")},
+                      calc(
+                              #{cv.getVar($name, "", "-l")} + #{cv.getVar("active-color-l-delta")}
+                      )
       ) !important;
     }
   }
@@ -282,23 +282,23 @@ $digits: (
     &:hover,
     &:focus-visible {
       background-color: hsl(
-        #{cv.getVar($name, "", "-h")},
-        #{cv.getVar($name, "", "-s")},
-        calc(
-          #{cv.getVar($name, "", "-l")} +
-            #{cv.getVar("hover-background-l-delta")}
-        )
+                      #{cv.getVar($name, "", "-h")},
+                      #{cv.getVar($name, "", "-s")},
+                      calc(
+                              #{cv.getVar($name, "", "-l")} +
+                              #{cv.getVar("hover-background-l-delta")}
+                      )
       ) !important;
     }
 
     &:active {
       background-color: hsl(
-        #{cv.getVar($name, "", "-h")},
-        #{cv.getVar($name, "", "-s")},
-        calc(
-          #{cv.getVar($name, "", "-l")} +
-            #{cv.getVar("active-background-l-delta")}
-        )
+                      #{cv.getVar($name, "", "-h")},
+                      #{cv.getVar($name, "", "-s")},
+                      calc(
+                              #{cv.getVar($name, "", "-l")} +
+                              #{cv.getVar("active-background-l-delta")}
+                      )
       ) !important;
     }
   }

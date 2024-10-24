@@ -30,35 +30,35 @@ $table-row-active-color: cv.getVar("primary-invert") !default;
 
 $table-striped-row-even-background-color: cv.getVar("scheme-main-bis") !default;
 $table-striped-row-even-hover-background-color: cv.getVar(
-  "scheme-main-ter"
+                "scheme-main-ter"
 ) !default;
 
 $table-colors: dv.$colors !default;
 
 .#{iv.$class-prefix}table {
   @include cv.register-vars(
-    (
-      "table-color": #{$table-color},
-      "table-background-color": #{$table-background-color},
-      "table-cell-border-color": #{$table-cell-border-color},
-      "table-cell-border-style": #{$table-cell-border-style},
-      "table-cell-border-width": #{$table-cell-border-width},
-      "table-cell-padding": #{$table-cell-padding},
-      "table-cell-heading-color": #{$table-cell-heading-color},
-      "table-cell-text-align": #{$table-cell-text-align},
-      "table-head-cell-border-width": #{$table-head-cell-border-width},
-      "table-head-cell-color": #{$table-head-cell-color},
-      "table-foot-cell-border-width": #{$table-foot-cell-border-width},
-      "table-foot-cell-color": #{$table-foot-cell-color},
-      "table-head-background-color": #{$table-head-background-color},
-      "table-body-background-color": #{$table-body-background-color},
-      "table-foot-background-color": #{$table-foot-background-color},
-      "table-row-hover-background-color": #{$table-row-hover-background-color},
-      "table-row-active-background-color": #{$table-row-active-background-color},
-      "table-row-active-color": #{$table-row-active-color},
-      "table-striped-row-even-background-color": #{$table-striped-row-even-background-color},
-      "table-striped-row-even-hover-background-color": #{$table-striped-row-even-hover-background-color},
-    )
+                  (
+                          "table-color": #{$table-color},
+                          "table-background-color": #{$table-background-color},
+                          "table-cell-border-color": #{$table-cell-border-color},
+                          "table-cell-border-style": #{$table-cell-border-style},
+                          "table-cell-border-width": #{$table-cell-border-width},
+                          "table-cell-padding": #{$table-cell-padding},
+                          "table-cell-heading-color": #{$table-cell-heading-color},
+                          "table-cell-text-align": #{$table-cell-text-align},
+                          "table-head-cell-border-width": #{$table-head-cell-border-width},
+                          "table-head-cell-color": #{$table-head-cell-color},
+                          "table-foot-cell-border-width": #{$table-foot-cell-border-width},
+                          "table-foot-cell-color": #{$table-foot-cell-color},
+                          "table-head-background-color": #{$table-head-background-color},
+                          "table-body-background-color": #{$table-body-background-color},
+                          "table-foot-background-color": #{$table-foot-background-color},
+                          "table-row-hover-background-color": #{$table-row-hover-background-color},
+                          "table-row-active-background-color": #{$table-row-active-background-color},
+                          "table-row-active-color": #{$table-row-active-color},
+                          "table-striped-row-even-background-color": #{$table-striped-row-even-background-color},
+                          "table-striped-row-even-hover-background-color": #{$table-striped-row-even-hover-background-color},
+                  )
   );
 }
 
@@ -82,12 +82,12 @@ $table-colors: dv.$colors !default;
     @each $name, $pair in $table-colors {
       &.#{iv.$class-prefix}is-#{$name} {
         @include cv.register-vars(
-          (
-            "table-color": #{cv.getVar($name, "", "-invert")},
-            "table-cell-heading-color": #{cv.getVar($name, "", "-invert")},
-            "table-cell-background-color": #{cv.getVar($name)},
-            "table-cell-border-color": #{cv.getVar($name)},
-          )
+                        (
+                                "table-color": #{cv.getVar($name, "", "-invert")},
+                                "table-cell-heading-color": #{cv.getVar($name, "", "-invert")},
+                                "table-cell-background-color": #{cv.getVar($name)},
+                                "table-cell-border-color": #{cv.getVar($name)},
+                        )
         );
       }
     }
@@ -141,12 +141,12 @@ $table-colors: dv.$colors !default;
     @each $name, $pair in $table-colors {
       &.#{iv.$class-prefix}is-#{$name} {
         @include cv.register-vars(
-          (
-            "table-color": #{cv.getVar($name, "", "-invert")},
-            "table-cell-heading-color": #{cv.getVar($name, "", "-invert")},
-            "table-cell-background-color": #{cv.getVar($name)},
-            "table-cell-border-color": #{cv.getVar($name)},
-          )
+                        (
+                                "table-color": #{cv.getVar($name, "", "-invert")},
+                                "table-cell-heading-color": #{cv.getVar($name, "", "-invert")},
+                                "table-cell-background-color": #{cv.getVar($name)},
+                                "table-cell-border-color": #{cv.getVar($name)},
+                        )
         );
       }
     }
@@ -223,7 +223,7 @@ $table-colors: dv.$colors !default;
 
             &:nth-child(even) {
               background-color: cv.getVar(
-                "table-striped-row-even-hover-background-color"
+                              "table-striped-row-even-hover-background-color"
               );
             }
           }
@@ -244,7 +244,7 @@ $table-colors: dv.$colors !default;
       tr:not(.#{iv.$class-prefix}is-selected) {
         &:nth-child(even) {
           background-color: cv.getVar(
-            "table-striped-row-even-background-color"
+                          "table-striped-row-even-background-color"
           );
         }
       }

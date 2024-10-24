@@ -6,7 +6,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <title>Login</title>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/bulma.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bulma.css}"/>
     <link href="/static/bulma.css" rel="stylesheet">
     <style>
         body {
@@ -32,32 +32,33 @@
 <body>
 <div class="login-container">
     <div class="box">
-        <h1 class="title is-4 has-text-centered">Your session has expired</h1>
+        <h1 class="title is-4 has-text-centered" style="color:#4b0099">Your session has expired</h1>
         <p class="has-text-centered">You will be redirected to the login page</p>
         <p class="has-text-centered"> in <span id="countdown" class="countdown">5</span> seconds... </p>
     </div>
 </div>
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
         let countdownElement = document.getElementById('countdown');
-        let countdownValue = 5; // Set countdown time in seconds
+        let countDownValue = 5; // Set countdown time in seconds
         let redirectUrl = '/login'; // URL to redirect to
 
         function updateCountdown() {
-            countdownElement.textContent = countdownValue;
-            if (countdownValue <= 0) {
+            countdownElement.textContent = countDownValue;
+            if (countDownValue <= 0) {
                 window.location.href = redirectUrl;
             } else {
-                countdownValue--;
+                countDownValue--;
                 setTimeout(updateCountdown, 1000); // Update every second
             }
         }
+
         updateCountdown();
     });
 
     document.addEventListener(
-        "DOMContentLoaded", function()
-        {document.body.classList.add('loaded');
+        "DOMContentLoaded", function () {
+            document.body.classList.add('loaded');
         });
 </script>
 </body>

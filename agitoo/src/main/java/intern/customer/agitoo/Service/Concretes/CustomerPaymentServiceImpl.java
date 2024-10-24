@@ -6,15 +6,19 @@ import intern.customer.agitoo.Helper.Messages;
 import intern.customer.agitoo.Models.Concretes.CustomerPayment;
 import intern.customer.agitoo.Repository.Abstracts.CustomerPaymentRepository;
 import intern.customer.agitoo.Service.Abstracts.ICustomerPaymentService;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 
 import static intern.customer.agitoo.Service.Rules.CommonBusinessRules.checkIfIdExist;
@@ -32,8 +36,10 @@ public class CustomerPaymentServiceImpl implements ICustomerPaymentService {
     private CustomerPaymentMapper customerPaymentMapper;
 
     @Override
+    @Async
+    @Transactional(readOnly = true)
     @Cacheable(value = "customer-payment")
-    public List<CustomerPaymentDTO> getAll () {
+    public CompletableFuture<List<CustomerPaymentDTO>> getAll () {
         isConnected ();
         List<CustomerPayment> customerPayments = customerPaymentRepository.findAll ();
         List<CustomerPaymentDTO> customerPaymentDTOS = customerPayments
@@ -41,30 +47,49 @@ public class CustomerPaymentServiceImpl implements ICustomerPaymentService {
                 .map (customerPayment -> customerPaymentMapper
                         .toDTO (customerPayment, CustomerPaymentDTO.class))
                 .collect (Collectors.toList ());
-        return customerPaymentDTOS;
+        return CompletableFuture.completedFuture (customerPaymentDTOS);
     }
 
     @Override
-    @CachePut(value = "customer-payment", key = "")
-    public CustomerPaymentDTO add (CustomerPaymentDTO dtoModel) {
+    @Async
+    @Transactional
+    @CachePut(value = "customer-payment", key = "#result.paymentID")
+    public CompletableFuture<CustomerPaymentDTO> add (CustomerPaymentDTO dtoModel) {
         CustomerPayment customerPayment = customerPaymentMapper.toEntity (dtoModel, CustomerPayment.class);
         CustomerPayment savedCustomerPayment = customerPaymentRepository.save (customerPayment);
-        return customerPaymentMapper.toDTO (savedCustomerPayment, CustomerPaymentDTO.class);
+        return CompletableFuture.completedFuture (customerPaymentMapper.toDTO (savedCustomerPayment, CustomerPaymentDTO.class));
     }
 
     @Override
-    @CachePut(value = "customer-payment", key = "")
-    public CustomerPaymentDTO update (CustomerPaymentDTO dtoModel) {
+    @Async
+    @Transactional
+    @CachePut(value = "customer-payment", key = "#result.paymentID")
+    public CompletableFuture<CustomerPaymentDTO> update (CustomerPaymentDTO dtoModel) {
         CustomerPayment customerPayment = customerPaymentMapper.toEntity (dtoModel, CustomerPayment.class);
         CustomerPayment updatedCustomerPayment = customerPaymentRepository.save (customerPayment);
-        return customerPaymentMapper.toDTO (updatedCustomerPayment, CustomerPaymentDTO.class);
+        return CompletableFuture.completedFuture (customerPaymentMapper.toDTO (updatedCustomerPayment, CustomerPaymentDTO.class));
     }
 
     @Override
+    @Async
+    @Transactional
     @CacheEvict(value = "customer-payment", key = "#id")
-    public void deleteById (Long id) {
+    public CompletableFuture<Void> deleteById (Long id) {
         checkIfIdExist (customerPaymentRepository, id);
         customerPaymentRepository.deleteById (id);
         System.out.print (id + " " + Messages.REMOVED);
+        return CompletableFuture.completedFuture (null);
+    }
+
+    @Override
+    @Async
+    @Transactional
+    @CachePut(value = "customer-payment", key = "#id")
+    public CompletableFuture<CustomerPaymentDTO> findById (Long id) {
+        checkIfIdExist (customerPaymentRepository, id);
+        CustomerPayment customerPayment = customerPaymentRepository.findById (id)
+                .orElseThrow (
+                        () -> new EntityNotFoundException ("Customer payment not found with id: " + id));
+        return CompletableFuture.completedFuture (customerPaymentMapper.toDTO (customerPayment, CustomerPaymentDTO.class));
     }
 }

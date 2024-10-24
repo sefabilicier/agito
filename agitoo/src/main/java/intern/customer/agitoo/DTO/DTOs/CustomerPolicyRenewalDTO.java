@@ -1,9 +1,8 @@
 package intern.customer.agitoo.DTO.DTOs;
 
-import jakarta.validation.constraints.DecimalMin;
-import jakarta.validation.constraints.FutureOrPresent;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.PositiveOrZero;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import intern.customer.agitoo.Models.Concretes.CustomerPolicy;
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,6 +16,10 @@ import java.util.Date;
 @NoArgsConstructor
 @Builder
 public class CustomerPolicyRenewalDTO {
+
+    @NotNull(message = "{renewalId.notNull}")
+    @Positive(message = "{renewalId.positive}")
+    private Long renewalId;
 
     @NotNull(message = "{renewalDate.notNull}")
     @FutureOrPresent(message = "{renewalDate.futureOrPresent}")
@@ -32,6 +35,8 @@ public class CustomerPolicyRenewalDTO {
     @DecimalMin(value = "0.00", message = "{renewalCoverageAmount.decimalMin}")
     private BigDecimal renewalCoverageAmount;
 
-//    @Valid
-//    private CustomerPolicyDTO customerPolicy;
+    @JsonIgnore
+    private CustomerPolicy customerPolicy;
+    private Long customerPolicyId;
+
 }

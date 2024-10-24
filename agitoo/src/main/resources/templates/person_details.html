@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bulma.css}"/>
+    <link href="/bulma.css" rel="stylesheet">
+    <title>Customer Details</title>
+    <style>
+        body {
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        body.loaded {
+            opacity: 1;
+        }
+
+        .header {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .title {
+            margin: 10px;
+            color: #ffffff;
+        }
+
+        .container {
+            margin: 50px auto;
+            padding: 20px;
+        }
+
+        .header {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .table-container {
+            margin-bottom: 40px;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        .table thead th {
+            color: white;
+            text-align: center;
+            background-color: #4b0099;
+        }
+
+        .table tbody td {
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        .table tbody tr:nth-child(odd) {
+            background-color: #f5f5f5;
+        }
+
+        .table tbody {
+            background-color: #e8e8e8;
+        }
+
+        .button {
+            border-radius: 2px;
+        }
+
+        .button.is-primary {
+            background-color: #4b0099; /* Button background color */
+            border-color: transparent;
+            color: white; /* Button text color */
+        }
+
+        .button.is-primary:hover {
+            background-color: #9400D3;
+            /*background-color: #1E00FF;  Button hover color */
+        }
+    </style>
+</head>
+<body class="is-max-desktop is-centered">
+<header class="header marginless">
+    <div class="header-content has-text-centered">
+        <h1 class="is-size-4" style="color:white">Customer Details</h1>
+    </div>
+</header>
+<main class="section">
+    <div class="container">
+
+        <!-- Person Information -->
+        <div class="table-container">
+            <h2>Person Information</h2>
+            <table class="table is-bordered is-striped is-hoverable">
+                <tbody>
+                <tr>
+                    <td>Full Name:</td>
+                    <td th:text="${person.fullName}"></td>
+                </tr>
+                <tr>
+                    <td>Date of Birth:</td>
+                    <td th:text="${person.dateOfBirth}"></td>
+                </tr>
+                <tr>
+                    <td>Gender:</td>
+                    <td th:text="${person.gender}"></td>
+                </tr>
+                <tr>
+                    <td>Marital Status:</td>
+                    <td th:text="${person.maritalStatus}"></td>
+                </tr>
+                <tr>
+                    <td>Nationality:</td>
+                    <td th:text="${person.nationality}"></td>
+                </tr>
+                <tr>
+                    <td>Occupation:</td>
+                    <td th:text="${person.occupation}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Person -->
+        <div>
+            <h2>Person Information</h2>
+            <p th:text="'Full Name: ' + ${person.fullName}"></p>
+            <p th:text="'Date of Birth: ' + ${person.dateOfBirth}"></p>
+            <p th:text="'Gender: ' + ${person.gender}"></p>
+            <p th:text="'Marital Status: ' + ${person.maritalStatus}"></p>
+            <p th:text="'Nationality: ' + ${person.nationality}"></p>
+            <p th:text="'Occupation: ' + ${person.occupation}"></p>
+        </div>
+
+        <!-- Feedback -->
+        <div>
+            <h2>Feedback Information</h2>
+            <ul>
+                <li th:each="feedback : ${feedbacks}">
+                    <p th:text="'Rating: ' + ${feedback.rating}"></p>
+                    <p th:text="'Comments: ' + ${feedback.comments}"></p>
+                    <p th:text="'Feedback Date: ' + ${feedback.feedbackDate}"></p>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Job Life -->
+        <div>
+            <h2>Job Life Information</h2>
+            <ul>
+                <li th:each="job : ${jobLife}">
+                    <p th:text="'Job Title: ' + ${job.jobTitle}"></p>
+                    <p th:text="'Base Salary: ' + ${job.baseSalary}"></p>
+                    <p th:text="'Employment Type: ' + ${job.employmentType}"></p>
+                    <p th:text="'Department: ' + ${job.department}"></p>
+                    <p th:text="'Bonus: ' + ${job.bonus}"></p>
+                    <p th:text="'Total Annual Income: ' + ${job.totalAnnualIncome}"></p>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Activity -->
+        <div>
+            <h2>Activity Information</h2>
+            <ul>
+                <li th:each="activity : ${activities}">
+                    <p th:text="'Activity Type: ' + ${activity.activityType}"></p>
+                    <p th:text="'Activity Date: ' + ${activity.activityDate}"></p>
+                    <p th:text="'Description: ' + ${activity.description}"></p>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Support Ticket -->
+        <div>
+            <h2>Support Tickets Information</h2>
+            <ul>
+                <li th:each="ticket : ${supportTickets}">
+                    <p th:text="'Ticket Number: ' + ${ticket.ticketNumber}"></p>
+                    <p th:text="'Subject: ' + ${ticket.subject}"></p>
+                    <p th:text="'Status: ' + ${ticket.status}"></p>
+                    <p th:text="'Created Date: ' + ${ticket.createdDate}"></p>
+                    <p th:text="'Resolved Date: ' + ${ticket.resolvedDate}"></p>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Customer Claim -->
+        <div>
+            <h2>Claim Information</h2>
+            <ul>
+                <li th:each="claim : ${claims}">
+                    <p th:text="'Claim ID: ' + ${claim.claimId}"></p>
+                    <p th:text="'Claim Number: ' + ${claim.claimNumber}"></p>
+                    <p th:text="'Claim Date: ' + ${claim.claimDate}"></p>
+                    <p th:text="'Claim Amount: ' + ${claim.claimAmount}"></p>
+                    <p th:text="'Claim Status: ' + ${claim.claimStatus}"></p>
+                    <p th:text="'Claim Description: ' + ${claim.claimDescription}"></p>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Customer Contact -->
+        <div>
+            <h2>Contact Information</h2>
+            <ul>
+                <li th:each="contact : ${contacts}">
+                    <p th:text="'Contact ID: ' + ${contact.contactID}"></p>
+                    <p th:text="'Contact Name: ' + ${contact.contactName}"></p>
+                    <p th:text="'Contact Type: ' + ${contact.contactType}"></p>
+                    <p th:text="'Email: ' + ${contact.email}"></p>
+                    <p th:text="'Phone: ' + ${contact.phone}"></p>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Customer Debit Card -->
+        <div>
+            <h2>Debit Card Information</h2>
+            <ul>
+                <li th:each="card : ${debitCards}">
+                    <p th:text="'Debit Card ID: ' + ${card.debitCardID}"></p>
+                    <p th:text="'Card Number: ' + ${card.cardNumber}"></p>
+                    <p th:text="'Card Holder Name: ' + ${card.cardHolderName}"></p>
+                    <p th:text="'Expiration Date: ' + ${#dates.format(card.expirationDate, 'yyyy-MM-dd')}"></p>
+                    <p th:text="'Issuer: ' + ${card.issuer}"></p>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Customer Payment -->
+        <div>
+            <h2>Payment Information</h2>
+            <ul>
+                <li th:each="payment : ${payments}">
+                    <p th:text="'Payment ID: ' + ${payment.paymentID}"></p>
+                    <p th:text="'Payment Amount: ' + ${payment.paymentAmount} + ' USD'"></p>
+                    <p th:text="'Payment Date: ' + ${#dates.format(payment.paymentDate, 'yyyy-MM-dd HH:mm')}"></p>
+                    <p th:text="'Payment Method: ' + ${payment.paymentMethod}"></p>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Customer Policy -->
+        <div>
+            <h2>Policy Information</h2>
+            <ul>
+                <li th:each="policy : ${policies}">
+                    <p th:text="'Policy ID: ' + ${policy.customerPolicyId}"></p>
+                    <p th:text="'Policy Number: ' + ${policy.customerPolicyNumber}"></p>
+                    <p th:text="'Policy Type: ' + ${policy.customerPolicyType}"></p>
+                    <p th:text="'Start Date: ' + ${#dates.format(policy.customerPolicyStartDate, 'yyyy-MM-dd')}"></p>
+                    <p th:text="'End Date: ' + ${#dates.format(policy.customerPolicyEndDate, 'yyyy-MM-dd')}"></p>
+                    <p th:text="'Coverage Amount: ' + ${policy.coverageAmount} + ' USD'"></p>
+                    <p th:text="'Premium: ' + ${policy.premium} + ' USD'"></p>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Customer Policy Renewal -->
+        <div>
+            <h2>Policy Renewal Information</h2>
+            <ul>
+                <li th:each="renewal : ${renewals}">
+                    <p th:text="'Renewal ID: ' + ${renewal.renewalId}"></p>
+                    <p th:text="'Renewal Date: ' + ${#dates.format(renewal.renewalDate, 'yyyy-MM-dd')}"></p>
+                    <p th:text="'Renewal Premium: ' + ${renewal.renewalPremium} + ' USD'"></p>
+                    <p th:text="'Renewal Coverage Amount: ' + ${renewal.renewalCoverageAmount} + ' USD'"></p>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Customer Registration Detail -->
+        <div>
+            <h2>Registration Information</h2>
+            <p th:text="'Registration ID: ' + ${registration.registrationID}"></p>
+            <p th:text="'Active: ' + (${registration.isActive} == 'Y' ? 'Yes' : 'No')"></p>
+            <p th:text="'Registration Date: ' + ${#dates.format(registration.registrationDate, 'yyyy-MM-dd HH:mm')}"></p>
+            <p th:text="'Last Login Date: ' + ${#dates.format(registration.lastLoginDate, 'yyyy-MM-dd HH:mm')}"></p>
+            <p th:text="'Loyalty Points: ' + ${registration.loyaltyPoints}"></p>
+            <p th:text="'Newsletter Subscription: ' + (${registration.newsLetterSubscription} == 'Y' ? 'Subscribed' : 'Not Subscribed')"></p>
+            <p th:text="'Social Media Handle: ' + ${registration.socialMediaHandle}"></p>
+            <p th:text="'Profile Picture URL: ' + ${registration.profilePictureURL}"></p>
+            <p th:text="'Date of Last Purchase: ' + (${registration.dateOfLastPurchase} != null ? #dates.format(registration.dateOfLastPurchase, 'yyyy-MM-dd') : 'N/A')"></p>
+            <p th:text="'Total Spent: ' + ${registration.totalSpent} + ' USD'"></p>
+        </div>
+
+        <!-- Delete Button -->
+        <form method="post" th:action="@{/ui/person/delete/{personId}/delete(personId=${personId})}">
+            <button type="submit" class="button is-primary">Delete</button>
+        </form>
+    </div>
+</main>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        document.body.classList.add('loaded');
+    });
+</script>
+</body>
+</html>

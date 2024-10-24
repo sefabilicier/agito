@@ -1,18 +1,23 @@
 package intern.customer.agitoo.DTO.DTOs;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import intern.customer.agitoo.Models.Concretes.*;
 import intern.customer.agitoo.Models.enums.MaritalStatus;
 import intern.customer.agitoo.Models.enums.PersonGender;
 import jakarta.annotation.Nullable;
-import jakarta.validation.Valid;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Past;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.util.List;
+
 
 @Data
 @AllArgsConstructor
@@ -21,23 +26,27 @@ import java.util.List;
 //@JsonInclude(JsonInclude.Include.NON_NULL) // Sadece null olmayan değerler JSON'da görünecek
 public class PersonDTO {
 
+    private Long personId;
+
     @NotBlank(message = "{firstName.notBlank}")
-    @JsonIgnore
     private String firstName;
 
     @Nullable
-    @JsonIgnore
     private String middleName;
 
     @NotBlank(message = "{lastName.notBlank}")
-    @JsonIgnore
     private String lastName;
 
-    private String fullName;
+//    private String fullName;
+
+    @NotNull(message = "{dateOfBirth.notNull}")
+    @Past(message = "{dateOfBirth.Past}")
+    private LocalDate dateOfBirth;
 
     @NotNull(message = "{gender.notBlank}")
     private PersonGender gender;
 
+    @Enumerated(EnumType.STRING)
     @NotNull(message = "{maritalStatus.notBlank}")
     private MaritalStatus maritalStatus;
 
@@ -47,16 +56,22 @@ public class PersonDTO {
     @NotBlank(message = "{occupation.notBlank}")
     private String occupation;
 
-    //    @Valid
-//    private List<PersonActivityDTO> personActivities;
-//    @Valid
-//    private List<PersonFeedbackDTO> personFeedbacks;
-    @Valid
-    private List<PersonJobLifeDTO> personJobLifes;
-//    @Valid
-//    private List<PersonSupportTicketDTO> personSupportTickets;
-//    @Valid
-//    private CustomerDTO customer;
+    @JsonIgnore
+    private Customer customer;
+    private Long customerId;
+
+    @JsonIgnore
+    private List<PersonActivity> personActivities;
+
+    @JsonIgnore
+    private List<PersonFeedback> personFeedbacks;
+
+    @JsonIgnore
+    private List<PersonJobLife> personJobLives;
+
+    @JsonIgnore
+    private List<PersonSupportTicket> personSupportTickets;
+
 
     public String getFullName () {
         return firstName + (middleName != null ? " " + middleName : "") + " " + lastName;

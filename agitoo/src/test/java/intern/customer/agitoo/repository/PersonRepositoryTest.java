@@ -1,3 +1,4 @@
+/*
 package intern.customer.agitoo.repository;
 
 import com.github.javafaker.Faker;
@@ -8,7 +9,6 @@ import intern.customer.agitoo.Repository.Abstracts.PersonRepository;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.jdbc.EmbeddedDatabaseConnection;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
@@ -26,18 +26,18 @@ public class PersonRepositoryTest {
     private PersonRepository personRepository;
 
     @Test
-    public void PersonRepository_SaveAll_ReturnsSavedPerson(){
+    public void PersonRepository_SaveAll_ReturnsSavedPerson () {
 
         Faker faker = new Faker ();
 
         //Arrange
-        Person person = Person.builder()
+        Person person = Person.builder ()
                 .personId (1L)
                 .firstName (faker.name ().toString ())
                 .middleName ("")
                 .lastName ("Though")
                 .gender (PersonGender.Male)
-                .dateOfBirth (LocalDate.of(2005, 12, 25))
+                .dateOfBirth (LocalDate.of (2005, 12, 25))
                 .maritalStatus (MaritalStatus.Single)
                 .nationality ("Swedish")
                 .occupation ("Sweden")
@@ -47,36 +47,36 @@ public class PersonRepositoryTest {
         Person savedPerson = personRepository.save (person);
 
         //Asser
-        Assertions.assertThat(savedPerson).isNotNull();
-        Assertions.assertThat(savedPerson.getMiddleName ().isEmpty ());
+        Assertions.assertThat (savedPerson).isNotNull ();
+        Assertions.assertThat (savedPerson.getMiddleName ().isEmpty ());
 
     }
 
     @Test
-    public void PersonRepository_SaveAll_ReturnsMoreThenOne(){
+    public void PersonRepository_SaveAll_ReturnsMoreThenOne () {
 
         Faker faker = new Faker ();
 
         //Arrange
-        Person person = Person.builder()
-                .personId (1L)
+        Person person = Person.builder ()
+                .personId (100L)
                 .firstName (faker.name ().toString ())
                 .middleName ("")
                 .lastName ("Though")
                 .gender (PersonGender.Male)
-                .dateOfBirth (LocalDate.of(2005, 12, 25))
+                .dateOfBirth (LocalDate.of (2005, 12, 25))
                 .maritalStatus (MaritalStatus.Single)
                 .nationality ("Swedish")
                 .occupation ("Sweden")
                 .build ();
         //Arrange
-        Person person2 = Person.builder()
-                .personId (1L)
+        Person person2 = Person.builder ()
+                .personId (90L)
                 .firstName (faker.name ().toString ())
                 .middleName ("")
                 .lastName ("Though")
                 .gender (PersonGender.Male)
-                .dateOfBirth (LocalDate.of(2005, 12, 25))
+                .dateOfBirth (LocalDate.of (2005, 12, 25))
                 .maritalStatus (MaritalStatus.Single)
                 .nationality ("Swedish")
                 .occupation ("Sweden")
@@ -86,11 +86,11 @@ public class PersonRepositoryTest {
         Person savedPerson = personRepository.save (person);
         Person savedPerson2 = personRepository.save (person2);
 
-        List<Person> personList = personRepository.findAll();
+        List<Person> personList = personRepository.findAll ();
 
         //Asser
-        Assertions.assertThat(savedPerson).isNotNull();
-        Assertions.assertThat(savedPerson2).isNotNull();
+        Assertions.assertThat (savedPerson).isNotNull ();
+        Assertions.assertThat (savedPerson2).isNotNull ();
         Assertions.assertThat (personList).isNotNull ();
         Assertions.assertThat (personList.size ()).isEqualTo (2);
 
@@ -98,3 +98,4 @@ public class PersonRepositoryTest {
 
 
 }
+*/

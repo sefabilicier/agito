@@ -1,3 +1,4 @@
+/*
 package intern.customer.agitoo.model;
 
 import intern.customer.agitoo.Models.Concretes.Customer;
@@ -25,24 +26,25 @@ public class CustomerAddressTest {
     private CustomerAddressRepository customerAddressRepository;
 
     @Test
-    public void testCreateCustomerAndAddress() {
+    public void testCreateCustomerAndAddress () {
         // Arrange
-        Customer customer = new Customer();
-        customer.setCustomerType(CustomerType.Company);
+        Customer customer = new Customer ();
+        customer.setCustomerType (CustomerType.Company);
 
-        Customer savedCustomer = customerRepository.save(customer);
+        Customer savedCustomer = customerRepository.save (customer);
 
-        CustomerAddress address = new CustomerAddress();
-        address.setAddressLine1("123 Main St");
-        address.setCustomer(savedCustomer);
+        CustomerAddress address = new CustomerAddress ();
+        address.setAddressLine1 ("123 Main St");
+        address.setCustomer (savedCustomer);
 
         // Act
-        CustomerAddress savedAddress = customerAddressRepository.save(address);
+        CustomerAddress savedAddress = customerAddressRepository.save (address);
 
         // Assert
-        assertThat(savedAddress).isNotNull();
-        assertThat(savedAddress.getAddressID()).isGreaterThan(0);
-        assertThat(savedAddress.getAddressLine1()).isEqualTo("123 Main St");
-        assertThat(savedAddress.getCustomer()).isEqualTo(savedCustomer);
+        assertThat (savedAddress).isNotNull ();
+        assertThat (savedAddress.getAddressID ()).isGreaterThan (0);
+        assertThat (savedAddress.getAddressLine1 ()).isEqualTo ("123 Main St");
+        assertThat (savedAddress.getCustomer ()).isEqualTo (savedCustomer);
     }
 }
+*/

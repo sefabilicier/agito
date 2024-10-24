@@ -4,14 +4,16 @@ import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cache.concurrent.ConcurrentMapCache;
 import org.springframework.cache.support.SimpleCacheManager;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import java.util.Arrays;
 
-@Configuration
 @EnableCaching
+@Configuration
 public class CachingConfiguration {
 
+    @Bean
     public CacheManager cacheManager () {
         SimpleCacheManager cashList = new SimpleCacheManager ();
         cashList.setCaches (Arrays.asList (
@@ -24,7 +26,7 @@ public class CachingConfiguration {
                 new ConcurrentMapCache ("customer-debit-cart"),
                 new ConcurrentMapCache ("customer-payment"),
                 new ConcurrentMapCache ("customer-policy"),
-                new ConcurrentMapCache ("customer-poicy-renewal"),
+                new ConcurrentMapCache ("customer-policy-renewal"),
                 new ConcurrentMapCache ("customer-registration"),
                 new ConcurrentMapCache ("person"),
                 new ConcurrentMapCache ("person-activity"),

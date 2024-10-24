@@ -25,24 +25,24 @@ $subtitle-strong-weight: cv.getVar("weight-semibold") !default;
 .#{iv.$class-prefix}title,
 .#{iv.$class-prefix}subtitle {
   @include cv.register-vars(
-    (
-      "title-color": #{$title-color},
-      "title-family": #{$title-family},
-      "title-size": #{$title-size},
-      "title-weight": #{$title-weight},
-      "title-line-height": #{$title-line-height},
-      "title-strong-color": #{$title-strong-color},
-      "title-strong-weight": #{$title-strong-weight},
-      "title-sub-size": #{$title-sub-size},
-      "title-sup-size": #{$title-sup-size},
-      "subtitle-color": #{$subtitle-color},
-      "subtitle-family": #{$subtitle-family},
-      "subtitle-size": #{$subtitle-size},
-      "subtitle-weight": #{$subtitle-weight},
-      "subtitle-line-height": #{$subtitle-line-height},
-      "subtitle-strong-color": #{$subtitle-strong-color},
-      "subtitle-strong-weight": #{$subtitle-strong-weight},
-    )
+                  (
+                          "title-color": #{$title-color},
+                          "title-family": #{$title-family},
+                          "title-size": #{$title-size},
+                          "title-weight": #{$title-weight},
+                          "title-line-height": #{$title-line-height},
+                          "title-strong-color": #{$title-strong-color},
+                          "title-strong-weight": #{$title-strong-weight},
+                          "title-sub-size": #{$title-sub-size},
+                          "title-sup-size": #{$title-sup-size},
+                          "subtitle-color": #{$subtitle-color},
+                          "subtitle-family": #{$subtitle-family},
+                          "subtitle-size": #{$subtitle-size},
+                          "subtitle-weight": #{$subtitle-weight},
+                          "subtitle-line-height": #{$subtitle-line-height},
+                          "subtitle-strong-color": #{$subtitle-strong-color},
+                          "subtitle-strong-weight": #{$subtitle-strong-weight},
+                  )
   );
 }
 

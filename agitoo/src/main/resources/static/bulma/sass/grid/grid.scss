@@ -26,10 +26,10 @@ $grid-container-name: bulma-fixed-grid;
 
   > .#{iv.$class-prefix}grid {
     @include cv.register-vars(
-      (
-        "grid-gap-count": calc(#{cv.getVar("grid-column-count")} - 1),
-        "grid-column-count": 2,
-      )
+                    (
+                            "grid-gap-count": calc(#{cv.getVar("grid-column-count")} - 1),
+                            "grid-column-count": 2,
+                    )
     );
 
     grid-template-columns: repeat(cv.getVar("grid-column-count"), 1fr);
@@ -84,12 +84,12 @@ $grid-container-name: bulma-fixed-grid;
 
 .#{iv.$class-prefix}grid {
   @include cv.register-vars(
-    (
-      "grid-gap": $grip-gap,
-      "grid-column-min": 9rem,
-      "grid-cell-column-span": 1,
-      "grid-cell-row-span": 1,
-    )
+                  (
+                          "grid-gap": $grip-gap,
+                          "grid-column-min": 9rem,
+                          "grid-cell-column-span": 1,
+                          "grid-cell-row-span": 1,
+                  )
   );
 
   @extend %block;
@@ -99,23 +99,23 @@ $grid-container-name: bulma-fixed-grid;
   row-gap: #{cv.getVarWithBackup("grid-row-gap", "grid-gap")};
   grid-template-columns: repeat(
     auto-fit,
-    minmax(#{cv.getVar("grid-column-min")}, 1fr)
+                  minmax(#{cv.getVar("grid-column-min")}, 1fr)
   );
   grid-template-rows: auto;
 
   &.is-auto-fill {
     grid-template-columns: repeat(
       auto-fill,
-      minmax(#{cv.getVar("grid-column-min")}, 1fr)
+                    minmax(#{cv.getVar("grid-column-min")}, 1fr)
     );
   }
 
   @for $i from 1 through 32 {
     &.#{iv.$class-prefix}is-col-min-#{$i} {
       @include cv.register-vars(
-        (
-          "grid-column-min": #{$column-min-base * $i},
-        )
+                      (
+                              "grid-column-min": #{$column-min-base * $i},
+                      )
       );
     }
   }

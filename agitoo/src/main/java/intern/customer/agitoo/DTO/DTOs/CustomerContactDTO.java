@@ -1,9 +1,9 @@
 package intern.customer.agitoo.DTO.DTOs;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import intern.customer.agitoo.Models.Concretes.Customer;
 import intern.customer.agitoo.Models.enums.CustomerContactType;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,6 +14,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class CustomerContactDTO {
+
+    @NotNull(message = "{contactID.notNull}")
+    @Positive(message = "{contactID.positive}")
+    private Long contactID;
 
     @NotBlank(message = "{contactName.notBlank}")
     private String contactName;
@@ -29,6 +33,8 @@ public class CustomerContactDTO {
     @Pattern(regexp = "^(\\+\\d{1,3}[- ]?)?\\d{10}$", message = "{phone.pattern}")
     private String phone;
 
-//    @Valid
-//    private CustomerDTO customer;
+    @JsonIgnore
+    private Customer customer;
+    private Long customerId;
+
 }

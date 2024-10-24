@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/bulma.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bulma.css}"/>
     <link href="/static/bulma.css" rel="stylesheet">
     <title>Customer Management</title>
     <style>
@@ -37,11 +37,11 @@
             text-align: center;
         }
 
-        .table thead{
+        .table thead {
             background-color: #4b0099;
         }
 
-        .table:hover td:hover{
+        .table:hover td:hover {
             background-color: rgba(5, 41, 158, 0.29);
         }
 
@@ -66,34 +66,34 @@
     </style>
 </head>
 <body>
-    <div class="is-widescreen is-centered">
-        <header class="header">
-            <h1 class="title">Customer Management</h1>
-        </header>
-        <main class="table-container">
-            <table class="table is-bordered is-striped is-hoverable is-fullwidth">
-                <thead>
-                <tr>
-                    <th>Customer Type</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="customer : ${customers}">
-                    <!--<span th:if="${customer.customerTypeAsString} == 'M'" th:text="Male" />
-                    <span th:unless="${customer.customerTypeAsString} == 'M'" th:text="Female" />-->
-                    <td th:text="${customer.customerType}"></td>
-                </tr>
-                </tbody>
-            </table>
-            <p>Data available: <span th:text="${#lists.size(customers)}"></span></p>
-        </main>
-    </div>
-    <script>
-        document.addEventListener(
-            "DOMContentLoaded", function()
-            {document.body.classList.add('loaded');
-            });
-    </script>
+<div class="is-widescreen is-centered">
+    <header class="header">
+        <h1 class="is-size-3 label" style="color:white">Customer Management</h1>
+    </header>
+    <main class="table-container">
+        <table class="table is-bordered is-striped is-hoverable is-fullwidth">
+            <thead>
+            <tr>
+                <th>Customer Type</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="customer : ${customers}">
+                <!--<span th:if="${customer.customerTypeAsString} == 'M'" th:text="Male" />
+                <span th:unless="${customer.customerTypeAsString} == 'M'" th:text="Female" />-->
+                <td th:text="${customer.customerType}"></td>
+            </tr>
+            </tbody>
+        </table>
+        <p>Data available: <span th:text="${#lists.size(customers)}"></span></p>
+    </main>
+</div>
+<script>
+    document.addEventListener(
+        "DOMContentLoaded", function () {
+            document.body.classList.add('loaded');
+        });
+</script>
 </body>
 
 </html>

@@ -1,33 +1,28 @@
 package intern.customer.agitoo.DTO.Mappers;
 
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-@NoArgsConstructor
-@AllArgsConstructor
 public class GenericMapper<S, D> {
 
-    /* generic as allinOne
-
-     *  S -> Source ------------ Customer
-     *
-     *  D -> Destination ------- CustomerDTO
-
-     * */
+    private final ModelMapper modelMapper;
 
     @Autowired
-    private ModelMapper modelMapper;
+    public GenericMapper (ModelMapper modelMapper) {
+        this.modelMapper = modelMapper;
+    }
+
+
+    //variable = (condition) ? expressionTrue :  expressionFalse;
 
     public D toDTO (S source, Class<D> destinationClass) {
-        return modelMapper.map (source, destinationClass);
+        return source == null ? null : modelMapper.map (source, destinationClass);
     }
 
     public S toEntity (D destination, Class<S> sourceClass) {
-        return modelMapper.map (destination, sourceClass);
+        return destination == null ? null : modelMapper.map (destination, sourceClass);
     }
 }
 

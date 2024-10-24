@@ -54,10 +54,7 @@ public class Company {
 
     //foreign key
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "CUSTOMERID",
-            insertable = false,
-            updatable = false,
-            nullable = false)
+    @JoinColumn(name = "CUSTOMERID", nullable = false)
     private Customer customer;
 
     @OneToMany(mappedBy = "company", fetch = FetchType.LAZY, cascade = CascadeType.ALL)

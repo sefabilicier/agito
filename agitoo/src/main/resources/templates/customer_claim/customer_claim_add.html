@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/bulma.css}" />
-    <link rel="stylesheet" type="text/css" th:href="@{/css/bulma.min.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bulma.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bulma.min.css}"/>
     <link href="/static/bulma.css" rel="stylesheet">
-    <title>Person Add</title>
+    <title>Customer Claim Add</title>
     <style>
         body {
             opacity: 0;
@@ -22,36 +22,38 @@
             margin: 50px auto;
             padding: 20px;
         }
+
         .input {
             border-radius: 2px;
         }
-        .title {
-            color: #ffffff;
-        }
-        .header{
+
+        .header {
             margin: 50px;
             padding: 25px;
             background-color: #4b0099;
         }
 
-        .field-2{
+        .field-2 {
             margin: 20px;
             text-align: center;
         }
 
-        .button{
+        .button {
             border-radius: 2px;
         }
 
         .button.is-primary {
-            background-color: #4b0099; /* Button background color */
+            background-color: #4b0099;
             border-color: transparent;
-            color: white; /* Button text color */
+            color: white;
         }
 
         .button.is-primary:hover {
             background-color: #9400D3;
-            /*background-color: #1E00FF;  Button hover color */
+        }
+
+        .help {
+            color: red;
         }
     </style>
 </head>
@@ -59,7 +61,7 @@
 
 <div class="is-widescreen">
     <header class="header has-text-centered marginless">
-        <h1 class="title">Create a Customer Claim</h1>
+        <h1 class="is-size-3 label" style="color:white">Create a Customer Claim</h1>
     </header>
     <main class="container is-max-tablet">
         <form
@@ -69,40 +71,69 @@
                 th:object="${customerClaimDTO}"
                 method="post"
         >
+            <input type="hidden" th:field="*{claimId}">
+            <input type="hidden" th:name="customerPolicyId" th:field="${customerPolicyId}">
+
             <div class="field">
                 <label class="label">Date</label>
                 <div class="control">
                     <input class="input" type="date" placeholder="12.13.2020" th:field="${customerClaimDTO.claimDate}">
                 </div>
+                <div th:if="${#fields.hasErrors('claimDate')}" class="help is-danger">
+                    <span th:errors="*{claimDate}"></span>
+                </div>
             </div>
+
             <div class="field">
                 <label class="label">Amount</label>
                 <div class="control">
                     <input class="input" type="number" placeholder="500.00" th:field="${customerClaimDTO.claimAmount}">
                 </div>
+                <div th:if="${#fields.hasErrors('claimAmount')}" class="help is-danger">
+                    <span th:errors="*{claimAmount}"></span>
+                </div>
             </div>
+
             <div class="field">
                 <label class="label">Status</label>
                 <div class="control">
                     <div class="select">
                         <select th:field="*{claimStatus}">
-                            <option th:each="claimStatuss : ${claimStatus}"
-                                    th:value="${claimStatuss.claimStatus}"
-                                    th:text="${claimStatuss.claimStatus}">
-                            </option>
+                            <option th:each="status : ${claimStatus}"
+                                    th:value="${status}"
+                                    th:text="${status}"></option>
                         </select>
                     </div>
                 </div>
+                <div th:if="${#fields.hasErrors('claimStatus')}" class="help is-danger">
+                    <span th:errors="*{claimStatus}"></span>
+                </div>
             </div>
+
+            <div class="field">
+                <label class="label">Claim Number</label>
+                <div class="control">
+                    <input class="input" type="text" placeholder="12345" th:field="${customerClaimDTO.claimNumber}">
+                </div>
+                <div th:if="${#fields.hasErrors('claimNumber')}" class="help is-danger">
+                    <span th:errors="*{claimNumber}"></span>
+                </div>
+            </div>
+
+            <div class="field">
+                <label class="label">Description</label>
+                <div class="control">
+                    <textarea class="textarea" placeholder="Description"
+                              th:field="${customerClaimDTO.claimDescription}"></textarea>
+                </div>
+                <div th:if="${#fields.hasErrors('claimDescription')}" class="help is-danger">
+                    <span th:errors="*{claimDescription}"></span>
+                </div>
+            </div>
+
             <div class="field-2 field is-grouped is-grouped-centered">
                 <p class="control">
-                    <button
-                            type="submit"
-                            class="button is-primary"
-                            th:href="'http://localhost:8080/ui/person-job-life/add'"
-                    >
-                        Next
-                    </button>
+                    <button type="submit" class="button is-primary">Finish</button>
                 </p>
                 <p class="control">
                     <a class="button is-light" th:href="'http://localhost:8080/home'">Cancel</a>
@@ -112,10 +143,9 @@
     </main>
 </div>
 <script>
-    document.addEventListener(
-        "DOMContentLoaded", function()
-        {document.body.classList.add('loaded');
-        });
+    document.addEventListener("DOMContentLoaded", function () {
+        document.body.classList.add('loaded');
+    });
 </script>
 </body>
 </html>

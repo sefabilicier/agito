@@ -1,0 +1,52 @@
+version: '3.9'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: agitoo:latest
+    ports:
+      - "8080:8080"
+    env_file:
+      - .env
+    environment:
+      SPRING_APPLICATION_NAME: ${SPRING_APPLICATION_NAME}
+      SPRING_DATASOURCE_URL: ${SPRING_DATASOURCE_URL}
+      SPRING_DATASOURCE_USERNAME: ${SPRING_DATASOURCE_USERNAME}
+      SPRING_DATASOURCE_PASSWORD: ${SPRING_DATASOURCE_PASSWORD}
+      #SPRING_DATASOURCE_URL: jdbc:oracle:thin:@localhost:1521:XE
+    depends_on:
+      - db
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8080/health" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  db:
+    image: container-registry.oracle.com/database/express:21.3.0-xe
+    ports:
+      - "1522:1521"
+    environment:
+      ORACLE_ALLOW_REMOTE: ${ORACLE_ALLOW_REMOTE}
+      ORACLE_PASSWORD: ${ORACLE_PASSWORD}
+      ORACLE_SID: ${ORACLE_SID}
+    volumes:
+      - db_data:/u01/app/oracle/oradata
+
+  prometheus:
+    image: prom/prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+
+  grafana:
+    image: grafana/grafana
+    ports:
+      - "3000:3000"
+    environment:
+      GF_SECURITY_ADMIN_PASSWORD: ${GF_SECURITY_ADMIN_PASSWORD}
+volumes:
+  db_data:

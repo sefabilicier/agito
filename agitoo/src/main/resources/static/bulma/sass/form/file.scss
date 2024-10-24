@@ -38,28 +38,28 @@ $file-colors: shared.$form-colors !default;
   @extend %unselectable;
 
   @include cv.register-vars(
-    (
-      "file-radius": #{$file-radius},
-      "file-name-border-color": #{$file-name-border-color},
-      "file-name-border-style": #{$file-name-border-style},
-      "file-name-border-width": #{$file-name-border-width},
-      "file-name-max-width": #{$file-name-max-width},
-      "file-h": #{$file-h},
-      "file-s": #{$file-s},
-      "file-background-l": #{$file-background-l},
-      "file-background-l-delta": #{$file-background-l-delta},
-      "file-hover-background-l-delta": #{$file-hover-background-l-delta},
-      "file-active-background-l-delta": #{$file-active-background-l-delta},
-      "file-border-l": #{$file-border-l},
-      "file-border-l-delta": #{$file-border-l-delta},
-      "file-hover-border-l-delta": #{$file-hover-border-l-delta},
-      "file-active-border-l-delta": #{$file-active-border-l-delta},
-      "file-cta-color-l": #{$file-cta-color-l},
-      "file-name-color-l": #{$file-name-color-l},
-      "file-color-l-delta": #{$file-color-l-delta},
-      "file-hover-color-l-delta": #{$file-hover-color-l-delta},
-      "file-active-color-l-delta": #{$file-active-color-l-delta},
-    )
+                  (
+                          "file-radius": #{$file-radius},
+                          "file-name-border-color": #{$file-name-border-color},
+                          "file-name-border-style": #{$file-name-border-style},
+                          "file-name-border-width": #{$file-name-border-width},
+                          "file-name-max-width": #{$file-name-max-width},
+                          "file-h": #{$file-h},
+                          "file-s": #{$file-s},
+                          "file-background-l": #{$file-background-l},
+                          "file-background-l-delta": #{$file-background-l-delta},
+                          "file-hover-background-l-delta": #{$file-hover-background-l-delta},
+                          "file-active-background-l-delta": #{$file-active-background-l-delta},
+                          "file-border-l": #{$file-border-l},
+                          "file-border-l-delta": #{$file-border-l-delta},
+                          "file-hover-border-l-delta": #{$file-hover-border-l-delta},
+                          "file-active-border-l-delta": #{$file-active-border-l-delta},
+                          "file-cta-color-l": #{$file-cta-color-l},
+                          "file-name-color-l": #{$file-name-color-l},
+                          "file-color-l-delta": #{$file-color-l-delta},
+                          "file-hover-color-l-delta": #{$file-hover-color-l-delta},
+                          "file-active-color-l-delta": #{$file-active-color-l-delta},
+                  )
   );
 
   align-items: stretch;
@@ -71,14 +71,14 @@ $file-colors: shared.$form-colors !default;
   @each $name, $pair in $file-colors {
     &.#{iv.$class-prefix}is-#{$name} {
       @include cv.register-vars(
-        (
-          "file-h": #{cv.getVar($name, "", "-h")},
-          "file-s": #{cv.getVar($name, "", "-s")},
-          "file-background-l": #{cv.getVar($name, "", "-l")},
-          "file-border-l": #{cv.getVar($name, "", "-l")},
-          "file-cta-color-l": #{cv.getVar($name, "", "-invert-l")},
-          "file-name-color-l": #{cv.getVar($name, "", "-on-scheme-l")},
-        )
+                      (
+                              "file-h": #{cv.getVar($name, "", "-h")},
+                              "file-s": #{cv.getVar($name, "", "-s")},
+                              "file-background-l": #{cv.getVar($name, "", "-l")},
+                              "file-border-l": #{cv.getVar($name, "", "-l")},
+                              "file-cta-color-l": #{cv.getVar($name, "", "-invert-l")},
+                              "file-name-color-l": #{cv.getVar($name, "", "-on-scheme-l")},
+                      )
       );
     }
   }
@@ -235,21 +235,21 @@ $file-colors: shared.$form-colors !default;
 
   &:hover {
     @include cv.register-vars(
-      (
-        "file-background-l-delta": #{cv.getVar("file-hover-background-l-delta")},
-        "file-border-l-delta": #{cv.getVar("file-hover-border-l-delta")},
-        "file-color-l-delta": #{cv.getVar("file-hover-color-l-delta")},
-      )
+                    (
+                            "file-background-l-delta": #{cv.getVar("file-hover-background-l-delta")},
+                            "file-border-l-delta": #{cv.getVar("file-hover-border-l-delta")},
+                            "file-color-l-delta": #{cv.getVar("file-hover-color-l-delta")},
+                    )
     );
   }
 
   &:active {
     @include cv.register-vars(
-      (
-        "file-background-l-delta": #{cv.getVar("file-active-background-l-delta")},
-        "file-border-l-delta": #{cv.getVar("file-active-border-l-delta")},
-        "file-color-l-delta": #{cv.getVar("file-active-color-l-delta")},
-      )
+                    (
+                            "file-background-l-delta": #{cv.getVar("file-active-background-l-delta")},
+                            "file-border-l-delta": #{cv.getVar("file-active-border-l-delta")},
+                            "file-color-l-delta": #{cv.getVar("file-active-color-l-delta")},
+                    )
     );
   }
 }
@@ -268,9 +268,9 @@ $file-colors: shared.$form-colors !default;
 .#{iv.$class-prefix}file-name {
   @extend %control;
   border-color: hsl(
-    cv.getVar("file-h"),
-    cv.getVar("file-s"),
-    calc(#{cv.getVar("file-border-l")} + #{cv.getVar("file-border-l-delta")})
+                  cv.getVar("file-h"),
+                  cv.getVar("file-s"),
+                  calc(#{cv.getVar("file-border-l")} + #{cv.getVar("file-border-l-delta")})
   );
   border-radius: cv.getVar("file-radius");
   font-size: 1em;
@@ -281,33 +281,33 @@ $file-colors: shared.$form-colors !default;
 
 .#{iv.$class-prefix}file-cta {
   background-color: hsl(
-    cv.getVar("file-h"),
-    cv.getVar("file-s"),
-    calc(
-      #{cv.getVar("file-background-l")} + #{cv.getVar(
+                  cv.getVar("file-h"),
+                  cv.getVar("file-s"),
+                  calc(
+                          #{cv.getVar("file-background-l")} + #{cv.getVar(
           "file-background-l-delta"
         )}
-    )
+                  )
   );
   color: hsl(
-    cv.getVar("file-h"),
-    cv.getVar("file-s"),
-    calc(#{cv.getVar("file-cta-color-l")} + #{cv.getVar("file-color-l-delta")})
+                  cv.getVar("file-h"),
+                  cv.getVar("file-s"),
+                  calc(#{cv.getVar("file-cta-color-l")} + #{cv.getVar("file-color-l-delta")})
   );
 }
 
 .#{iv.$class-prefix}file-name {
   border-color: hsl(
-    cv.getVar("file-h"),
-    cv.getVar("file-s"),
-    calc(#{cv.getVar("file-border-l")} + #{cv.getVar("file-color-l-delta")})
+                  cv.getVar("file-h"),
+                  cv.getVar("file-s"),
+                  calc(#{cv.getVar("file-border-l")} + #{cv.getVar("file-color-l-delta")})
   );
   border-style: cv.getVar("file-name-border-style");
   border-width: cv.getVar("file-name-border-width");
   color: hsl(
-    cv.getVar("file-h"),
-    cv.getVar("file-s"),
-    calc(#{cv.getVar("file-name-color-l")} + #{cv.getVar("file-color-l-delta")})
+                  cv.getVar("file-h"),
+                  cv.getVar("file-s"),
+                  calc(#{cv.getVar("file-name-color-l")} + #{cv.getVar("file-color-l-delta")})
   );
   display: block;
   max-width: cv.getVar("file-name-max-width");

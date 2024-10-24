@@ -26,15 +26,15 @@ $textarea-colors: shared.$form-colors !default;
 
     &.#{iv.$class-prefix}is-#{$name} {
       @include cv.register-vars(
-        (
-          "input-h": #{cv.getVar($name, "", "-h")},
-          "input-s": #{cv.getVar($name, "", "-s")},
-          "input-l": #{cv.getVar($name, "", "-l")},
-          "input-focus-h": #{cv.getVar($name, "", "-h")},
-          "input-focus-s": #{cv.getVar($name, "", "-s")},
-          "input-focus-l": #{cv.getVar($name, "", "-l")},
-          "input-border-l": #{cv.getVar($name, "", "-l")},
-        )
+                      (
+                              "input-h": #{cv.getVar($name, "", "-h")},
+                              "input-s": #{cv.getVar($name, "", "-s")},
+                              "input-l": #{cv.getVar($name, "", "-l")},
+                              "input-focus-h": #{cv.getVar($name, "", "-h")},
+                              "input-focus-s": #{cv.getVar($name, "", "-s")},
+                              "input-focus-l": #{cv.getVar($name, "", "-l")},
+                              "input-border-l": #{cv.getVar($name, "", "-l")},
+                      )
       );
     }
   }
@@ -85,11 +85,11 @@ $textarea-colors: shared.$form-colors !default;
 .#{iv.$class-prefix}textarea {
   @extend %input-textarea;
   @include cv.register-vars(
-    (
-      "textarea-padding": #{$textarea-padding},
-      "textarea-max-height": #{$textarea-max-height},
-      "textarea-min-height": #{$textarea-min-height},
-    )
+                  (
+                          "textarea-padding": #{$textarea-padding},
+                          "textarea-max-height": #{$textarea-max-height},
+                          "textarea-min-height": #{$textarea-min-height},
+                  )
   );
   display: block;
   max-width: 100%;

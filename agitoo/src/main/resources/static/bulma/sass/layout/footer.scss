@@ -7,11 +7,11 @@ $footer-padding: 3rem 1.5rem 6rem !default;
 
 .#{iv.$class-prefix}footer {
   @include cv.register-vars(
-    (
-      "footer-background-color": #{$footer-background-color},
-      "footer-color": #{$footer-color},
-      "footer-padding": #{$footer-padding},
-    )
+                  (
+                          "footer-background-color": #{$footer-background-color},
+                          "footer-color": #{$footer-color},
+                          "footer-padding": #{$footer-padding},
+                  )
   );
 
   background-color: cv.getVar("footer-background-color");

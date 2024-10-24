@@ -2,7 +2,6 @@ package intern.customer.agitoo.WebAPi.Concretes;
 
 import intern.customer.agitoo.Common.Results.DataResult;
 import intern.customer.agitoo.DTO.DTOs.PersonDTO;
-import intern.customer.agitoo.Helper.Messages;
 import intern.customer.agitoo.Service.Abstracts.IPersonService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
@@ -14,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 import static intern.customer.agitoo.Helper.Messages.*;
 
@@ -27,42 +27,66 @@ public class PersonController {
 
 
     @RequestMapping(value = "/get-all", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<DataResult<List<PersonDTO>>> getAll () {
+    public CompletableFuture<ResponseEntity<DataResult<List<PersonDTO>>>> getAll () {
         log.info ("Received request to list all person!");
-        List<PersonDTO> personDTOList = personService.getAll ();
-        DataResult<List<PersonDTO>> response = new DataResult<> (
-                personDTOList,
-                true,
-                LISTED
+        return personService.getAll ().thenApply (
+                personDTOList -> {
+                    DataResult<List<PersonDTO>> response = new DataResult<> (
+                            personDTOList,
+                            true,
+                            LISTED
+                    );
+                    return ResponseEntity.ok (response);
+                }
         );
-        return ResponseEntity.ok (response);
+
     }
 
-    @RequestMapping(value = "/add", method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_VALUE})
+    @RequestMapping(
+            value = "/add",
+            method = RequestMethod.POST,
+            produces = {MediaType.APPLICATION_JSON_VALUE}
+    )
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<DataResult<PersonDTO>> Add (@RequestBody @Valid PersonDTO personDTO) {
+    public CompletableFuture<ResponseEntity<DataResult<PersonDTO>>> Add (@RequestBody @Valid PersonDTO personDTO) {
         log.info ("Received request to add person {}", personDTO);
-        PersonDTO addedPersonDTO = personService.add (personDTO);
-        DataResult<PersonDTO> response = new DataResult<> (
-                addedPersonDTO, true, ADDED
+        return personService.add (personDTO).thenApply (
+                addedPersonDTO -> {
+                    DataResult<PersonDTO> response = new DataResult<> (
+                            addedPersonDTO, true, ADDED
+                    );
+                    return ResponseEntity.ok (response);
+                }
         );
-        return ResponseEntity.ok (response);
+
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.PUT, produces = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<DataResult<PersonDTO>> Update (@RequestBody @Valid PersonDTO personDTO) {
+    public CompletableFuture<ResponseEntity<DataResult<PersonDTO>>> Update (@RequestBody @Valid PersonDTO personDTO) {
         log.info ("Received request to update person {}", personDTO);
-        PersonDTO updatedPersonDTO = personService.update (personDTO);
-        DataResult<PersonDTO> response = new DataResult<> (
-                updatedPersonDTO,
-                true, UPDATED
+        return personService.update (personDTO).thenApply (
+                updatedPersonDTO -> {
+                    DataResult<PersonDTO> response = new DataResult<> (
+                            updatedPersonDTO,
+                            true, UPDATED
+                    );
+                    return ResponseEntity.ok (response);
+                }
         );
-        return ResponseEntity.ok (response);
+
     }
 
     @RequestMapping(value = "/delete-by-id/{id}", method = RequestMethod.DELETE)
-    public void Delete (@PathVariable @Min(1) Long id) {
+    public CompletableFuture<ResponseEntity<DataResult<Void>>> Delete (@PathVariable @Min(1) Long id) {
         log.info ("Received request to delete person {}", id);
-        this.personService.deleteById (id);
+        return personService.deleteById (id)
+                .thenApply (result -> {
+                    DataResult<Void> response = new DataResult<> (
+                            result,
+                            true,
+                            REMOVED
+                    );
+                    return ResponseEntity.ok (response);
+                });
     }
 }

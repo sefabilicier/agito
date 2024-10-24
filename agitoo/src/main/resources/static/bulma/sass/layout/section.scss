@@ -9,12 +9,12 @@ $section-padding-large: 18rem 6rem !default;
 
 .#{iv.$class-prefix}section {
   @include cv.register-vars(
-    (
-      "section-padding": #{$section-padding},
-      "section-padding-desktop": #{$section-padding-desktop},
-      "section-padding-medium": #{$section-padding-medium},
-      "section-padding-large": #{$section-padding-large},
-    )
+                  (
+                          "section-padding": #{$section-padding},
+                          "section-padding-desktop": #{$section-padding-desktop},
+                          "section-padding-medium": #{$section-padding-medium},
+                          "section-padding-large": #{$section-padding-large},
+                  )
   );
   padding: cv.getVar("section-padding");
 

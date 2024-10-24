@@ -7,10 +7,10 @@
 $modal-z: 40 !default;
 
 $modal-background-background-color: hsla(
-  #{cv.getVar("scheme-h")},
-  #{cv.getVar("scheme-s")},
-  #{cv.getVar("scheme-invert-l")},
-  0.86
+                #{cv.getVar("scheme-h")},
+                #{cv.getVar("scheme-s")},
+                #{cv.getVar("scheme-invert-l")},
+                0.86
 ) !default;
 
 $modal-content-width: 40rem !default;
@@ -42,28 +42,28 @@ $modal-breakpoint: iv.$tablet !default;
 
 .#{iv.$class-prefix}modal {
   @include cv.register-vars(
-    (
-      "modal-z": #{$modal-z},
-      "modal-background-background-color": #{$modal-background-background-color},
-      "modal-content-width": #{$modal-content-width},
-      "modal-content-margin-mobile": #{$modal-content-margin-mobile},
-      "modal-content-spacing-mobile": #{$modal-content-spacing-mobile},
-      "modal-content-spacing-tablet": #{$modal-content-spacing-tablet},
-      "modal-close-dimensions": #{$modal-close-dimensions},
-      "modal-close-right": #{$modal-close-right},
-      "modal-close-top": #{$modal-close-top},
-      "modal-card-spacing": #{$modal-card-spacing},
-      "modal-card-head-background-color": #{$modal-card-head-background-color},
-      "modal-card-head-padding": #{$modal-card-head-padding},
-      "modal-card-head-radius": #{$modal-card-head-radius},
-      "modal-card-title-color": #{$modal-card-title-color},
-      "modal-card-title-line-height": #{$modal-card-title-line-height},
-      "modal-card-title-size": #{$modal-card-title-size},
-      "modal-card-foot-background-color": #{$modal-card-foot-background-color},
-      "modal-card-foot-radius": #{$modal-card-foot-radius},
-      "modal-card-body-background-color": #{$modal-card-body-background-color},
-      "modal-card-body-padding": #{$modal-card-body-padding},
-    )
+                  (
+                          "modal-z": #{$modal-z},
+                          "modal-background-background-color": #{$modal-background-background-color},
+                          "modal-content-width": #{$modal-content-width},
+                          "modal-content-margin-mobile": #{$modal-content-margin-mobile},
+                          "modal-content-spacing-mobile": #{$modal-content-spacing-mobile},
+                          "modal-content-spacing-tablet": #{$modal-content-spacing-tablet},
+                          "modal-close-dimensions": #{$modal-close-dimensions},
+                          "modal-close-right": #{$modal-close-right},
+                          "modal-close-top": #{$modal-close-top},
+                          "modal-card-spacing": #{$modal-card-spacing},
+                          "modal-card-head-background-color": #{$modal-card-head-background-color},
+                          "modal-card-head-padding": #{$modal-card-head-padding},
+                          "modal-card-head-radius": #{$modal-card-head-radius},
+                          "modal-card-title-color": #{$modal-card-title-color},
+                          "modal-card-title-line-height": #{$modal-card-title-line-height},
+                          "modal-card-title-size": #{$modal-card-title-size},
+                          "modal-card-foot-background-color": #{$modal-card-foot-background-color},
+                          "modal-card-foot-radius": #{$modal-card-foot-radius},
+                          "modal-card-body-background-color": #{$modal-card-body-background-color},
+                          "modal-card-body-padding": #{$modal-card-body-padding},
+                  )
   );
 }
 

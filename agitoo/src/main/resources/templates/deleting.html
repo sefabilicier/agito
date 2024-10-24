@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Login</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bulma.css}"/>
+    <link href="/static/bulma.css" rel="stylesheet">
+    <style>
+        body {
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        body.loaded {
+            opacity: 1;
+        }
+
+        .login-container {
+            max-width: 400px;
+            margin: 100px auto;
+            padding: 20px;
+        }
+
+        .box {
+            box-shadow: none;
+        }
+
+        .button {
+            border-radius: 1px;
+        }
+
+        .button.no-border {
+            border: none;
+            background: transparent;
+            color: inherit;
+
+        }
+
+        .button.no-border:hover {
+            background-color: #4b0099;
+            color: #ffffff;
+        }
+
+        p {
+            margin: 5px;
+        }
+
+    </style>
+</head>
+<body>
+<div class="login-container">
+    <div class="box">
+        <form action="/ui/person/confirm-update" method="post" class="has-text-centered">
+            <p>Apply changes?</p>
+            <div class="field is-grouped is-grouped-centered">
+                <p class="control">
+                    <button type="submit" class="button is-primary no-border">Apply</button>
+                </p>
+                <p class="control">
+                    <a class="button is-light" th:href="@{/home}">Cancel</a>
+                </p>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    document.addEventListener(
+        "DOMContentLoaded", function () {
+            document.body.classList.add('loaded');
+        });
+</script>
+</body>
+</html>

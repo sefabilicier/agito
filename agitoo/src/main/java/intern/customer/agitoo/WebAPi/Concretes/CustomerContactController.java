@@ -2,7 +2,6 @@ package intern.customer.agitoo.WebAPi.Concretes;
 
 import intern.customer.agitoo.Common.Results.DataResult;
 import intern.customer.agitoo.DTO.DTOs.CustomerContactDTO;
-import intern.customer.agitoo.Helper.Messages;
 import intern.customer.agitoo.Service.Abstracts.ICustomerContactService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
@@ -14,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 import static intern.customer.agitoo.Helper.Messages.*;
 
@@ -27,40 +27,59 @@ public class CustomerContactController {
 
 
     @RequestMapping(value = "/get-all", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<DataResult<List<CustomerContactDTO>>> getAll () {
+    public CompletableFuture<ResponseEntity<DataResult<List<CustomerContactDTO>>>> getAll () {
         log.info ("Received request to list customer contacts! ");
-        List<CustomerContactDTO> customerContactDTOList = customerContactService.getAll ();
-        DataResult<List<CustomerContactDTO>> response = new DataResult<> (
-                customerContactDTOList, true, LISTED);
-        return ResponseEntity.ok (response);
+        return customerContactService.getAll ().thenApply (
+                customerContactDTOList -> {
+                    DataResult<List<CustomerContactDTO>> response = new DataResult<> (
+                            customerContactDTOList, true, LISTED);
+                    return ResponseEntity.ok (response);
+                }
+        );
+
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_VALUE})
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<DataResult<CustomerContactDTO>> Add (@RequestBody @Valid CustomerContactDTO customerContactDTO) {
+    public CompletableFuture<ResponseEntity<DataResult<CustomerContactDTO>>> Add (@RequestBody @Valid CustomerContactDTO customerContactDTO) {
         log.info ("Received request to create customer contact {}", customerContactDTO);
-        CustomerContactDTO customerContact = customerContactService.add (customerContactDTO);
-        DataResult<CustomerContactDTO> response = new DataResult<> (
-                customerContact,
-                true,
-                ADDED
+        return customerContactService.add (customerContactDTO).thenApply (
+                customerContact -> {
+                    DataResult<CustomerContactDTO> response = new DataResult<> (
+                            customerContact,
+                            true,
+                            ADDED
+                    );
+                    return ResponseEntity.ok (response);
+                }
         );
-        return ResponseEntity.ok (response);
+
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.PUT, produces = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<DataResult<CustomerContactDTO>> Update (@RequestBody @Valid CustomerContactDTO customerContactDTO) {
+    public CompletableFuture<ResponseEntity<DataResult<CustomerContactDTO>>> Update (@RequestBody @Valid CustomerContactDTO customerContactDTO) {
         log.info ("Received request to update customer contact {}", customerContactDTO);
-        CustomerContactDTO customerContact = customerContactService.add (customerContactDTO);
-        DataResult<CustomerContactDTO> response = new DataResult<> (
-                customerContact, true, UPDATED
+        return customerContactService.add (customerContactDTO).thenApply (
+                customerContact -> {
+                    DataResult<CustomerContactDTO> response = new DataResult<> (
+                            customerContact, true, UPDATED
+                    );
+                    return ResponseEntity.ok (response);
+                }
         );
-        return ResponseEntity.ok (response);
     }
 
     @RequestMapping(value = "/delete-by-id/{id}", method = RequestMethod.DELETE)
-    public void Delete (@PathVariable @Min(1) Long id) {
+    public CompletableFuture<ResponseEntity<DataResult<Void>>> Delete (@PathVariable @Min(1) Long id) {
         log.info ("Received request to delete customer contact {}", id);
-        this.customerContactService.deleteById (id);
+        return customerContactService.deleteById (id)
+                .thenApply (result -> {
+                    DataResult<Void> response = new DataResult<> (
+                            result,
+                            true,
+                            REMOVED
+                    );
+                    return ResponseEntity.ok (response);
+                });
     }
 }

@@ -34,32 +34,32 @@ $tabs-toggle-link-active-color: cv.getVar("link-invert") !default;
 
 .#{iv.$class-prefix}tabs {
   @include cv.register-vars(
-    (
-      "tabs-border-bottom-color": #{$tabs-border-bottom-color},
-      "tabs-border-bottom-style": #{$tabs-border-bottom-style},
-      "tabs-border-bottom-width": #{$tabs-border-bottom-width},
-      "tabs-link-color": #{$tabs-link-color},
-      "tabs-link-hover-border-bottom-color": #{$tabs-link-hover-border-bottom-color},
-      "tabs-link-hover-color": #{$tabs-link-hover-color},
-      "tabs-link-active-border-bottom-color": #{$tabs-link-active-border-bottom-color},
-      "tabs-link-active-color": #{$tabs-link-active-color},
-      "tabs-link-padding": #{$tabs-link-padding},
-      "tabs-boxed-link-radius": #{$tabs-boxed-link-radius},
-      "tabs-boxed-link-hover-background-color": #{$tabs-boxed-link-hover-background-color},
-      "tabs-boxed-link-hover-border-bottom-color": #{$tabs-boxed-link-hover-border-bottom-color},
-      "tabs-boxed-link-active-background-color": #{$tabs-boxed-link-active-background-color},
-      "tabs-boxed-link-active-border-color": #{$tabs-boxed-link-active-border-color},
-      "tabs-boxed-link-active-border-bottom-color": #{$tabs-boxed-link-active-border-bottom-color},
-      "tabs-toggle-link-border-color": #{$tabs-toggle-link-border-color},
-      "tabs-toggle-link-border-style": #{$tabs-toggle-link-border-style},
-      "tabs-toggle-link-border-width": #{$tabs-toggle-link-border-width},
-      "tabs-toggle-link-hover-background-color": #{$tabs-toggle-link-hover-background-color},
-      "tabs-toggle-link-hover-border-color": #{$tabs-toggle-link-hover-border-color},
-      "tabs-toggle-link-radius": #{$tabs-toggle-link-radius},
-      "tabs-toggle-link-active-background-color": #{$tabs-toggle-link-active-background-color},
-      "tabs-toggle-link-active-border-color": #{$tabs-toggle-link-active-border-color},
-      "tabs-toggle-link-active-color": #{$tabs-toggle-link-active-color},
-    )
+                  (
+                          "tabs-border-bottom-color": #{$tabs-border-bottom-color},
+                          "tabs-border-bottom-style": #{$tabs-border-bottom-style},
+                          "tabs-border-bottom-width": #{$tabs-border-bottom-width},
+                          "tabs-link-color": #{$tabs-link-color},
+                          "tabs-link-hover-border-bottom-color": #{$tabs-link-hover-border-bottom-color},
+                          "tabs-link-hover-color": #{$tabs-link-hover-color},
+                          "tabs-link-active-border-bottom-color": #{$tabs-link-active-border-bottom-color},
+                          "tabs-link-active-color": #{$tabs-link-active-color},
+                          "tabs-link-padding": #{$tabs-link-padding},
+                          "tabs-boxed-link-radius": #{$tabs-boxed-link-radius},
+                          "tabs-boxed-link-hover-background-color": #{$tabs-boxed-link-hover-background-color},
+                          "tabs-boxed-link-hover-border-bottom-color": #{$tabs-boxed-link-hover-border-bottom-color},
+                          "tabs-boxed-link-active-background-color": #{$tabs-boxed-link-active-background-color},
+                          "tabs-boxed-link-active-border-color": #{$tabs-boxed-link-active-border-color},
+                          "tabs-boxed-link-active-border-bottom-color": #{$tabs-boxed-link-active-border-bottom-color},
+                          "tabs-toggle-link-border-color": #{$tabs-toggle-link-border-color},
+                          "tabs-toggle-link-border-style": #{$tabs-toggle-link-border-style},
+                          "tabs-toggle-link-border-width": #{$tabs-toggle-link-border-width},
+                          "tabs-toggle-link-hover-background-color": #{$tabs-toggle-link-hover-background-color},
+                          "tabs-toggle-link-hover-border-color": #{$tabs-toggle-link-hover-border-color},
+                          "tabs-toggle-link-radius": #{$tabs-toggle-link-radius},
+                          "tabs-toggle-link-active-background-color": #{$tabs-toggle-link-active-background-color},
+                          "tabs-toggle-link-active-border-color": #{$tabs-toggle-link-active-border-color},
+                          "tabs-toggle-link-active-color": #{$tabs-toggle-link-active-color},
+                  )
   );
 }
 
@@ -166,7 +166,7 @@ $tabs-toggle-link-active-color: cv.getVar("link-invert") !default;
       &:hover {
         background-color: cv.getVar("tabs-boxed-link-hover-background-color");
         border-bottom-color: cv.getVar(
-          "tabs-boxed-link-hover-border-bottom-color"
+                        "tabs-boxed-link-hover-border-bottom-color"
         );
       }
     }
@@ -175,11 +175,11 @@ $tabs-toggle-link-active-color: cv.getVar("link-invert") !default;
       &.#{iv.$class-prefix}is-active {
         a {
           background-color: cv.getVar(
-            "tabs-boxed-link-active-background-color"
+                          "tabs-boxed-link-active-background-color"
           );
           border-color: cv.getVar("tabs-boxed-link-active-border-color");
           border-bottom-color: cv.getVar(
-            "tabs-boxed-link-active-border-bottom-color"
+                          "tabs-boxed-link-active-border-bottom-color"
           ) !important;
         }
       }
@@ -211,7 +211,7 @@ $tabs-toggle-link-active-color: cv.getVar("link-invert") !default;
     li {
       & + li {
         margin-inline-start: calc(
-          -1 * #{cv.getVar("tabs-toggle-link-border-width")}
+                -1 * #{cv.getVar("tabs-toggle-link-border-width")}
         );
       }
 
@@ -228,7 +228,7 @@ $tabs-toggle-link-active-color: cv.getVar("link-invert") !default;
       &.#{iv.$class-prefix}is-active {
         a {
           background-color: cv.getVar(
-            "tabs-toggle-link-active-background-color"
+                          "tabs-toggle-link-active-background-color"
           );
           border-color: cv.getVar("tabs-toggle-link-active-border-color");
           color: cv.getVar("tabs-toggle-link-active-color");

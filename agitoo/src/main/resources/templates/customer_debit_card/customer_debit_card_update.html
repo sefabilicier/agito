@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="eng" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bulma.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bulma.min.css}"/>
+    <link href="/static/bulma.css" rel="stylesheet">
+    <title>Customer Credit Card Update</title>
+    <style>
+        body {
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        body.loaded {
+            opacity: 1;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+
+        .input {
+            border-radius: 2px;
+        }
+
+        .title {
+            color: #ffffff;
+        }
+
+        .header {
+            margin: 50px;
+            padding: 25px;
+            background-color: #4b0099;
+        }
+
+        .field-2 {
+            margin: 20px;
+            text-align: center;
+        }
+
+        .button {
+            border-radius: 2px;
+        }
+
+        .button.is-primary {
+            background-color: #4b0099; /* Button background color */
+            border-color: transparent;
+            color: white; /* Button text color */
+        }
+
+        .button.is-primary:hover {
+            background-color: #9400D3;
+            /*background-color: #1E00FF;  Button hover color */
+        }
+    </style>
+</head>
+<body>
+<div class="is-widescreen">
+    <header class="header has-text-centered marginless">
+        <h1 class="is-size-3 label" style="color:white">Update the customer credit card</h1>
+    </header>
+    <main class="container is-max-tablet">
+        <form
+                action="@{/ui/customer-debit-card/update/{debitCardID}/edit(debitCardID=${customerDebitCardDTO.debitCardID})}"
+                th:action="@{/ui/customer-debit-card/update/{debitCardID}/edit(debitCardID=${customerDebitCardDTO.debitCardID})}"
+                th:object="${customerDebitCardDTO}"
+                method="post"
+        >
+            <input type="hidden" th:field="${customerDebitCardDTO.debitCardID}">
+
+            <div class="field">
+                <label class="label">Card Number</label>
+                <div class="control">
+                    <input class="input" type="text" placeholder="1111-2222-3333-4444"
+                           th:field="${customerDebitCardDTO.cardNumber}">
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Card Holder Name</label>
+                <div class="control">
+                    <input class="input" type="text" placeholder="Alex Mark"
+                           th:field="${customerDebitCardDTO.cardHolderName}">
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Expiration Date</label>
+                <div class="control">
+                    <input class="input" type="date" placeholder="11-2026"
+                           th:field="${customerDebitCardDTO.expirationDate}">
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Contact Type</label>
+                <div class="control">
+                    <div class="select">
+                        <select th:field="*{issuer}">
+                            <option th:each="issuerName : ${issuer}"
+                                    th:value="${issuerName.issuer}"
+                                    th:text="${issuerName.issuer}">
+                            </option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="field">
+                <label class="label">Contact Name</label>
+                <div class="control">
+                    <input class="input" type="text" placeholder="Alex Mark"
+                           th:field="${customerContactDTO.contactName}">
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Contact Type</label>
+                <div class="control">
+                    <div class="select">
+                        <select th:field="*{contactType}">
+                            <option th:each="type : ${contactType}"
+                                    th:value="${type.customerContact}"
+                                    th:text="${type.customerContact}">
+                            </option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">E-Mail</label>
+                <div class="control">
+                    <input class="input" type="email" placeholder="someone@agito.com.tr"
+                           th:field="${customerContactDTO.email}">
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Phone</label>
+                <div class="control">
+                    <input class="input" type="text" placeholder="+905456667788" th:field="${customerContactDTO.phone}">
+                </div>
+            </div>
+
+            <div class="field-2 field is-grouped is-grouped-centered">
+                <p class="control">
+                    <button
+                            type="submit"
+                            class="button is-primary"
+                            th:href="'http://localhost:8080/ui/customer-contact/update'"
+                    >
+                        Update
+                    </button>
+                </p>
+                <p class="control">
+                    <a class="button is-light" th:href="'http://localhost:8080/home'">Cancel</a>
+                </p>
+            </div>
+        </form>
+    </main>
+</div>
+<script>
+    document.addEventListener(
+        "DOMContentLoaded", function () {
+            document.body.classList.add('loaded');
+        });
+</script>
+</body>
+</html>

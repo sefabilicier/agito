@@ -3,16 +3,18 @@ package intern.customer.agitoo.Service.Abstracts;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 @Component
 public interface IGenericService<DTO> {
 
-    List<DTO> getAll ();
+    CompletableFuture<List<DTO>> getAll ();
 
-    DTO add (DTO dtoModel);
+    CompletableFuture<DTO> add (DTO dtoModel);
 
-    DTO update (DTO dtoModel);
+    CompletableFuture<DTO> update (DTO dtoModel);
 
-    void deleteById (Long id);
+    CompletableFuture<Void> deleteById (Long id);
 
+    CompletableFuture<DTO> findById (Long id);
 }

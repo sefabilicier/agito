@@ -1,7 +1,7 @@
 package intern.customer.agitoo.WebAPi.uiPages;
 
-import intern.customer.agitoo.WebAPi.thymeleafUIControllers.Rules.countCustomer;
 import intern.customer.agitoo.WebAPi.thymeleafUIControllers.Rules.apiLinksReturn;
+import intern.customer.agitoo.WebAPi.thymeleafUIControllers.Rules.countCustomer;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,9 +21,9 @@ public class HomePageController {
     private apiLinksReturn apiLinksReturn;
 
     @GetMapping(value = "home")
-    public String getHome(Model model) {
+    public String getHome (Model model) {
         model.addAttribute ("apiLinks", apiLinksReturn.uiApiLinks ());
-        model.addAttribute ("customerCount", countCustomer.countCompanyType());
+        model.addAttribute ("customerCount", countCustomer.countCompanyType ());
         return "home";
     }
 

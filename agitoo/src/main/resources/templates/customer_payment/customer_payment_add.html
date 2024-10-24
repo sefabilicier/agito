@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/bulma.css}" />
-    <link rel="stylesheet" type="text/css" th:href="@{/css/bulma.min.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bulma.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bulma.min.css}"/>
     <link href="/static/bulma.css" rel="stylesheet">
-    <title>Person Add</title>
+    <title>Customer Payment Add</title>
     <style>
         body {
             opacity: 0;
@@ -22,43 +22,46 @@
             margin: 50px auto;
             padding: 20px;
         }
+
         .input {
             border-radius: 2px;
         }
-        .title {
-            color: #ffffff;
-        }
-        .header{
+
+        .header {
             margin: 50px;
             padding: 25px;
             background-color: #4b0099;
         }
 
-        .field-2{
+        .field-2 {
             margin: 20px;
             text-align: center;
         }
 
-        .button{
+        .button {
             border-radius: 2px;
         }
 
         .button.is-primary {
-            background-color: #4b0099; /* Button background color */
+            background-color: #4b0099;
             border-color: transparent;
-            color: white; /* Button text color */
+            color: white;
         }
 
         .button.is-primary:hover {
             background-color: #9400D3;
-            /*background-color: #1E00FF;  Button hover color */
+        }
+
+        .error {
+            color: red;
+            font-size: 0.8em;
         }
     </style>
 </head>
 <body>
 <div class="is-widescreen">
     <header class="header has-text-centered marginless">
-        <h1 class="title">Create a Customer Payment</h1>
+        <h1 class="is-size-3 label" style="color:white">Create a Customer Payment</h1>
     </header>
     <main class="container is-max-tablet">
         <form
@@ -67,36 +70,51 @@
                 th:action="@{/ui/customer-payment/add}"
                 th:object="${customerPaymentDTO}"
                 method="post"
+                th:attr="novalidate"
         >
+            <input type="hidden" th:field="${customerPaymentDTO.paymentID}">
+            <input type="hidden" th:name="customerId" th:field="customerId">
+            <input type="hidden" th:name="customerPolicyId" th:field="customerPolicyId">
+
             <div class="field">
                 <label class="label">Payment Date</label>
                 <div class="control">
-                    <input class="input" type="date" placeholder="13.12.2023" th:field="${customerPaymentDTO.paymentDate}">
+                    <input class="input" type="datetime-local" th:field="${customerPaymentDTO.paymentDate}" required>
+                </div>
+                <div th:if="${#fields.hasErrors('paymentDate') && formSubmitted}" class="error">
+                    <span th:errors="*{paymentDate}"></span>
                 </div>
             </div>
+
+            <div class="field">
+                <label class="label">Amount</label>
+                <div class="control">
+                    <input class="input" type="number" th:field="${customerPaymentDTO.paymentAmount}" required>
+                </div>
+                <div th:if="${#fields.hasErrors('paymentAmount') && formSubmitted}" class="error">
+                    <span th:errors="*{paymentAmount}"></span>
+                </div>
+            </div>
+
             <div class="field">
                 <label class="label">Payment Method</label>
                 <div class="control">
                     <div class="select">
-                        <select th:field="*{paymentMethod}">
-                            <option th:each="paymentMethod : ${paymentMethod}"
-                                    th:value="${paymentMethod.paymentMethod}"
-                                    th:text="${paymentMethod.paymentMethod}">
-                            </option>
+                        <select th:field="*{paymentMethod}" required>
+                            <option th:each="payments : ${paymentMethod}"
+                                    th:value="${payments.paymentMethod}"
+                                    th:text="${payments.paymentMethod}"></option>
                         </select>
                     </div>
+                </div>
+                <div th:if="${#fields.hasErrors('paymentMethod') && formSubmitted}" class="error">
+                    <span th:errors="*{paymentMethod}"></span>
                 </div>
             </div>
 
             <div class="field-2 field is-grouped is-grouped-centered">
                 <p class="control">
-                    <button
-                            type="submit"
-                            class="button is-primary"
-                            th:href="'http://localhost:8080/ui/person-job-life/add'"
-                    >
-                        Next
-                    </button>
+                    <button type="submit" class="button is-primary">Next</button>
                 </p>
                 <p class="control">
                     <a class="button is-light" th:href="'http://localhost:8080/home'">Cancel</a>
@@ -106,10 +124,9 @@
     </main>
 </div>
 <script>
-    document.addEventListener(
-        "DOMContentLoaded", function()
-        {document.body.classList.add('loaded');
-        });
+    document.addEventListener("DOMContentLoaded", function () {
+        document.body.classList.add('loaded');
+    });
 </script>
 </body>
 </html>

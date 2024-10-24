@@ -11,13 +11,13 @@ $skeleton-line-height: 0.75em !default;
 
 :root {
   @include cv.register-vars(
-    (
-      "skeleton-background": #{$skeleton-background},
-      "skeleton-radius": #{$skeleton-radius},
-      "skeleton-block-min-height": #{$skeleton-block-min-height},
-      "skeleton-lines-gap": #{$skeleton-lines-gap},
-      "skeleton-line-height": #{$skeleton-line-height},
-    )
+                  (
+                          "skeleton-background": #{$skeleton-background},
+                          "skeleton-radius": #{$skeleton-radius},
+                          "skeleton-block-min-height": #{$skeleton-block-min-height},
+                          "skeleton-lines-gap": #{$skeleton-lines-gap},
+                          "skeleton-line-height": #{$skeleton-line-height},
+                  )
   );
 }
 

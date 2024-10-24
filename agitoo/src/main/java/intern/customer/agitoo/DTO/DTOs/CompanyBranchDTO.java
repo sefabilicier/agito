@@ -1,6 +1,8 @@
 package intern.customer.agitoo.DTO.DTOs;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import intern.customer.agitoo.Models.Concretes.Company;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
@@ -16,6 +18,8 @@ import lombok.NoArgsConstructor;
 @Builder
 public class CompanyBranchDTO {
 
+    private Long branchID;
+
     @NotNull(message = " {branchName.notNull}")
     @NotBlank(message = "{branchName.notBlank}")
     @Size(min = 3, max = 150, message = "{branchName.size}")
@@ -29,10 +33,12 @@ public class CompanyBranchDTO {
     @Pattern(regexp = "^\\+?[0-9]{10,15}$", message = "{branchPhone.pattern}")
     private String branchPhone;
 
-//    private String companyName;
+    @NotBlank(message = "{branchManager.notBlank}")
+    private String branchManager; //todo
 
-//    @Valid
-//    private CompanyDTO company;
-
+    @JsonIgnore
+    private Company company;
+    //    Long companyId = companyDTO.getCompanyId ();
+    private Long companyId;
 
 }
